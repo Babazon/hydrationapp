@@ -5,6 +5,8 @@ import { computed, observable, runInAction } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 
+// tslint:disable: max-line-length
+
 @observer
 export default class App extends React.Component {
 
@@ -79,46 +81,49 @@ export default class App extends React.Component {
 
     return (
       <ErrorBoundary>
-        <KeyboardAvoidingView behavior="position" style={styles.flex}>
-          <ScrollView contentContainerStyle={styles.flex}>
+
+        <KeyboardAvoidingView behavior="padding" style={styles.flex}>
+          <ScrollView contentContainerStyle={styles.flex} style={{ flex: 1 }}>
+
+            <Text style={{ paddingVertical: 8, fontWeight: 'bold', fontSize: 24 }}>@sourdoughpie hydration app</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
-              <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Quick Set Flour</Text>
-              <TouchableOpacity onPress={() => runInAction(() => this.flourWeight = 1000)} style={{ marginHorizontal: 8 }}>
+              <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Set Flour</Text>
+              <TouchableOpacity onPress={() => runInAction(() => this.flourWeight = 1000)} style={{ marginHorizontal: 8, backgroundColor: this.flourWeight === 1000 ? 'lightgray' : 'transparent' }}>
                 <Text style={{ fontSize: 14 }}>1000g</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => runInAction(() => this.flourWeight = 2000)} style={{ marginHorizontal: 8 }}>
+              <TouchableOpacity onPress={() => runInAction(() => this.flourWeight = 2000)} style={{ marginHorizontal: 8, backgroundColor: this.flourWeight === 2000 ? 'lightgray' : 'transparent' }}>
                 <Text style={{ fontSize: 14 }}>2000g</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => runInAction(() => this.flourWeight = 3000)} style={{ marginHorizontal: 8 }}>
+              <TouchableOpacity onPress={() => runInAction(() => this.flourWeight = 3000)} style={{ marginHorizontal: 8, backgroundColor: this.flourWeight === 3000 ? 'lightgray' : 'transparent' }}>
                 <Text style={{ fontSize: 14 }}>3000g</Text>
               </TouchableOpacity>
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
-              <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Quick Set Leaven Inoculation</Text>
-              <TouchableOpacity onPress={() => runInAction(() => this.leavenWeight = 0.15 * this.flourWeight)} style={{ marginHorizontal: 8 }}>
+              <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Set Inoculation</Text>
+              <TouchableOpacity onPress={() => runInAction(() => this.leavenWeight = 0.15 * this.flourWeight)} style={{ marginHorizontal: 8, backgroundColor: this.leavenWeight === 0.15 * this.flourWeight ? 'lightgray' : 'transparent' }}>
                 <Text style={{ fontSize: 14 }}>15%</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => runInAction(() => this.leavenWeight = 0.2 * this.flourWeight)} style={{ marginHorizontal: 8 }}>
+              <TouchableOpacity onPress={() => runInAction(() => this.leavenWeight = 0.2 * this.flourWeight)} style={{ marginHorizontal: 8, backgroundColor: this.leavenWeight === 0.2 * this.flourWeight ? 'lightgray' : 'transparent' }}>
                 <Text style={{ fontSize: 14 }}>20%</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => runInAction(() => this.leavenWeight = 0.25 * this.flourWeight)} style={{ marginHorizontal: 8 }}>
+              <TouchableOpacity onPress={() => runInAction(() => this.leavenWeight = 0.25 * this.flourWeight)} style={{ marginHorizontal: 8, backgroundColor: this.leavenWeight === 0.25 * this.flourWeight ? 'lightgray' : 'transparent' }}>
                 <Text style={{ fontSize: 14 }}>25%</Text>
               </TouchableOpacity>
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
-              <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Quick Set Leaven Hydration</Text>
-              <TouchableOpacity onPress={() => runInAction(() => this.leavenHydration = 50)} style={{ marginHorizontal: 8 }}>
+              <Text style={{ marginHorizontal: 8, fontSize: 14 }}> Set Leaven Hydration</Text>
+              <TouchableOpacity onPress={() => runInAction(() => this.leavenHydration = 50)} style={{ marginHorizontal: 8, backgroundColor: this.leavenHydration === 50 ? 'lightgray' : 'transparent' }}>
                 <Text style={{ fontSize: 14 }}>50%</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => runInAction(() => this.leavenHydration = 75)} style={{ marginHorizontal: 8 }}>
+              <TouchableOpacity onPress={() => runInAction(() => this.leavenHydration = 75)} style={{ marginHorizontal: 8, backgroundColor: this.leavenHydration === 75 ? 'lightgray' : 'transparent' }}>
                 <Text style={{ fontSize: 14 }}>75%</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => runInAction(() => this.leavenHydration = 100)} style={{ marginHorizontal: 8 }}>
+              <TouchableOpacity onPress={() => runInAction(() => this.leavenHydration = 100)} style={{ marginHorizontal: 8, backgroundColor: this.leavenHydration === 100 ? 'lightgray' : 'transparent' }}>
                 <Text style={{ fontSize: 14 }}>100%</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => runInAction(() => this.leavenHydration = 150)} style={{ marginHorizontal: 8 }}>
+              <TouchableOpacity onPress={() => runInAction(() => this.leavenHydration = 150)} style={{ marginHorizontal: 8, backgroundColor: this.leavenHydration === 150 ? 'lightgray' : 'transparent' }}>
                 <Text style={{ fontSize: 14 }}>150%</Text>
               </TouchableOpacity>
             </View>
@@ -140,7 +145,7 @@ export default class App extends React.Component {
               value={this.leavenHydration + ''}
               onChangeText={(text) => { runInAction(() => this.leavenHydration = Number(text) ? Number(text) : 0); }} /></View>
 
-            <Text style={{ fontSize: 40, fontWeight: 'bold' }}>Total Hydration: {(this.totalHydration * 100).toFixed(2)}</Text>
+            <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Total Hydration: {(this.totalHydration * 100).toFixed(2)}</Text>
 
             <Text>Total Flour: {this.totalFlour.toFixed(2)}</Text>
             <Text>Total Water: {this.totalWater.toFixed(2)}</Text>
@@ -154,6 +159,31 @@ export default class App extends React.Component {
               value={this.desiredTargetHydration + ''}
               style={{ borderColor: 'red', borderWidth: StyleSheet.hairlineWidth, fontSize: 40 }}
               onChangeText={(text) => { runInAction(() => this.desiredTargetHydration = Number(text) ? Number(text) : 0); }} /></View>
+
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
+              <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Set Hydration</Text>
+              <TouchableOpacity onPress={() => runInAction(() => this.desiredTargetHydration = 60)} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: this.desiredTargetHydration === 60 ? 'lightgray' : 'transparent' }}>
+                <Text style={{ fontSize: 14 }}>60%</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => runInAction(() => this.desiredTargetHydration = 65)} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: this.desiredTargetHydration === 65 ? 'lightgray' : 'transparent' }}>
+                <Text style={{ fontSize: 14 }}>65%</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => runInAction(() => this.desiredTargetHydration = 70)} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: this.desiredTargetHydration === 70 ? 'lightgray' : 'transparent' }}>
+                <Text style={{ fontSize: 14 }}>70%</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => runInAction(() => this.desiredTargetHydration = 75)} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: this.desiredTargetHydration === 75 ? 'lightgray' : 'transparent' }}>
+                <Text style={{ fontSize: 14 }}>75%</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => runInAction(() => this.desiredTargetHydration = 80)} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: this.desiredTargetHydration === 80 ? 'lightgray' : 'transparent' }}>
+                <Text style={{ fontSize: 14 }}>80%</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => runInAction(() => this.desiredTargetHydration = 85)} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: this.desiredTargetHydration === 85 ? 'lightgray' : 'transparent' }}>
+                <Text style={{ fontSize: 14 }}>85%</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => runInAction(() => this.desiredTargetHydration = 90)} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: this.desiredTargetHydration === 90 ? 'lightgray' : 'transparent' }}>
+                <Text style={{ fontSize: 14 }}>90%</Text>
+              </TouchableOpacity>
+            </View>
 
             {this.waterWeightToMatchDesiredTargetHydration != null && this.waterWeightToMatchDesiredTargetHydration > 0 &&
               <Text style={{ fontSize: 30 }}>
@@ -175,6 +205,6 @@ const styles = StyleSheet.create({
   flex: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 });
