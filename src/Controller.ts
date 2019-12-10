@@ -56,7 +56,7 @@ export class Controller {
     return 0;
   }
 
-  @observable public desiredTargetHydration: number = 0;
+  @observable public desiredTargetHydration: number = 75;
 
   @computed public get waterWeightToMatchDesiredTargetHydration(): number {
     if (this.flourWeight != null && this.leavenWeight != null && this.leavenHydration != null) {

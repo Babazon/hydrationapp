@@ -53,14 +53,14 @@ export default class App extends React.Component {
           <Slider
             style={{ width: 300, height: 40, marginVertical: 4 }}
             minimumValue={0}
-            maximumValue={100}
+            maximumValue={2000}
             step={1}
             minimumTrackTintColor="gray"
             maximumTrackTintColor="black"
-            value={(Controller.leavenWeight / Controller.flourWeight) * 100}
-            onValueChange={(newVal: number) => runInAction(() => Controller.leavenWeight = (newVal / 100) * Controller.flourWeight)}
+            value={Controller.leavenWeight}
+            onValueChange={(newVal: number) => runInAction(() => Controller.leavenWeight = newVal)}
           />
-          <Text>{((Controller.leavenWeight / Controller.flourWeight) * 100).toFixed(0)}% inoculation </Text>
+          <Text>{((Controller.leavenWeight)).toFixed(0)}g leaven </Text>
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
             <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Set Inoculation</Text>
@@ -158,25 +158,6 @@ export default class App extends React.Component {
             </TouchableOpacity>
           </View>
 
-          {/* <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}><Text>Flour Weight</Text><TextInput
-              style={{ borderColor: 'gray', borderWidth: StyleSheet.hairlineWidth, fontSize: 40 }}
-              value={Controller.flourWeight + ''}
-              onChangeText={(text) => { runInAction(() => Controller.flourWeight = Number(text) ? Number(text) : 0); }} /></View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}><Text>Water Weight</Text><TextInput
-              style={{ borderColor: 'gray', borderWidth: StyleSheet.hairlineWidth, fontSize: 40 }}
-              value={Controller.waterWeight + ''}
-              onChangeText={(text) => { runInAction(() => Controller.waterWeight = Number(text) ? Number(text) : 0); }} /></View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}><Text>Leaven Weight</Text><TextInput
-              style={{ borderColor: 'gray', borderWidth: StyleSheet.hairlineWidth, fontSize: 40 }}
-              value={Controller.leavenWeight + ''}
-              onChangeText={(text) => { runInAction(() => Controller.leavenWeight = Number(text) ? Number(text) : 0); }} /></View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}><Text>Leaven Hydration</Text><TextInput
-              style={{ borderColor: 'gray', borderWidth: StyleSheet.hairlineWidth, fontSize: 40 }}
-              value={Controller.leavenHydration + ''}
-              onChangeText={(text) => { runInAction(() => Controller.leavenHydration = Number(text) ? Number(text) : 0); }} /></View> */}
-
-          {/* <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Total Hydration: {(Controller.totalHydration * 100).toFixed(2)}</Text> */}
-
           <Text>Total Flour: {Controller.totalFlour.toFixed(2)}</Text>
           <Text>Total Water: {Controller.totalWater.toFixed(2)}</Text>
           <Text> Leaven Water: {Controller.leavenWater.toFixed(2)}</Text>
@@ -185,13 +166,8 @@ export default class App extends React.Component {
           <Text>Recommended Salt: {Controller.recommendedSalt.toFixed(2)}</Text>
           <Text>Approximate Post Bake Weight: {Controller.postBakeWeight.toFixed(2)}</Text>
 
-          {/* <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}><Text>Desired Hydration</Text><TextInput
-              value={Controller.desiredTargetHydration + ''}
-              style={{ borderColor: 'red', borderWidth: StyleSheet.hairlineWidth, fontSize: 40 }}
-              onChangeText={(text) => { runInAction(() => Controller.desiredTargetHydration = Number(text) ? Number(text) : 0); }} /></View> */}
-
           {Controller.waterWeightToMatchDesiredTargetHydration != null && Controller.waterWeightToMatchDesiredTargetHydration > 0 &&
-            <Text style={{ fontSize: 30 }}>{` Add ${Controller.waterWeightToMatchDesiredTargetHydration.toFixed(0)}g water to ${Controller.flourWeight}g flour and ${Controller.leavenWeight}g leaven (${Controller.leavenHydration} hydration) in order to reach target hydration of ${Controller.desiredTargetHydration}%`}
+            <Text style={{ fontSize: 30 }}>{`Add ${Controller.waterWeightToMatchDesiredTargetHydration.toFixed(0)}g water to ${Controller.flourWeight}g flour and ${Controller.leavenWeight}g leaven (${Controller.leavenHydration} hydration) in order to reach target hydration of ${Controller.desiredTargetHydration}%`}
             </Text>
           }
         </View>
