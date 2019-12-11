@@ -1,5 +1,5 @@
 import 'es6-symbol/implement';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { ErrorBoundary } from './ErrorBoundary';
 import { runInAction } from 'mobx';
 import { observer } from 'mobx-react';
@@ -23,7 +23,7 @@ export default class App extends React.Component {
     return (
       <ErrorBoundary>
 
-        <View style={styles.flex}>
+        <ScrollView style={styles.flex}>
 
           <Text style={{ paddingVertical: 8, fontWeight: 'bold', fontSize: 24, textAlign: 'center' }}>@sourdoughpie hydration app</Text>
 
@@ -132,7 +132,8 @@ export default class App extends React.Component {
               desiredTargetHydration={Controller.desiredTargetHydration}
             />
           }
-        </View>
+        </ScrollView>
+
       </ErrorBoundary >
     );
   }
