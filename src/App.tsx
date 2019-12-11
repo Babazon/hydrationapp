@@ -6,6 +6,8 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import Controller from './Controller';
 import { SliderRow } from './Components/SliderRow';
+import { HydrationInfoParagraph } from './Components/HydrationInfoParagraph';
+import { PresetButtonsRow } from './Components/PresetButtonsRow';
 
 // tslint:disable: max-line-length
 
@@ -25,6 +27,8 @@ export default class App extends React.Component {
 
           <Text style={{ paddingVertical: 8, fontWeight: 'bold', fontSize: 24, textAlign: 'center' }}>@sourdoughpie hydration app</Text>
 
+          <View style={{ height: 16 }} />
+
           <SliderRow
             minValue={0}
             maxValue={5000}
@@ -33,19 +37,14 @@ export default class App extends React.Component {
             description={'flour weight'}
             valueAffix={'g'}
           />
+          <PresetButtonsRow
+            presetValues={[1000, 1500, 2000, 3000, 5000, 10000, 20000]}
+            onClickCallback={(item: number) => runInAction(() => { Controller.flourWeight = item; })}
+            valueSuffix={'g'}
+            selectedValue={Controller.flourWeight}
+          />
 
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
-            <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Set Flour</Text>
-            <TouchableOpacity onPress={() => runInAction(() => Controller.flourWeight = 1000)} style={{ marginHorizontal: 8, backgroundColor: Controller.flourWeight === 1000 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>1000g</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => Controller.flourWeight = 2000)} style={{ marginHorizontal: 8, backgroundColor: Controller.flourWeight === 2000 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>2000g</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => Controller.flourWeight = 3000)} style={{ marginHorizontal: 8, backgroundColor: Controller.flourWeight === 3000 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>3000g</Text>
-            </TouchableOpacity>
-          </View>
+          <View style={{ height: 16 }} />
 
           <SliderRow
             minValue={0}
@@ -55,19 +54,14 @@ export default class App extends React.Component {
             description={'leaven weight'}
             valueAffix={'g'}
           />
+          <PresetButtonsRow
+            presetValues={[15, 20, 25, 30, 35, 50, 75]}
+            onClickCallback={(item: number) => runInAction(() => { Controller.leavenWeight = (item / 100) * Controller.flourWeight; })}
+            valueSuffix={'%'}
+            selectedValue={(Controller.leavenWeight / Controller.flourWeight) * 100}
+          />
 
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
-            <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Set Inoculation</Text>
-            <TouchableOpacity onPress={() => runInAction(() => Controller.leavenWeight = 0.15 * Controller.flourWeight)} style={{ marginHorizontal: 8, backgroundColor: Controller.leavenWeight === 0.15 * Controller.flourWeight ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>15%</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => Controller.leavenWeight = 0.2 * Controller.flourWeight)} style={{ marginHorizontal: 8, backgroundColor: Controller.leavenWeight === 0.2 * Controller.flourWeight ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>20%</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => Controller.leavenWeight = 0.25 * Controller.flourWeight)} style={{ marginHorizontal: 8, backgroundColor: Controller.leavenWeight === 0.25 * Controller.flourWeight ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>25%</Text>
-            </TouchableOpacity>
-          </View>
+          <View style={{ height: 16 }} />
 
           <SliderRow
             minValue={0}
@@ -77,22 +71,14 @@ export default class App extends React.Component {
             description={'leaven hydration'}
             valueAffix={'%'}
           />
+          <PresetButtonsRow
+            presetValues={[50, 75, 100, 125, 150, 175, 200]}
+            onClickCallback={(item: number) => runInAction(() => { Controller.leavenHydration = item; })}
+            valueSuffix={'%'}
+            selectedValue={Controller.leavenHydration}
+          />
 
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
-            <Text style={{ marginHorizontal: 8, fontSize: 14 }}> Set Leaven Hydration</Text>
-            <TouchableOpacity onPress={() => runInAction(() => Controller.leavenHydration = 50)} style={{ marginHorizontal: 8, backgroundColor: Controller.leavenHydration === 50 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>50%</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => Controller.leavenHydration = 75)} style={{ marginHorizontal: 8, backgroundColor: Controller.leavenHydration === 75 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>75%</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => Controller.leavenHydration = 100)} style={{ marginHorizontal: 8, backgroundColor: Controller.leavenHydration === 100 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>100%</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => Controller.leavenHydration = 150)} style={{ marginHorizontal: 8, backgroundColor: Controller.leavenHydration === 150 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>150%</Text>
-            </TouchableOpacity>
-          </View>
+          <View style={{ height: 16 }} />
 
           <SliderRow
             minValue={0}
@@ -106,6 +92,8 @@ export default class App extends React.Component {
             valueAffix={'g'}
           />
 
+          <View style={{ height: 16 }} />
+
           <SliderRow
             minValue={0}
             maxValue={150}
@@ -118,30 +106,14 @@ export default class App extends React.Component {
             valueAffix={'%'}
           />
 
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
-            <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Set Hydration</Text>
-            <TouchableOpacity onPress={() => runInAction(() => { Controller.desiredTargetHydration = 60; Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration; })} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: Controller.desiredTargetHydration === 60 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>60%</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => { Controller.desiredTargetHydration = 65; Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration; })} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: Controller.desiredTargetHydration === 65 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>65%</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => { Controller.desiredTargetHydration = 70; Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration; })} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: Controller.desiredTargetHydration === 70 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>70%</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => { Controller.desiredTargetHydration = 75; Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration; })} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: Controller.desiredTargetHydration === 75 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>75%</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => { Controller.desiredTargetHydration = 80; Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration; })} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: Controller.desiredTargetHydration === 80 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>80%</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => { Controller.desiredTargetHydration = 85; Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration; })} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: Controller.desiredTargetHydration === 85 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>85%</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => runInAction(() => { Controller.desiredTargetHydration = 90; Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration; })} style={{ marginHorizontal: 8, borderColor: 'lightblue', borderWidth: StyleSheet.hairlineWidth, backgroundColor: Controller.desiredTargetHydration === 90 ? 'lightgray' : 'transparent' }}>
-              <Text style={{ fontSize: 14 }}>90%</Text>
-            </TouchableOpacity>
-          </View>
+          <View style={{ height: 16 }} />
+
+          <PresetButtonsRow
+            presetValues={[60, 65, 70, 75, 80, 85, 90, 95, 100]}
+            onClickCallback={(item: number) => runInAction(() => { Controller.desiredTargetHydration = item; Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration; })}
+            valueSuffix={'%'}
+            selectedValue={Controller.desiredTargetHydration}
+          />
 
           <Text>Total Flour: {Controller.totalFlour.toFixed(2)}</Text>
           <Text>Total Water: {Controller.totalWater.toFixed(2)}</Text>
@@ -152,8 +124,13 @@ export default class App extends React.Component {
           <Text>Approximate Post Bake Weight: {Controller.postBakeWeight.toFixed(2)}</Text>
 
           {Controller.waterWeightToMatchDesiredTargetHydration != null && Controller.waterWeightToMatchDesiredTargetHydration > 0 &&
-            <Text style={{ fontSize: 24, textAlign: 'center', marginTop: 4 }}>{`Add ${Controller.waterWeightToMatchDesiredTargetHydration.toFixed(0)}g water to ${Controller.flourWeight}g flour and ${Controller.leavenWeight}g leaven (${Controller.leavenHydration} hydration) in order to reach target hydration of ${Controller.desiredTargetHydration}%`}
-            </Text>
+            <HydrationInfoParagraph
+              waterWeightToMatchDesiredTargetHydration={Controller.waterWeightToMatchDesiredTargetHydration}
+              flourWeight={Controller.flourWeight}
+              leavenWeight={Controller.leavenWeight}
+              leavenHydration={Controller.leavenHydration}
+              desiredTargetHydration={Controller.desiredTargetHydration}
+            />
           }
         </View>
       </ErrorBoundary >
