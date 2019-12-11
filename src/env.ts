@@ -1,4 +1,5 @@
 export const presets = {
+  fuck: 'shit',
   saltRatio: 0.022,
   postBakeWeightRatio: 0.85,
   flourWeightPresets: [1000, 1500, 2000, 3000, 5000, 10000, 20000, 30000],

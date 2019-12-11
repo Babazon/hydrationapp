@@ -3,7 +3,19 @@ import { presets } from './env';
 
 export class Controller {
 
-  constructor(protected readonly appPresets: any) { }
+  constructor(protected readonly appPresets: any) {
+
+    Object.keys(appPresets).forEach((field) => {
+      if (field === 'fuck') {
+        this[field] = observable.box(appPresets[field]);
+      }
+    });
+
+    console.log(this.fuck);
+
+  }
+
+  [key: string]: any;
 
   @observable public flourWeight: number = 1000;
   @observable public waterWeight: number = 725;

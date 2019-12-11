@@ -7,6 +7,7 @@ import React from 'react';
 import Controller from './Controller';
 import { SliderRow } from './Components/SliderRow';
 import { PresetButtonsRow } from './Components/PresetButtonsRow';
+// tslint:disable-next-line: no-var-requires
 const backgroundImage = require('./bread.jpg');
 
 // tslint:disable: max-line-length
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   infoStyle: {
-    fontSize: 16,
+    fontSize: 20,
     textAlign: 'left',
     fontWeight: 'bold'
   },
