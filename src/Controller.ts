@@ -14,6 +14,10 @@ export class Controller {
     return this.appPresets.saltRatio;
   }
 
+  @computed public get postBakeWeightRatio(): number {
+    return this.appPresets.postBakeWeightRatio;
+  }
+
   @computed public get flourWeightPresets(): number[] {
     return this.appPresets.flourWeightPresets;
   }
@@ -67,14 +71,14 @@ export class Controller {
 
   @computed public get recommendedSalt(): number {
     if (this.totalFlour != null) {
-      return this.totalFlour * 0.022;
+      return this.totalFlour * this.appPresets.saltRatio;
     }
     return 0;
   }
 
   @computed public get postBakeWeight(): number {
     if (this.totalFlour != null && this.totalWater != null) {
-      return 0.85 * (this.totalWater + this.totalFlour);
+      return this.postBakeWeightRatio * (this.totalWater + this.totalFlour);
     }
     return 0;
   }

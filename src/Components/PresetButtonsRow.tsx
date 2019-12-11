@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View, Text, TouchableOpacity } from 'react-native';
+import { FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { observer } from 'mobx-react';
 
 export interface IPresetButtonsRowProps {
@@ -21,10 +21,12 @@ export class PresetButtonsRow extends React.Component<IPresetButtonsRowProps>{
           padding: 4,
           justifyContent: 'center',
           alignItems: 'center',
+          borderWidth: StyleSheet.hairlineWidth,
+          borderRadius: 2,
           borderColor: selectedValue === item ? 'transparent' : 'lightgray',
           backgroundColor: selectedValue === item ? 'lightgray' : 'transparent'
         }}>
-        <Text style={{ fontSize: 14 }}>{item.toFixed(0)}{valueSuffix}</Text>
+        <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{item.toFixed(0)}{valueSuffix}</Text>
       </TouchableOpacity>
     );
   }
