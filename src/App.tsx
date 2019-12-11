@@ -1,12 +1,11 @@
 import 'es6-symbol/implement';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { ErrorBoundary } from './ErrorBoundary';
 import { runInAction } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import Controller from './Controller';
 import { SliderRow } from './Components/SliderRow';
-import { HydrationInfoParagraph } from './Components/HydrationInfoParagraph';
 import { PresetButtonsRow } from './Components/PresetButtonsRow';
 
 // tslint:disable: max-line-length
@@ -23,11 +22,11 @@ export default class App extends React.Component {
     return (
       <ErrorBoundary>
 
-        <ScrollView style={styles.flex}>
+        <ScrollView style={styles.flex} contentContainerStyle={styles.content}>
 
-          <Text style={{ paddingVertical: 8, fontWeight: 'bold', fontSize: 24, textAlign: 'center' }}>@sourdoughpie hydration app</Text>
+          <Text style={styles.title}>@sourdoughpie hydration app</Text>
 
-          <View style={{ height: 16 }} />
+          <View style={styles.separator} />
 
           <SliderRow
             minValue={0}
@@ -38,13 +37,13 @@ export default class App extends React.Component {
             valueAffix={'g'}
           />
           <PresetButtonsRow
-            presetValues={[1000, 1500, 2000, 3000, 5000, 10000, 20000]}
+            presetValues={Controller.flourWeightPresets}
             onClickCallback={(item: number) => runInAction(() => { Controller.flourWeight = item; })}
             valueSuffix={'g'}
             selectedValue={Controller.flourWeight}
           />
 
-          <View style={{ height: 16 }} />
+          <View style={styles.separator} />
 
           <SliderRow
             minValue={0}
@@ -55,13 +54,13 @@ export default class App extends React.Component {
             valueAffix={'g'}
           />
           <PresetButtonsRow
-            presetValues={[15, 20, 25, 30, 35, 50, 75]}
+            presetValues={Controller.leavenInoculationPresets}
             onClickCallback={(item: number) => runInAction(() => { Controller.leavenWeight = (item / 100) * Controller.flourWeight; })}
             valueSuffix={'%'}
             selectedValue={(Controller.leavenWeight / Controller.flourWeight) * 100}
           />
 
-          <View style={{ height: 16 }} />
+          <View style={styles.separator} />
 
           <SliderRow
             minValue={0}
@@ -72,13 +71,13 @@ export default class App extends React.Component {
             valueAffix={'%'}
           />
           <PresetButtonsRow
-            presetValues={[50, 75, 100, 125, 150, 175, 200]}
+            presetValues={Controller.leavenHydrationPresets}
             onClickCallback={(item: number) => runInAction(() => { Controller.leavenHydration = item; })}
             valueSuffix={'%'}
             selectedValue={Controller.leavenHydration}
           />
 
-          <View style={{ height: 16 }} />
+          <View style={styles.separator} />
 
           <SliderRow
             minValue={0}
@@ -92,7 +91,7 @@ export default class App extends React.Component {
             valueAffix={'g'}
           />
 
-          <View style={{ height: 16 }} />
+          <View style={styles.separator} />
 
           <SliderRow
             minValue={0}
@@ -106,24 +105,26 @@ export default class App extends React.Component {
             valueAffix={'%'}
           />
 
-          <View style={{ height: 16 }} />
+          <View style={styles.separator} />
 
           <PresetButtonsRow
-            presetValues={[60, 65, 70, 75, 80, 85, 90, 95, 100]}
+            presetValues={Controller.desiredHydrationPresets}
             onClickCallback={(item: number) => runInAction(() => { Controller.desiredTargetHydration = item; Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration; })}
             valueSuffix={'%'}
             selectedValue={Controller.desiredTargetHydration}
           />
 
-          <Text>Total Flour: {Controller.totalFlour.toFixed(2)}</Text>
-          <Text>Total Water: {Controller.totalWater.toFixed(2)}</Text>
-          <Text> Leaven Water: {Controller.leavenWater.toFixed(2)}</Text>
-          <Text> Leaven Flour: {Controller.leavenFlour.toFixed(2)}</Text>
+          <View style={styles.infoBlock}>
+            <Text style={styles.infoStyle}>Total Flour: {Controller.totalFlour.toFixed(2)}g</Text>
+            <Text style={styles.infoStyle}>Total Water: {Controller.totalWater.toFixed(2)}g</Text>
+            <Text style={styles.infoStyle}>Leaven Water: {Controller.leavenWater.toFixed(2)}g</Text>
+            <Text style={styles.infoStyle}>Leaven Flour: {Controller.leavenFlour.toFixed(2)}g</Text>
 
-          <Text>Recommended Salt: {Controller.recommendedSalt.toFixed(2)}</Text>
-          <Text>Approximate Post Bake Weight: {Controller.postBakeWeight.toFixed(2)}</Text>
+            <Text style={styles.infoStyle}>Recommended Salt: {Controller.recommendedSalt.toFixed(2)}g</Text>
+            <Text style={styles.infoStyle}>Post Bake Weight: {Controller.postBakeWeight.toFixed(2)}g</Text>
+          </View>
 
-          {Controller.waterWeightToMatchDesiredTargetHydration != null && Controller.waterWeightToMatchDesiredTargetHydration > 0 &&
+          {/* {Controller.waterWeightToMatchDesiredTargetHydration != null && Controller.waterWeightToMatchDesiredTargetHydration > 0 &&
             <HydrationInfoParagraph
               waterWeightToMatchDesiredTargetHydration={Controller.waterWeightToMatchDesiredTargetHydration}
               flourWeight={Controller.flourWeight}
@@ -131,7 +132,7 @@ export default class App extends React.Component {
               leavenHydration={Controller.leavenHydration}
               desiredTargetHydration={Controller.desiredTargetHydration}
             />
-          }
+          } */}
         </ScrollView>
 
       </ErrorBoundary >
@@ -140,10 +141,29 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  title: { paddingVertical: 8, fontWeight: 'bold', fontSize: 24, textAlign: 'center' },
   flex: {
     flex: 1,
+  },
+  content: {
     justifyContent: 'center',
     alignItems: 'stretch',
-    marginHorizontal: 16
+    marginHorizontal: 16,
+    marginTop: 32,
+    flex: 1
   },
+  infoStyle: {
+    fontSize: 16,
+    textAlign: 'left',
+  },
+  infoBlock: {
+    marginVertical: 16,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    alignSelf: 'center'
+  },
+  separator: {
+    height: 16
+  }
 });

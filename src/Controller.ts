@@ -1,11 +1,34 @@
 import { observable, computed } from 'mobx';
+import { presets } from './env';
 
 export class Controller {
+
+  constructor(protected readonly appPresets: any) { }
 
   @observable public flourWeight: number = 1000;
   @observable public waterWeight: number = 725;
   @observable public leavenWeight: number = 200;
   @observable public leavenHydration: number = 100;
+
+  @computed public get saltRatio(): number {
+    return this.appPresets.saltRatio;
+  }
+
+  @computed public get flourWeightPresets(): number[] {
+    return this.appPresets.flourWeightPresets;
+  }
+
+  @computed public get leavenInoculationPresets(): number[] {
+    return this.appPresets.leavenInoculationPresets;
+  }
+
+  @computed public get desiredHydrationPresets(): number[] {
+    return this.appPresets.desiredHydrationPresets;
+  }
+
+  @computed public get leavenHydrationPresets(): number[] {
+    return this.appPresets.leavenHydrationPresets;
+  }
 
   @computed public get leavenFlour(): number {
     if (this.leavenHydration != null && this.leavenWeight != null) {
@@ -66,4 +89,4 @@ export class Controller {
   }
 }
 
-export default new Controller();
+export default new Controller(presets);

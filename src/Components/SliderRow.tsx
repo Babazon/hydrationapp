@@ -24,7 +24,7 @@ export class SliderRow extends React.Component<ISliderRowProps>{
         <Text style={{ textAlign: 'center' }}>{description.toUpperCase()}</Text>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
 
-          <Text style={{ flex: 1, textAlign: 'center', marginRight: 4 }}>
+          <Text style={{ flex: 1, textAlign: 'center', marginRight: 4, fontWeight: 'bold', fontSize: 16, textDecorationLine: 'underline', textDecorationColor: 'lightgray' }}>
             {value.toFixed(0)}{valueAffix}
           </Text>
 

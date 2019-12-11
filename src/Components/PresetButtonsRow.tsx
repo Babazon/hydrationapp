@@ -34,6 +34,7 @@ export class PresetButtonsRow extends React.Component<IPresetButtonsRowProps>{
     return (
       <View>
         <FlatList
+          showsHorizontalScrollIndicator={false}
           horizontal
           data={presetValues}
           renderItem={this.renderItem}
