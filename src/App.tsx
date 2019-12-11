@@ -5,7 +5,7 @@ import { runInAction } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import Controller from './Controller';
-import Slider from '@react-native-community/slider';
+import { SliderRow } from './Components/SliderRow';
 
 // tslint:disable: max-line-length
 
@@ -23,19 +23,16 @@ export default class App extends React.Component {
 
         <View style={styles.flex}>
 
-          <Text style={{ paddingVertical: 8, fontWeight: 'bold', fontSize: 24 }}>@sourdoughpie hydration app</Text>
+          <Text style={{ paddingVertical: 8, fontWeight: 'bold', fontSize: 24, textAlign: 'center' }}>@sourdoughpie hydration app</Text>
 
-          <Slider
-            style={{ width: 300, height: 40, marginVertical: 4 }}
-            minimumValue={0}
-            maximumValue={5000}
-            step={5}
-            minimumTrackTintColor="gray"
-            maximumTrackTintColor="black"
+          <SliderRow
+            minValue={0}
+            maxValue={5000}
             value={Controller.flourWeight}
             onValueChange={(newVal: number) => runInAction(() => Controller.flourWeight = newVal)}
+            description={'flour weight'}
+            valueAffix={'g'}
           />
-          <Text>{Controller.flourWeight.toFixed(0)} g flour</Text>
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
             <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Set Flour</Text>
@@ -50,17 +47,14 @@ export default class App extends React.Component {
             </TouchableOpacity>
           </View>
 
-          <Slider
-            style={{ width: 300, height: 40, marginVertical: 4 }}
-            minimumValue={0}
-            maximumValue={2000}
-            step={1}
-            minimumTrackTintColor="gray"
-            maximumTrackTintColor="black"
+          <SliderRow
+            minValue={0}
+            maxValue={2000}
             value={Controller.leavenWeight}
             onValueChange={(newVal: number) => runInAction(() => Controller.leavenWeight = newVal)}
+            description={'leaven weight'}
+            valueAffix={'g'}
           />
-          <Text>{((Controller.leavenWeight)).toFixed(0)}g leaven </Text>
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
             <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Set Inoculation</Text>
@@ -75,17 +69,14 @@ export default class App extends React.Component {
             </TouchableOpacity>
           </View>
 
-          <Slider
-            style={{ width: 300, height: 40, marginVertical: 4 }}
-            minimumValue={0}
-            maximumValue={200}
-            step={5}
-            minimumTrackTintColor="gray"
-            maximumTrackTintColor="black"
+          <SliderRow
+            minValue={0}
+            maxValue={200}
             value={Controller.leavenHydration}
             onValueChange={(newVal: number) => runInAction(() => Controller.leavenHydration = newVal)}
+            description={'leaven hydration'}
+            valueAffix={'%'}
           />
-          <Text>{Controller.leavenHydration.toFixed(0)}% leaven hydration </Text>
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
             <Text style={{ marginHorizontal: 8, fontSize: 14 }}> Set Leaven Hydration</Text>
@@ -103,35 +94,29 @@ export default class App extends React.Component {
             </TouchableOpacity>
           </View>
 
-          <Slider
-            style={{ width: 300, height: 40, marginVertical: 4 }}
-            minimumValue={0}
-            maximumValue={5000}
-            step={5}
-            minimumTrackTintColor="gray"
-            maximumTrackTintColor="black"
+          <SliderRow
+            minValue={0}
+            maxValue={5000}
             value={Controller.waterWeight}
             onValueChange={(newVal: number) => runInAction(() => {
               Controller.waterWeight = newVal;
               Controller.desiredTargetHydration = Controller.totalHydration * 100;
             })}
+            description={'water'}
+            valueAffix={'g'}
           />
-          <Text>{Controller.waterWeight.toFixed(0)}g water </Text>
 
-          <Slider
-            style={{ width: 300, height: 40, marginVertical: 4 }}
-            minimumValue={0}
-            maximumValue={150}
-            step={5}
-            minimumTrackTintColor="green"
-            maximumTrackTintColor="red"
+          <SliderRow
+            minValue={0}
+            maxValue={150}
             value={Controller.desiredTargetHydration}
             onValueChange={(newVal: number) => runInAction(() => {
               Controller.desiredTargetHydration = newVal;
               Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration;
             })}
+            description={'target hydration'}
+            valueAffix={'%'}
           />
-          <Text>{Controller.desiredTargetHydration.toFixed(0)}% desired hydration </Text>
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: 8 }}>
             <Text style={{ marginHorizontal: 8, fontSize: 14 }}>Set Hydration</Text>
@@ -167,7 +152,7 @@ export default class App extends React.Component {
           <Text>Approximate Post Bake Weight: {Controller.postBakeWeight.toFixed(2)}</Text>
 
           {Controller.waterWeightToMatchDesiredTargetHydration != null && Controller.waterWeightToMatchDesiredTargetHydration > 0 &&
-            <Text style={{ fontSize: 30 }}>{`Add ${Controller.waterWeightToMatchDesiredTargetHydration.toFixed(0)}g water to ${Controller.flourWeight}g flour and ${Controller.leavenWeight}g leaven (${Controller.leavenHydration} hydration) in order to reach target hydration of ${Controller.desiredTargetHydration}%`}
+            <Text style={{ fontSize: 24, textAlign: 'center', marginTop: 4 }}>{`Add ${Controller.waterWeightToMatchDesiredTargetHydration.toFixed(0)}g water to ${Controller.flourWeight}g flour and ${Controller.leavenWeight}g leaven (${Controller.leavenHydration} hydration) in order to reach target hydration of ${Controller.desiredTargetHydration}%`}
             </Text>
           }
         </View>
@@ -180,6 +165,7 @@ const styles = StyleSheet.create({
   flex: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
+    marginHorizontal: 16
   },
 });

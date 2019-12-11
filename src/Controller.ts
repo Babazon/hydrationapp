@@ -44,7 +44,7 @@ export class Controller {
 
   @computed public get recommendedSalt(): number {
     if (this.totalFlour != null) {
-      return this.totalFlour * 0.22;
+      return this.totalFlour * 0.022;
     }
     return 0;
   }
