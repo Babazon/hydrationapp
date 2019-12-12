@@ -168,7 +168,8 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center',
     marginHorizontal: 16,
-    marginTop: 32
+    marginTop: 32,
+    paddingBottom: 32
   },
   flex: {
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
