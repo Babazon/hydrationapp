@@ -36,6 +36,7 @@ export class SliderRow extends React.Component<ISliderRowProps>{
           </Text>
 
           <Slider
+            disabled={isLocked}
             style={styles.sliderStyle}
             minimumValue={minValue}
             maximumValue={maxValue}
