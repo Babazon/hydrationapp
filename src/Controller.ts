@@ -13,6 +13,12 @@ export class Controller {
 
   [key: string]: any;
 
+  @observable public desiredHydrationLocked: boolean = false;
+
+  @action public toggleDesiredHydationLock = (): void => {
+    this.desiredHydrationLocked = !this.desiredHydrationLocked;
+  }
+
   @observable public flourWeight: number = 1000;
   @observable public waterWeight: number = 725;
   @observable public leavenWeight: number = 200;
@@ -101,6 +107,13 @@ export class Controller {
     return 0;
   }
 
+  @computed public get flourWeightToMatchDesiredTargetHydration(): number {
+    if (this.waterWeight != null && this.leavenWeight != null && this.leavenHydration != null) {
+      return ((this.totalWater / this.desiredTargetHydration) * 100) - this.leavenFlour;
+    }
+    return 0;
+  }
+
   @computed public get minFlour(): number {
     return this.appPresets.minFlour;
   }
@@ -142,6 +155,9 @@ export class Controller {
 
   @action public setFlourWeight = (value: number): void => {
     this.flourWeight = value;
+    if (this.desiredTargetHydration && this.desiredHydrationLocked) {
+      this.waterWeight = this.waterWeightToMatchDesiredTargetHydration;
+    }
   }
 
   @action public setLeavenWeight = (value: number): void => {
@@ -154,6 +170,9 @@ export class Controller {
 
   @action public setwater = (value: number): void => {
     this.waterWeight = value;
+    if (this.desiredTargetHydration && this.desiredHydrationLocked) {
+      this.flourWeight = this.flourWeightToMatchDesiredTargetHydration;
+    }
   }
 
   @action public setLeavenWeightUsingInoculation = (value: number): void => {
@@ -166,19 +185,28 @@ export class Controller {
 
   @action public setWaterWeightAndUpdateDesiredHydration = (value: number): void => {
     this.waterWeight = value;
-    this.desiredTargetHydration = this.totalHydration * 100;
+    if (!this.desiredHydrationLocked) {
+      this.desiredTargetHydration = this.totalHydration * 100;
+    } else {
+      this.flourWeight = this.flourWeightToMatchDesiredTargetHydration;
+    }
+
   }
 
   @action public setDesiredHydrationAndUpdateRequiredWaterWeight = (value: number): void => {
-    this.desiredTargetHydration = value;
-    this.waterWeight = this.waterWeightToMatchDesiredTargetHydration;
+    if (!this.desiredHydrationLocked) {
+      this.desiredTargetHydration = value;
+      this.waterWeight = this.waterWeightToMatchDesiredTargetHydration;
+    }
   }
 
   @computed public get languageConstants(): { [key: string]: string } | undefined {
     try {
       return this.appPresets.languageConstants;
     } catch (error) {
-      //
+      // 2a429a82dbe1ae96260b67c1e2cd04e81c108b9d
+
+      // b7ef4d725e7b8e3144e30a125c01b222ced7db3e
     }
   }
 

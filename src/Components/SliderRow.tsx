@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Slider, Text, StyleSheet } from 'react-native';
+import { View, Slider, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { observer } from 'mobx-react';
 
 export interface ISliderRowProps {
@@ -9,16 +9,27 @@ export interface ISliderRowProps {
   description: string;
   minValue: number;
   maxValue: number;
+  onLockValue?(): void;
+  isLocked?: boolean;
 }
 
 @observer
 export class SliderRow extends React.Component<ISliderRowProps>{
   public render() {
-    const { value, onValueChange, description, valueAffix, minValue, maxValue } = this.props;
+    const { value, onValueChange, description, valueAffix, minValue, maxValue, isLocked, onLockValue } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.label}>{description.toUpperCase()}</Text>
         <View style={styles.sliderContainer}>
+
+          {onLockValue && isLocked != null &&
+            <TouchableOpacity onPress={this.props.onLockValue} style={{ justifyContent: 'center', alignItems: 'center' }}>
+              <>
+                {isLocked && <Image source={require('../icon_locked.png')} style={{ height: 20, width: 20, resizeMode: 'contain' }} />}
+                {!isLocked && <Image source={require('../icon_unlocked.png')} style={{ height: 20, width: 20, resizeMode: 'contain' }} />}
+              </>
+            </TouchableOpacity>
+          }
 
           <Text style={styles.sliderValue}>
             {value.toFixed(0)}{valueAffix}

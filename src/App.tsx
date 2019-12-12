@@ -103,6 +103,8 @@ export default class App extends React.Component {
             {/* TARGET HYDRATION  */}
 
             <SliderRow
+              onLockValue={Controller.toggleDesiredHydationLock}
+              isLocked={Controller.desiredHydrationLocked}
               minValue={Controller.minDesiredHydration}
               maxValue={Controller.maxDesiredHydration}
               value={Controller.desiredTargetHydration}
