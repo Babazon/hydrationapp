@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Slider, Text } from 'react-native';
+import { View, Slider, Text, StyleSheet } from 'react-native';
 import { observer } from 'mobx-react';
 
 export interface ISliderRowProps {
@@ -16,20 +16,16 @@ export class SliderRow extends React.Component<ISliderRowProps>{
   public render() {
     const { value, onValueChange, description, valueAffix, minValue, maxValue } = this.props;
     return (
-      <View style={{
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'stretch'
-      }}>
-        <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>{description.toUpperCase()}</Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+      <View style={styles.container}>
+        <Text style={styles.label}>{description.toUpperCase()}</Text>
+        <View style={styles.sliderContainer}>
 
-          <Text style={{ flex: 1, textAlign: 'center', marginRight: 4, fontWeight: 'bold', fontSize: 16, textDecorationLine: 'underline', textDecorationColor: 'lightgray' }}>
+          <Text style={styles.sliderValue}>
             {value.toFixed(0)}{valueAffix}
           </Text>
 
           <Slider
-            style={{ height: 40, marginVertical: 4, flex: 4 }}
+            style={styles.sliderStyle}
             minimumValue={minValue}
             maximumValue={maxValue}
             step={5}
@@ -44,3 +40,34 @@ export class SliderRow extends React.Component<ISliderRowProps>{
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'stretch',
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
+  },
+  label: {
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  sliderContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  sliderStyle: {
+    flex: 4,
+    height: 40,
+    marginVertical: 4
+  },
+  sliderValue: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginRight: 4,
+    textAlign: 'center',
+    textDecorationColor: 'lightgray',
+    textDecorationLine: 'underline'
+  }
+});

@@ -22,13 +22,15 @@ export default class App extends React.Component {
 
     return (
       <ErrorBoundary>
-        <ImageBackground source={backgroundImage} style={{ width: '100%', height: '100%', opacity: 0.7 }}>
+        <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
 
-          <ScrollView style={styles.flex} contentContainerStyle={styles.content}>
+          <ScrollView style={styles.flex} contentContainerStyle={styles.content} bounces={false}>
 
             <Text style={styles.title}>{Controller.languageConstants!._appTitle}</Text>
 
             <View style={styles.separator} />
+
+            {/* FLOUR WEIGHT  */}
 
             <SliderRow
               minValue={Controller.minFlour}
@@ -47,6 +49,8 @@ export default class App extends React.Component {
 
             <View style={styles.separator} />
 
+            {/* LEAVEN WEIGHT  */}
+
             <SliderRow
               minValue={Controller.minLeaven}
               maxValue={Controller.maxLeaven}
@@ -63,6 +67,8 @@ export default class App extends React.Component {
             />
 
             <View style={styles.separator} />
+
+            {/* LEAVEN HYDRATION */}
 
             <SliderRow
               minValue={Controller.minLeavenHydration}
@@ -81,6 +87,8 @@ export default class App extends React.Component {
 
             <View style={styles.separator} />
 
+            {/* WATER WEIGHT  */}
+
             <SliderRow
               minValue={Controller.minWater}
               maxValue={Controller.maxWater}
@@ -91,6 +99,8 @@ export default class App extends React.Component {
             />
 
             <View style={styles.separator} />
+
+            {/* TARGET HYDRATION  */}
 
             <SliderRow
               minValue={Controller.minDesiredHydration}
@@ -109,6 +119,8 @@ export default class App extends React.Component {
               valueSuffix={Controller.languageConstants!._percent}
               selectedValue={Controller.desiredTargetHydration}
             />
+
+            {/* INFO  */}
 
             <View style={styles.infoBlock}>
 
@@ -147,35 +159,45 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  title: { paddingVertical: 8, fontWeight: 'bold', fontSize: 24, textAlign: 'center' },
-  flex: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-  },
-  infoRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
+  backgroundImage: {
+    height: '100%',
+    opacity: 0.7,
+    width: '100%'
   },
   content: {
-    justifyContent: 'center',
     alignItems: 'stretch',
+    justifyContent: 'center',
     marginHorizontal: 16,
-    marginTop: 32,
+    marginTop: 32
+  },
+  flex: {
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    flex: 1
+  },
+  infoBlock: {
+    alignItems: 'flex-start',
+    alignSelf: 'center',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    marginVertical: 16
+  },
+  infoRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   infoStyle: {
     fontSize: 20,
-    textAlign: 'left',
-    fontWeight: 'bold'
-  },
-  infoBlock: {
-    marginVertical: 16,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    alignSelf: 'center'
+    fontWeight: 'bold',
+    textAlign: 'left'
   },
   separator: {
     height: 16
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    paddingVertical: 8,
+    textAlign: 'center'
   }
 });

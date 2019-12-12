@@ -16,17 +16,11 @@ export class PresetButtonsRow extends React.Component<IPresetButtonsRowProps>{
     return (
       <TouchableOpacity
         onPress={() => onClickCallback(item)}
-        style={{
-          marginHorizontal: 8,
-          padding: 4,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderWidth: StyleSheet.hairlineWidth,
-          borderRadius: 2,
+        style={StyleSheet.flatten([styles.buttonStyles, {
           borderColor: selectedValue === item ? 'transparent' : 'lightgray',
           backgroundColor: selectedValue === item ? 'lightgray' : 'transparent'
-        }}>
-        <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{item.toFixed(0)}{valueSuffix}</Text>
+        }])}>
+        <Text style={styles.buttonText}>{item.toFixed(0)}{valueSuffix}</Text>
       </TouchableOpacity>
     );
   }
@@ -46,3 +40,18 @@ export class PresetButtonsRow extends React.Component<IPresetButtonsRowProps>{
     );
   }
 }
+
+const styles = StyleSheet.create({
+  buttonStyles: {
+    alignItems: 'center',
+    borderRadius: 2,
+    borderWidth: StyleSheet.hairlineWidth,
+    justifyContent: 'center',
+    marginHorizontal: 8,
+    padding: 4
+  },
+  buttonText: {
+    fontSize: 14,
+    fontWeight: 'bold'
+  }
+});
