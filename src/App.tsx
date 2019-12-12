@@ -127,6 +127,16 @@ export default class App extends React.Component {
             <View style={styles.infoBlock}>
 
               <View style={styles.infoRow}>
+                <Text style={styles.infoStyle}>Current Hydration:</Text>
+                <Text style={styles.infoStyle}>{(Controller.totalHydration * 100).toFixed(2)}%</Text>
+              </View>
+
+              <View style={styles.infoRow}>
+                <Text style={styles.infoStyle}>Current Inoculation:</Text>
+                <Text style={styles.infoStyle}>{(Controller.inoculation).toFixed(2)}%</Text>
+              </View>
+
+              <View style={styles.infoRow}>
                 <Text style={styles.infoStyle}>Total Flour:</Text>
                 <Text style={styles.infoStyle}>{Controller.totalFlour.toFixed(2)}g</Text>
               </View>

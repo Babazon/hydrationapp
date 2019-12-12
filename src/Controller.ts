@@ -162,10 +162,16 @@ export class Controller {
 
   @action public setLeavenWeight = (value: number): void => {
     this.leavenWeight = value;
+    if (this.desiredHydrationLocked) {
+      this.waterWeight = this.waterWeightToMatchDesiredTargetHydration;
+    }
   }
 
   @action public setLeavenHydration = (value: number): void => {
     this.leavenHydration = value;
+    if (this.desiredHydrationLocked) {
+      this.waterWeight = this.waterWeightToMatchDesiredTargetHydration;
+    }
   }
 
   @action public setwater = (value: number): void => {
@@ -177,6 +183,10 @@ export class Controller {
 
   @action public setLeavenWeightUsingInoculation = (value: number): void => {
     this.leavenWeight = (value / 100) * this.flourWeight;
+    if (this.desiredHydrationLocked) {
+      this.waterWeight = this.waterWeightToMatchDesiredTargetHydration;
+      this.flourWeight = this.flourWeightToMatchDesiredTargetHydration;
+    }
   }
 
   @computed public get inoculation(): number {
@@ -190,7 +200,6 @@ export class Controller {
     } else {
       this.flourWeight = this.flourWeightToMatchDesiredTargetHydration;
     }
-
   }
 
   @action public setDesiredHydrationAndUpdateRequiredWaterWeight = (value: number): void => {
@@ -204,9 +213,7 @@ export class Controller {
     try {
       return this.appPresets.languageConstants;
     } catch (error) {
-      // 2a429a82dbe1ae96260b67c1e2cd04e81c108b9d
-
-      // b7ef4d725e7b8e3144e30a125c01b222ced7db3e
+      //
     }
   }
 
