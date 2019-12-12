@@ -1,7 +1,6 @@
 import 'es6-symbol/implement';
 import { StyleSheet, View, Text, ScrollView, ImageBackground } from 'react-native';
 import { ErrorBoundary } from './ErrorBoundary';
-import { runInAction } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import Controller from './Controller';
@@ -23,122 +22,125 @@ export default class App extends React.Component {
 
     return (
       <ErrorBoundary>
-        <ImageBackground source={backgroundImage} style={{ width: '100%', height: '100%' }}>
+        <ImageBackground source={backgroundImage} style={{ width: '100%', height: '100%', opacity: 0.7 }}>
 
           <ScrollView style={styles.flex} contentContainerStyle={styles.content}>
 
-            <Text style={styles.title}>@sourdoughpie hydration app</Text>
+            <Text style={styles.title}>{Controller.languageConstants!._appTitle}</Text>
 
             <View style={styles.separator} />
 
             <SliderRow
-              minValue={0}
-              maxValue={5000}
+              minValue={Controller.minFlour}
+              maxValue={Controller.maxFlour}
               value={Controller.flourWeight}
-              onValueChange={(newVal: number) => runInAction(() => Controller.flourWeight = newVal)}
-              description={'flour weight'}
-              valueAffix={'g'}
+              onValueChange={Controller.setFlourWeight}
+              description={Controller.languageConstants!._flour_weight}
+              valueAffix={Controller.languageConstants!._gram_abbvr}
             />
             <PresetButtonsRow
               presetValues={Controller.flourWeightPresets}
-              onClickCallback={(item: number) => runInAction(() => { Controller.flourWeight = item; })}
-              valueSuffix={'g'}
+              onClickCallback={Controller.setFlourWeight}
+              valueSuffix={Controller.languageConstants!._gram_abbvr}
               selectedValue={Controller.flourWeight}
             />
 
             <View style={styles.separator} />
 
             <SliderRow
-              minValue={0}
-              maxValue={2000}
+              minValue={Controller.minLeaven}
+              maxValue={Controller.maxLeaven}
               value={Controller.leavenWeight}
-              onValueChange={(newVal: number) => runInAction(() => Controller.leavenWeight = newVal)}
-              description={'leaven weight'}
-              valueAffix={'g'}
+              onValueChange={Controller.setLeavenWeight}
+              description={Controller.languageConstants!._leaven_weight}
+              valueAffix={Controller.languageConstants!._gram_abbvr}
             />
             <PresetButtonsRow
               presetValues={Controller.leavenInoculationPresets}
-              onClickCallback={(item: number) => runInAction(() => { Controller.leavenWeight = (item / 100) * Controller.flourWeight; })}
-              valueSuffix={'%'}
-              selectedValue={(Controller.leavenWeight / Controller.flourWeight) * 100}
+              onClickCallback={Controller.setLeavenWeightUsingInoculation}
+              valueSuffix={Controller.languageConstants!._percent}
+              selectedValue={Controller.inoculation}
             />
 
             <View style={styles.separator} />
 
             <SliderRow
-              minValue={0}
-              maxValue={200}
+              minValue={Controller.minLeavenHydration}
+              maxValue={Controller.maxLeavenHydration}
               value={Controller.leavenHydration}
-              onValueChange={(newVal: number) => runInAction(() => Controller.leavenHydration = newVal)}
-              description={'leaven hydration'}
-              valueAffix={'%'}
+              onValueChange={Controller.setLeavenHydration}
+              description={Controller.languageConstants!._leaven_hydration}
+              valueAffix={Controller.languageConstants!._percent}
             />
             <PresetButtonsRow
               presetValues={Controller.leavenHydrationPresets}
-              onClickCallback={(item: number) => runInAction(() => { Controller.leavenHydration = item; })}
-              valueSuffix={'%'}
+              onClickCallback={Controller.setLeavenHydration}
+              valueSuffix={Controller.languageConstants!._percent}
               selectedValue={Controller.leavenHydration}
             />
 
             <View style={styles.separator} />
 
             <SliderRow
-              minValue={0}
-              maxValue={5000}
+              minValue={Controller.minWater}
+              maxValue={Controller.maxWater}
               value={Controller.waterWeight}
-              onValueChange={(newVal: number) => runInAction(() => {
-                Controller.waterWeight = newVal;
-                Controller.desiredTargetHydration = Controller.totalHydration * 100;
-              })}
-              description={'water'}
-              valueAffix={'g'}
+              onValueChange={Controller.setWaterWeightAndUpdateDesiredHydration}
+              description={Controller.languageConstants!._water}
+              valueAffix={Controller.languageConstants!._gram_abbvr}
             />
 
             <View style={styles.separator} />
 
             <SliderRow
-              minValue={0}
-              maxValue={150}
+              minValue={Controller.minDesiredHydration}
+              maxValue={Controller.maxDesiredHydration}
               value={Controller.desiredTargetHydration}
-              onValueChange={(newVal: number) => runInAction(() => {
-                Controller.desiredTargetHydration = newVal;
-                Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration;
-              })}
-              description={'target hydration'}
-              valueAffix={'%'}
+              onValueChange={Controller.setDesiredHydrationAndUpdateRequiredWaterWeight}
+              description={Controller.languageConstants!._target_hydration}
+              valueAffix={Controller.languageConstants!._percent}
             />
 
             <View style={styles.separator} />
 
             <PresetButtonsRow
               presetValues={Controller.desiredHydrationPresets}
-              onClickCallback={(item: number) => runInAction(() => { Controller.desiredTargetHydration = item; Controller.waterWeight = Controller.waterWeightToMatchDesiredTargetHydration; })}
-              valueSuffix={'%'}
+              onClickCallback={Controller.setDesiredHydrationAndUpdateRequiredWaterWeight}
+              valueSuffix={Controller.languageConstants!._percent}
               selectedValue={Controller.desiredTargetHydration}
             />
 
             <View style={styles.infoBlock}>
-              <Text style={styles.infoStyle}>Total Flour: {Controller.totalFlour.toFixed(2)}g</Text>
-              <Text style={styles.infoStyle}>Total Water: {Controller.totalWater.toFixed(2)}g</Text>
-              <Text style={styles.infoStyle}>Leaven Water: {Controller.leavenWater.toFixed(2)}g</Text>
-              <Text style={styles.infoStyle}>Leaven Flour: {Controller.leavenFlour.toFixed(2)}g</Text>
 
-              <Text style={styles.infoStyle}>Recommended Salt: {Controller.recommendedSalt.toFixed(2)}g</Text>
-              <Text style={styles.infoStyle}>Post Bake Weight: {Controller.postBakeWeight.toFixed(2)}g</Text>
+              <View style={styles.infoRow}>
+                <Text style={styles.infoStyle}>Total Flour:</Text>
+                <Text style={styles.infoStyle}>{Controller.totalFlour.toFixed(2)}g</Text>
+              </View>
+
+              <View style={styles.infoRow}>
+                <Text style={styles.infoStyle}>Total Water: </Text>
+                <Text style={styles.infoStyle}>{Controller.totalWater.toFixed(2)}g</Text>
+              </View>
+
+              <View style={styles.infoRow}>
+                <Text style={styles.infoStyle}>Leaven  </Text>
+                <Text style={styles.infoStyle}>{Controller.leavenWeight.toFixed(2)}g</Text>
+              </View>
+
+              <View style={styles.infoRow}>
+                <Text style={styles.infoStyle}>Recommended Salt: </Text>
+                <Text style={styles.infoStyle}>{Controller.recommendedSalt.toFixed(2)}g</Text>
+              </View>
+
+              <View style={styles.infoRow}>
+                <Text style={styles.infoStyle}>Post Bake Weight: </Text>
+                <Text style={styles.infoStyle}>{Controller.postBakeWeight.toFixed(2)}g</Text>
+              </View>
+
             </View>
 
-            {/* {Controller.waterWeightToMatchDesiredTargetHydration != null && Controller.waterWeightToMatchDesiredTargetHydration > 0 &&
-            <HydrationInfoParagraph
-              waterWeightToMatchDesiredTargetHydration={Controller.waterWeightToMatchDesiredTargetHydration}
-              flourWeight={Controller.flourWeight}
-              leavenWeight={Controller.leavenWeight}
-              leavenHydration={Controller.leavenHydration}
-              desiredTargetHydration={Controller.desiredTargetHydration}
-            />
-          } */}
           </ScrollView>
         </ImageBackground>
-
       </ErrorBoundary >
     );
   }
@@ -149,14 +151,17 @@ const styles = StyleSheet.create({
   flex: {
     flex: 1,
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
-
+  },
+  infoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
   content: {
     justifyContent: 'center',
     alignItems: 'stretch',
     marginHorizontal: 16,
     marginTop: 32,
-    flex: 1
   },
   infoStyle: {
     fontSize: 20,

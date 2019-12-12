@@ -1,18 +1,9 @@
-import { observable, computed } from 'mobx';
+import { observable, computed, action } from 'mobx';
 import { presets } from './env';
 
 export class Controller {
 
   constructor(protected readonly appPresets: any) {
-
-    Object.keys(appPresets).forEach((field) => {
-      if (field === 'fuck') {
-        this[field] = observable.box(appPresets[field]);
-      }
-    });
-
-    console.log(this.fuck);
-
   }
 
   [key: string]: any;
@@ -103,6 +94,88 @@ export class Controller {
     }
     return 0;
   }
+
+  @computed public get minFlour(): number {
+    return this.appPresets.minFlour;
+  }
+
+  @computed public get maxFlour(): number {
+    return this.appPresets.maxFlour;
+  }
+
+  @computed public get minLeaven(): number {
+    return this.appPresets.minLeaven;
+  }
+
+  @computed public get maxLeaven(): number {
+    return this.appPresets.maxLeaven;
+  }
+
+  @computed public get minDesiredHydration(): number {
+    return this.appPresets.minDesiredHydration;
+  }
+  @computed public get maxDesiredHydration(): number {
+    return this.appPresets.maxDesiredHydration;
+  }
+
+  @computed public get minLeavenHydration(): number {
+    return this.appPresets.minLeavenHydration;
+  }
+
+  @computed public get maxLeavenHydration(): number {
+    return this.appPresets.maxLeavenHydration;
+  }
+
+  @computed public get minWater(): number {
+    return this.appPresets.minWater;
+  }
+
+  @computed public get maxWater(): number {
+    return this.appPresets.maxWater;
+  }
+
+  @action public setFlourWeight = (value: number): void => {
+    this.flourWeight = value;
+  }
+
+  @action public setLeavenWeight = (value: number): void => {
+    this.leavenWeight = value;
+  }
+
+  @action public setLeavenHydration = (value: number): void => {
+    this.leavenHydration = value;
+  }
+
+  @action public setwater = (value: number): void => {
+    this.waterWeight = value;
+  }
+
+  @action public setLeavenWeightUsingInoculation = (value: number): void => {
+    this.leavenWeight = (value / 100) * this.flourWeight;
+  }
+
+  @computed public get inoculation(): number {
+    return (this.leavenWeight / this.flourWeight) * 100;
+  }
+
+  @action public setWaterWeightAndUpdateDesiredHydration = (value: number): void => {
+    this.waterWeight = value;
+    this.desiredTargetHydration = this.totalHydration * 100;
+  }
+
+  @action public setDesiredHydrationAndUpdateRequiredWaterWeight = (value: number): void => {
+    this.desiredTargetHydration = value;
+    this.waterWeight = this.waterWeightToMatchDesiredTargetHydration;
+  }
+
+  @computed public get languageConstants(): { [key: string]: string } | undefined {
+    try {
+      return this.appPresets.languageConstants;
+    } catch (error) {
+      //
+    }
+  }
+
 }
 
 export default new Controller(presets);
