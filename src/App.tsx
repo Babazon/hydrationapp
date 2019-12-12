@@ -27,7 +27,7 @@ export default class App extends React.Component {
           <ScrollView style={styles.flex} contentContainerStyle={styles.content} bounces={false}>
 
             <Text style={styles.title}>{Controller.languageConstants!._appTitle}</Text>
-
+            {/* <Text>{JSON.stringify(Controller._appTitle).replace('"', '').replace('"', '')}</Text> */}
             <View style={styles.separator} />
 
             {/* FLOUR WEIGHT  */}

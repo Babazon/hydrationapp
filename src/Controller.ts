@@ -4,6 +4,11 @@ import { presets } from './env';
 export class Controller {
 
   constructor(protected readonly appPresets: any) {
+    Object.keys(presets.languageConstants).forEach((key: string) => {
+      // @ts-ignore
+      const value: string = presets.languageConstants[key]!;
+      this[key] = observable.box<string>(value);
+    });
   }
 
   [key: string]: any;
@@ -15,6 +20,7 @@ export class Controller {
 
   @computed public get saltRatio(): number {
     return this.appPresets.saltRatio;
+
   }
 
   @computed public get postBakeWeightRatio(): number {
