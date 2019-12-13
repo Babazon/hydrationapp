@@ -11,6 +11,7 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		490E0ABD23A4289D00DE586E /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 490E0ABC23A4289C00DE586E /* AppCenter-Config.plist */; };
 		A1D25A5A51383B74D8098808 /* libPods-tsboilerplate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F9D1C2F1FF30ADAD37A59B6 /* libPods-tsboilerplate.a */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		1A28859D1A9259E8F03588B6 /* Pods-tsboilerplate-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tsboilerplate-tvOS.release.xcconfig"; path = "Target Support Files/Pods-tsboilerplate-tvOS/Pods-tsboilerplate-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		251FFF8A0BA3CAAE3AC6ADB9 /* libPods-tsboilerplateTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tsboilerplateTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		330C12FACEF2F1069C6A37D2 /* Pods-tsboilerplate-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tsboilerplate-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-tsboilerplate-tvOSTests/Pods-tsboilerplate-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		490E0ABC23A4289C00DE586E /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "tsboilerplate/AppCenter-Config.plist"; sourceTree = "<group>"; };
 		535691FEAFA9E711A68E21EE /* Pods-tsboilerplate-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tsboilerplate-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-tsboilerplate-tvOS/Pods-tsboilerplate-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		5F9D1C2F1FF30ADAD37A59B6 /* libPods-tsboilerplate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tsboilerplate.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E569CEEF628D011BC7AECD0 /* Pods-tsboilerplate-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tsboilerplate-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-tsboilerplate-tvOSTests/Pods-tsboilerplate-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 		13B07FAE1A68108700A75B9A /* tsboilerplate */ = {
 			isa = PBXGroup;
 			children = (
+				490E0ABC23A4289C00DE586E /* AppCenter-Config.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -185,6 +188,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				490E0ABD23A4289D00DE586E /* AppCenter-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
