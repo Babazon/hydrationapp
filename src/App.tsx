@@ -25,6 +25,7 @@ export default class App extends React.Component {
         <SafeAreaView style={{ flex: 1, marginTop: 16 }}>
 
           <ScrollView
+            showsVerticalScrollIndicator={false}
             refreshControl={<RefreshControl title="Reset" refreshing={false} onRefresh={Controller.resetValues} />}
             contentContainerStyle={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'stretch', marginHorizontal: 8, paddingVertical: 16 }}>
 
