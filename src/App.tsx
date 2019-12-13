@@ -173,38 +173,67 @@ export default class App extends React.Component {
             <View style={styles.infoBlock}>
 
               <View style={styles.infoRow}>
-                <TextWithAccessibility style={styles.infoStyle}>Current Hydration:</TextWithAccessibility>
-                <TextWithAccessibility style={styles.infoStyle}>{(Controller.totalHydration * 100).toFixed(2)}%</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>Total Flour</TextWithAccessibility>
+
+                <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
+
+                <TextWithAccessibility style={styles.infoStyle}>{Controller.totalFlour.toFixed(Controller.totalFlour % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
-                <TextWithAccessibility style={styles.infoStyle}>Current Inoculation:</TextWithAccessibility>
-                <TextWithAccessibility style={styles.infoStyle}>{(Controller.inoculation).toFixed(2)}%</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>Total Water</TextWithAccessibility>
+
+                <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
+
+                <TextWithAccessibility style={styles.infoStyle}>{Controller.totalWater.toFixed(Controller.totalWater % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
-                <TextWithAccessibility style={styles.infoStyle}>Total Flour:</TextWithAccessibility>
-                <TextWithAccessibility style={styles.infoStyle}>{Controller.totalFlour.toFixed(2)}g</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>Leaven</TextWithAccessibility>
+
+                <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
+
+                <TextWithAccessibility style={styles.infoStyle}>{Controller.leavenWeight.toFixed(Controller.leavenWeight % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
-                <TextWithAccessibility style={styles.infoStyle}>Total Water: </TextWithAccessibility>
-                <TextWithAccessibility style={styles.infoStyle}>{Controller.totalWater.toFixed(2)}g</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>Inoculation</TextWithAccessibility>
+
+                <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
+
+                <TextWithAccessibility style={styles.infoStyle}>{(Controller.inoculation).toFixed(Controller.inoculation % 1 > 0 ? 2 : 0)} %</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
-                <TextWithAccessibility style={styles.infoStyle}>Leaven  </TextWithAccessibility>
-                <TextWithAccessibility style={styles.infoStyle}>{Controller.leavenWeight.toFixed(2)}g</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>Recommended Salt</TextWithAccessibility>
+
+                <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
+
+                <TextWithAccessibility style={styles.infoStyle}>{Controller.recommendedSalt.toFixed(Controller.recommendedSalt % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
-                <TextWithAccessibility style={styles.infoStyle}>Recommended Salt: </TextWithAccessibility>
-                <TextWithAccessibility style={styles.infoStyle}>{Controller.recommendedSalt.toFixed(2)}g</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>Total Weight</TextWithAccessibility>
+
+                <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
+
+                <TextWithAccessibility style={styles.infoStyle}>{(Controller.totalFlour + Controller.totalWater).toFixed((Controller.totalFlour + Controller.totalWater) % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
-                <TextWithAccessibility style={styles.infoStyle}>Post Bake Weight: </TextWithAccessibility>
-                <TextWithAccessibility style={styles.infoStyle}>{Controller.postBakeWeight.toFixed(2)}g</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>Post Bake Weight</TextWithAccessibility>
+
+                <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
+
+                <TextWithAccessibility style={styles.infoStyle}>{Controller.postBakeWeight.toFixed(Controller.postBakeWeight % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
+              </View>
+
+              <View style={styles.infoRow}>
+                <TextWithAccessibility style={styles.infoStyle}>Hydration</TextWithAccessibility>
+
+                <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
+
+                <TextWithAccessibility style={styles.infoStyle}>{(Controller.totalHydration * 100).toFixed((Controller.totalHydration * 100) % 1 > 0 ? 2 : 0)} %</TextWithAccessibility>
               </View>
 
             </View>
@@ -221,16 +250,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    marginVertical: 16
+    marginVertical: 16,
+    marginHorizontal: 4
   },
   infoRow: {
-    alignItems: 'center',
+    alignItems: 'flex-end',
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
   infoStyle: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 14,
     textAlign: 'left'
   },
 
