@@ -1,9 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-#ifndef MS_APP_CENTER_ERRORS_H
-#define MS_APP_CENTER_ERRORS_H
-
 #import <Foundation/Foundation.h>
 
 #define MS_APP_CENTER_BASE_DOMAIN @"com.Microsoft.AppCenter."
@@ -37,5 +34,3 @@ static NSString const *kMSACConnectionPausedErrorDesc = @"Canceled, connection p
 static NSString const *kMSACConnectionHttpCodeErrorKey = @"MSACConnectionHttpCode";
 
 NS_ASSUME_NONNULL_END
-
-#endif

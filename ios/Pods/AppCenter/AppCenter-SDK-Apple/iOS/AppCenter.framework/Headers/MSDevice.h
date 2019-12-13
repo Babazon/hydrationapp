@@ -1,9 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-#ifndef MS_DEVICE_H
-#define MS_DEVICE_H
-
 #import <Foundation/Foundation.h>
 
 #import "MSWrapperSdk.h"
@@ -92,5 +89,3 @@
 @property(nonatomic, copy, readonly) NSString *appNamespace;
 
 @end
-
-#endif
