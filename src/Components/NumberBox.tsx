@@ -4,8 +4,8 @@ import { observer } from 'mobx-react';
 
 interface IProps {
   value: number;
-  onValueClick(): void;
-  onValueChange(value: number): void;
+  onValueClick?(): void;
+  onValueChange?(value: number): void;
   symbol: string;
   onSymbolClick(): void;
   isKeyboardActive: boolean;
@@ -34,10 +34,11 @@ export class NumberBox extends React.Component<IProps>{
           justifyContent: 'center',
           backgroundColor: '#EAEAEA'
         }}
+        disabled={!this.props.onValueClick}
         onPress={this.props.onValueClick}>
 
         {!this.props.isKeyboardActive &&
-          (<Text numberOfLines={1} style={{ color: 'black', textAlign: 'center', fontSize: 18, fontWeight: '500' }}>
+          (<Text style={{ color: 'black', textAlign: 'center', fontSize: 14, fontWeight: '500', marginHorizontal: 4 }}>
             {this.props.value}
           </Text>)
         }
@@ -45,11 +46,10 @@ export class NumberBox extends React.Component<IProps>{
         {this.props.isKeyboardActive &&
           (<TextInput
             autoFocus
-            numberOfLines={1}
-            style={{ color: 'black', textAlign: 'center', fontSize: 18, fontWeight: '500' }}
+            style={{ color: 'black', textAlign: 'center', fontSize: 14, fontWeight: '500', marginHorizontal: 4 }}
             value={this.props.value + ''}
             onChangeText={(value: string) => {
-              if (!isNaN(+value)) {
+              if (!isNaN(+value) && this.props.onValueChange) {
                 this.props.onValueChange(+value);
               }
             }} />)
