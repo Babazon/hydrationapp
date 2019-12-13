@@ -159,6 +159,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = B48TRD8X75;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -282,6 +283,8 @@
 			baseConfigurationReference = 0096255515885005257944BA /* Pods-tsboilerplate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = B48TRD8X75;
@@ -292,8 +295,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.bashydro;
+				PRODUCT_BUNDLE_IDENTIFIER = org.basyuksel.bashydro;
 				PRODUCT_NAME = BasHydro;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -304,6 +308,8 @@
 			baseConfigurationReference = D1E25256ADB6A70859C688B8 /* Pods-tsboilerplate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B48TRD8X75;
 				INFOPLIST_FILE = tsboilerplate/Info.plist;
@@ -313,8 +319,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.bashydro;
+				PRODUCT_BUNDLE_IDENTIFIER = org.basyuksel.bashydro;
 				PRODUCT_NAME = BasHydro;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
