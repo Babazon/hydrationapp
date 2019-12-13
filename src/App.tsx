@@ -1,13 +1,11 @@
 import 'es6-symbol/implement';
-import { StyleSheet, View, Text, ScrollView, ImageBackground } from 'react-native';
+import { View, } from 'react-native';
 import { ErrorBoundary } from './ErrorBoundary';
 import { observer } from 'mobx-react';
 import React from 'react';
 import Controller from './Controller';
-import { SliderRow } from './Components/SliderRow';
-import { PresetButtonsRow } from './Components/PresetButtonsRow';
+import { NumberBox } from './Components/NumberBox';
 // tslint:disable-next-line: no-var-requires
-const backgroundImage = require('./bread.jpg');
 
 // tslint:disable: max-line-length
 
@@ -22,15 +20,30 @@ export default class App extends React.Component {
 
     return (
       <ErrorBoundary>
-        <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
+        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+          <NumberBox
+            value={Controller.flourWeight}
+            onValueChange={Controller.setFlourWeight}
+            onValueClick={Controller.onFlourValueClick}
+            symbol={'g'}
+            onSymbolClick={() => { /* */ }}
+            inputMode={Controller.flourInputMode}
+          />
+        </View>
+      </ErrorBoundary >
+    );
+  }
+}
+
+/*
+
+<ImageBackground source={backgroundImage} style={styles.backgroundImage}>
 
           <ScrollView style={styles.flex} contentContainerStyle={styles.content} bounces={false}>
 
             <Text style={styles.title}>{Controller.languageConstants!._appTitle}</Text>
-            {/* <Text>{JSON.stringify(Controller._appTitle).replace('"', '').replace('"', '')}</Text> */}
+            }
             <View style={styles.separator} />
-
-            {/* FLOUR WEIGHT  */}
 
             <SliderRow
               minValue={Controller.minFlour}
@@ -49,8 +62,6 @@ export default class App extends React.Component {
 
             <View style={styles.separator} />
 
-            {/* LEAVEN WEIGHT  */}
-
             <SliderRow
               minValue={Controller.minLeaven}
               maxValue={Controller.maxLeaven}
@@ -67,8 +78,6 @@ export default class App extends React.Component {
             />
 
             <View style={styles.separator} />
-
-            {/* LEAVEN HYDRATION */}
 
             <SliderRow
               minValue={Controller.minLeavenHydration}
@@ -87,8 +96,6 @@ export default class App extends React.Component {
 
             <View style={styles.separator} />
 
-            {/* WATER WEIGHT  */}
-
             <SliderRow
               minValue={Controller.minWater}
               maxValue={Controller.maxWater}
@@ -99,8 +106,6 @@ export default class App extends React.Component {
             />
 
             <View style={styles.separator} />
-
-            {/* TARGET HYDRATION  */}
 
             <SliderRow
               onLockValue={Controller.toggleDesiredHydationLock}
@@ -121,8 +126,6 @@ export default class App extends React.Component {
               valueSuffix={Controller.languageConstants!._percent}
               selectedValue={Controller.desiredTargetHydration}
             />
-
-            {/* INFO  */}
 
             <View style={styles.infoBlock}>
 
@@ -165,52 +168,4 @@ export default class App extends React.Component {
 
           </ScrollView>
         </ImageBackground>
-      </ErrorBoundary >
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  backgroundImage: {
-    height: '100%',
-    opacity: 0.7,
-    width: '100%'
-  },
-  content: {
-    alignItems: 'stretch',
-    justifyContent: 'center',
-    marginHorizontal: 16,
-    marginTop: 32,
-    paddingBottom: 32
-  },
-  flex: {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    flex: 1
-  },
-  infoBlock: {
-    alignItems: 'flex-start',
-    alignSelf: 'center',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    marginVertical: 16
-  },
-  infoRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-  infoStyle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'left'
-  },
-  separator: {
-    height: 16
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    paddingVertical: 8,
-    textAlign: 'center'
-  }
-});
+*/

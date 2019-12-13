@@ -217,6 +217,12 @@ export class Controller {
     }
   }
 
+  @observable public flourInputMode: boolean = false;
+
+  @action public onFlourValueClick = () => {
+    this.flourInputMode = true;
+  }
+
 }
 
 export default new Controller(presets);
