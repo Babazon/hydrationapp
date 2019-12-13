@@ -1,6 +1,7 @@
 import React from 'react';
-import { FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { FlatList, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { observer } from 'mobx-react';
+import { TextWithAccessibility } from './TextWithAccessibility';
 
 export interface IPresetButtonsRowProps {
   presetValues: number[];
@@ -23,7 +24,7 @@ export class PresetButtonsRow extends React.Component<IPresetButtonsRowProps>{
           marginRight: index === this.props.presetValues.length - 1 ? 0 : 8
 
         }])}>
-        <Text style={styles.buttonText}>{item.toFixed(0)}{valueSuffix}</Text>
+        <TextWithAccessibility style={styles.buttonText}>{item.toFixed(0)}{valueSuffix}</TextWithAccessibility>
       </TouchableOpacity>
     );
   }

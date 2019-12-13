@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, TextInput } from 'react-native';
+import { View, TouchableOpacity, TextInput } from 'react-native';
 import { observer } from 'mobx-react';
+import { TextWithAccessibility } from './TextWithAccessibility';
 
 interface IProps {
   value: number;
@@ -26,11 +27,11 @@ export class NumberBox extends React.Component<IProps>{
       }}>
       <TouchableOpacity
         style={{
-          alignItems: 'center',
-          borderBottomLeftRadius: 8,
-          borderTopLeftRadius: 8,
+          alignItems: 'stretch',
+          borderBottomLeftRadius: 4,
+          borderTopLeftRadius: 4,
           flex: 2,
-          height: 40,
+          height: 32,
           justifyContent: 'center',
           backgroundColor: '#EAEAEA'
         }}
@@ -38,16 +39,16 @@ export class NumberBox extends React.Component<IProps>{
         onPress={this.props.onValueClick}>
 
         {!this.props.isKeyboardActive &&
-          (<Text style={{ color: 'black', textAlign: 'center', fontSize: 14, fontWeight: '500', marginHorizontal: 4 }}>
+          (<TextWithAccessibility style={{ color: 'black', textAlign: 'right', fontSize: 14, fontWeight: '500', marginHorizontal: 4 }}>
             {this.props.value.toFixed(0)}
-          </Text>)
+          </TextWithAccessibility>)
         }
 
         {this.props.isKeyboardActive &&
           (<TextInput
             autoFocus
-            style={{ color: 'black', textAlign: 'center', fontSize: 14, fontWeight: '500', marginHorizontal: 4 }}
-            value={this.props.value + ''}
+            style={{ color: 'black', textAlign: 'right', fontSize: 14, fontWeight: '500', marginHorizontal: 4 }}
+            value={this.props.value.toFixed(0) + ''}
             onChangeText={(value: string) => {
               if (!isNaN(+value) && this.props.onValueChange) {
                 this.props.onValueChange(+value);
@@ -59,18 +60,18 @@ export class NumberBox extends React.Component<IProps>{
       <TouchableOpacity
         style={{
           alignItems: 'center',
-          borderBottomRightRadius: 8,
-          borderTopRightRadius: 8,
+          borderBottomRightRadius: 4,
+          borderTopRightRadius: 4,
           flex: 1,
-          height: 40,
+          height: 32,
           justifyContent: 'center',
           backgroundColor: '#D8D8D8'
         }}
         disabled={!this.props.onSymbolClick}
         onPress={this.props.onSymbolClick}>
-        <Text numberOfLines={1} style={{ color: 'black', textAlign: 'center', fontSize: 14, fontWeight: '500' }}>
+        <TextWithAccessibility numberOfLines={1} style={{ color: 'black', textAlign: 'center', fontSize: 14, fontWeight: '500' }}>
           {this.props.symbol}
-        </Text>
+        </TextWithAccessibility>
       </TouchableOpacity>
     </View>);
   }
