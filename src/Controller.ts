@@ -154,28 +154,28 @@ export class Controller {
   }
 
   @action public setFlourWeight = (value: number): void => {
-    this.flourWeight = value;
+    this.flourWeight = value > 0 ? value : 0;
     if (this.desiredTargetHydration && this.desiredHydrationLocked) {
       this.waterWeight = this.waterWeightToMatchDesiredTargetHydration;
     }
   }
 
   @action public setLeavenWeight = (value: number): void => {
-    this.leavenWeight = value;
+    this.leavenWeight = value > 0 ? value : 0;
     if (this.desiredHydrationLocked) {
       this.waterWeight = this.waterWeightToMatchDesiredTargetHydration;
     }
   }
 
   @action public setLeavenHydration = (value: number): void => {
-    this.leavenHydration = value;
+    this.leavenHydration = value > 0 ? value : 0;
     if (this.desiredHydrationLocked) {
       this.waterWeight = this.waterWeightToMatchDesiredTargetHydration;
     }
   }
 
   @action public setwater = (value: number): void => {
-    this.waterWeight = value;
+    this.waterWeight = value > 0 ? value : 0;
     if (this.desiredTargetHydration && this.desiredHydrationLocked) {
       this.flourWeight = this.flourWeightToMatchDesiredTargetHydration;
     }
@@ -194,7 +194,7 @@ export class Controller {
   }
 
   @action public setWaterWeightAndUpdateDesiredHydration = (value: number): void => {
-    this.waterWeight = value;
+    this.waterWeight = value > 0 ? value : 0;
     if (!this.desiredHydrationLocked) {
       this.desiredTargetHydration = this.totalHydration * 100;
     } else {
@@ -204,7 +204,7 @@ export class Controller {
 
   @action public setDesiredHydrationAndUpdateRequiredWaterWeight = (value: number): void => {
     if (!this.desiredHydrationLocked) {
-      this.desiredTargetHydration = value;
+      this.desiredTargetHydration = value > 0 ? value : 0;
       this.waterWeight = this.waterWeightToMatchDesiredTargetHydration;
     }
   }

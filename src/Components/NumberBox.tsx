@@ -8,7 +8,7 @@ interface IProps {
   onValueChange(value: number): void;
   symbol: string;
   onSymbolClick(): void;
-  inputMode: boolean;
+  isKeyboardActive: boolean;
 }
 @observer
 export class NumberBox extends React.Component<IProps>{
@@ -36,13 +36,13 @@ export class NumberBox extends React.Component<IProps>{
         }}
         onPress={this.props.onValueClick}>
 
-        {!this.props.inputMode &&
+        {!this.props.isKeyboardActive &&
           (<Text numberOfLines={1} style={{ color: 'black', textAlign: 'center', fontSize: 18, fontWeight: '500' }}>
             {this.props.value}
           </Text>)
         }
 
-        {this.props.inputMode &&
+        {this.props.isKeyboardActive &&
           (<TextInput
             autoFocus
             numberOfLines={1}

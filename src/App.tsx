@@ -4,7 +4,7 @@ import { ErrorBoundary } from './ErrorBoundary';
 import { observer } from 'mobx-react';
 import React from 'react';
 import Controller from './Controller';
-import { NumberBox } from './Components/NumberBox';
+import { SliderRow } from './Components/SliderRow';
 // tslint:disable-next-line: no-var-requires
 
 // tslint:disable: max-line-length
@@ -20,14 +20,18 @@ export default class App extends React.Component {
 
     return (
       <ErrorBoundary>
-        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <NumberBox
+        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'stretch', marginHorizontal: 16 }}>
+          <SliderRow
             value={Controller.flourWeight}
             onValueChange={Controller.setFlourWeight}
             onValueClick={Controller.onFlourValueClick}
-            symbol={'g'}
-            onSymbolClick={() => { /* */ }}
-            inputMode={Controller.flourInputMode}
+            onSymbolClick={() => {/* */ }}
+            valueAffix={'g'}
+            incrementAmount={50}
+            minValue={Controller.minFlour}
+            maxValue={Controller.maxFlour}
+            isKeyboardActive={Controller.flourInputMode}
+            description={''}
           />
         </View>
       </ErrorBoundary >
