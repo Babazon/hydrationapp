@@ -274,13 +274,9 @@ DEPENDENCIES:
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-<<<<<<< HEAD
-  https://cdn.cocoapods.org/:
-=======
   trunk:
     - AppCenter
     - AppCenterReactNativeShared
->>>>>>> c1c830a... went through the basic app center setup for ios
     - boost-for-react-native
 
 EXTERNAL SOURCES:
