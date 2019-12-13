@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Slider, StyleSheet, Dimensions, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Slider, StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
 import { observer } from 'mobx-react';
 import { DecrementButton } from './DecrementButton';
 import { IncrementButton } from './IncrementButton';
 import { NumberBox } from './NumberBox';
+import { TextWithAccessibility } from './TextWithAccessibility';
 
 export interface ISliderRowProps {
   value: number;
@@ -28,9 +29,9 @@ export class SliderRow extends React.Component<ISliderRowProps>{
       valueAffix, onValueClick, onSymbolClick, isKeyboardActive, label, onLockValue } = this.props;
     return (
       <View style={styles.container}>
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
 
-          <Text style={{ fontWeight: '500' }}>{label}</Text>
+          <TextWithAccessibility style={{ fontWeight: '500' }}>{label}</TextWithAccessibility>
 
           <View style={{ width: onLockValue && isLocked != null ? 32 : 0, marginLeft: onLockValue && isLocked != null ? 4 : 0 }}>
             {onLockValue && isLocked != null &&
@@ -51,7 +52,7 @@ export class SliderRow extends React.Component<ISliderRowProps>{
             disabled={isLocked}
             onPress={() => onValueChange(value - incrementAmount)}
           />
-          <View style={{ width: 8 }} />
+          <View style={{ width: 4 }} />
 
           <Slider
             disabled={isLocked}
@@ -65,13 +66,13 @@ export class SliderRow extends React.Component<ISliderRowProps>{
             value={value}
             onValueChange={onValueChange}
           />
-          <View style={{ width: 8 }} />
+          <View style={{ width: 4 }} />
 
           <IncrementButton
             disabled={isLocked}
             onPress={() => onValueChange(value + incrementAmount)}
           />
-          <View style={{ width: 16 }} />
+          <View style={{ width: 8 }} />
 
           <NumberBox
             isKeyboardActive={!isLocked && isKeyboardActive}

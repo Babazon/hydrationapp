@@ -1,11 +1,12 @@
 import 'es6-symbol/implement';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { ErrorBoundary } from './ErrorBoundary';
 import { observer } from 'mobx-react';
 import React from 'react';
 import Controller from './Controller';
 import { SliderRow } from './Components/SliderRow';
 import { PresetButtonsRow } from './Components/PresetButtonsRow';
+import { TextWithAccessibility } from './Components/TextWithAccessibility';
 // tslint:disable-next-line: no-var-requires
 
 // tslint:disable: max-line-length
@@ -21,139 +22,185 @@ export default class App extends React.Component {
 
     return (
       <ErrorBoundary>
-        <ScrollView contentContainerStyle={{ flex: 1, flexDirection: 'column', justifyContent: 'space-around', alignItems: 'stretch', marginHorizontal: 16, marginTop: 32 }}>
+        <ScrollView
+          contentContainerStyle={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'stretch', marginHorizontal: 8, paddingVertical: 32 }}>
 
           {/* Flour Weight */}
 
-          <SliderRow
-            value={Controller.flourWeight}
-            onValueChange={Controller.setFlourWeight}
-            onValueClick={Controller.onFlourValueClick}
-            onSymbolClick={() => {/* */ }}
-            valueAffix={'g'}
-            incrementAmount={50}
-            minValue={Controller.minFlour}
-            maxValue={Controller.maxFlour}
-            isKeyboardActive={Controller.flourInputMode}
-            label={'Flour'}
-          />
-          <PresetButtonsRow
-            presetValues={Controller.flourWeightPresets}
-            onClickCallback={Controller.setFlourWeight}
-            valueSuffix={Controller.languageConstants!._gram_abbvr}
-            selectedValue={Controller.flourWeight}
-          />
+          <View style={{
+            height: 80,
+            marginBottom: 8
+          }}>
+            <SliderRow
+              value={Controller.flourWeight}
+              onValueChange={Controller.setFlourWeight}
+              onValueClick={Controller.onFlourValueClick}
+              onSymbolClick={() => {/* */ }}
+              valueAffix={'g'}
+              incrementAmount={50}
+              minValue={Controller.minFlour}
+              maxValue={Controller.maxFlour}
+              isKeyboardActive={Controller.flourInputMode}
+              label={'Flour'}
+            />
+          </View>
+          <View style={{
+            height: 40,
+            marginBottom: 8
+          }}>
+            <PresetButtonsRow
+              presetValues={Controller.flourWeightPresets}
+              onClickCallback={Controller.setFlourWeight}
+              valueSuffix={Controller.languageConstants!._gram_abbvr}
+              selectedValue={Controller.flourWeight}
+            />
+          </View>
 
           {/* Leaven Weight */}
-          <SliderRow
-            value={Controller.leavenWeight}
-            onValueChange={Controller.setLeavenWeight}
-            onValueClick={Controller.onLeavenWeightValueClick}
-            onSymbolClick={() => {/* */ }}
-            valueAffix={'g'}
-            incrementAmount={50}
-            minValue={Controller.minLeaven}
-            maxValue={Controller.maxLeaven}
-            isKeyboardActive={Controller.leavenWeightInputMode}
-            label={'Leaven Weight'}
-          />
-          <PresetButtonsRow
-            presetValues={Controller.leavenInoculationPresets}
-            onClickCallback={Controller.setLeavenWeightUsingInoculation}
-            valueSuffix={Controller.languageConstants!._percent}
-            selectedValue={Controller.inoculation}
-          />
+          <View style={{
+            height: 80,
+            marginBottom: 8
+          }}>
+            <SliderRow
+              value={Controller.leavenWeight}
+              onValueChange={Controller.setLeavenWeight}
+              onValueClick={Controller.onLeavenWeightValueClick}
+              onSymbolClick={() => {/* */ }}
+              valueAffix={'g'}
+              incrementAmount={50}
+              minValue={Controller.minLeaven}
+              maxValue={Controller.maxLeaven}
+              isKeyboardActive={Controller.leavenWeightInputMode}
+              label={'Leaven Weight'}
+            />
+          </View>
+          <View style={{
+            height: 40,
+            marginBottom: 8
+          }}>
+            <PresetButtonsRow
+              presetValues={Controller.leavenInoculationPresets}
+              onClickCallback={Controller.setLeavenWeightUsingInoculation}
+              valueSuffix={Controller.languageConstants!._percent}
+              selectedValue={Controller.inoculation}
+            />
+          </View>
 
           {/* Leaven Hydration  */}
-          <SliderRow
-            value={Controller.leavenHydration}
-            onValueChange={Controller.setLeavenHydration}
-            onValueClick={Controller.onLeavenHydrationValueClick}
-            valueAffix={'%'}
-            incrementAmount={50}
-            minValue={Controller.minLeavenHydration}
-            maxValue={Controller.maxLeavenHydration}
-            isKeyboardActive={Controller.leavenHydrationInputMode}
-            label={'Leaven Hydration'}
-          />
-          <PresetButtonsRow
-            presetValues={Controller.leavenHydrationPresets}
-            onClickCallback={Controller.setLeavenHydration}
-            valueSuffix={Controller.languageConstants!._percent}
-            selectedValue={Controller.leavenHydration}
-          />
+          <View style={{
+            height: 80,
+            marginBottom: 8
+          }}>
+            <SliderRow
+              value={Controller.leavenHydration}
+              onValueChange={Controller.setLeavenHydration}
+              onValueClick={Controller.onLeavenHydrationValueClick}
+              valueAffix={'%'}
+              incrementAmount={50}
+              minValue={Controller.minLeavenHydration}
+              maxValue={Controller.maxLeavenHydration}
+              isKeyboardActive={Controller.leavenHydrationInputMode}
+              label={'Leaven Hydration'}
+            />
+          </View>
+          <View style={{
+            height: 40,
+            marginBottom: 8
+          }}>
+            <PresetButtonsRow
+              presetValues={Controller.leavenHydrationPresets}
+              onClickCallback={Controller.setLeavenHydration}
+              valueSuffix={Controller.languageConstants!._percent}
+              selectedValue={Controller.leavenHydration}
+            />
+          </View>
 
           {/* Water Weight */}
-          <SliderRow
-            value={Controller.waterWeight}
-            onValueChange={Controller.setWaterWeightAndUpdateDesiredHydration}
-            onValueClick={Controller.onWaterValueClick}
-            onSymbolClick={() => {/* */ }}
-            valueAffix={'g'}
-            incrementAmount={50}
-            minValue={Controller.minWater}
-            maxValue={Controller.maxWater}
-            isKeyboardActive={Controller.waterInputMode}
-            label={'Water'}
-          />
+          <View style={{
+            height: 80,
+            marginBottom: 8
+          }}>
+            <SliderRow
+              value={Controller.waterWeight}
+              onValueChange={Controller.setWaterWeightAndUpdateDesiredHydration}
+              onValueClick={Controller.onWaterValueClick}
+              onSymbolClick={() => {/* */ }}
+              valueAffix={'g'}
+              incrementAmount={50}
+              minValue={Controller.minWater}
+              maxValue={Controller.maxWater}
+              isKeyboardActive={Controller.waterInputMode}
+              label={'Water'}
+            />
+          </View>
 
-          {/* Target Hydration */}
-          <SliderRow
-            isLocked={Controller.desiredHydrationLocked}
-            onLockValue={Controller.toggleDesiredHydationLock}
-            value={Controller.desiredTargetHydration}
-            onValueChange={Controller.setDesiredHydrationAndUpdateRequiredWaterWeight}
-            onValueClick={Controller.onDesiredTargetHydrationValueClick}
-            valueAffix={'%'}
-            incrementAmount={50}
-            minValue={Controller.minDesiredHydration}
-            maxValue={Controller.maxDesiredHydration}
-            isKeyboardActive={Controller.desiredTargetHydrationInputMode}
-            label={'Target Hydration'}
-          />
+          <View style={{
+            height: 80,
+            marginBottom: 8
+          }}>
+            {/* Target Hydration */}
+            <SliderRow
+              isLocked={Controller.desiredHydrationLocked}
+              onLockValue={Controller.toggleDesiredHydationLock}
+              value={Controller.desiredTargetHydration}
+              onValueChange={Controller.setDesiredHydrationAndUpdateRequiredWaterWeight}
+              onValueClick={Controller.onDesiredTargetHydrationValueClick}
+              valueAffix={'%'}
+              incrementAmount={50}
+              minValue={Controller.minDesiredHydration}
+              maxValue={Controller.maxDesiredHydration}
+              isKeyboardActive={Controller.desiredTargetHydrationInputMode}
+              label={'Target Hydration'}
+            />
+          </View>
 
-          <PresetButtonsRow
-            presetValues={Controller.desiredHydrationPresets}
-            onClickCallback={Controller.setDesiredHydrationAndUpdateRequiredWaterWeight}
-            valueSuffix={Controller.languageConstants!._percent}
-            selectedValue={Controller.desiredTargetHydration}
-          />
+          <View style={{
+            height: 40,
+            marginBottom: 8
+          }}>
+            <PresetButtonsRow
+              presetValues={Controller.desiredHydrationPresets}
+              onClickCallback={Controller.setDesiredHydrationAndUpdateRequiredWaterWeight}
+              valueSuffix={Controller.languageConstants!._percent}
+              selectedValue={Controller.desiredTargetHydration}
+            />
+          </View>
 
           <View style={styles.infoBlock}>
 
             <View style={styles.infoRow}>
-              <Text style={styles.infoStyle}>Current Hydration:</Text>
-              <Text style={styles.infoStyle}>{(Controller.totalHydration * 100).toFixed(2)}%</Text>
+              <TextWithAccessibility style={styles.infoStyle}>Current Hydration:</TextWithAccessibility>
+              <TextWithAccessibility style={styles.infoStyle}>{(Controller.totalHydration * 100).toFixed(2)}%</TextWithAccessibility>
             </View>
 
             <View style={styles.infoRow}>
-              <Text style={styles.infoStyle}>Current Inoculation:</Text>
-              <Text style={styles.infoStyle}>{(Controller.inoculation).toFixed(2)}%</Text>
+              <TextWithAccessibility style={styles.infoStyle}>Current Inoculation:</TextWithAccessibility>
+              <TextWithAccessibility style={styles.infoStyle}>{(Controller.inoculation).toFixed(2)}%</TextWithAccessibility>
             </View>
 
             <View style={styles.infoRow}>
-              <Text style={styles.infoStyle}>Total Flour:</Text>
-              <Text style={styles.infoStyle}>{Controller.totalFlour.toFixed(2)}g</Text>
+              <TextWithAccessibility style={styles.infoStyle}>Total Flour:</TextWithAccessibility>
+              <TextWithAccessibility style={styles.infoStyle}>{Controller.totalFlour.toFixed(2)}g</TextWithAccessibility>
             </View>
 
             <View style={styles.infoRow}>
-              <Text style={styles.infoStyle}>Total Water: </Text>
-              <Text style={styles.infoStyle}>{Controller.totalWater.toFixed(2)}g</Text>
+              <TextWithAccessibility style={styles.infoStyle}>Total Water: </TextWithAccessibility>
+              <TextWithAccessibility style={styles.infoStyle}>{Controller.totalWater.toFixed(2)}g</TextWithAccessibility>
             </View>
 
             <View style={styles.infoRow}>
-              <Text style={styles.infoStyle}>Leaven  </Text>
-              <Text style={styles.infoStyle}>{Controller.leavenWeight.toFixed(2)}g</Text>
+              <TextWithAccessibility style={styles.infoStyle}>Leaven  </TextWithAccessibility>
+              <TextWithAccessibility style={styles.infoStyle}>{Controller.leavenWeight.toFixed(2)}g</TextWithAccessibility>
             </View>
 
             <View style={styles.infoRow}>
-              <Text style={styles.infoStyle}>Recommended Salt: </Text>
-              <Text style={styles.infoStyle}>{Controller.recommendedSalt.toFixed(2)}g</Text>
+              <TextWithAccessibility style={styles.infoStyle}>Recommended Salt: </TextWithAccessibility>
+              <TextWithAccessibility style={styles.infoStyle}>{Controller.recommendedSalt.toFixed(2)}g</TextWithAccessibility>
             </View>
 
             <View style={styles.infoRow}>
-              <Text style={styles.infoStyle}>Post Bake Weight: </Text>
-              <Text style={styles.infoStyle}>{Controller.postBakeWeight.toFixed(2)}g</Text>
+              <TextWithAccessibility style={styles.infoStyle}>Post Bake Weight: </TextWithAccessibility>
+              <TextWithAccessibility style={styles.infoStyle}>{Controller.postBakeWeight.toFixed(2)}g</TextWithAccessibility>
             </View>
 
           </View>
@@ -317,4 +364,4 @@ const styles = StyleSheet.create({
 
           </ScrollView>
         </ImageBackground>
-*/
+        */
