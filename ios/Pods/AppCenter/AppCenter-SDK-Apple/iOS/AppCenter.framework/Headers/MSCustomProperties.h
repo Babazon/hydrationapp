@@ -1,9 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-#ifndef MS_CUSTOM_PROPERTIES_H
-#define MS_CUSTOM_PROPERTIES_H
-
 #import <Foundation/Foundation.h>
 
 /**
@@ -66,5 +63,3 @@
 - (instancetype)clearPropertyForKey:(NSString *)key;
 
 @end
-
-#endif
