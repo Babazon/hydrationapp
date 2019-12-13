@@ -48,12 +48,17 @@ export class NumberBox extends React.Component<IProps>{
           (<TextInput
             autoFocus
             style={{ color: 'black', textAlign: 'right', fontSize: 14, fontWeight: '500', marginHorizontal: 4 }}
-            value={this.props.value.toFixed(0) + ''}
+            value={
+              this.props.value > 0 ?
+                this.props.value.toFixed(0) + '' :
+                ''
+            }
             onChangeText={(value: string) => {
               if (!isNaN(+value) && this.props.onValueChange) {
                 this.props.onValueChange(+value);
               }
-            }} />)
+            }} />
+          )
         }
 
       </TouchableOpacity>

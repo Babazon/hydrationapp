@@ -39,6 +39,15 @@ export class Controller {
   @observable public leavenWeight: number = 200;
   @observable public leavenHydration: number = 100;
 
+  @action public resetValues = () => {
+    this.flourWeight = 1000;
+    this.waterWeight = 725;
+    this.leavenWeight = 200;
+    this.leavenHydration = 100;
+    this.desiredHydrationLocked = false;
+    this.desiredTargetHydration = 75;
+  }
+
   @computed public get saltRatio(): number {
     return this.appPresets.saltRatio;
 
