@@ -1,6 +1,11 @@
 import { observable, computed, action } from 'mobx';
 import { presets } from './env';
 
+export enum Units {
+  metric = 'metric',
+  imperial = 'imperial'
+}
+
 export class Controller {
 
   constructor(protected readonly appPresets: any) {
@@ -12,6 +17,16 @@ export class Controller {
   }
 
   [key: string]: any;
+
+  @observable private units: Units = Units.metric;
+
+  @action public toggleUnits = () => {
+    if (this.units === Units.metric) {
+      this.units = Units.imperial;
+    } else {
+      this.units = Units.metric;
+    }
+  }
 
   @observable public desiredHydrationLocked: boolean = false;
 

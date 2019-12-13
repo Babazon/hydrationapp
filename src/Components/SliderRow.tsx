@@ -16,7 +16,7 @@ export interface ISliderRowProps {
   onLockValue?(): void;
   incrementAmount: number;
   onValueClick(): void;
-  onSymbolClick(): void;
+  onSymbolClick?(): void;
   isKeyboardActive: boolean;
 }
 

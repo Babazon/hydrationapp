@@ -69,7 +69,6 @@ export default class App extends React.Component {
             value={Controller.leavenHydration}
             onValueChange={Controller.setLeavenHydration}
             onValueClick={Controller.onLeavenHydrationValueClick}
-            onSymbolClick={() => {/* */ }}
             valueAffix={'%'}
             incrementAmount={50}
             minValue={Controller.minLeavenHydration}
@@ -105,7 +104,6 @@ export default class App extends React.Component {
             value={Controller.desiredTargetHydration}
             onValueChange={Controller.setDesiredHydrationAndUpdateRequiredWaterWeight}
             onValueClick={Controller.onDesiredTargetHydrationValueClick}
-            onSymbolClick={() => {/* */ }}
             valueAffix={'%'}
             incrementAmount={50}
             minValue={Controller.minDesiredHydration}

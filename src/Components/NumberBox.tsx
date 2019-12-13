@@ -7,7 +7,7 @@ interface IProps {
   onValueClick?(): void;
   onValueChange?(value: number): void;
   symbol: string;
-  onSymbolClick(): void;
+  onSymbolClick?(): void;
   isKeyboardActive: boolean;
 }
 @observer
@@ -39,7 +39,7 @@ export class NumberBox extends React.Component<IProps>{
 
         {!this.props.isKeyboardActive &&
           (<Text style={{ color: 'black', textAlign: 'center', fontSize: 14, fontWeight: '500', marginHorizontal: 4 }}>
-            {this.props.value}
+            {this.props.value.toFixed(0)}
           </Text>)
         }
 
@@ -66,8 +66,9 @@ export class NumberBox extends React.Component<IProps>{
           justifyContent: 'center',
           backgroundColor: '#D8D8D8'
         }}
-        onPress={this.props.onValueClick}>
-        <Text numberOfLines={1} style={{ color: 'black', textAlign: 'center', fontSize: 18, fontWeight: '500' }}>
+        disabled={!this.props.onSymbolClick}
+        onPress={this.props.onSymbolClick}>
+        <Text numberOfLines={1} style={{ color: 'black', textAlign: 'center', fontSize: 14, fontWeight: '500' }}>
           {this.props.symbol}
         </Text>
       </TouchableOpacity>
