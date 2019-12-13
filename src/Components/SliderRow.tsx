@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Slider, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Slider, StyleSheet, Dimensions, Text, TouchableOpacity, Image } from 'react-native';
 import { observer } from 'mobx-react';
 import { DecrementButton } from './DecrementButton';
 import { IncrementButton } from './IncrementButton';
@@ -9,11 +9,11 @@ export interface ISliderRowProps {
   value: number;
   onValueChange(val: number): void;
   valueAffix: string;
-  description: string;
+  label: string;
   minValue: number;
   maxValue: number;
-  onLockValue?(): void;
   isLocked?: boolean;
+  onLockValue?(): void;
   incrementAmount: number;
   onValueClick(): void;
   onSymbolClick(): void;
@@ -24,28 +24,34 @@ export interface ISliderRowProps {
 export class SliderRow extends React.Component<ISliderRowProps>{
   public render() {
     const {
-      value, onValueChange, incrementAmount, minValue, maxValue, isLocked, onLockValue,
-      valueAffix, onValueClick, onSymbolClick, isKeyboardActive } = this.props;
+      value, onValueChange, incrementAmount, minValue, maxValue, isLocked,
+      valueAffix, onValueClick, onSymbolClick, isKeyboardActive, label, onLockValue } = this.props;
     return (
       <View style={styles.container}>
+        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+
+          <Text style={{ fontWeight: '500' }}>{label}</Text>
+
+          <View style={{ width: onLockValue && isLocked != null ? 32 : 0, marginLeft: onLockValue && isLocked != null ? 4 : 0 }}>
+            {onLockValue && isLocked != null &&
+              <TouchableOpacity onPress={this.props.onLockValue} style={{ justifyContent: 'center', alignItems: 'center', marginRight: 8 }}>
+                <>
+                  {isLocked &&
+                    <Image source={require('../icon_locked.png')} style={{ height: 20, width: 20, resizeMode: 'contain' }} />}
+                  {!isLocked &&
+                    <Image source={require('../icon_unlocked.png')} style={{ height: 20, width: 20, resizeMode: 'contain', tintColor: 'lightgray' }} />}
+                </>
+              </TouchableOpacity>}
+          </View>
+        </View>
+
         <View style={styles.sliderContainer}>
 
-          {onLockValue && isLocked != null &&
-            <>
-              <TouchableOpacity onPress={this.props.onLockValue} style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <>
-                  {isLocked && <Image source={require('../icon_locked.png')} style={{ height: 20, width: 20, resizeMode: 'contain' }} />}
-                  {!isLocked && <Image source={require('../icon_unlocked.png')} style={{ height: 20, width: 20, resizeMode: 'contain' }} />}
-                </>
-              </TouchableOpacity>
-              <View style={{ width: 4 }} />
-            </>
-
-          }
           <DecrementButton
+            disabled={isLocked}
             onPress={() => onValueChange(value - incrementAmount)}
           />
-          <View style={{ width: 4 }} />
+          <View style={{ width: 8 }} />
 
           <Slider
             disabled={isLocked}
@@ -59,18 +65,19 @@ export class SliderRow extends React.Component<ISliderRowProps>{
             value={value}
             onValueChange={onValueChange}
           />
-          <View style={{ width: 4 }} />
+          <View style={{ width: 8 }} />
 
           <IncrementButton
+            disabled={isLocked}
             onPress={() => onValueChange(value + incrementAmount)}
           />
-          <View style={{ width: 4 }} />
+          <View style={{ width: 16 }} />
 
           <NumberBox
-            isKeyboardActive={isKeyboardActive}
+            isKeyboardActive={!isLocked && isKeyboardActive}
             value={value}
-            onValueClick={onValueClick}
-            onValueChange={onValueChange}
+            onValueClick={!isLocked ? onValueClick : undefined}
+            onValueChange={!isLocked ? onValueChange : undefined}
             onSymbolClick={onSymbolClick}
             symbol={valueAffix}
           />
@@ -85,13 +92,16 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'stretch',
     flexDirection: 'column',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    marginVertical: 8
   },
   sliderContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    flex: 1
+    justifyContent: 'flex-start',
+    flex: 1,
+    maxWidth: Dimensions.get('window').width,
+    marginTop: 24
   },
   sliderStyle: {
     flex: 4,

@@ -11,14 +11,17 @@ export interface IPresetButtonsRowProps {
 @observer
 export class PresetButtonsRow extends React.Component<IPresetButtonsRowProps>{
 
-  public renderItem = ({ item }: { item: number }) => {
+  public renderItem = ({ item, index }: { item: number, index: number }) => {
     const { onClickCallback, valueSuffix, selectedValue } = this.props;
     return (
       <TouchableOpacity
         onPress={() => onClickCallback(item)}
         style={StyleSheet.flatten([styles.buttonStyles, {
           borderColor: selectedValue === item ? 'transparent' : 'lightgray',
-          backgroundColor: selectedValue === item ? 'lightgray' : 'transparent'
+          backgroundColor: selectedValue === item ? 'lightgray' : 'transparent',
+          marginLeft: index === 0 ? 0 : 8,
+          marginRight: index === this.props.presetValues.length - 1 ? 0 : 8
+
         }])}>
         <Text style={styles.buttonText}>{item.toFixed(0)}{valueSuffix}</Text>
       </TouchableOpacity>
@@ -44,14 +47,12 @@ export class PresetButtonsRow extends React.Component<IPresetButtonsRowProps>{
 const styles = StyleSheet.create({
   buttonStyles: {
     alignItems: 'center',
-    borderRadius: 2,
+    borderRadius: 8,
     borderWidth: StyleSheet.hairlineWidth,
     justifyContent: 'center',
-    marginHorizontal: 8,
     padding: 4
   },
   buttonText: {
     fontSize: 14,
-    fontWeight: 'bold'
   }
 });

@@ -223,6 +223,30 @@ export class Controller {
     this.flourInputMode = true;
   }
 
+  @observable public waterInputMode: boolean = false;
+
+  @action public onWaterValueClick = () => {
+    this.waterInputMode = true;
+  }
+
+  @observable public leavenWeightInputMode: boolean = false;
+
+  @action public onLeavenWeightValueClick = () => {
+    this.leavenWeightInputMode = true;
+  }
+
+  @observable public leavenHydrationInputMode: boolean = false;
+
+  @action public onLeavenHydrationValueClick = () => {
+    this.leavenHydrationInputMode = true;
+  }
+
+  @observable public desiredTargetHydrationInputMode: boolean = false;
+
+  @action public onDesiredTargetHydrationValueClick = () => {
+    this.desiredTargetHydrationInputMode = true;
+  }
+
 }
 
 export default new Controller(presets);
