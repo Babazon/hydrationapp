@@ -40,7 +40,7 @@ export default class App extends React.Component {
                 onValueClick={dough.userInterface.onFlourValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}
-                incrementAmount={25}
+                incrementAmount={dough.userInterface.appPresets.flourIncrementAmount}
                 minValue={dough.flour.minFlour}
                 maxValue={dough.flour.maxFlour}
                 isKeyboardActive={dough.userInterface.flourInputMode}
@@ -70,7 +70,7 @@ export default class App extends React.Component {
                 onValueClick={dough.userInterface.onLeavenWeightValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}
-                incrementAmount={10}
+                incrementAmount={dough.userInterface.appPresets.leavenWeightIncrementAmount}
                 minValue={dough.leaven.minLeaven}
                 maxValue={dough.leaven.maxLeaven}
                 isKeyboardActive={dough.userInterface.leavenWeightInputMode}
@@ -99,7 +99,7 @@ export default class App extends React.Component {
                 onValueChange={dough.leaven.setLeavenHydration}
                 onValueClick={dough.userInterface.onLeavenHydrationValueClick}
                 valueAffix={'%'}
-                incrementAmount={5}
+                incrementAmount={dough.userInterface.appPresets.leavenHydrationIncrementAmount}
                 minValue={dough.leaven.minLeavenHydration}
                 maxValue={dough.leaven.maxLeavenHydration}
                 isKeyboardActive={dough.userInterface.leavenHydrationInputMode}
@@ -129,7 +129,7 @@ export default class App extends React.Component {
                 onValueClick={dough.userInterface.onWaterValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}
-                incrementAmount={10}
+                incrementAmount={dough.userInterface.appPresets.waterIncrementAmount}
                 minValue={dough.water.minWater}
                 maxValue={dough.water.maxWater}
                 isKeyboardActive={dough.userInterface.waterInputMode}
@@ -149,7 +149,7 @@ export default class App extends React.Component {
                 onValueChange={dough.hydration.setDesiredHydrationAndUpdateRequiredWaterWeight}
                 onValueClick={dough.userInterface.onDesiredTargetHydrationValueClick}
                 valueAffix={'%'}
-                incrementAmount={1}
+                incrementAmount={dough.userInterface.appPresets.desiredTargetHydrationIncrementAmount}
                 minValue={dough.hydration.minDesiredHydration}
                 maxValue={dough.hydration.maxDesiredHydration}
                 isKeyboardActive={dough.userInterface.desiredTargetHydrationInputMode}
@@ -233,6 +233,22 @@ export default class App extends React.Component {
                 <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
 
                 <TextWithAccessibility style={styles.infoStyle}>{(dough.totalHydration * 100).toFixed((dough.totalHydration * 100) % 1 > 0 ? 2 : 0)} %</TextWithAccessibility>
+              </View>
+
+              <View style={styles.infoRow}>
+                <TextWithAccessibility style={styles.infoStyle}>Initial Dough Volume (Experimental)</TextWithAccessibility>
+
+                <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
+
+                <TextWithAccessibility style={styles.infoStyle}>{(dough.experimentalDoughVolume).toFixed(dough.experimentalDoughVolume % 1 > 0 ? 2 : 0)} lt</TextWithAccessibility>
+              </View>
+
+              <View style={styles.infoRow}>
+                <TextWithAccessibility style={styles.infoStyle}>Final Dough Volume After Bulk (Experimental)</TextWithAccessibility>
+
+                <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
+
+                <TextWithAccessibility style={styles.infoStyle}>{(dough.experimentalBulkVolume).toFixed(dough.experimentalBulkVolume % 1 > 0 ? 2 : 0)} lt</TextWithAccessibility>
               </View>
 
             </View>
