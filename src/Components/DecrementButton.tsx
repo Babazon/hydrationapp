@@ -8,11 +8,28 @@ interface IProps {
 
 export class DecrementButton extends React.Component<IProps>{
   public render() {
-    return <TouchableOpacity onPress={this.props.onPress}
-      disabled={this.props.disabled}
-      style={{ height: 30, width: 30, borderRadius: 15, justifyContent: 'center', alignItems: 'center', backgroundColor: '#D8D8D8' }}>
-      <Image source={require('../icon_minus.png')}
-        style={{ height: 15, width: 15, borderRadius: 7.5, resizeMode: 'contain', tintColor: 'black' }} />
-    </TouchableOpacity>;
+    return (
+      <TouchableOpacity onPress={this.props.onPress}
+        disabled={this.props.disabled}
+        style={{
+          alignItems: 'center',
+          backgroundColor: '#D8D8D8',
+          borderRadius: 15,
+          height: 30,
+          justifyContent: 'center',
+          width: 30,
+          opacity: !this.props.disabled ? 1 : 0.5
+        }}>
+        <Image source={require('../icon_minus.png')}
+          style={{
+            borderRadius: 7.5,
+            height: 15,
+            resizeMode: 'contain',
+            tintColor: 'black',
+            width: 15,
+            opacity: !this.props.disabled ? 1 : 0.5
+          }} />
+      </TouchableOpacity>
+    );
   }
 }
