@@ -1,7 +1,7 @@
 export const presets = {
   initialFlourWeight: 1000,
   initialLeavenWeight: 200,
-  initialLeavenHydrataion: 100,
+  initialLeavenHydratioon: 100,
   initialWaterWeight: 725,
   initialDesiredTargetHydration: 75,
   flourIncrementAmount: 50,
