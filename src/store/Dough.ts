@@ -69,6 +69,28 @@ export class Dough {
     return 0;
   }
 
+  @computed public get experimentalDoughVolume(): number {
+    return (this.totalFlour + this.totalWater) * (2 / 3);
+  }
+
+  @computed public get experimentalBulkVolume(): number {
+
+    if (this.totalHydration > 75) {
+      return this.experimentalDoughVolume * 1.25;
+    }
+    if (this.totalHydration > 70) {
+      return this.experimentalDoughVolume * 1.30;
+    }
+    if (this.totalHydration > 65) {
+      return this.experimentalDoughVolume * 1.4;
+    }
+    if (this.totalHydration > 60) {
+      return this.experimentalDoughVolume * 1.45;
+    }
+    return this.experimentalDoughVolume * 1.5;
+
+  }
+
 }
 
 export default new Dough(presets);

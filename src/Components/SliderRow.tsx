@@ -26,14 +26,23 @@ export interface ISliderRowProps {
 export class SliderRow extends React.Component<ISliderRowProps>{
   public render() {
     const {
-      value, onValueChange, incrementAmount, minValue, maxValue, isLocked,
-      valueAffix, onValueClick, onSymbolClick, isKeyboardActive, label, onLockValue } = this.props;
+      incrementAmount,
+      isKeyboardActive,
+      isLocked,
+      label,
+      maxValue,
+      minValue,
+      onLockValue,
+      onSymbolClick,
+      onValueChange,
+      onValueClick,
+      value,
+      valueAffix
+    } = this.props;
     return (
       <View style={styles.container}>
         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-
           <TextWithAccessibility style={{ fontWeight: '500' }}>{label}</TextWithAccessibility>
-
           <View style={{ width: onLockValue && isLocked != null ? 32 : 0, marginLeft: onLockValue && isLocked != null ? 4 : 0 }}>
             {onLockValue && isLocked != null &&
               <TouchableOpacity onPress={this.props.onLockValue} style={{ justifyContent: 'center', alignItems: 'center', marginRight: 8 }}>
@@ -46,15 +55,12 @@ export class SliderRow extends React.Component<ISliderRowProps>{
               </TouchableOpacity>}
           </View>
         </View>
-
         <View style={styles.sliderContainer}>
-
           <DecrementButton
             disabled={isLocked}
             onPress={() => onValueChange(value - incrementAmount)}
           />
           <View style={{ width: 4 }} />
-
           <Slider
             disabled={isLocked}
             style={styles.sliderStyle}
@@ -68,13 +74,11 @@ export class SliderRow extends React.Component<ISliderRowProps>{
             onValueChange={onValueChange}
           />
           <View style={{ width: 4 }} />
-
           <IncrementButton
             disabled={isLocked}
             onPress={() => onValueChange(value + incrementAmount)}
           />
           <View style={{ width: 8 }} />
-
           <NumberBox
             isKeyboardActive={!isLocked && isKeyboardActive}
             value={value}
@@ -83,7 +87,6 @@ export class SliderRow extends React.Component<ISliderRowProps>{
             onSymbolClick={onSymbolClick}
             symbol={valueAffix}
           />
-
         </View>
       </View>
     );

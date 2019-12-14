@@ -3,14 +3,13 @@ import { Dough } from './Dough';
 
 export class Hydration {
 
-  constructor(private readonly dough: Dough) {
-
-  }
+  constructor(private readonly dough: Dough) { }
 
   @observable public desiredHydrationLocked: boolean = false;
 
   @action public toggleDesiredHydationLock = (): void => {
     this.desiredHydrationLocked = !this.desiredHydrationLocked;
+    this.dough.water.setwater(this.dough.water.waterWeightToMatchDesiredTargetHydration);
   }
 
   @observable public desiredTargetHydration: number = 75;
@@ -25,7 +24,7 @@ export class Hydration {
   @action public setDesiredHydrationAndUpdateRequiredWaterWeight = (value: number): void => {
     if (!this.desiredHydrationLocked) {
       this.desiredTargetHydration = value > 0 ? value : 0;
-      this.dough.water.waterWeight = this.dough.water.waterWeightToMatchDesiredTargetHydration;
+      this.dough.water.setwater(this.dough.water.waterWeightToMatchDesiredTargetHydration);
     }
   }
 

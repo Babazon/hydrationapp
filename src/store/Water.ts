@@ -2,11 +2,15 @@ import { Dough } from './Dough';
 import { computed, observable, action } from 'mobx';
 
 export class Water {
-  constructor(private readonly dough: Dough) {
-
-  }
+  constructor(private readonly dough: Dough) { }
 
   @observable public waterWeight: number = 725;
+
+  @observable public waterLocked: boolean = false;
+
+  @action public toggleWaterLock = (): void => {
+    this.waterLocked = !this.waterLocked;
+  }
 
   @computed public get waterWeightToMatchDesiredTargetHydration(): number {
     if (this.dough.flour.flourWeight != null && this.dough.leaven.leavenWeight != null && this.dough.leaven.leavenHydration != null) {
@@ -26,7 +30,7 @@ export class Water {
   @action public setwater = (value: number): void => {
     this.waterWeight = value > 0 ? value : 0;
     if (this.dough.hydration.desiredTargetHydration && this.dough.hydration.desiredHydrationLocked) {
-      this.dough.flour.flourWeight = this.dough.flour.flourWeightToMatchDesiredTargetHydration;
+      this.dough.flour.setFlourWeight(this.dough.flour.flourWeightToMatchDesiredTargetHydration);
     }
   }
 
@@ -35,7 +39,7 @@ export class Water {
     if (!this.dough.hydration.desiredHydrationLocked) {
       this.dough.hydration.desiredTargetHydration = this.dough.totalHydration * 100;
     } else {
-      this.dough.flour.flourWeight = this.dough.flour.flourWeightToMatchDesiredTargetHydration;
+      this.dough.flour.setFlourWeight(this.dough.flour.flourWeightToMatchDesiredTargetHydration);
     }
   }
 
