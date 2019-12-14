@@ -7,6 +7,7 @@ import { SliderRow } from './Components/SliderRow';
 import { PresetButtonsRow } from './Components/PresetButtonsRow';
 import dough from './store/Dough';
 import { InfoBlock } from './Components/InfoBlock';
+import { TextWithAccessibility } from './Components/TextWithAccessibility';
 
 // tslint:disable: max-line-length
 
@@ -143,6 +144,18 @@ export default class App extends React.Component {
 
             {/* Info Block */}
             <InfoBlock dough={dough} />
+
+            <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'stretch' }}>
+              <TextWithAccessibility style={{ fontSize: 8, textAlign: 'center' }}>
+                Code: @sourdoughpie
+            </TextWithAccessibility>
+              <TextWithAccessibility style={{ fontSize: 8, textAlign: 'center' }}>
+                Design: @chexee
+            </TextWithAccessibility>
+              <TextWithAccessibility style={{ fontSize: 8, textAlign: 'center' }}>
+                Feedback: instagram.com/sourdoughpie or basar.yuksel@gmail.com
+            </TextWithAccessibility>
+            </View>
           </ScrollView>
         </SafeAreaView>
       </ErrorBoundary >
