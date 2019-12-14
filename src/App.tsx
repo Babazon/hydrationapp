@@ -44,7 +44,7 @@ export default class App extends React.Component {
                 minValue={dough.flour.minFlour}
                 maxValue={dough.flour.maxFlour}
                 isKeyboardActive={dough.userInterface.flourInputMode}
-                label={'Flour'}
+                label={dough.userInterface.languageConstants!._flour_weight}
               />
             </View>
             <View style={{
@@ -74,7 +74,7 @@ export default class App extends React.Component {
                 minValue={dough.leaven.minLeaven}
                 maxValue={dough.leaven.maxLeaven}
                 isKeyboardActive={dough.userInterface.leavenWeightInputMode}
-                label={'Leaven Weight'}
+                label={dough.userInterface.languageConstants!._leaven_weight}
               />
             </View>
             <View style={{
@@ -103,7 +103,7 @@ export default class App extends React.Component {
                 minValue={dough.leaven.minLeavenHydration}
                 maxValue={dough.leaven.maxLeavenHydration}
                 isKeyboardActive={dough.userInterface.leavenHydrationInputMode}
-                label={'Leaven Hydration'}
+                label={dough.userInterface.languageConstants!._leaven_hydration}
               />
             </View>
             <View style={{
@@ -133,7 +133,7 @@ export default class App extends React.Component {
                 minValue={dough.water.minWater}
                 maxValue={dough.water.maxWater}
                 isKeyboardActive={dough.userInterface.waterInputMode}
-                label={'Water'}
+                label={dough.userInterface.languageConstants!._water}
               />
             </View>
 
@@ -153,7 +153,7 @@ export default class App extends React.Component {
                 minValue={dough.hydration.minDesiredHydration}
                 maxValue={dough.hydration.maxDesiredHydration}
                 isKeyboardActive={dough.userInterface.desiredTargetHydrationInputMode}
-                label={'Target Hydration'}
+                label={dough.userInterface.languageConstants!._target_hydration}
               />
             </View>
 

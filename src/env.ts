@@ -27,11 +27,11 @@ export const presets = {
   maxWater: 10000,
   languageConstants: {
     _appTitle: '@sourdoughpie hydration app',
-    _flour_weight: 'flour weight',
-    _leaven_weight: 'leaven weight',
-    _leaven_hydration: 'leaven hydration',
-    _water: 'water',
-    _target_hydration: 'target hydration',
+    _flour_weight: 'Flour',
+    _leaven_weight: 'Leaven',
+    _leaven_hydration: 'Leaven Hydration',
+    _water: 'Water',
+    _target_hydration: 'Target Hydration',
     _gram_abbvr: 'g',
     _percent: '%'
   }
