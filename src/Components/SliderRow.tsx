@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Slider, StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
+import Slider from '@react-native-community/slider';
+import { View, StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
 import { observer } from 'mobx-react';
 import { DecrementButton } from './DecrementButton';
 import { IncrementButton } from './IncrementButton';
