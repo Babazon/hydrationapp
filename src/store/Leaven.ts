@@ -8,6 +8,12 @@ export class Leaven {
   @observable public leavenWeight: number = 200;
   @observable public leavenHydration: number = 100;
 
+  @observable public leavenLocked: boolean = false;
+
+  @action public toggleLeavenLock = (): void => {
+    this.leavenLocked = !this.leavenLocked;
+  }
+
   @computed public get leavenFlour(): number {
     if (this.leavenHydration != null && this.leavenWeight != null) {
       return (this.leavenWeight / (1 + this.leavenHydration / 100));

@@ -9,6 +9,12 @@ export class Flour {
 
   @observable public flourWeight: number = 1000;
 
+  @observable public flourLocked: boolean = false;
+
+  @action public toggleFlourLock = (): void => {
+    this.flourLocked = !this.flourLocked;
+  }
+
   @computed public get flourWeightToMatchDesiredTargetHydration(): number {
     if (this.dough.water.waterWeight != null && this.dough.leaven.leavenWeight != null && this.dough.leaven.leavenHydration != null) {
       return ((this.dough.totalWater / this.dough.hydration.desiredTargetHydration) * 100) - this.dough.leaven.leavenFlour;
