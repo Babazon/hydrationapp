@@ -1,5 +1,9 @@
 export const presets = {
-  fuck: 'shit',
+  initialFlourWeight: 1000,
+  initialLeavenWeight: 200,
+  initialLeavenHydrataion: 100,
+  initialWaterWeight: 725,
+  initialDesiredTargetHydration: 75,
   saltRatio: 0.022,
   postBakeWeightRatio: 0.85,
   flourWeightPresets: [1000, 1500, 2000, 3000, 5000],

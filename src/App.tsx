@@ -3,11 +3,10 @@ import { View, StyleSheet, ScrollView, SafeAreaView, RefreshControl } from 'reac
 import { ErrorBoundary } from './ErrorBoundary';
 import { observer } from 'mobx-react';
 import React from 'react';
-import Controller from './Controller';
 import { SliderRow } from './Components/SliderRow';
 import { PresetButtonsRow } from './Components/PresetButtonsRow';
 import { TextWithAccessibility } from './Components/TextWithAccessibility';
-// tslint:disable-next-line: no-var-requires
+import dough from './store/Dough';
 
 // tslint:disable: max-line-length
 
@@ -26,7 +25,7 @@ export default class App extends React.Component {
 
           <ScrollView
             showsVerticalScrollIndicator={false}
-            refreshControl={<RefreshControl title="Reset" refreshing={false} onRefresh={Controller.resetValues} />}
+            refreshControl={<RefreshControl title="Reset" refreshing={false} onRefresh={dough.resetValues} />}
             contentContainerStyle={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'stretch', marginHorizontal: 8, paddingVertical: 16 }}>
 
             {/* Flour Weight */}
@@ -36,15 +35,15 @@ export default class App extends React.Component {
               marginBottom: 8
             }}>
               <SliderRow
-                value={Controller.flourWeight}
-                onValueChange={Controller.setFlourWeight}
-                onValueClick={Controller.onFlourValueClick}
+                value={dough.flour.flourWeight}
+                onValueChange={dough.flour.setFlourWeight}
+                onValueClick={dough.userInterface.onFlourValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}
                 incrementAmount={50}
-                minValue={Controller.minFlour}
-                maxValue={Controller.maxFlour}
-                isKeyboardActive={Controller.flourInputMode}
+                minValue={dough.flour.minFlour}
+                maxValue={dough.flour.maxFlour}
+                isKeyboardActive={dough.userInterface.flourInputMode}
                 label={'Flour'}
               />
             </View>
@@ -53,10 +52,10 @@ export default class App extends React.Component {
               marginBottom: 8
             }}>
               <PresetButtonsRow
-                presetValues={Controller.flourWeightPresets}
-                onClickCallback={Controller.setFlourWeight}
-                valueSuffix={Controller.languageConstants!._gram_abbvr}
-                selectedValue={Controller.flourWeight}
+                presetValues={dough.userInterface.flourWeightPresets}
+                onClickCallback={dough.flour.setFlourWeight}
+                valueSuffix={dough.userInterface.languageConstants!._gram_abbvr}
+                selectedValue={dough.flour.flourWeight}
               />
             </View>
 
@@ -66,15 +65,15 @@ export default class App extends React.Component {
               marginBottom: 8
             }}>
               <SliderRow
-                value={Controller.leavenWeight}
-                onValueChange={Controller.setLeavenWeight}
-                onValueClick={Controller.onLeavenWeightValueClick}
+                value={dough.leaven.leavenWeight}
+                onValueChange={dough.leaven.setLeavenWeight}
+                onValueClick={dough.userInterface.onLeavenWeightValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}
                 incrementAmount={50}
-                minValue={Controller.minLeaven}
-                maxValue={Controller.maxLeaven}
-                isKeyboardActive={Controller.leavenWeightInputMode}
+                minValue={dough.leaven.minLeaven}
+                maxValue={dough.leaven.maxLeaven}
+                isKeyboardActive={dough.userInterface.leavenWeightInputMode}
                 label={'Leaven Weight'}
               />
             </View>
@@ -83,10 +82,10 @@ export default class App extends React.Component {
               marginBottom: 8
             }}>
               <PresetButtonsRow
-                presetValues={Controller.leavenInoculationPresets}
-                onClickCallback={Controller.setLeavenWeightUsingInoculation}
-                valueSuffix={Controller.languageConstants!._percent}
-                selectedValue={Controller.inoculation}
+                presetValues={dough.userInterface.leavenInoculationPresets}
+                onClickCallback={dough.leaven.setLeavenWeightUsingInoculation}
+                valueSuffix={dough.userInterface.languageConstants!._percent}
+                selectedValue={dough.leaven.inoculation}
               />
             </View>
 
@@ -96,14 +95,14 @@ export default class App extends React.Component {
               marginBottom: 8
             }}>
               <SliderRow
-                value={Controller.leavenHydration}
-                onValueChange={Controller.setLeavenHydration}
-                onValueClick={Controller.onLeavenHydrationValueClick}
+                value={dough.leaven.leavenHydration}
+                onValueChange={dough.leaven.setLeavenHydration}
+                onValueClick={dough.userInterface.onLeavenHydrationValueClick}
                 valueAffix={'%'}
                 incrementAmount={50}
-                minValue={Controller.minLeavenHydration}
-                maxValue={Controller.maxLeavenHydration}
-                isKeyboardActive={Controller.leavenHydrationInputMode}
+                minValue={dough.leaven.minLeavenHydration}
+                maxValue={dough.leaven.maxLeavenHydration}
+                isKeyboardActive={dough.userInterface.leavenHydrationInputMode}
                 label={'Leaven Hydration'}
               />
             </View>
@@ -112,10 +111,10 @@ export default class App extends React.Component {
               marginBottom: 8
             }}>
               <PresetButtonsRow
-                presetValues={Controller.leavenHydrationPresets}
-                onClickCallback={Controller.setLeavenHydration}
-                valueSuffix={Controller.languageConstants!._percent}
-                selectedValue={Controller.leavenHydration}
+                presetValues={dough.userInterface.leavenHydrationPresets}
+                onClickCallback={dough.leaven.setLeavenHydration}
+                valueSuffix={dough.userInterface.languageConstants!._percent}
+                selectedValue={dough.leaven.leavenHydration}
               />
             </View>
 
@@ -125,15 +124,15 @@ export default class App extends React.Component {
               marginBottom: 8
             }}>
               <SliderRow
-                value={Controller.waterWeight}
-                onValueChange={Controller.setWaterWeightAndUpdateDesiredHydration}
-                onValueClick={Controller.onWaterValueClick}
+                value={dough.water.waterWeight}
+                onValueChange={dough.water.setWaterWeightAndUpdateDesiredHydration}
+                onValueClick={dough.userInterface.onWaterValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}
                 incrementAmount={50}
-                minValue={Controller.minWater}
-                maxValue={Controller.maxWater}
-                isKeyboardActive={Controller.waterInputMode}
+                minValue={dough.water.minWater}
+                maxValue={dough.water.maxWater}
+                isKeyboardActive={dough.userInterface.waterInputMode}
                 label={'Water'}
               />
             </View>
@@ -144,16 +143,16 @@ export default class App extends React.Component {
             }}>
               {/* Target Hydration */}
               <SliderRow
-                isLocked={Controller.desiredHydrationLocked}
-                onLockValue={Controller.toggleDesiredHydationLock}
-                value={Controller.desiredTargetHydration}
-                onValueChange={Controller.setDesiredHydrationAndUpdateRequiredWaterWeight}
-                onValueClick={Controller.onDesiredTargetHydrationValueClick}
+                isLocked={dough.hydration.desiredHydrationLocked}
+                onLockValue={dough.hydration.toggleDesiredHydationLock}
+                value={dough.hydration.desiredTargetHydration}
+                onValueChange={dough.hydration.setDesiredHydrationAndUpdateRequiredWaterWeight}
+                onValueClick={dough.userInterface.onDesiredTargetHydrationValueClick}
                 valueAffix={'%'}
                 incrementAmount={50}
-                minValue={Controller.minDesiredHydration}
-                maxValue={Controller.maxDesiredHydration}
-                isKeyboardActive={Controller.desiredTargetHydrationInputMode}
+                minValue={dough.hydration.minDesiredHydration}
+                maxValue={dough.hydration.maxDesiredHydration}
+                isKeyboardActive={dough.userInterface.desiredTargetHydrationInputMode}
                 label={'Target Hydration'}
               />
             </View>
@@ -163,10 +162,10 @@ export default class App extends React.Component {
               marginBottom: 8
             }}>
               <PresetButtonsRow
-                presetValues={Controller.desiredHydrationPresets}
-                onClickCallback={Controller.setDesiredHydrationAndUpdateRequiredWaterWeight}
-                valueSuffix={Controller.languageConstants!._percent}
-                selectedValue={Controller.desiredTargetHydration}
+                presetValues={dough.userInterface.desiredHydrationPresets}
+                onClickCallback={dough.hydration.setDesiredHydrationAndUpdateRequiredWaterWeight}
+                valueSuffix={dough.userInterface.languageConstants!._percent}
+                selectedValue={dough.hydration.desiredTargetHydration}
               />
             </View>
 
@@ -177,7 +176,7 @@ export default class App extends React.Component {
 
                 <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
 
-                <TextWithAccessibility style={styles.infoStyle}>{Controller.totalFlour.toFixed(Controller.totalFlour % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>{dough.totalFlour.toFixed(dough.totalFlour % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
@@ -185,7 +184,7 @@ export default class App extends React.Component {
 
                 <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
 
-                <TextWithAccessibility style={styles.infoStyle}>{Controller.totalWater.toFixed(Controller.totalWater % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>{dough.totalWater.toFixed(dough.totalWater % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
@@ -193,7 +192,7 @@ export default class App extends React.Component {
 
                 <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
 
-                <TextWithAccessibility style={styles.infoStyle}>{Controller.leavenWeight.toFixed(Controller.leavenWeight % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>{dough.leaven.leavenWeight.toFixed(dough.leaven.leavenWeight % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
@@ -201,7 +200,7 @@ export default class App extends React.Component {
 
                 <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
 
-                <TextWithAccessibility style={styles.infoStyle}>{(Controller.inoculation).toFixed(Controller.inoculation % 1 > 0 ? 2 : 0)} %</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>{(dough.leaven.inoculation).toFixed(dough.leaven.inoculation % 1 > 0 ? 2 : 0)} %</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
@@ -209,7 +208,7 @@ export default class App extends React.Component {
 
                 <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
 
-                <TextWithAccessibility style={styles.infoStyle}>{Controller.recommendedSalt.toFixed(Controller.recommendedSalt % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>{dough.recommendedSalt.toFixed(dough.recommendedSalt % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
@@ -217,7 +216,7 @@ export default class App extends React.Component {
 
                 <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
 
-                <TextWithAccessibility style={styles.infoStyle}>{(Controller.totalFlour + Controller.totalWater).toFixed((Controller.totalFlour + Controller.totalWater) % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>{(dough.totalFlour + dough.totalWater).toFixed((dough.totalFlour + dough.totalWater) % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
@@ -225,7 +224,7 @@ export default class App extends React.Component {
 
                 <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
 
-                <TextWithAccessibility style={styles.infoStyle}>{Controller.postBakeWeight.toFixed(Controller.postBakeWeight % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>{dough.postBakeWeight.toFixed(dough.postBakeWeight % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
               </View>
 
               <View style={styles.infoRow}>
@@ -233,7 +232,7 @@ export default class App extends React.Component {
 
                 <View style={{ marginHorizontal: 4, flex: 1, borderRadius: 1, marginBottom: 3, borderWidth: 1, borderColor: 'gray', borderStyle: 'dotted', zIndex: 0, }} />
 
-                <TextWithAccessibility style={styles.infoStyle}>{(Controller.totalHydration * 100).toFixed((Controller.totalHydration * 100) % 1 > 0 ? 2 : 0)} %</TextWithAccessibility>
+                <TextWithAccessibility style={styles.infoStyle}>{(dough.totalHydration * 100).toFixed((dough.totalHydration * 100) % 1 > 0 ? 2 : 0)} %</TextWithAccessibility>
               </View>
 
             </View>
