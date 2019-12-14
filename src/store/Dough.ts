@@ -21,8 +21,10 @@ export class Dough {
     this.flour.flourWeight = this.appPresets.initialFlourWeight;
     this.water.waterWeight = this.appPresets.initialWaterWeight;
     this.leaven.leavenWeight = this.appPresets.initialLeavenWeight;
-    this.leaven.leavenHydration = this.appPresets.initialLeavenHydration;
+    this.leaven.leavenHydration = this.appPresets.initialLeavenHydratioon;
     this.hydration.desiredHydrationLocked = false;
+    this.water.waterLocked = false;
+    this.flour.flourLocked = false;
     this.hydration.desiredTargetHydration = this.appPresets.initialDesiredTargetHydration;
   }
 

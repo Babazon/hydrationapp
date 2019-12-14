@@ -40,7 +40,7 @@ export class InfoBlock extends React.Component<IProps>{
           <TextWithAccessibility style={styles.infoStyle}>Inoculation</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {(dough.leaven.inoculation).toFixed(dough.leaven.inoculation % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._percent}
+            {(dough.leaven.inoculation).toFixed(dough.leaven.inoculation % 1 > 0 ? 2 : 0)}{dough.userInterface.languageConstants!._percent}
           </TextWithAccessibility>
         </View>
 
@@ -48,7 +48,7 @@ export class InfoBlock extends React.Component<IProps>{
           <TextWithAccessibility style={styles.infoStyle}>Recommended Salt</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {dough.recommendedSalt.toFixed(dough.recommendedSalt % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._gram_abbbvr}
+            {dough.recommendedSalt.toFixed(dough.recommendedSalt % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._gram_abbvr}
           </TextWithAccessibility>
         </View>
 
@@ -57,7 +57,7 @@ export class InfoBlock extends React.Component<IProps>{
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
             {/* tslint:disable-next-line: max-line-length*/}
-            {(dough.totalFlour + dough.totalWater).toFixed((dough.totalFlour + dough.totalWater) % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._gram_abbbvr}
+            {(dough.totalFlour + dough.totalWater).toFixed((dough.totalFlour + dough.totalWater) % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._gram_abbvr}
           </TextWithAccessibility>
         </View>
 
@@ -65,7 +65,7 @@ export class InfoBlock extends React.Component<IProps>{
           <TextWithAccessibility style={styles.infoStyle}>Post Bake Weight</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {dough.postBakeWeight.toFixed(dough.postBakeWeight % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._gram_abbbvr}
+            {dough.postBakeWeight.toFixed(dough.postBakeWeight % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._gram_abbvr}
           </TextWithAccessibility>
         </View>
 
@@ -73,7 +73,7 @@ export class InfoBlock extends React.Component<IProps>{
           <TextWithAccessibility style={styles.infoStyle}>Hydration</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {(dough.totalHydration * 100).toFixed((dough.totalHydration * 100) % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._percent}
+            {(dough.totalHydration * 100).toFixed((dough.totalHydration * 100) % 1 > 0 ? 2 : 0)}{dough.userInterface.languageConstants!._percent}
           </TextWithAccessibility>
         </View>
 
