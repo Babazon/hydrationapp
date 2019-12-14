@@ -40,7 +40,7 @@ export default class App extends React.Component {
                 onValueClick={dough.userInterface.onFlourValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}
-                incrementAmount={50}
+                incrementAmount={25}
                 minValue={dough.flour.minFlour}
                 maxValue={dough.flour.maxFlour}
                 isKeyboardActive={dough.userInterface.flourInputMode}
@@ -70,7 +70,7 @@ export default class App extends React.Component {
                 onValueClick={dough.userInterface.onLeavenWeightValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}
-                incrementAmount={50}
+                incrementAmount={10}
                 minValue={dough.leaven.minLeaven}
                 maxValue={dough.leaven.maxLeaven}
                 isKeyboardActive={dough.userInterface.leavenWeightInputMode}
@@ -99,7 +99,7 @@ export default class App extends React.Component {
                 onValueChange={dough.leaven.setLeavenHydration}
                 onValueClick={dough.userInterface.onLeavenHydrationValueClick}
                 valueAffix={'%'}
-                incrementAmount={50}
+                incrementAmount={5}
                 minValue={dough.leaven.minLeavenHydration}
                 maxValue={dough.leaven.maxLeavenHydration}
                 isKeyboardActive={dough.userInterface.leavenHydrationInputMode}
@@ -129,7 +129,7 @@ export default class App extends React.Component {
                 onValueClick={dough.userInterface.onWaterValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}
-                incrementAmount={50}
+                incrementAmount={10}
                 minValue={dough.water.minWater}
                 maxValue={dough.water.maxWater}
                 isKeyboardActive={dough.userInterface.waterInputMode}
@@ -149,7 +149,7 @@ export default class App extends React.Component {
                 onValueChange={dough.hydration.setDesiredHydrationAndUpdateRequiredWaterWeight}
                 onValueClick={dough.userInterface.onDesiredTargetHydrationValueClick}
                 valueAffix={'%'}
-                incrementAmount={50}
+                incrementAmount={1}
                 minValue={dough.hydration.minDesiredHydration}
                 maxValue={dough.hydration.maxDesiredHydration}
                 isKeyboardActive={dough.userInterface.desiredTargetHydrationInputMode}
