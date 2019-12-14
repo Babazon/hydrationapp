@@ -33,6 +33,7 @@ export const presets = {
     _water: 'Water',
     _target_hydration: 'Target Hydration',
     _gram_abbvr: 'g',
-    _percent: '%'
+    _percent: '%',
+    _liter_abbvr: 'lt'
   }
 };

@@ -46,7 +46,7 @@ export class NumberBox extends React.Component<IProps>{
 
         {this.props.isKeyboardActive &&
           (<TextInput
-            keyboardType={'numeric'}
+            keyboardType={'default'}
             autoFocus
             style={{ color: 'black', textAlign: 'right', fontSize: 14, fontWeight: '500', marginHorizontal: 4 }}
             value={
