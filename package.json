@@ -25,7 +25,8 @@
     "mobx": "^5.14.2",
     "mobx-react": "^6.1.4",
     "react": "16.11.0",
-    "react-native": "0.61.4"
+    "react-native": "0.61.4",
+    "react-native-keyboard-aware-scroll-view": "^0.9.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",

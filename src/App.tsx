@@ -1,5 +1,5 @@
 import 'es6-symbol/implement';
-import { View, StyleSheet, ScrollView, SafeAreaView, RefreshControl } from 'react-native';
+import { View, StyleSheet, SafeAreaView, RefreshControl } from 'react-native';
 import { ErrorBoundary } from './ErrorBoundary';
 import { observer } from 'mobx-react';
 import React from 'react';
@@ -8,6 +8,7 @@ import { PresetButtonsRow } from './Components/PresetButtonsRow';
 import dough from './store/Dough';
 import { InfoBlock } from './Components/InfoBlock';
 import { TextWithAccessibility } from './Components/TextWithAccessibility';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 // tslint:disable: max-line-length
 
@@ -24,7 +25,7 @@ export default class App extends React.Component {
       <ErrorBoundary>
         <SafeAreaView style={styles.safeAreaView}>
 
-          <ScrollView
+          <KeyboardAwareScrollView
             showsVerticalScrollIndicator={false}
             refreshControl={<RefreshControl title="Reset" refreshing={false} onRefresh={dough.resetValues} />}
             contentContainerStyle={styles.scrollViewContentStyle}>
@@ -156,7 +157,7 @@ export default class App extends React.Component {
                 Feedback: instagram.com/sourdoughpie or basar.yuksel@gmail.com
             </TextWithAccessibility>
             </View>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         </SafeAreaView>
       </ErrorBoundary >
     );
