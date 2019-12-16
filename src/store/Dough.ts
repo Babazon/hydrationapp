@@ -50,6 +50,24 @@ export class Dough {
     return 0;
   }
 
+  @observable public desiredTargetWeight: number = 2000;
+  @action public setDesiredTargetWeight = (value: number): void => {
+    this.desiredTargetWeight = value;
+    this.adjustOtherValuesBasedOnDesiredTargetWeight();
+  }
+
+  @computed public get desiredTargetBakedWeight(): number {
+    if (this.desiredTargetWeight) {
+      return this.desiredTargetWeight * 0.15;
+    }
+    return 0;
+  }
+
+  @action private adjustOtherValuesBasedOnDesiredTargetWeight = (): void => {
+    // if hydration is locked , flour is locked, leaven and leaven hydro locked, water locked, multiply them by target weight / current weight
+    return;
+  }
+
   @computed public get totalHydration(): number {
     if (this.totalFlour != null && this.totalWater != null) {
       return this.totalWater / this.totalFlour;
