@@ -3,12 +3,21 @@
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "jsx": "react",
+    "jsx": "react-native",
     "lib": [
-      "es5", "es6", "es7"
+      "es5",
+      "es6",
+      "es7"
     ],
-    "types": ["react", "jest", "react-native", "node"],
-    "typeRoots": ["src/typings", "./node_modules/@types"],
+    "types": [
+      "react",
+      "jest",
+      "react-native",
+      "node"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
     "module": "es6",
     "skipLibCheck": true,
     "moduleResolution": "node",
@@ -27,6 +36,5 @@
   ],
   "include": [
     "src",
-    "shared"
   ]
 }
