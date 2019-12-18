@@ -3,14 +3,17 @@ import { View, StyleSheet, SafeAreaView, RefreshControl } from 'react-native';
 import { ErrorBoundary } from './ErrorBoundary';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { SliderRow } from './Components/SliderRow';
-import { PresetButtonsRow } from './Components/PresetButtonsRow';
+import { SliderRow } from './components/SliderRow';
+import { PresetButtonsRow } from './components/PresetButtonsRow';
 import dough from './store/Dough';
-import { InfoBlock } from './Components/InfoBlock';
-import { TextWithAccessibility } from './Components/TextWithAccessibility';
+import { InfoBlock } from './components/InfoBlock';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { TextWithAccessibility } from './components/TextWithAccessibility';
 
 // tslint:disable: max-line-length
+
+// TODO : Move text to language constants fileor locize
+// TODO : Optimise styles
 
 @observer
 export default class App extends React.Component {

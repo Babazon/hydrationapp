@@ -2,10 +2,11 @@ import React from 'react';
 import Slider from '@react-native-community/slider';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
 import { observer } from 'mobx-react';
+import { TextWithAccessibility } from './TextWithAccessibility';
 import { DecrementButton } from './DecrementButton';
 import { IncrementButton } from './IncrementButton';
 import { NumberBox } from './NumberBox';
-import { TextWithAccessibility } from './TextWithAccessibility';
+import { Assets } from '../assets';
 
 export interface ISliderRowProps {
   value: number;
@@ -24,9 +25,13 @@ export interface ISliderRowProps {
 
 @observer
 export class SliderRow extends React.Component<ISliderRowProps>{
+
+  private decrementValue = () => this.props.onValueChange(this.props.value - this.props.incrementAmount);
+
+  private incrementValue = () => this.props.onValueChange(this.props.value + this.props.incrementAmount);
+
   public render() {
     const {
-      incrementAmount,
       isKeyboardActive,
       isLocked,
       label,
@@ -39,18 +44,19 @@ export class SliderRow extends React.Component<ISliderRowProps>{
       value,
       valueAffix
     } = this.props;
+
     return (
       <View style={styles.container}>
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-          <TextWithAccessibility style={{ fontWeight: '500' }}>{label}</TextWithAccessibility>
+        <View style={styles.upperRowContainer}>
+          <TextWithAccessibility style={styles.semiboldText}>{label}</TextWithAccessibility>
           <View style={{ width: onLockValue && isLocked != null ? 32 : 0, marginLeft: onLockValue && isLocked != null ? 4 : 0 }}>
             {onLockValue && isLocked != null &&
-              <TouchableOpacity onPress={this.props.onLockValue} style={{ justifyContent: 'center', alignItems: 'center', marginRight: 8 }}>
+              <TouchableOpacity onPress={this.props.onLockValue} style={styles.unlockedIcon}>
                 <>
                   {isLocked &&
-                    <Image source={require('../icon_locked.png')} style={{ height: 20, width: 20, resizeMode: 'contain' }} />}
+                    <Image source={Assets.icon_locked} style={styles.lockedIcon} />}
                   {!isLocked &&
-                    <Image source={require('../icon_unlocked.png')} style={{ height: 20, width: 20, resizeMode: 'contain', tintColor: 'lightgray' }} />}
+                    <Image source={Assets.icon_unlocked} style={styles.unlockedIcon} />}
                 </>
               </TouchableOpacity>}
           </View>
@@ -58,9 +64,9 @@ export class SliderRow extends React.Component<ISliderRowProps>{
         <View style={styles.sliderContainer}>
           <DecrementButton
             disabled={isLocked}
-            onPress={() => onValueChange(value - incrementAmount)}
+            onPress={this.decrementValue}
           />
-          <View style={{ width: 4 }} />
+          <View style={styles.minorHorizontalGap} />
           <Slider
             disabled={isLocked}
             style={styles.sliderStyle}
@@ -73,12 +79,12 @@ export class SliderRow extends React.Component<ISliderRowProps>{
             value={value}
             onValueChange={onValueChange}
           />
-          <View style={{ width: 4 }} />
+          <View style={styles.minorHorizontalGap} />
           <IncrementButton
             disabled={isLocked}
-            onPress={() => onValueChange(value + incrementAmount)}
+            onPress={this.incrementValue}
           />
-          <View style={{ width: 8 }} />
+          <View style={styles.horizontalGap} />
           <NumberBox
             isKeyboardActive={!isLocked && isKeyboardActive}
             value={value}
@@ -100,17 +106,41 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginVertical: 8
   },
+  horizontalGap: {
+    width: 8
+  },
+  lockedIcon: {
+    height: 20,
+    resizeMode: 'contain',
+    width: 20
+  },
+  minorHorizontalGap: {
+    width: 4
+  },
+  semiboldText: {
+    fontWeight: '500'
+  },
   sliderContainer: {
     alignItems: 'center',
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    flex: 1,
-    maxWidth: Dimensions.get('window').width,
-    marginTop: 24
+    marginTop: 24,
+    maxWidth: Dimensions.get('window').width
   },
   sliderStyle: {
     flex: 4,
     height: 40,
     marginVertical: 4
+  },
+  unlockedIcon: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 8
+  },
+  upperRowContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
   }
 });

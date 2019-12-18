@@ -18,11 +18,10 @@ export class PresetButtonsRow extends React.Component<IPresetButtonsRowProps>{
       <TouchableOpacity
         onPress={() => onClickCallback(item)}
         style={StyleSheet.flatten([styles.buttonStyles, {
-          borderColor: selectedValue === item ? 'transparent' : 'lightgray',
           backgroundColor: selectedValue === item ? 'lightgray' : 'transparent',
+          borderColor: selectedValue === item ? 'transparent' : 'lightgray',
           marginLeft: index === 0 ? 0 : 8,
           marginRight: index === this.props.presetValues.length - 1 ? 0 : 8
-
         }])}>
         <TextWithAccessibility style={styles.buttonText}>{item.toFixed(0)}{valueSuffix}</TextWithAccessibility>
       </TouchableOpacity>

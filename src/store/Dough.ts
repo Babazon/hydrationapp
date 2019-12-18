@@ -53,7 +53,7 @@ export class Dough {
   @observable public desiredTargetWeight: number = 2000;
   @action public setDesiredTargetWeight = (value: number): void => {
     this.desiredTargetWeight = value;
-    this.adjustOtherValuesBasedOnDesiredTargetWeight();
+    this.adjustOtherValuesBasedOnDesiredTargetWeight(); // add reaction
   }
 
   @computed public get desiredTargetBakedWeight(): number {

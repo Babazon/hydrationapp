@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Image } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 interface IProps {
   onPress(): void;
@@ -9,27 +9,44 @@ interface IProps {
 export class IncrementButton extends React.Component<IProps>{
   public render() {
     return (
+
       <TouchableOpacity onPress={this.props.onPress}
         disabled={this.props.disabled}
-        style={{
-          alignItems: 'center',
-          backgroundColor: '#D8D8D8',
-          borderRadius: 15,
-          height: 30,
-          justifyContent: 'center',
-          width: 30,
-          opacity: !this.props.disabled ? 1 : 0.5
-        }}>
+        style={StyleSheet.flatten([
+          styles.button,
+          {
+            opacity: !this.props.disabled ? 1 : 0.5
+          }
+        ])}>
+
         <Image source={require('../icon_plus.png')}
-          style={{
-            borderRadius: 7.5,
-            height: 15,
-            opacity: !this.props.disabled ? 1 : 0.5,
-            resizeMode: 'contain',
-            tintColor: 'black',
-            width: 15
-          }} />
+          style={StyleSheet.flatten([
+            styles.icon,
+            {
+              opacity: !this.props.disabled ? 1 : 0.5,
+            }
+          ])}
+        />
+
       </TouchableOpacity>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#D8D8D8',
+    borderRadius: 15,
+    height: 30,
+    justifyContent: 'center',
+    width: 30,
+  },
+  icon: {
+    borderRadius: 7.5,
+    height: 15,
+    resizeMode: 'contain',
+    tintColor: 'black',
+    width: 15,
+  }
+});

@@ -11,29 +11,31 @@ interface IProps {
   onSymbolClick?(): void;
   isKeyboardActive: boolean;
 }
+// TODO : Optimise styles
+
 @observer
 export class NumberBox extends React.Component<IProps>{
 
   public render() {
     return (<View
       style={{
+        alignItems: 'center',
+        borderColor: 'red',
         borderRadius: 8,
+        flex: 2,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        width: 120,
-        flex: 2,
-        borderColor: 'red'
+        width: 120
       }}>
       <TouchableOpacity
         style={{
           alignItems: 'stretch',
+          backgroundColor: '#EAEAEA',
           borderBottomLeftRadius: 4,
           borderTopLeftRadius: 4,
           flex: 2,
           height: 32,
-          justifyContent: 'center',
-          backgroundColor: '#EAEAEA'
+          justifyContent: 'center'
         }}
         disabled={!this.props.onValueClick}
         onPress={this.props.onValueClick}>
@@ -66,12 +68,12 @@ export class NumberBox extends React.Component<IProps>{
       <TouchableOpacity
         style={{
           alignItems: 'center',
+          backgroundColor: '#D8D8D8',
           borderBottomRightRadius: 4,
           borderTopRightRadius: 4,
           flex: 1,
           height: 32,
-          justifyContent: 'center',
-          backgroundColor: '#D8D8D8'
+          justifyContent: 'center'
         }}
         disabled={!this.props.onSymbolClick}
         onPress={this.props.onSymbolClick}>

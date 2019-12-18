@@ -32,7 +32,7 @@ export class Flour {
 
   @action public setFlourWeight = (value: number): void => {
     this.flourWeight = value > 0 ? value : 0;
-    if (this.dough.hydration.desiredTargetHydration && this.dough.hydration.desiredHydrationLocked) {
+    if (this.dough.hydration.desiredTargetHydration && this.dough.hydration.desiredHydrationLocked) { // add reaction
       this.dough.water.waterWeight = this.dough.water.waterWeightToMatchDesiredTargetHydration;
     }
   }

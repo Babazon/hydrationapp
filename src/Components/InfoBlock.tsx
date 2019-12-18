@@ -8,6 +8,8 @@ interface IProps {
   dough: Dough;
 }
 
+// TODO : Move text to language constants fileor locize
+
 @observer
 export class InfoBlock extends React.Component<IProps>{
 
@@ -99,23 +101,6 @@ export class InfoBlock extends React.Component<IProps>{
 }
 
 const styles = StyleSheet.create({
-  infoBlock: {
-    alignItems: 'flex-start',
-    alignSelf: 'center',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    marginVertical: 8,
-    marginHorizontal: 4
-  },
-  infoRow: {
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-  infoStyle: {
-    fontSize: 14,
-    textAlign: 'left'
-  },
   dottedLine: {
     borderColor: 'gray',
     borderRadius: 1,
@@ -125,5 +110,22 @@ const styles = StyleSheet.create({
     marginBottom: 3,
     marginHorizontal: 4,
     zIndex: 0
+  },
+  infoBlock: {
+    alignItems: 'flex-start',
+    alignSelf: 'center',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    marginHorizontal: 4,
+    marginVertical: 8
+  },
+  infoRow: {
+    alignItems: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  infoStyle: {
+    fontSize: 14,
+    textAlign: 'left'
   }
 });

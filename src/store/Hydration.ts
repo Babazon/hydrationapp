@@ -9,7 +9,7 @@ export class Hydration {
 
   @action public toggleDesiredHydationLock = (): void => {
     this.desiredHydrationLocked = !this.desiredHydrationLocked;
-    this.dough.water.setwater(this.dough.water.waterWeightToMatchDesiredTargetHydration);
+    this.dough.water.setwater(this.dough.water.waterWeightToMatchDesiredTargetHydration); // add reaction
   }
 
   @observable public desiredTargetHydration: number = 75;
@@ -22,7 +22,7 @@ export class Hydration {
   }
 
   @action public setDesiredHydrationAndUpdateRequiredWaterWeight = (value: number): void => {
-    if (!this.desiredHydrationLocked) {
+    if (!this.desiredHydrationLocked) {// add reaction
       this.desiredTargetHydration = value > 0 ? value : 0;
       this.dough.water.setwater(this.dough.water.waterWeightToMatchDesiredTargetHydration);
     }

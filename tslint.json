@@ -21,7 +21,7 @@
       }
     ],
     "ordered-imports": false,
-    "object-literal-sort-keys": false,
+    "object-literal-sort-keys": true,
     "trailing-comma": false,
     "one-line": false,
     "member-ordering": false,
