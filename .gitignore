@@ -9,7 +9,6 @@ ios-debug.bundle
 ios-debug.bundle.map
 
 .env
-.locize
 
 # OSX
 ios/Index/DataStore
@@ -80,9 +79,6 @@ package-lock.json
 .jest/
 coverage/
 
-# Secrets
-ApiSecrets.ts
-
 # Android builds
 */app/release/*
 */app/src/main/res/assets/*
@@ -103,6 +99,3 @@ index.android.bundle
 # Google
 GoogleService-Info.plist
 google-services.json
-
-# include local node_modules
-!src/node_modules
