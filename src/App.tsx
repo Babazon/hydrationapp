@@ -3,12 +3,12 @@ import { View, StyleSheet, SafeAreaView, RefreshControl } from 'react-native';
 import { ErrorBoundary } from './ErrorBoundary';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { SliderRow } from './components/SliderRow';
-import { PresetButtonsRow } from './components/PresetButtonsRow';
 import dough from './store/Dough';
-import { InfoBlock } from './components/InfoBlock';
+import { InfoBlock } from './Components/InfoBlock';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { TextWithAccessibility } from './components/TextWithAccessibility';
+import { SliderRow } from './Components/SliderRow';
+import { PresetButtonsRow } from './Components/PresetButtonsRow';
+import { TextWithAccessibility } from './Components/TextWithAccessibility';
 
 // tslint:disable: max-line-length
 
