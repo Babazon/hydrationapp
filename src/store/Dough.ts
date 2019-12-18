@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action, computed, reaction } from 'mobx';
 import { Flour } from './Flour';
 import { Water } from './Water';
 import { Leaven } from './Leaven';
@@ -9,6 +9,11 @@ import { presets } from '../env';
 export class Dough {
 
   constructor(protected readonly appPresets: any) {
+    reaction(() => this.totalHydration, (totalHydration) => {
+      if (!this.hydration.desiredHydrationLocked) {
+        this.hydration.setDesiredTargetHydration(totalHydration * 100);
+      }
+    });
   }
 
   @observable public flour: Flour = new Flour(this);

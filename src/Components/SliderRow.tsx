@@ -135,9 +135,10 @@ const styles = StyleSheet.create({
     marginVertical: 4
   },
   unlockedIcon: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 8
+    height: 20,
+    resizeMode: 'contain',
+    tintColor: 'lightgray',
+    width: 20
   },
   upperRowContainer: {
     alignItems: 'center',

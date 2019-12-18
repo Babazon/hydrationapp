@@ -14,6 +14,10 @@ export class Hydration {
 
   @observable public desiredTargetHydration: number = 75;
 
+  @action public setDesiredTargetHydration = (value: number) => {
+    this.desiredTargetHydration = value;
+  }
+
   @computed public get minDesiredHydration(): number {
     return this.dough.userInterface.appPresets.minDesiredHydration;
   }

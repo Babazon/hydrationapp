@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { Assets } from '../assets';
 
 interface IProps {
   onPress(): void;
@@ -19,7 +20,7 @@ export class IncrementButton extends React.Component<IProps>{
           }
         ])}>
 
-        <Image source={require('../icon_plus.png')}
+        <Image source={Assets.icon_plus}
           style={StyleSheet.flatten([
             styles.icon,
             {
