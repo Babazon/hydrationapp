@@ -9,9 +9,18 @@ import { presets } from '../env';
 export class Dough {
 
   constructor(protected readonly appPresets: any) {
-    reaction(() => this.totalHydration, (totalHydration) => {
+    reaction(() => this.totalHydration, (totalHydration: number) => {
       if (!this.hydration.desiredHydrationLocked) {
         this.hydration.setDesiredTargetHydration(totalHydration * 100);
+      }
+    });
+
+    reaction(() => this.targetDoughWeight, (targetDoughWeight: number) => {
+      if (this.hydration.desiredHydrationLocked) {
+        const ratioToMultiply: number = (targetDoughWeight * (1 - this.saltRatio)) / (this.totalFlour + this.totalWater);
+        this.flour.setFlourWeight(this.flour.flourWeight * ratioToMultiply);
+        this.water.setWaterWeight(this.water.waterWeight * ratioToMultiply);
+        this.leaven.setLeavenWeight(this.leaven.leavenWeight * ratioToMultiply);
       }
     });
   }
@@ -58,7 +67,6 @@ export class Dough {
   @observable public desiredTargetWeight: number = 2000;
   @action public setDesiredTargetWeight = (value: number): void => {
     this.desiredTargetWeight = value;
-    this.adjustOtherValuesBasedOnDesiredTargetWeight(); // add reaction
   }
 
   @computed public get desiredTargetBakedWeight(): number {
@@ -66,11 +74,6 @@ export class Dough {
       return this.desiredTargetWeight * 0.15;
     }
     return 0;
-  }
-
-  @action private adjustOtherValuesBasedOnDesiredTargetWeight = (): void => {
-    // if hydration is locked , flour is locked, leaven and leaven hydro locked, water locked, multiply them by target weight / current weight
-    return;
   }
 
   @computed public get totalHydration(): number {
@@ -114,6 +117,12 @@ export class Dough {
     }
     return this.experimentalDoughVolume * 1.5;
 
+  }
+
+  @observable public targetDoughWeight: number = 0;
+
+  @action public setTargetDoughWeight = (value: number) => {
+    this.targetDoughWeight = value;
   }
 
 }

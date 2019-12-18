@@ -59,7 +59,7 @@ export class InfoBlock extends React.Component<IProps>{
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
             {/* tslint:disable-next-line: max-line-length*/}
-            {(dough.totalFlour + dough.totalWater).toFixed((dough.totalFlour + dough.totalWater) % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._gram_abbvr}
+            {(dough.totalFlour + dough.totalWater + dough.recommendedSalt).toFixed((dough.totalFlour + dough.totalWater + dough.recommendedSalt) % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._gram_abbvr}
           </TextWithAccessibility>
         </View>
 

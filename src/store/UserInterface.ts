@@ -60,7 +60,12 @@ export class UserInterface {
 
   @computed public get saltRatio(): number {
     return this.appPresets.saltRatio;
+  }
 
+  @observable public desiredDoughWeightInputMode: boolean = false;
+
+  @action public onDesiredTargetDoughValueClick = () => {
+    this.desiredDoughWeightInputMode = true;
   }
 
   @computed public get postBakeWeightRatio(): number {

@@ -36,7 +36,7 @@ export default class App extends React.Component {
             <View style={styles.sliderRow}>
               <SliderRow
                 value={dough.flour.flourWeight}
-                onValueChange={dough.flour.setFlourWeight}
+                onValueChange={dough.flour.setFlourWeightAndAdjustWater}
                 onValueClick={dough.userInterface.onFlourValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}
@@ -50,7 +50,7 @@ export default class App extends React.Component {
             <View style={styles.presetRow}>
               <PresetButtonsRow
                 presetValues={dough.userInterface.flourWeightPresets}
-                onClickCallback={dough.flour.setFlourWeight}
+                onClickCallback={dough.flour.setFlourWeightAndAdjustWater}
                 valueSuffix={dough.userInterface.languageConstants!._gram_abbvr}
                 selectedValue={dough.flour.flourWeight}
               />
@@ -125,7 +125,7 @@ export default class App extends React.Component {
                 isLocked={dough.hydration.desiredHydrationLocked}
                 onLockValue={dough.hydration.toggleDesiredHydationLock}
                 value={dough.hydration.desiredTargetHydration}
-                onValueChange={dough.hydration.setDesiredHydrationAndUpdateRequiredWaterWeight}
+                onValueChange={dough.hydration.setDesiredTargetHydration}
                 onValueClick={dough.userInterface.onDesiredTargetHydrationValueClick}
                 valueAffix={'%'}
                 incrementAmount={dough.userInterface.appPresets.desiredTargetHydrationIncrementAmount}
@@ -139,11 +139,26 @@ export default class App extends React.Component {
             <View style={styles.presetRow}>
               <PresetButtonsRow
                 presetValues={dough.userInterface.desiredHydrationPresets}
-                onClickCallback={dough.hydration.setDesiredHydrationAndUpdateRequiredWaterWeight}
+                onClickCallback={dough.hydration.setDesiredTargetHydration}
                 valueSuffix={dough.userInterface.languageConstants!._percent}
                 selectedValue={dough.hydration.desiredTargetHydration}
               />
             </View>
+
+            {__DEV__ &&
+              <View style={styles.sliderRow}>
+                <SliderRow
+                  value={dough.targetDoughWeight}
+                  onValueChange={dough.setTargetDoughWeight}
+                  onValueClick={dough.userInterface.onDesiredTargetDoughValueClick}
+                  valueAffix={'g'}
+                  incrementAmount={100}
+                  minValue={2000}
+                  maxValue={100000}
+                  isKeyboardActive={dough.userInterface.desiredDoughWeightInputMode}
+                  label={dough.userInterface.languageConstants!._target_dough_weight}
+                />
+              </View>}
 
             {/* Info Block */}
             <InfoBlock dough={dough} />

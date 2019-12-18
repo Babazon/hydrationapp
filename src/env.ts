@@ -16,6 +16,7 @@ export const presets = {
     _leaven_weight: 'Leaven',
     _liter_abbvr: 'lt',
     _percent: '%',
+    _target_dough_weight: 'Target Dough Weight',
     _target_hydration: 'Target Hydration',
     _water: 'Water'
   },

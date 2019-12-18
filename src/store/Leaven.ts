@@ -1,9 +1,21 @@
 import { Dough } from './Dough';
-import { computed, observable, action } from 'mobx';
+import { computed, observable, action, reaction } from 'mobx';
 
 export class Leaven {
 
-  constructor(private readonly dough: Dough) { }
+  constructor(private readonly dough: Dough) {
+    reaction(() => this.leavenWeight, (_) => {
+      if (this.dough.hydration.desiredHydrationLocked) {
+        this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchDesiredTargetHydration);
+      }
+    });
+
+    reaction(() => this.leavenHydration, (_) => {
+      if (this.dough.hydration.desiredHydrationLocked) {
+        this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchDesiredTargetHydration);
+      }
+    });
+  }
 
   @observable public leavenWeight: number = 200;
   @observable public leavenHydration: number = 100;
@@ -46,24 +58,14 @@ export class Leaven {
 
   @action public setLeavenWeight = (value: number): void => {
     this.leavenWeight = value > 0 ? value : 0;
-    if (this.dough.hydration.desiredHydrationLocked) {// add reaction
-      this.dough.water.setwater(this.dough.water.waterWeightToMatchDesiredTargetHydration);
-    }
   }
 
   @action public setLeavenHydration = (value: number): void => {
     this.leavenHydration = value > 0 ? value : 0;
-    if (this.dough.hydration.desiredHydrationLocked) { // add reaction
-      this.dough.water.setwater(this.dough.water.waterWeightToMatchDesiredTargetHydration);
-    }
   }
 
   @action public setLeavenWeightUsingInoculation = (value: number): void => {
     this.leavenWeight = (value / 100) * this.dough.flour.flourWeight;
-    if (this.dough.hydration.desiredHydrationLocked) { // add reaction?
-      this.dough.water.setwater(this.dough.water.waterWeightToMatchDesiredTargetHydration);
-      this.dough.flour.setFlourWeight(this.dough.flour.flourWeightToMatchDesiredTargetHydration);
-    }
   }
 
   @computed public get inoculation(): number {
