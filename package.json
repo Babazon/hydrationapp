@@ -10,7 +10,7 @@
     "test:watch": "jest --watchAll",
     "tsc": "tsc --noemit",
     "tsc:watch": "tsc --noemit --watch",
-    "tslint": "",
+    "tslint": "tslint -t stylish",
     "tslint:watch": "nodemon -e ts,tsx -w src -w tslint.json -d 0.2 -w tsconfig.json -- node_modules/.bin/tslint --project . -t stylish",
     "clear": "./clear.sh",
     "postinstall": "cd ios && pod install"

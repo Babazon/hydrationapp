@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, TextInput } from 'react-native';
+import { View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { observer } from 'mobx-react';
 import { TextWithAccessibility } from './TextWithAccessibility';
 
@@ -11,37 +11,26 @@ interface IProps {
   onSymbolClick?(): void;
   isKeyboardActive: boolean;
 }
-// TODO : Optimise styles
 
 @observer
 export class NumberBox extends React.Component<IProps>{
 
+  private onChangeText = (value: string) => {
+    if (!isNaN(+value) && this.props.onValueChange) {
+      this.props.onValueChange(+value);
+    }
+  }
+
   public render() {
     return (<View
-      style={{
-        alignItems: 'center',
-        borderColor: 'red',
-        borderRadius: 8,
-        flex: 2,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: 120
-      }}>
+      style={styles.container}>
       <TouchableOpacity
-        style={{
-          alignItems: 'stretch',
-          backgroundColor: '#EAEAEA',
-          borderBottomLeftRadius: 4,
-          borderTopLeftRadius: 4,
-          flex: 2,
-          height: 32,
-          justifyContent: 'center'
-        }}
+        style={styles.valueText}
         disabled={!this.props.onValueClick}
         onPress={this.props.onValueClick}>
 
         {!this.props.isKeyboardActive &&
-          (<TextWithAccessibility style={{ color: 'black', textAlign: 'right', fontSize: 14, fontWeight: '500', marginHorizontal: 4 }}>
+          (<TextWithAccessibility style={styles.staticValue}>
             {this.props.value.toFixed(0)}
           </TextWithAccessibility>)
         }
@@ -50,37 +39,75 @@ export class NumberBox extends React.Component<IProps>{
           (<TextInput
             keyboardType={'default'}
             autoFocus
-            style={{ color: 'black', textAlign: 'right', fontSize: 14, fontWeight: '500', marginHorizontal: 4 }}
+            style={styles.textInput}
             value={
               this.props.value > 0 ?
                 this.props.value.toFixed(0) + '' :
                 ''
             }
-            onChangeText={(value: string) => {
-              if (!isNaN(+value) && this.props.onValueChange) {
-                this.props.onValueChange(+value);
-              }
-            }} />
+            onChangeText={this.onChangeText} />
           )
         }
 
       </TouchableOpacity>
       <TouchableOpacity
-        style={{
-          alignItems: 'center',
-          backgroundColor: '#D8D8D8',
-          borderBottomRightRadius: 4,
-          borderTopRightRadius: 4,
-          flex: 1,
-          height: 32,
-          justifyContent: 'center'
-        }}
+        style={styles.symbolTouchable}
         disabled={!this.props.onSymbolClick}
         onPress={this.props.onSymbolClick}>
-        <TextWithAccessibility numberOfLines={1} style={{ color: 'black', textAlign: 'center', fontSize: 14, fontWeight: '500' }}>
+        <TextWithAccessibility numberOfLines={1} style={styles.symbolText}>
           {this.props.symbol}
         </TextWithAccessibility>
       </TouchableOpacity>
     </View>);
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    borderColor: 'red',
+    borderRadius: 8,
+    flex: 2,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 120
+  },
+  staticValue: {
+    color: 'black',
+    fontSize: 14,
+    fontWeight: '500',
+    marginHorizontal: 4,
+    textAlign: 'right'
+  },
+  symbolText: {
+    color: 'black',
+    fontSize: 14,
+    fontWeight: '500',
+    textAlign: 'center'
+  },
+  symbolTouchable: {
+    alignItems: 'center',
+    backgroundColor: '#D8D8D8',
+    borderBottomRightRadius: 4,
+    borderTopRightRadius: 4,
+    flex: 1,
+    height: 32,
+    justifyContent: 'center'
+  },
+  textInput: {
+    color: 'black',
+    fontSize: 14,
+    fontWeight: '500',
+    marginHorizontal: 4,
+    textAlign: 'right'
+  },
+  valueText: {
+    alignItems: 'stretch',
+    backgroundColor: '#EAEAEA',
+    borderBottomLeftRadius: 4,
+    borderTopLeftRadius: 4,
+    flex: 2,
+    height: 32,
+    justifyContent: 'center'
+  }
+});

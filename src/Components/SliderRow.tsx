@@ -50,6 +50,7 @@ export class SliderRow extends React.Component<ISliderRowProps>{
         <View style={styles.upperRowContainer}>
           <TextWithAccessibility style={styles.semiboldText}>{label}</TextWithAccessibility>
           <View style={{ width: onLockValue && isLocked != null ? 32 : 0, marginLeft: onLockValue && isLocked != null ? 4 : 0 }}>
+
             {onLockValue && isLocked != null &&
               <TouchableOpacity onPress={this.props.onLockValue} style={styles.unlockedIcon}>
                 <>

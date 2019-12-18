@@ -12,8 +12,7 @@ import { TextWithAccessibility } from './components/TextWithAccessibility';
 
 // tslint:disable: max-line-length
 
-// TODO : Move text to language constants fileor locize
-// TODO : Optimise styles
+// TODO : Move text to language constants file or locize
 
 @observer
 export default class App extends React.Component {
@@ -149,14 +148,14 @@ export default class App extends React.Component {
             {/* Info Block */}
             <InfoBlock dough={dough} />
 
-            <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'stretch' }}>
-              <TextWithAccessibility style={{ fontSize: 8, textAlign: 'center' }}>
+            <View style={styles.creditContainer}>
+              <TextWithAccessibility style={styles.creditText}>
                 Code: @sourdoughpie
             </TextWithAccessibility>
-              <TextWithAccessibility style={{ fontSize: 8, textAlign: 'center' }}>
+              <TextWithAccessibility style={styles.creditText}>
                 Design: @chexee
             </TextWithAccessibility>
-              <TextWithAccessibility style={{ fontSize: 8, textAlign: 'center' }}>
+              <TextWithAccessibility style={styles.creditText}>
                 Feedback: instagram.com/sourdoughpie or basar.yuksel@gmail.com
             </TextWithAccessibility>
             </View>
@@ -168,6 +167,15 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  creditContainer: {
+    alignItems: 'stretch',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  creditText: {
+    fontSize: 8,
+    textAlign: 'center'
+  },
   presetRow: {
     height: 40,
     marginBottom: 8
