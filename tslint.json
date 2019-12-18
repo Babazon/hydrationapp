@@ -40,8 +40,7 @@
   "linterOptions": {
     "exclude": [
       "**/*.test.ts",
-      "**/*.test.tsx",
-      "src/components/LicenceHTML.tsx"
+      "**/*.test.tsx"
     ]
   }
 }
