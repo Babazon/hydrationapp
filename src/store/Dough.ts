@@ -17,7 +17,9 @@ export class Dough {
 
     reaction(() => this.targetDoughWeight, (targetDoughWeight: number) => {
       if (this.hydration.desiredHydrationLocked) {
-        const ratioToMultiply: number = (targetDoughWeight * (1 - this.saltRatio)) / (this.totalFlour + this.totalWater);
+        const actualTargetFlourWeight: number = targetDoughWeight * (1 / (1 + this.hydration.desiredTargetHydration / 100 + 0.022));
+        const ratioToMultiply: number = actualTargetFlourWeight / this.totalFlour;
+
         this.flour.setFlourWeight(this.flour.flourWeight * ratioToMultiply);
         this.water.setWaterWeight(this.water.waterWeight * ratioToMultiply);
         this.leaven.setLeavenWeight(this.leaven.leavenWeight * ratioToMultiply);

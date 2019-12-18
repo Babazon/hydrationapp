@@ -42,7 +42,7 @@ export class SliderRow extends React.Component<ISliderRowProps>{
       onValueChange,
       onValueClick,
       value,
-      valueAffix
+      valueAffix,
     } = this.props;
 
     return (

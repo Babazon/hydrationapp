@@ -22,6 +22,7 @@ export class NumberBox extends React.Component<IProps>{
   }
 
   public render() {
+
     return (<View
       style={styles.container}>
       <TouchableOpacity
@@ -31,7 +32,8 @@ export class NumberBox extends React.Component<IProps>{
 
         {!this.props.isKeyboardActive &&
           (<TextWithAccessibility style={styles.staticValue}>
-            {this.props.value.toFixed(0)}
+            {this.props.value.toFixed(0)
+            }
           </TextWithAccessibility>)
         }
 
