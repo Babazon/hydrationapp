@@ -52,7 +52,7 @@ export class SliderRow extends React.Component<ISliderRowProps>{
           <View style={{ width: onLockValue && isLocked != null ? 32 : 0, marginLeft: onLockValue && isLocked != null ? 4 : 0 }}>
 
             {onLockValue && isLocked != null &&
-              <TouchableOpacity onPress={this.props.onLockValue} style={styles.unlockedIcon}>
+              <TouchableOpacity onPress={this.props.onLockValue} style={styles.lockButtonContainer}>
                 <>
                   {isLocked &&
                     <Image source={Assets.icon_locked} style={styles.lockedIcon} />}
@@ -109,6 +109,11 @@ const styles = StyleSheet.create({
   },
   horizontalGap: {
     width: 8
+  },
+  lockButtonContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10
   },
   lockedIcon: {
     height: 20,
