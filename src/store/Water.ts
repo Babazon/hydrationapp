@@ -37,8 +37,4 @@ export class Water {
     this.waterWeight = value > 0 ? value : 0;
   }
 
-  @action public setWaterWeightAndUpdateDesiredHydration = (value: number): void => {
-    this.waterWeight = value > 0 ? value : 0;
-  }
-
 }

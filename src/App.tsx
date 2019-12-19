@@ -107,7 +107,7 @@ export default class App extends React.Component {
             <View style={styles.sliderRow}>
               <SliderRow
                 value={dough.water.waterWeight}
-                onValueChange={dough.water.setWaterWeightAndUpdateDesiredHydration}
+                onValueChange={dough.water.setWaterWeight}
                 onValueClick={dough.userInterface.onWaterValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}

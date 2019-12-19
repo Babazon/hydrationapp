@@ -6,7 +6,7 @@ export class Flour {
 
   constructor(private readonly dough: Dough) {
     reaction(() => this.flourWeight, (_) => {
-      if (dough.hydration.desiredTargetHydration && dough.hydration.desiredHydrationLocked) { // add reaction
+      if (dough.hydration.desiredTargetHydration && dough.hydration.desiredHydrationLocked) {
         dough.water.setWaterWeight(dough.water.waterWeightToMatchDesiredTargetHydration);
       }
     });
