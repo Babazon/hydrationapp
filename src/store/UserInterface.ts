@@ -1,5 +1,5 @@
+import { action, computed, observable } from 'mobx';
 import { Dough } from './Dough';
-import { computed, observable, action } from 'mobx';
 
 export enum Units {
   metric = 'metric',

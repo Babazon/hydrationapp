@@ -1,14 +1,14 @@
 import 'es6-symbol/implement';
-import { View, StyleSheet, SafeAreaView, RefreshControl } from 'react-native';
-import { ErrorBoundary } from './ErrorBoundary';
 import { observer } from 'mobx-react';
 import React from 'react';
-import dough from './store/Dough';
-import { InfoBlock } from './Components/InfoBlock';
+import { RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { SliderRow } from './Components/SliderRow';
+import { InfoBlock } from './Components/InfoBlock';
 import { PresetButtonsRow } from './Components/PresetButtonsRow';
+import { SliderRow } from './Components/SliderRow';
 import { TextWithAccessibility } from './Components/TextWithAccessibility';
+import { ErrorBoundary } from './ErrorBoundary';
+import dough from './store/Dough';
 
 // tslint:disable: max-line-length
 

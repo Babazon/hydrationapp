@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { observer } from 'mobx-react';
+import React from 'react';
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { TextWithAccessibility } from './TextWithAccessibility';
 
 interface IProps {

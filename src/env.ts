@@ -1,6 +1,8 @@
 export const presets = {
+  butterWaterRatio: 0.15,
   desiredHydrationPresets: [50, 75, 80, 85, 90, 95],
   desiredTargetHydrationIncrementAmount: 1,
+  eggWaterPercentage: 0.76,
   flourIncrementAmount: 50,
   flourWeightPresets: [1000, 1500, 2000, 3000, 5000],
   initialDesiredTargetHydration: 75,
@@ -29,6 +31,7 @@ export const presets = {
   maxLeaven: 5000,
   maxLeavenHydration: 200,
   maxWater: 10000,
+  milkWaterPercentage: 0.87,
   minDesiredHydration: 0,
   minFlour: 0,
   minLeaven: 0,

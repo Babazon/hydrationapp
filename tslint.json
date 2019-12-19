@@ -20,7 +20,7 @@
         "ignore-pattern": "^import |^export | implements "
       }
     ],
-    "ordered-imports": false,
+    "ordered-imports": true,
     "object-literal-sort-keys": true,
     "trailing-comma": false,
     "one-line": false,

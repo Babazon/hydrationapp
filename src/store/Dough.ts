@@ -1,10 +1,10 @@
-import { observable, action, computed, reaction } from 'mobx';
-import { Flour } from './Flour';
-import { Water } from './Water';
-import { Leaven } from './Leaven';
-import { Hydration } from './Hydration';
-import { UserInterface } from './UserInterface';
+import { action, computed, observable, reaction } from 'mobx';
 import { presets } from '../env';
+import { Flour } from './Flour';
+import { Hydration } from './Hydration';
+import { Leaven } from './Leaven';
+import { UserInterface } from './UserInterface';
+import { Water } from './Water';
 
 export class Dough {
 
@@ -17,7 +17,7 @@ export class Dough {
 
     reaction(() => this.targetDoughWeight, (targetDoughWeight: number) => {
       if (this.hydration.desiredHydrationLocked) {
-        const actualTargetFlourWeight: number = targetDoughWeight * (1 / (1 + this.hydration.desiredTargetHydration / 100 + 0.022));
+        const actualTargetFlourWeight: number = targetDoughWeight * (1 / (1 + this.hydration.desiredTargetHydration / 100 + this.saltRatio));
         const ratioToMultiply: number = actualTargetFlourWeight / this.totalFlour;
 
         this.flour.setFlourWeight(this.flour.flourWeight * ratioToMultiply);
@@ -48,6 +48,18 @@ export class Dough {
     return this.appPresets.saltRatio;
   }
 
+  @computed public get eggWaterRatio(): number {
+    return this.appPresets.eggWaterRatio;
+  }
+
+  @computed public get milkWaterRatio(): number {
+    return this.appPresets.milkWaterRatio;
+  }
+
+  @computed public get butterWaterRatio(): number {
+    return this.appPresets.butterWaterRatio;
+  }
+
   @computed public get postBakeWeightRatio(): number {
     return this.appPresets.postBakeWeightRatio;
   }
@@ -73,7 +85,7 @@ export class Dough {
 
   @computed public get desiredTargetBakedWeight(): number {
     if (this.desiredTargetWeight) {
-      return this.desiredTargetWeight * 0.15;
+      return this.desiredTargetWeight * 0.85;
     }
     return 0;
   }
@@ -94,7 +106,7 @@ export class Dough {
 
   @computed public get postBakeWeight(): number {
     if (this.totalFlour != null && this.totalWater != null) {
-      return this.postBakeWeightRatio * (this.totalWater + this.totalFlour);
+      return this.postBakeWeightRatio * (this.totalWater + this.totalFlour + this.recommendedSalt);
     }
     return 0;
   }

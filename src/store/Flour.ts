@@ -1,6 +1,6 @@
 import { Dough } from './Dough';
 
-import { computed, observable, action } from 'mobx';
+import { action, computed, observable } from 'mobx';
 
 export class Flour {
 

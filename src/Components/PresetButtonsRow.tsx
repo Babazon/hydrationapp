@@ -1,6 +1,6 @@
-import React from 'react';
-import { FlatList, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { observer } from 'mobx-react';
+import React from 'react';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { TextWithAccessibility } from './TextWithAccessibility';
 
 export interface IPresetButtonsRowProps {

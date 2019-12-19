@@ -1,12 +1,12 @@
-import React from 'react';
 import Slider from '@react-native-community/slider';
-import { View, StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
 import { observer } from 'mobx-react';
-import { TextWithAccessibility } from './TextWithAccessibility';
+import React from 'react';
+import { Dimensions, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Assets } from '../assets';
 import { DecrementButton } from './DecrementButton';
 import { IncrementButton } from './IncrementButton';
 import { NumberBox } from './NumberBox';
-import { Assets } from '../assets';
+import { TextWithAccessibility } from './TextWithAccessibility';
 
 export interface ISliderRowProps {
   value: number;

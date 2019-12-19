@@ -1,4 +1,4 @@
-import { observable, action, computed, reaction } from 'mobx';
+import { action, computed, observable, reaction } from 'mobx';
 import { Dough } from './Dough';
 
 export class Hydration {

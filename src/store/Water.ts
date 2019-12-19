@@ -1,5 +1,5 @@
+import { action, computed, observable, reaction } from 'mobx';
 import { Dough } from './Dough';
-import { computed, observable, action, reaction } from 'mobx';
 
 export class Water {
   constructor(private readonly dough: Dough) {
