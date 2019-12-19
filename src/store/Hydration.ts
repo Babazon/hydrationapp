@@ -4,32 +4,32 @@ import { Dough } from './Dough';
 export class Hydration {
 
   constructor(private readonly dough: Dough) {
-    reaction(() => this.desiredHydrationLocked, (locked) => {
+    reaction(() => this.targetHydrationLocked, (locked) => {
       if (locked) {
-        this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchDesiredTargetHydration);
+        this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchTargetHydration);
       }
     });
   }
 
-  @observable public desiredHydrationLocked: boolean = false;
+  @observable public targetHydrationLocked: boolean = false;
 
-  @action public toggleDesiredHydationLock = (): void => {
-    this.desiredHydrationLocked = !this.desiredHydrationLocked;
+  @action public toggleTargetHydrationLock = (): void => {
+    this.targetHydrationLocked = !this.targetHydrationLocked;
   }
 
-  @observable public desiredTargetHydration: number = 75;
+  @observable public targetHydration: number = 75;
 
-  @action public setDesiredTargetHydration = (value: number) => {
-    if (!this.desiredHydrationLocked) {
-      this.desiredTargetHydration = value;
+  @action public setTargetHydration = (value: number) => {
+    if (!this.targetHydrationLocked) {
+      this.targetHydration = value;
     }
   }
 
-  @computed public get minDesiredHydration(): number {
-    return this.dough.userInterface.appPresets.minDesiredHydration;
+  @computed public get minTargetHydration(): number {
+    return this.dough.userInterface.appPresets.minTargetHydration;
   }
-  @computed public get maxDesiredHydration(): number {
-    return this.dough.userInterface.appPresets.maxDesiredHydration;
+  @computed public get maxTargetHydration(): number {
+    return this.dough.userInterface.appPresets.maxTargetHydration;
   }
 
 }

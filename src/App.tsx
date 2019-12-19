@@ -122,26 +122,26 @@ export default class App extends React.Component {
             {/* Target Hydration */}
             <View style={styles.sliderRow}>
               <SliderRow
-                isLocked={dough.hydration.desiredHydrationLocked}
-                onLockValue={dough.hydration.toggleDesiredHydationLock}
-                value={dough.hydration.desiredTargetHydration}
-                onValueChange={dough.hydration.setDesiredTargetHydration}
-                onValueClick={dough.userInterface.onDesiredTargetHydrationValueClick}
+                isLocked={dough.hydration.targetHydrationLocked}
+                onLockValue={dough.hydration.toggleTargetHydrationLock}
+                value={dough.hydration.targetHydration}
+                onValueChange={dough.hydration.setTargetHydration}
+                onValueClick={dough.userInterface.onTargetHydrationValueClick}
                 valueAffix={'%'}
-                incrementAmount={dough.userInterface.appPresets.desiredTargetHydrationIncrementAmount}
-                minValue={dough.hydration.minDesiredHydration}
-                maxValue={dough.hydration.maxDesiredHydration}
-                isKeyboardActive={dough.userInterface.desiredTargetHydrationInputMode}
+                incrementAmount={dough.userInterface.appPresets.targetHydrationIncrementAmount}
+                minValue={dough.hydration.minTargetHydration}
+                maxValue={dough.hydration.maxTargetHydration}
+                isKeyboardActive={dough.userInterface.targetHydrationInputMode}
                 label={dough.userInterface.languageConstants!._target_hydration}
               />
             </View>
 
             <View style={styles.presetRow}>
               <PresetButtonsRow
-                presetValues={dough.userInterface.desiredHydrationPresets}
-                onClickCallback={dough.hydration.setDesiredTargetHydration}
+                presetValues={dough.userInterface.targetHydrationPresets}
+                onClickCallback={dough.hydration.setTargetHydration}
                 valueSuffix={dough.userInterface.languageConstants!._percent}
-                selectedValue={dough.hydration.desiredTargetHydration}
+                selectedValue={dough.hydration.targetHydration}
               />
             </View>
 
@@ -150,12 +150,12 @@ export default class App extends React.Component {
                 <SliderRow
                   value={dough.targetDoughWeight}
                   onValueChange={dough.setTargetDoughWeight}
-                  onValueClick={dough.userInterface.onDesiredTargetDoughValueClick}
+                  onValueClick={dough.userInterface.onTargetDoughValueClick}
                   valueAffix={'g'}
                   incrementAmount={100}
                   minValue={2000}
                   maxValue={100000}
-                  isKeyboardActive={dough.userInterface.desiredDoughWeightInputMode}
+                  isKeyboardActive={dough.userInterface.targetDoughWeightInputMode}
                   label={dough.userInterface.languageConstants!._target_dough_weight}
                 />
               </View>}

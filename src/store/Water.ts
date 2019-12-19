@@ -4,8 +4,8 @@ import { Dough } from './Dough';
 export class Water {
   constructor(private readonly dough: Dough) {
     reaction(() => this.waterWeight, (_: number) => {
-      if (this.dough.hydration.desiredHydrationLocked) {
-        this.dough.flour.setFlourWeight(this.dough.flour.flourWeightToMatchDesiredTargetHydration);
+      if (this.dough.hydration.targetHydrationLocked) {
+        this.dough.flour.setFlourWeight(this.dough.flour.flourWeightToMatchTargetHydration);
       }
     });
   }
@@ -18,9 +18,9 @@ export class Water {
     this.waterLocked = !this.waterLocked;
   }
 
-  @computed public get waterWeightToMatchDesiredTargetHydration(): number {
+  @computed public get waterWeightToMatchTargetHydration(): number {
     if (this.dough.flour.flourWeight != null && this.dough.leaven.leavenWeight != null && this.dough.leaven.leavenHydration != null) {
-      return ((this.dough.hydration.desiredTargetHydration / 100) * this.dough.totalFlour) - this.dough.leaven.leavenWater;
+      return ((this.dough.hydration.targetHydration / 100) * this.dough.totalFlour) - this.dough.leaven.leavenWater;
     }
     return 0;
   }

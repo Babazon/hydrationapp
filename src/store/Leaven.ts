@@ -5,14 +5,14 @@ export class Leaven {
 
   constructor(private readonly dough: Dough) {
     reaction(() => this.leavenWeight, (_) => {
-      if (this.dough.hydration.desiredHydrationLocked) {
-        this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchDesiredTargetHydration);
+      if (this.dough.hydration.targetHydrationLocked) {
+        this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchTargetHydration);
       }
     });
 
     reaction(() => this.leavenHydration, (_) => {
-      if (this.dough.hydration.desiredHydrationLocked) {
-        this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchDesiredTargetHydration);
+      if (this.dough.hydration.targetHydrationLocked) {
+        this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchTargetHydration);
       }
     });
   }

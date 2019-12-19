@@ -10,10 +10,10 @@ describe('Dough store tests', () => {
 
   it('resets values', () => {
     const dough = new Dough(presets);
-    dough.hydration.toggleDesiredHydationLock();
-    expect(dough.hydration.desiredHydrationLocked).toBeTruthy();
+    dough.hydration.toggleTargetHydrationLock();
+    expect(dough.hydration.targetHydrationLocked).toBeTruthy();
     dough.resetValues();
-    expect(dough.hydration.desiredHydrationLocked).toBeFalsy();
+    expect(dough.hydration.targetHydrationLocked).toBeFalsy();
   })
 
   it('computes salt ratio', () => {
@@ -40,14 +40,14 @@ describe('Dough store tests', () => {
     expect(dough.totalWater).toEqual(825);
   })
 
-  it('sets desired target dough weight', () => {
+  it('sets target dough weight', () => {
     const dough = new Dough(presets);
     expect(dough.targetDoughWeight).toBe(2000);
     dough.setTargetDoughWeight(3000);
     expect(dough.targetDoughWeight).toBe(3000);
   })
 
-  it('can compute desired target baked weight', () => {
+  it('can compute target baked weight', () => {
     const dough = new Dough(presets);
     expect(dough.bakedTargetDoughWeight).toBe(2000 * 0.85)
   })

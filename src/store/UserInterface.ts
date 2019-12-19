@@ -52,20 +52,20 @@ export class UserInterface {
     this.leavenHydrationInputMode = true;
   }
 
-  @observable public desiredTargetHydrationInputMode: boolean = false;
+  @observable public targetHydrationInputMode: boolean = false;
 
-  @action public onDesiredTargetHydrationValueClick = () => {
-    this.desiredTargetHydrationInputMode = true;
+  @action public onTargetHydrationValueClick = () => {
+    this.targetHydrationInputMode = true;
   }
 
   @computed public get saltRatio(): number {
     return this.appPresets.saltRatio;
   }
 
-  @observable public desiredDoughWeightInputMode: boolean = false;
+  @observable public targetDoughWeightInputMode: boolean = false;
 
-  @action public onDesiredTargetDoughValueClick = () => {
-    this.desiredDoughWeightInputMode = true;
+  @action public onTargetDoughValueClick = () => {
+    this.targetDoughWeightInputMode = true;
   }
 
   @computed public get postBakeWeightRatio(): number {
@@ -80,8 +80,8 @@ export class UserInterface {
     return this.appPresets.leavenInoculationPresets;
   }
 
-  @computed public get desiredHydrationPresets(): number[] {
-    return this.appPresets.desiredHydrationPresets;
+  @computed public get targetHydrationPresets(): number[] {
+    return this.appPresets.targetHydrationPresets;
   }
 
   @computed public get leavenHydrationPresets(): number[] {

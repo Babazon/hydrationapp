@@ -32,8 +32,8 @@ describe('Water store tests', () => {
     dough.flour.setFlourWeight(1000);
     dough.leaven.setLeavenWeight(1000);
     dough.leaven.setLeavenHydration(100);
-    dough.hydration.setDesiredTargetHydration(100);
-    expect(dough.water.waterWeightToMatchDesiredTargetHydration).toBe(1000);
+    dough.hydration.setTargetHydration(100);
+    expect(dough.water.waterWeightToMatchTargetHydration).toBe(1000);
   })
 
 

@@ -6,8 +6,8 @@ export class Flour {
 
   constructor(private readonly dough: Dough) {
     reaction(() => this.flourWeight, (_) => {
-      if (dough.hydration.desiredTargetHydration && dough.hydration.desiredHydrationLocked) {
-        dough.water.setWaterWeight(dough.water.waterWeightToMatchDesiredTargetHydration);
+      if (dough.hydration.targetHydration && dough.hydration.targetHydrationLocked) {
+        dough.water.setWaterWeight(dough.water.waterWeightToMatchTargetHydration);
       }
     });
   }
@@ -20,9 +20,9 @@ export class Flour {
     this.flourLocked = !this.flourLocked;
   }
 
-  @computed public get flourWeightToMatchDesiredTargetHydration(): number {
+  @computed public get flourWeightToMatchTargetHydration(): number {
     if (this.dough.water.waterWeight != null && this.dough.leaven.leavenWeight != null && this.dough.leaven.leavenHydration != null) {
-      return ((this.dough.totalWater / this.dough.hydration.desiredTargetHydration) * 100) - this.dough.leaven.leavenFlour;
+      return ((this.dough.totalWater / this.dough.hydration.targetHydration) * 100) - this.dough.leaven.leavenFlour;
     }
     return 0;
   }
