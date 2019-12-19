@@ -36,7 +36,7 @@ export default class App extends React.Component {
             <View style={styles.sliderRow}>
               <SliderRow
                 value={dough.flour.flourWeight}
-                onValueChange={dough.flour.setFlourWeightAndAdjustWater}
+                onValueChange={dough.flour.setFlourWeight}
                 onValueClick={dough.userInterface.onFlourValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={'g'}
@@ -50,7 +50,7 @@ export default class App extends React.Component {
             <View style={styles.presetRow}>
               <PresetButtonsRow
                 presetValues={dough.userInterface.flourWeightPresets}
-                onClickCallback={dough.flour.setFlourWeightAndAdjustWater}
+                onClickCallback={dough.flour.setFlourWeight}
                 valueSuffix={dough.userInterface.languageConstants!._gram_abbvr}
                 selectedValue={dough.flour.flourWeight}
               />

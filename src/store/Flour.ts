@@ -1,10 +1,15 @@
 import { Dough } from './Dough';
 
-import { action, computed, observable } from 'mobx';
+import { action, computed, observable, reaction } from 'mobx';
 
 export class Flour {
 
   constructor(private readonly dough: Dough) {
+    reaction(() => this.flourWeight, (_) => {
+      if (dough.hydration.desiredTargetHydration && dough.hydration.desiredHydrationLocked) { // add reaction
+        dough.water.setWaterWeight(dough.water.waterWeightToMatchDesiredTargetHydration);
+      }
+    });
   }
 
   @observable public flourWeight: number = 1000;
@@ -31,14 +36,7 @@ export class Flour {
   }
 
   @action public setFlourWeight = (value: number): void => {
-    this.flourWeight = value > 0 ? value : 0;
-  }
-
-  @action public setFlourWeightAndAdjustWater = (value: number): void => {
-    this.flourWeight = value > 0 ? value : 0;
-    if (this.dough.hydration.desiredTargetHydration && this.dough.hydration.desiredHydrationLocked) { // add reaction
-      this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchDesiredTargetHydration);
-    }
+    this.flourWeight = value > 0 ? value : 0; // doubt
   }
 
 }

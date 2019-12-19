@@ -40,16 +40,16 @@ describe('Dough store tests', () => {
     expect(dough.totalWater).toEqual(825);
   })
 
-  it('sets desired target weight', () => {
+  it('sets desired target dough weight', () => {
     const dough = new Dough(presets);
-    expect(dough.desiredTargetWeight).toBe(2000);
-    dough.setDesiredTargetWeight(3000);
-    expect(dough.desiredTargetWeight).toBe(3000);
+    expect(dough.targetDoughWeight).toBe(2000);
+    dough.setTargetDoughWeight(3000);
+    expect(dough.targetDoughWeight).toBe(3000);
   })
 
   it('can compute desired target baked weight', () => {
     const dough = new Dough(presets);
-    expect(dough.desiredTargetBakedWeight).toBe(2000 * 0.85)
+    expect(dough.bakedTargetDoughWeight).toBe(2000 * 0.85)
   })
 
   it('can yield total hydration', () => {
@@ -78,6 +78,51 @@ describe('Dough store tests', () => {
     dough.leaven.setLeavenHydration(100);
     expect(dough.postBakeWeight).toBe((3000 + 1500 * 0.022) * 0.85)
   })
+
+  it('can yield experimental dough initial volume', () => {
+    const dough = new Dough(presets);
+    dough.water.setWaterWeight(1000);
+    dough.flour.setFlourWeight(1000);
+    dough.leaven.setLeavenWeight(1000);
+    dough.leaven.setLeavenHydration(100);
+    expect(dough.experimentalDoughVolume).toBe(2000);
+  })
+
+  it('can yield experimental dough final volume', () => {
+    const dough = new Dough(presets);
+
+    dough.water.setWaterWeight(1000);
+    dough.flour.setFlourWeight(1000);
+    dough.leaven.setLeavenWeight(1000);
+    dough.leaven.setLeavenHydration(100);
+    expect(dough.experimentalBulkVolume).toBe(dough.experimentalDoughVolume * 1.25);
+
+    dough.water.setWaterWeight(750);
+    dough.flour.setFlourWeight(1000);
+    dough.leaven.setLeavenWeight(1000);
+    dough.leaven.setLeavenHydration(75);
+    expect(dough.experimentalBulkVolume).toBe(dough.experimentalDoughVolume * 1.30);
+
+    dough.water.setWaterWeight(660);
+    dough.flour.setFlourWeight(1000);
+    dough.leaven.setLeavenWeight(1000);
+    dough.leaven.setLeavenHydration(66);
+    expect(dough.experimentalBulkVolume).toBe(dough.experimentalDoughVolume * 1.4);
+
+
+    dough.water.setWaterWeight(601);
+    dough.flour.setFlourWeight(1000);
+    dough.leaven.setLeavenWeight(1000);
+    dough.leaven.setLeavenHydration(61);
+    expect(dough.experimentalBulkVolume).toBe(dough.experimentalDoughVolume * 1.45);
+
+    dough.water.setWaterWeight(500);
+    dough.flour.setFlourWeight(1000);
+    dough.leaven.setLeavenWeight(1000);
+    dough.leaven.setLeavenHydration(50);
+    expect(dough.experimentalBulkVolume).toBe(dough.experimentalDoughVolume * 1.5);
+  })
+
 
 
 })

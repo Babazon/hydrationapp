@@ -78,18 +78,6 @@ export class Dough {
     return 0;
   }
 
-  @observable public desiredTargetWeight: number = 2000;
-  @action public setDesiredTargetWeight = (value: number): void => {
-    this.desiredTargetWeight = value;
-  }
-
-  @computed public get desiredTargetBakedWeight(): number {
-    if (this.desiredTargetWeight) {
-      return this.desiredTargetWeight * 0.85;
-    }
-    return 0;
-  }
-
   @computed public get totalHydration(): number {
     if (this.totalFlour != null && this.totalWater != null) {
       return this.totalWater / this.totalFlour;
@@ -117,16 +105,16 @@ export class Dough {
 
   @computed public get experimentalBulkVolume(): number {
 
-    if (this.totalHydration > 75) {
+    if (this.totalHydration > 0.75) {
       return this.experimentalDoughVolume * 1.25;
     }
-    if (this.totalHydration > 70) {
+    if (this.totalHydration > 0.70) {
       return this.experimentalDoughVolume * 1.30;
     }
-    if (this.totalHydration > 65) {
+    if (this.totalHydration > 0.65) {
       return this.experimentalDoughVolume * 1.4;
     }
-    if (this.totalHydration > 60) {
+    if (this.totalHydration > 0.60) {
       return this.experimentalDoughVolume * 1.45;
     }
     return this.experimentalDoughVolume * 1.5;
@@ -139,6 +127,13 @@ export class Dough {
     if (value > 0) {
       this.targetDoughWeight = value;
     }
+  }
+
+  @computed public get bakedTargetDoughWeight(): number {
+    if (this.targetDoughWeight) {
+      return this.targetDoughWeight * 0.85;
+    }
+    return 0;
   }
 
 }
