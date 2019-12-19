@@ -4,11 +4,13 @@ import { Dough } from './Dough';
 export class Hydration {
 
   constructor(private readonly dough: Dough) {
-    reaction(() => this.targetHydrationLocked, (locked) => {
-      if (locked) {
-        this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchTargetHydration);
-      }
-    });
+    reaction(() => this.targetHydrationLocked, this.waterReactionCallback);
+  }
+
+  @action private waterReactionCallback = (locked: boolean) => {
+    if (locked) {
+      this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchTargetHydration);
+    }
   }
 
   @observable public targetHydrationLocked: boolean = false;
