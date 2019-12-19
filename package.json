@@ -10,7 +10,7 @@
     "test:watch": "jest --watchAll",
     "tsc": "tsc --noemit",
     "tsc:watch": "tsc --noemit --watch",
-    "tslint": "tslint -t stylish",
+    "tslint": "tslint --project . -t stylish",
     "tslint:watch": "nodemon -e ts,tsx -w src -w tslint.json -d 0.2 -w tsconfig.json -- node_modules/.bin/tslint --project . -t stylish",
     "postinstall": "cd ios && pod install"
   },
@@ -80,6 +80,16 @@
     "tslint-react": "^4.1.0",
     "tslint-react-native": "^0.0.7",
     "typescript": "^3.7.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn tslint"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && yarn run tsc && yarn test"
+    }
   },
   "jest": {
     "preset": "react-native",
