@@ -29,7 +29,7 @@ export default class App extends React.Component {
 
           <KeyboardAwareScrollView
             showsVerticalScrollIndicator={false}
-            refreshControl={<RefreshControl title="Reset" refreshing={false} onRefresh={dough.resetValues} />}
+            refreshControl={<RefreshControl title={dough.userInterface.languageConstants!._reset} refreshing={false} onRefresh={dough.resetValues} />}
             contentContainerStyle={styles.scrollViewContentStyle}>
 
             {/* Flour Weight */}
@@ -39,7 +39,7 @@ export default class App extends React.Component {
                 onValueChange={dough.flour.setFlourWeight}
                 onValueClick={dough.userInterface.onFlourValueClick}
                 onSymbolClick={() => {/* */ }}
-                valueAffix={'g'}
+                valueAffix={dough.userInterface.languageConstants!._gram_abbvr}
                 incrementAmount={dough.userInterface.appPresets.flourIncrementAmount}
                 minValue={dough.flour.minFlour}
                 maxValue={dough.flour.maxFlour}
@@ -63,7 +63,7 @@ export default class App extends React.Component {
                 onValueChange={dough.leaven.setLeavenWeight}
                 onValueClick={dough.userInterface.onLeavenWeightValueClick}
                 onSymbolClick={() => {/* */ }}
-                valueAffix={'g'}
+                valueAffix={dough.userInterface.languageConstants!._gram_abbvr}
                 incrementAmount={dough.userInterface.appPresets.leavenWeightIncrementAmount}
                 minValue={dough.leaven.minLeaven}
                 maxValue={dough.leaven.maxLeaven}
@@ -86,7 +86,7 @@ export default class App extends React.Component {
                 value={dough.leaven.leavenHydration}
                 onValueChange={dough.leaven.setLeavenHydration}
                 onValueClick={dough.userInterface.onLeavenHydrationValueClick}
-                valueAffix={'%'}
+                valueAffix={dough.userInterface.languageConstants!._percent}
                 incrementAmount={dough.userInterface.appPresets.leavenHydrationIncrementAmount}
                 minValue={dough.leaven.minLeavenHydration}
                 maxValue={dough.leaven.maxLeavenHydration}
@@ -110,7 +110,7 @@ export default class App extends React.Component {
                 onValueChange={dough.water.setWaterWeight}
                 onValueClick={dough.userInterface.onWaterValueClick}
                 onSymbolClick={() => {/* */ }}
-                valueAffix={'g'}
+                valueAffix={dough.userInterface.languageConstants!._gram_abbvr}
                 incrementAmount={dough.userInterface.appPresets.waterIncrementAmount}
                 minValue={dough.water.minWater}
                 maxValue={dough.water.maxWater}
@@ -138,6 +138,7 @@ export default class App extends React.Component {
 
             <View style={styles.presetRow}>
               <PresetButtonsRow
+                isLocked={dough.hydration.targetHydrationLocked}
                 presetValues={dough.userInterface.targetHydrationPresets}
                 onClickCallback={dough.hydration.setTargetHydration}
                 valueSuffix={dough.userInterface.languageConstants!._percent}
@@ -151,7 +152,7 @@ export default class App extends React.Component {
                   value={dough.targetDoughWeight}
                   onValueChange={dough.setTargetDoughWeight}
                   onValueClick={dough.userInterface.onTargetDoughValueClick}
-                  valueAffix={'g'}
+                  valueAffix={dough.userInterface.languageConstants!._gram_abbvr}
                   incrementAmount={100}
                   minValue={2000}
                   maxValue={100000}
@@ -208,6 +209,6 @@ const styles = StyleSheet.create({
   },
   sliderRow: {
     height: 80,
-    marginBottom: 8
+    paddingBottom: 8
   }
 });

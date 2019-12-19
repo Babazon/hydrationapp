@@ -31,23 +31,25 @@ export class NumberBox extends React.Component<IProps>{
         onPress={this.props.onValueClick}>
 
         {!this.props.isKeyboardActive &&
-          (<TextWithAccessibility style={styles.staticValue}>
-            {this.props.value.toFixed(0)
-            }
-          </TextWithAccessibility>)
+          (
+            <TextWithAccessibility style={styles.staticValue}>
+              {this.props.value.toFixed(0)}
+            </TextWithAccessibility>
+          )
         }
 
         {this.props.isKeyboardActive &&
-          (<TextInput
-            keyboardType={'default'}
-            autoFocus
-            style={styles.textInput}
-            value={
-              this.props.value > 0 ?
-                this.props.value.toFixed(0) + '' :
-                ''
-            }
-            onChangeText={this.onChangeText} />
+          (
+            <TextInput
+              keyboardType={'default'}
+              autoFocus
+              style={styles.textInput}
+              value={
+                this.props.value > 0 ?
+                  this.props.value.toFixed(0) + '' :
+                  ''
+              }
+              onChangeText={this.onChangeText} />
           )
         }
 
@@ -60,14 +62,14 @@ export class NumberBox extends React.Component<IProps>{
           {this.props.symbol}
         </TextWithAccessibility>
       </TouchableOpacity>
-    </View>);
+    </View>
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    borderColor: 'red',
     borderRadius: 8,
     flex: 2,
     flexDirection: 'row',

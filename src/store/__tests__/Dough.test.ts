@@ -42,13 +42,14 @@ describe('Dough store tests', () => {
 
   it('sets target dough weight', () => {
     const dough = new Dough(presets);
-    expect(dough.targetDoughWeight).toBe(2000);
+    expect(dough.targetDoughWeight).toBe(0);
     dough.setTargetDoughWeight(3000);
     expect(dough.targetDoughWeight).toBe(3000);
   })
 
   it('can compute target baked weight', () => {
     const dough = new Dough(presets);
+    dough.setTargetDoughWeight(2000);
     expect(dough.bakedTargetDoughWeight).toBe(2000 * 0.85)
   })
 

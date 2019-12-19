@@ -69,7 +69,10 @@ export class Leaven {
   }
 
   @computed public get inoculation(): number {
-    return (this.leavenWeight / this.dough.flour.flourWeight) * 100;
+    if (!isNaN(this.leavenWeight / this.dough.flour.flourWeight)) {
+      return (this.leavenWeight / this.dough.flour.flourWeight) * 100;
+    }
+    return 0;
   }
 
 }

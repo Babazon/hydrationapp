@@ -73,12 +73,12 @@ export class SliderRow extends React.Component<ISliderRowProps>{
             style={styles.sliderStyle}
             minimumValue={minValue}
             maximumValue={maxValue}
-            step={5}
+            step={1}
             thumbTintColor="#D8D8D8"
             minimumTrackTintColor="#D8D8D8"
             maximumTrackTintColor="#D8D8D8"
             value={value}
-            onValueChange={onValueChange}
+            onSlidingComplete={onValueChange}
           />
           <View style={styles.minorHorizontalGap} />
           <IncrementButton
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   unlockedIcon: {
     height: 20,
     resizeMode: 'contain',
-    tintColor: 'lightgray',
+    tintColor: 'gray',
     width: 20
   },
   upperRowContainer: {

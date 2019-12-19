@@ -25,6 +25,17 @@ export class Dough {
         this.leaven.setLeavenWeight(this.leaven.leavenWeight * ratioToMultiply);
       }
     });
+
+    reaction(() => this.hydration.targetHydrationLocked, (_: boolean) => {
+      if (this.hydration.targetHydrationLocked && this.targetDoughWeight) {
+        const actualTargetFlourWeight: number = this.targetDoughWeight * (1 / (1 + this.hydration.targetHydration / 100 + this.saltRatio));
+        const ratioToMultiply: number = actualTargetFlourWeight / this.totalFlour;
+
+        this.flour.setFlourWeight(this.flour.flourWeight * ratioToMultiply);
+        this.water.setWaterWeight(this.water.waterWeight * ratioToMultiply);
+        this.leaven.setLeavenWeight(this.leaven.leavenWeight * ratioToMultiply);
+      }
+    });
   }
 
   @observable public flour: Flour = new Flour(this);
@@ -79,7 +90,7 @@ export class Dough {
   }
 
   @computed public get totalHydration(): number {
-    if (this.totalFlour != null && this.totalWater != null) {
+    if (this.totalFlour != null && this.totalWater != null && !isNaN(this.totalWater / this.totalFlour)) {
       return this.totalWater / this.totalFlour;
     }
     return 0;
@@ -121,12 +132,10 @@ export class Dough {
 
   }
 
-  @observable public targetDoughWeight: number = 2000;
+  @observable public targetDoughWeight: number = 0;
 
   @action public setTargetDoughWeight = (value: number) => {
-    if (value > 0) {
-      this.targetDoughWeight = value;
-    }
+    this.targetDoughWeight = value;
   }
 
   @computed public get bakedTargetDoughWeight(): number {

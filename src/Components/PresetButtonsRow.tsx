@@ -4,6 +4,7 @@ import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { TextWithAccessibility } from './TextWithAccessibility';
 
 export interface IPresetButtonsRowProps {
+  isLocked?: boolean;
   presetValues: number[];
   onClickCallback(value: number): void;
   valueSuffix: string;
@@ -13,9 +14,10 @@ export interface IPresetButtonsRowProps {
 export class PresetButtonsRow extends React.Component<IPresetButtonsRowProps>{
 
   public renderItem = ({ item, index }: { item: number, index: number }) => {
-    const { onClickCallback, valueSuffix, selectedValue } = this.props;
+    const { onClickCallback, valueSuffix, selectedValue, isLocked } = this.props;
     return (
       <TouchableOpacity
+        disabled={isLocked}
         onPress={() => onClickCallback(item)}
         style={StyleSheet.flatten([styles.buttonStyles, {
           backgroundColor: selectedValue === item ? 'lightgray' : 'transparent',
