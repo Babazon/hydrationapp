@@ -133,10 +133,12 @@ export class Dough {
 
   }
 
-  @observable public targetDoughWeight: number = 0;
+  @observable public targetDoughWeight: number = 2000;
 
   @action public setTargetDoughWeight = (value: number) => {
-    this.targetDoughWeight = value;
+    if (value > 0) {
+      this.targetDoughWeight = value;
+    }
   }
 
 }
