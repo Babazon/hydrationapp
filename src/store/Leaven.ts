@@ -1,42 +1,39 @@
 import { action, computed, observable, reaction } from 'mobx';
 import { Dough } from './Dough';
+import { Generic } from './Generic';
 
-export class Leaven {
+export class Leaven extends Generic {
 
   constructor(private readonly dough: Dough) {
-    reaction(() => this.leavenWeight, (_) => {
+    super();
+
+    reaction(() => this.weight, (_) => {
       if (this.dough.hydration.targetHydrationLocked) {
-        this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchTargetHydration);
+        this.dough.water.setWeight(this.dough.water.waterWeightToMatchTargetHydration);
       }
     });
 
     reaction(() => this.leavenHydration, (_) => {
       if (this.dough.hydration.targetHydrationLocked) {
-        this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchTargetHydration);
+        this.dough.water.setWeight(this.dough.water.waterWeightToMatchTargetHydration);
       }
     });
   }
 
-  @observable public leavenWeight: number = 200;
+  @observable public weight: number = 200;
   @observable public leavenHydration: number = 100;
 
-  @observable public leavenLocked: boolean = false;
-
-  @action public toggleLeavenLock = (): void => {
-    this.leavenLocked = !this.leavenLocked;
-  }
-
   @computed public get leavenFlour(): number {
-    if (this.leavenHydration != null && this.leavenWeight != null) {
-      return (this.leavenWeight / (1 + this.leavenHydration / 100));
+    if (this.leavenHydration != null && this.weight != null) {
+      return (this.weight / (1 + this.leavenHydration / 100));
     }
     return 0;
   }
 
   @computed public get leavenWater(): number {
     if (this.leavenHydration != null &&
-      this.leavenWeight != null) {
-      return (this.leavenWeight / (1 + this.leavenHydration / 100)) * (this.leavenHydration / 100);
+      this.weight != null) {
+      return (this.weight / (1 + this.leavenHydration / 100)) * (this.leavenHydration / 100);
     }
     return 0;
   }
@@ -57,21 +54,17 @@ export class Leaven {
     return this.dough.userInterface.appPresets.maxLeavenHydration;
   }
 
-  @action public setLeavenWeight = (value: number): void => {
-    this.leavenWeight = value > 0 ? value : 0;
-  }
-
   @action public setLeavenHydration = (value: number): void => {
     this.leavenHydration = value > 0 ? value : 0;
   }
 
   @action public setLeavenWeightUsingInoculation = (value: number): void => {
-    this.leavenWeight = (value / 100) * this.dough.flour.flourWeight;
+    this.weight = (value / 100) * this.dough.flour.weight;
   }
 
   @computed public get inoculation(): number {
-    if (!isNaN(this.leavenWeight / this.dough.flour.flourWeight)) {
-      return (this.leavenWeight / this.dough.flour.flourWeight) * 100;
+    if (!isNaN(this.weight / this.dough.flour.weight)) {
+      return (this.weight / this.dough.flour.weight) * 100;
     }
     return 0;
   }

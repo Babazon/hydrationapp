@@ -1,27 +1,24 @@
-import { action, computed, observable, reaction } from 'mobx';
+import { computed, observable, reaction } from 'mobx';
 import { Dough } from './Dough';
+import { Generic } from './Generic';
 
-export class Water {
+export class Water extends Generic {
   constructor(private readonly dough: Dough) {
-    reaction(() => this.waterWeight, (_: number) => {
+    super();
+
+    reaction(() => this.weight, (_: number) => {
       if (this.dough.hydration.targetHydrationLocked) {
-        this.dough.flour.setFlourWeight(this.dough.flour.flourWeightToMatchTargetHydration);
+        this.dough.flour.setWeight(this.dough.flour.flourWeightToMatchTargetHydration);
       }
     });
   }
 
-  @observable public waterWeight: number = 725;
-
-  @observable public waterLocked: boolean = false;
-
-  @action public toggleWaterLock = (): void => {
-    this.waterLocked = !this.waterLocked;
-  }
+  @observable public weight: number = 725;
 
   @computed public get waterWeightToMatchTargetHydration(): number {
     if (
-      this.dough.flour.flourWeight != null &&
-      this.dough.leaven.leavenWeight != null &&
+      this.dough.flour.weight != null &&
+      this.dough.leaven.weight != null &&
       this.dough.leaven.leavenHydration != null) {
       return ((this.dough.hydration.targetHydration / 100) * this.dough.totalFlour) - this.dough.leaven.leavenWater;
     }
@@ -34,10 +31,6 @@ export class Water {
 
   @computed public get maxWater(): number {
     return this.dough.userInterface.appPresets.maxWater;
-  }
-
-  @action public setWaterWeight = (value: number): void => {
-    this.waterWeight = value > 0 ? value : 0;
   }
 
 }

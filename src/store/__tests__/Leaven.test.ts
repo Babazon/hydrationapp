@@ -10,9 +10,9 @@ describe('Leaven store tests', () => {
   })
 
   it('sets leaven weight', () => {
-    expect(dough.leaven.leavenWeight).toBe(200);
-    dough.leaven.setLeavenWeight(666);
-    expect(dough.leaven.leavenWeight).toBe(666);
+    expect(dough.leaven.weight).toBe(200);
+    dough.leaven.setWeight(666);
+    expect(dough.leaven.weight).toBe(666);
   })
 
   it('sets leaven hydration', () => {
@@ -22,19 +22,19 @@ describe('Leaven store tests', () => {
   })
 
   it('sets leaven value lock', () => {
-    expect(dough.leaven.leavenLocked).toBeFalsy();
-    dough.leaven.toggleLeavenLock()
-    expect(dough.leaven.leavenLocked).toBeTruthy();
+    expect(dough.leaven.isLocked).toBeFalsy();
+    dough.leaven.toggleLocked()
+    expect(dough.leaven.isLocked).toBeTruthy();
   })
 
   it('yieds flour weight of leaven based on hydration', () => {
-    dough.leaven.setLeavenWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(100);
     expect(dough.leaven.leavenFlour).toBe(500);
   })
 
   it('yieds water weight of leaven based on hydration', () => {
-    dough.leaven.setLeavenWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(100);
     expect(dough.leaven.leavenWater).toBe(500);
   })
@@ -56,15 +56,15 @@ describe('Leaven store tests', () => {
   })
 
   it('can set leaven weight via inoculation percentage based on flour in dough', () => {
-    dough.flour.setFlourWeight(1000);
+    dough.flour.setWeight(1000);
     dough.leaven.setLeavenWeightUsingInoculation(20);
-    expect(dough.leaven.leavenWeight).toBe(200);
+    expect(dough.leaven.weight).toBe(200);
   })
 
 
   it('yields inoculation of leaven based on its weight and the weight of flour', () => {
-    dough.flour.setFlourWeight(1000);
-    dough.leaven.setLeavenWeight(490);
+    dough.flour.setWeight(1000);
+    dough.leaven.setWeight(490);
     expect(dough.leaven.inoculation).toBe(49)
   })
 

@@ -34,7 +34,7 @@ export class InfoBlock extends React.Component<IProps>{
           <TextWithAccessibility style={styles.infoStyle}>Leaven</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {dough.leaven.leavenWeight.toFixed(dough.leaven.leavenWeight % 1 > 0 ? 2 : 0)} g
+            {dough.leaven.weight.toFixed(dough.leaven.weight % 1 > 0 ? 2 : 0)} g
             </TextWithAccessibility>
         </View>
 

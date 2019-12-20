@@ -9,7 +9,7 @@ export class Hydration {
 
   @action private waterReactionCallback = (locked: boolean) => {
     if (locked) {
-      this.dough.water.setWaterWeight(this.dough.water.waterWeightToMatchTargetHydration);
+      this.dough.water.setWeight(this.dough.water.waterWeightToMatchTargetHydration);
     }
   }
 

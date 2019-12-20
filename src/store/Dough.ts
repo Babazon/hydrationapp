@@ -20,9 +20,9 @@ export class Dough {
         const actualTargetFlourWeight: number = targetDoughWeight * (1 / (1 + this.hydration.targetHydration / 100 + this.saltRatio));
         const ratioToMultiply: number = actualTargetFlourWeight / this.totalFlour;
 
-        this.flour.setFlourWeight(this.flour.flourWeight * ratioToMultiply);
-        this.water.setWaterWeight(this.water.waterWeight * ratioToMultiply);
-        this.leaven.setLeavenWeight(this.leaven.leavenWeight * ratioToMultiply);
+        this.flour.setWeight(this.flour.weight * ratioToMultiply);
+        this.water.setWeight(this.water.weight * ratioToMultiply);
+        this.leaven.setWeight(this.leaven.weight * ratioToMultiply);
       }
     });
 
@@ -31,9 +31,9 @@ export class Dough {
         const actualTargetFlourWeight: number = this.targetDoughWeight * (1 / (1 + this.hydration.targetHydration / 100 + this.saltRatio));
         const ratioToMultiply: number = actualTargetFlourWeight / this.totalFlour;
 
-        this.flour.setFlourWeight(this.flour.flourWeight * ratioToMultiply);
-        this.water.setWaterWeight(this.water.waterWeight * ratioToMultiply);
-        this.leaven.setLeavenWeight(this.leaven.leavenWeight * ratioToMultiply);
+        this.flour.setWeight(this.flour.weight * ratioToMultiply);
+        this.water.setWeight(this.water.weight * ratioToMultiply);
+        this.leaven.setWeight(this.leaven.weight * ratioToMultiply);
       }
     });
   }
@@ -45,13 +45,13 @@ export class Dough {
   @observable public userInterface: UserInterface = new UserInterface(this, this.appPresets);
 
   @action public resetValues = () => {
-    this.flour.flourWeight = this.appPresets.initialFlourWeight;
-    this.water.waterWeight = this.appPresets.initialWaterWeight;
-    this.leaven.leavenWeight = this.appPresets.initialLeavenWeight;
+    this.flour.weight = this.appPresets.initialFlourWeight;
+    this.water.weight = this.appPresets.initialWaterWeight;
+    this.leaven.weight = this.appPresets.initialLeavenWeight;
     this.leaven.leavenHydration = this.appPresets.initialLeavenHydratioon;
     this.hydration.targetHydrationLocked = false;
-    this.water.waterLocked = false;
-    this.flour.flourLocked = false;
+    this.water.isLocked = false;
+    this.flour.isLocked = false;
     this.hydration.targetHydration = this.appPresets.initialTargetHydration;
   }
 
@@ -76,15 +76,15 @@ export class Dough {
   }
 
   @computed public get totalFlour(): number {
-    if (this.flour.flourWeight != null && this.leaven.leavenFlour != null) {
-      return this.flour.flourWeight + this.leaven.leavenFlour;
+    if (this.flour.weight != null && this.leaven.leavenFlour != null) {
+      return this.flour.weight + this.leaven.leavenFlour;
     }
     return 0;
   }
 
   @computed public get totalWater(): number {
-    if (this.water.waterWeight != null && this.leaven.leavenWater != null) {
-      return this.water.waterWeight + this.leaven.leavenWater;
+    if (this.water.weight != null && this.leaven.leavenWater != null) {
+      return this.water.weight + this.leaven.leavenWater;
     }
     return 0;
   }

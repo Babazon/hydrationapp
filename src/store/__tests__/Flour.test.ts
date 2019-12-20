@@ -12,15 +12,15 @@ describe('Flour store tests', () => {
 
 
   it('sets flour weight', () => {
-    expect(dough.flour.flourWeight).toBe(1000);
-    dough.flour.setFlourWeight(666);
-    expect(dough.flour.flourWeight).toBe(666);
+    expect(dough.flour.weight).toBe(1000);
+    dough.flour.setWeight(666);
+    expect(dough.flour.weight).toBe(666);
   })
 
   it('locks and unlocks flour input', () => {
-    expect(dough.flour.flourLocked).toBeFalsy();
-    dough.flour.toggleFlourLock();
-    expect(dough.flour.flourLocked).toBeTruthy()
+    expect(dough.flour.isLocked).toBeFalsy();
+    dough.flour.toggleLocked();
+    expect(dough.flour.isLocked).toBeTruthy()
   })
 
 
@@ -33,8 +33,8 @@ describe('Flour store tests', () => {
   })
 
   it('yields the flour weight to satisfy target hydration on water weight change', () => {
-    dough.water.setWaterWeight(1000);
-    dough.leaven.setLeavenWeight(1000);
+    dough.water.setWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(100);
     dough.hydration.setTargetHydration(100);
 

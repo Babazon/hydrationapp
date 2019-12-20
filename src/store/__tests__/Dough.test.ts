@@ -55,36 +55,36 @@ describe('Dough store tests', () => {
 
   it('can yield total hydration', () => {
     const dough = new Dough(presets);
-    dough.water.setWaterWeight(1000);
-    dough.flour.setFlourWeight(1000);
-    dough.leaven.setLeavenWeight(1000);
+    dough.water.setWeight(1000);
+    dough.flour.setWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(100);
     expect(dough.totalHydration).toBe(100 / 100);
   })
 
   it('can yield recommended salt amount', () => {
     const dough = new Dough(presets);
-    dough.water.setWaterWeight(1000);
-    dough.flour.setFlourWeight(1000);
-    dough.leaven.setLeavenWeight(1000);
+    dough.water.setWeight(1000);
+    dough.flour.setWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(100);
     expect(dough.recommendedSalt).toBe(1500 * 0.022)
   })
 
   it('can yield post bake weight approximation', () => {
     const dough = new Dough(presets);
-    dough.water.setWaterWeight(1000);
-    dough.flour.setFlourWeight(1000);
-    dough.leaven.setLeavenWeight(1000);
+    dough.water.setWeight(1000);
+    dough.flour.setWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(100);
     expect(dough.postBakeWeight).toBe((3000 + 1500 * 0.022) * 0.85)
   })
 
   it('can yield experimental dough initial volume', () => {
     const dough = new Dough(presets);
-    dough.water.setWaterWeight(1000);
-    dough.flour.setFlourWeight(1000);
-    dough.leaven.setLeavenWeight(1000);
+    dough.water.setWeight(1000);
+    dough.flour.setWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(100);
     expect(dough.experimentalDoughVolume).toBe(2000);
   })
@@ -92,34 +92,34 @@ describe('Dough store tests', () => {
   it('can yield experimental dough final volume', () => {
     const dough = new Dough(presets);
 
-    dough.water.setWaterWeight(1000);
-    dough.flour.setFlourWeight(1000);
-    dough.leaven.setLeavenWeight(1000);
+    dough.water.setWeight(1000);
+    dough.flour.setWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(100);
     expect(dough.experimentalBulkVolume).toBe(dough.experimentalDoughVolume * 1.25);
 
-    dough.water.setWaterWeight(750);
-    dough.flour.setFlourWeight(1000);
-    dough.leaven.setLeavenWeight(1000);
+    dough.water.setWeight(750);
+    dough.flour.setWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(75);
     expect(dough.experimentalBulkVolume).toBe(dough.experimentalDoughVolume * 1.30);
 
-    dough.water.setWaterWeight(660);
-    dough.flour.setFlourWeight(1000);
-    dough.leaven.setLeavenWeight(1000);
+    dough.water.setWeight(660);
+    dough.flour.setWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(66);
     expect(dough.experimentalBulkVolume).toBe(dough.experimentalDoughVolume * 1.4);
 
 
-    dough.water.setWaterWeight(601);
-    dough.flour.setFlourWeight(1000);
-    dough.leaven.setLeavenWeight(1000);
+    dough.water.setWeight(601);
+    dough.flour.setWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(61);
     expect(dough.experimentalBulkVolume).toBe(dough.experimentalDoughVolume * 1.45);
 
-    dough.water.setWaterWeight(500);
-    dough.flour.setFlourWeight(1000);
-    dough.leaven.setLeavenWeight(1000);
+    dough.water.setWeight(500);
+    dough.flour.setWeight(1000);
+    dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(50);
     expect(dough.experimentalBulkVolume).toBe(dough.experimentalDoughVolume * 1.5);
   })
@@ -128,7 +128,7 @@ describe('Dough store tests', () => {
     const dough = new Dough(presets);
     dough.hydration.setTargetHydration = jest.fn().mockImplementation((_: number) => { })
     expect(dough.hydration.targetHydrationLocked).toBeFalsy();
-    dough.water.setWaterWeight(1000);
+    dough.water.setWeight(1000);
     expect(dough.hydration.setTargetHydration).toHaveBeenCalledWith(dough.totalHydration * 100);
   })
 
@@ -137,7 +137,7 @@ describe('Dough store tests', () => {
     dough.hydration.setTargetHydration = jest.fn().mockImplementation((_: number) => { })
     dough.hydration.toggleTargetHydrationLock();
     expect(dough.hydration.targetHydrationLocked).toBeTruthy();
-    dough.water.setWaterWeight(666);
+    dough.water.setWeight(666);
     expect(dough.hydration.setTargetHydration).not.toHaveBeenCalled();
   })
 
@@ -145,17 +145,17 @@ describe('Dough store tests', () => {
     const dough = new Dough(presets);
     dough.hydration.setTargetHydration(100);
     dough.hydration.toggleTargetHydrationLock();
-    dough.flour.setFlourWeight(10);
-    dough.water.setWaterWeight(10);
-    dough.leaven.setLeavenWeight(0);
+    dough.flour.setWeight(10);
+    dough.water.setWeight(10);
+    dough.leaven.setWeight(0);
 
-    dough.flour.setFlourWeight = jest.fn().mockImplementation((_: number) => { })
-    dough.water.setWaterWeight = jest.fn().mockImplementation((_: number) => { })
-    dough.leaven.setLeavenWeight = jest.fn().mockImplementation((_: number) => { })
+    dough.flour.setWeight = jest.fn().mockImplementation((_: number) => { })
+    dough.water.setWeight = jest.fn().mockImplementation((_: number) => { })
+    dough.leaven.setWeight = jest.fn().mockImplementation((_: number) => { })
 
     dough.setTargetDoughWeight(200);
-    expect(dough.flour.setFlourWeight).toHaveBeenCalled();
-    expect(dough.water.setWaterWeight).toHaveBeenCalled();
-    expect(dough.leaven.setLeavenWeight).toHaveBeenCalledWith(0)
+    expect(dough.flour.setWeight).toHaveBeenCalled();
+    expect(dough.water.setWeight).toHaveBeenCalled();
+    expect(dough.leaven.setWeight).toHaveBeenCalledWith(0)
   })
 });

@@ -35,8 +35,8 @@ export default class App extends React.Component {
             {/* Flour Weight */}
             <View style={styles.sliderRow}>
               <SliderRow
-                value={dough.flour.flourWeight}
-                onValueChange={dough.flour.setFlourWeight}
+                value={dough.flour.weight}
+                onValueChange={dough.flour.setWeight}
                 onValueClick={dough.userInterface.onFlourValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={dough.userInterface.languageConstants!._gram_abbvr}
@@ -50,17 +50,17 @@ export default class App extends React.Component {
             <View style={styles.presetRow}>
               <PresetButtonsRow
                 presetValues={dough.userInterface.flourWeightPresets}
-                onClickCallback={dough.flour.setFlourWeight}
+                onClickCallback={dough.flour.setWeight}
                 valueSuffix={dough.userInterface.languageConstants!._gram_abbvr}
-                selectedValue={dough.flour.flourWeight}
+                selectedValue={dough.flour.weight}
               />
             </View>
 
             {/* Leaven Weight */}
             <View style={styles.sliderRow}>
               <SliderRow
-                value={dough.leaven.leavenWeight}
-                onValueChange={dough.leaven.setLeavenWeight}
+                value={dough.leaven.weight}
+                onValueChange={dough.leaven.setWeight}
                 onValueClick={dough.userInterface.onLeavenWeightValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={dough.userInterface.languageConstants!._gram_abbvr}
@@ -106,8 +106,8 @@ export default class App extends React.Component {
             {/* Water Weight */}
             <View style={styles.sliderRow}>
               <SliderRow
-                value={dough.water.waterWeight}
-                onValueChange={dough.water.setWaterWeight}
+                value={dough.water.weight}
+                onValueChange={dough.water.setWeight}
                 onValueClick={dough.userInterface.onWaterValueClick}
                 onSymbolClick={() => {/* */ }}
                 valueAffix={dough.userInterface.languageConstants!._gram_abbvr}
