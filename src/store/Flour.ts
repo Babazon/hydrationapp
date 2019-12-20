@@ -8,7 +8,7 @@ export class Flour extends Generic {
     super();
 
     reaction(() => this.weight, (_) => {
-      if (dough.hydration.targetHydration && dough.hydration.targetHydrationLocked) {
+      if (dough.hydration.targetHydration && dough.hydration.isLocked) {
         dough.water.setWeight(dough.water.waterWeightToMatchTargetHydration);
       }
     });

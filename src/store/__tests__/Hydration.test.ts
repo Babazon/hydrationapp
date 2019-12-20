@@ -24,17 +24,17 @@ describe('Hydration store tests', () => {
   })
 
   it('can lock target hydration in place', () => {
-    expect(dough.hydration.targetHydrationLocked).toBeFalsy();
-    dough.hydration.toggleTargetHydrationLock();
-    expect(dough.hydration.targetHydrationLocked).toBeTruthy();
+    expect(dough.hydration.isLocked).toBeFalsy();
+    dough.hydration.toggleLocked();
+    expect(dough.hydration.isLocked).toBeTruthy();
   })
 
   it('invokes callback to match water to target hydration when the lock is toggled', () => {
     dough.water.setWeight = jest.fn().mockImplementation((_: number) => {
     });
-    expect(dough.hydration.targetHydrationLocked).toBeFalsy();
-    dough.hydration.toggleTargetHydrationLock();
-    expect(dough.hydration.targetHydrationLocked).toBeTruthy();
+    expect(dough.hydration.isLocked).toBeFalsy();
+    dough.hydration.toggleLocked();
+    expect(dough.hydration.isLocked).toBeTruthy();
     expect(dough.water.setWeight).toHaveBeenCalled();
   })
 

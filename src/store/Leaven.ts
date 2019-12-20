@@ -8,13 +8,13 @@ export class Leaven extends Generic {
     super();
 
     reaction(() => this.weight, (_) => {
-      if (this.dough.hydration.targetHydrationLocked) {
+      if (this.dough.hydration.isLocked) {
         this.dough.water.setWeight(this.dough.water.waterWeightToMatchTargetHydration);
       }
     });
 
     reaction(() => this.leavenHydration, (_) => {
-      if (this.dough.hydration.targetHydrationLocked) {
+      if (this.dough.hydration.isLocked) {
         this.dough.water.setWeight(this.dough.water.waterWeightToMatchTargetHydration);
       }
     });

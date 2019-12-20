@@ -1,10 +1,13 @@
 import { action, computed, observable, reaction } from 'mobx';
 import { Dough } from './Dough';
+import { Generic } from './Generic';
 
-export class Hydration {
+export class Hydration extends Generic {
 
   constructor(private readonly dough: Dough) {
-    reaction(() => this.targetHydrationLocked, this.waterReactionCallback);
+    super();
+
+    reaction(() => this.isLocked, this.waterReactionCallback);
   }
 
   @action private waterReactionCallback = (locked: boolean) => {
@@ -13,16 +16,10 @@ export class Hydration {
     }
   }
 
-  @observable public targetHydrationLocked: boolean = false;
-
-  @action public toggleTargetHydrationLock = (): void => {
-    this.targetHydrationLocked = !this.targetHydrationLocked;
-  }
-
   @observable public targetHydration: number = 75;
 
   @action public setTargetHydration = (value: number) => {
-    if (!this.targetHydrationLocked) {
+    if (!this.isLocked) {
       this.targetHydration = value;
     }
   }

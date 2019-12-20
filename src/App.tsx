@@ -22,6 +22,7 @@ export default class App extends React.Component {
   }
 
   public render() {
+    const { flour, water, hydration, leaven, userInterface, resetValues, targetDoughWeight, setTargetDoughWeight } = dough;
 
     return (
       <ErrorBoundary>
@@ -29,135 +30,135 @@ export default class App extends React.Component {
 
           <KeyboardAwareScrollView
             showsVerticalScrollIndicator={false}
-            refreshControl={<RefreshControl title={dough.userInterface.languageConstants!._reset} refreshing={false} onRefresh={dough.resetValues} />}
+            refreshControl={<RefreshControl title={userInterface.languageConstants!._reset} refreshing={false} onRefresh={resetValues} />}
             contentContainerStyle={styles.scrollViewContentStyle}>
 
             {/* Flour Weight */}
             <View style={styles.sliderRow}>
               <SliderRow
-                value={dough.flour.weight}
-                onValueChange={dough.flour.setWeight}
-                onValueClick={dough.userInterface.onFlourValueClick}
+                value={flour.weight}
+                onValueChange={flour.setWeight}
+                onValueClick={userInterface.onFlourValueClick}
                 onSymbolClick={() => {/* */ }}
-                valueAffix={dough.userInterface.languageConstants!._gram_abbvr}
-                incrementAmount={dough.userInterface.appPresets.flourIncrementAmount}
-                minValue={dough.flour.minFlour}
-                maxValue={dough.flour.maxFlour}
-                isKeyboardActive={dough.userInterface.flourInputMode}
-                label={dough.userInterface.languageConstants!._flour_weight}
+                valueAffix={userInterface.languageConstants!._gram_abbvr}
+                incrementAmount={userInterface.appPresets.flourIncrementAmount}
+                minValue={flour.minFlour}
+                maxValue={flour.maxFlour}
+                isKeyboardActive={userInterface.flourInputMode}
+                label={userInterface.languageConstants!._flour_weight}
               />
             </View>
             <View style={styles.presetRow}>
               <PresetButtonsRow
-                presetValues={dough.userInterface.flourWeightPresets}
-                onClickCallback={dough.flour.setWeight}
-                valueSuffix={dough.userInterface.languageConstants!._gram_abbvr}
-                selectedValue={dough.flour.weight}
+                presetValues={userInterface.flourWeightPresets}
+                onClickCallback={flour.setWeight}
+                valueSuffix={userInterface.languageConstants!._gram_abbvr}
+                selectedValue={flour.weight}
               />
             </View>
 
             {/* Leaven Weight */}
             <View style={styles.sliderRow}>
               <SliderRow
-                value={dough.leaven.weight}
-                onValueChange={dough.leaven.setWeight}
-                onValueClick={dough.userInterface.onLeavenWeightValueClick}
+                value={leaven.weight}
+                onValueChange={leaven.setWeight}
+                onValueClick={userInterface.onLeavenWeightValueClick}
                 onSymbolClick={() => {/* */ }}
-                valueAffix={dough.userInterface.languageConstants!._gram_abbvr}
-                incrementAmount={dough.userInterface.appPresets.leavenWeightIncrementAmount}
-                minValue={dough.leaven.minLeaven}
-                maxValue={dough.leaven.maxLeaven}
-                isKeyboardActive={dough.userInterface.leavenWeightInputMode}
-                label={dough.userInterface.languageConstants!._leaven_weight}
+                valueAffix={userInterface.languageConstants!._gram_abbvr}
+                incrementAmount={userInterface.appPresets.leavenWeightIncrementAmount}
+                minValue={leaven.minLeaven}
+                maxValue={leaven.maxLeaven}
+                isKeyboardActive={userInterface.leavenWeightInputMode}
+                label={userInterface.languageConstants!._leaven_weight}
               />
             </View>
             <View style={styles.presetRow}>
               <PresetButtonsRow
-                presetValues={dough.userInterface.leavenInoculationPresets}
-                onClickCallback={dough.leaven.setLeavenWeightUsingInoculation}
-                valueSuffix={dough.userInterface.languageConstants!._percent}
-                selectedValue={dough.leaven.inoculation}
+                presetValues={userInterface.leavenInoculationPresets}
+                onClickCallback={leaven.setLeavenWeightUsingInoculation}
+                valueSuffix={userInterface.languageConstants!._percent}
+                selectedValue={leaven.inoculation}
               />
             </View>
 
             {/* Leaven Hydration  */}
             <View style={styles.sliderRow}>
               <SliderRow
-                value={dough.leaven.leavenHydration}
-                onValueChange={dough.leaven.setLeavenHydration}
-                onValueClick={dough.userInterface.onLeavenHydrationValueClick}
-                valueAffix={dough.userInterface.languageConstants!._percent}
-                incrementAmount={dough.userInterface.appPresets.leavenHydrationIncrementAmount}
-                minValue={dough.leaven.minLeavenHydration}
-                maxValue={dough.leaven.maxLeavenHydration}
-                isKeyboardActive={dough.userInterface.leavenHydrationInputMode}
-                label={dough.userInterface.languageConstants!._leaven_hydration}
+                value={leaven.leavenHydration}
+                onValueChange={leaven.setLeavenHydration}
+                onValueClick={userInterface.onLeavenHydrationValueClick}
+                valueAffix={userInterface.languageConstants!._percent}
+                incrementAmount={userInterface.appPresets.leavenHydrationIncrementAmount}
+                minValue={leaven.minLeavenHydration}
+                maxValue={leaven.maxLeavenHydration}
+                isKeyboardActive={userInterface.leavenHydrationInputMode}
+                label={userInterface.languageConstants!._leaven_hydration}
               />
             </View>
             <View style={styles.presetRow}>
               <PresetButtonsRow
-                presetValues={dough.userInterface.leavenHydrationPresets}
-                onClickCallback={dough.leaven.setLeavenHydration}
-                valueSuffix={dough.userInterface.languageConstants!._percent}
-                selectedValue={dough.leaven.leavenHydration}
+                presetValues={userInterface.leavenHydrationPresets}
+                onClickCallback={leaven.setLeavenHydration}
+                valueSuffix={userInterface.languageConstants!._percent}
+                selectedValue={leaven.leavenHydration}
               />
             </View>
 
             {/* Water Weight */}
             <View style={styles.sliderRow}>
               <SliderRow
-                value={dough.water.weight}
-                onValueChange={dough.water.setWeight}
-                onValueClick={dough.userInterface.onWaterValueClick}
+                value={water.weight}
+                onValueChange={water.setWeight}
+                onValueClick={userInterface.onWaterValueClick}
                 onSymbolClick={() => {/* */ }}
-                valueAffix={dough.userInterface.languageConstants!._gram_abbvr}
-                incrementAmount={dough.userInterface.appPresets.waterIncrementAmount}
-                minValue={dough.water.minWater}
-                maxValue={dough.water.maxWater}
-                isKeyboardActive={dough.userInterface.waterInputMode}
-                label={dough.userInterface.languageConstants!._water}
+                valueAffix={userInterface.languageConstants!._gram_abbvr}
+                incrementAmount={userInterface.appPresets.waterIncrementAmount}
+                minValue={water.minWater}
+                maxValue={water.maxWater}
+                isKeyboardActive={userInterface.waterInputMode}
+                label={userInterface.languageConstants!._water}
               />
             </View>
 
             {/* Target Hydration */}
             <View style={styles.sliderRow}>
               <SliderRow
-                isLocked={dough.hydration.targetHydrationLocked}
-                onLockValue={dough.hydration.toggleTargetHydrationLock}
-                value={dough.hydration.targetHydration}
-                onValueChange={dough.hydration.setTargetHydration}
-                onValueClick={dough.userInterface.onTargetHydrationValueClick}
+                isLocked={hydration.isLocked}
+                onLockValue={hydration.toggleLocked}
+                value={hydration.targetHydration}
+                onValueChange={hydration.setTargetHydration}
+                onValueClick={userInterface.onTargetHydrationValueClick}
                 valueAffix={'%'}
-                incrementAmount={dough.userInterface.appPresets.targetHydrationIncrementAmount}
-                minValue={dough.hydration.minTargetHydration}
-                maxValue={dough.hydration.maxTargetHydration}
-                isKeyboardActive={dough.userInterface.targetHydrationInputMode}
-                label={dough.userInterface.languageConstants!._target_hydration}
+                incrementAmount={userInterface.appPresets.targetHydrationIncrementAmount}
+                minValue={hydration.minTargetHydration}
+                maxValue={hydration.maxTargetHydration}
+                isKeyboardActive={userInterface.targetHydrationInputMode}
+                label={userInterface.languageConstants!._target_hydration}
               />
             </View>
 
             <View style={styles.presetRow}>
               <PresetButtonsRow
-                isLocked={dough.hydration.targetHydrationLocked}
-                presetValues={dough.userInterface.targetHydrationPresets}
-                onClickCallback={dough.hydration.setTargetHydration}
-                valueSuffix={dough.userInterface.languageConstants!._percent}
-                selectedValue={dough.hydration.targetHydration}
+                isLocked={hydration.isLocked}
+                presetValues={userInterface.targetHydrationPresets}
+                onClickCallback={hydration.setTargetHydration}
+                valueSuffix={userInterface.languageConstants!._percent}
+                selectedValue={hydration.targetHydration}
               />
             </View>
 
             {__DEV__ &&
               <View style={styles.sliderRow}>
                 <SliderRow
-                  value={dough.targetDoughWeight}
-                  onValueChange={dough.setTargetDoughWeight}
-                  onValueClick={dough.userInterface.onTargetDoughValueClick}
-                  valueAffix={dough.userInterface.languageConstants!._gram_abbvr}
+                  value={targetDoughWeight}
+                  onValueChange={setTargetDoughWeight}
+                  onValueClick={userInterface.onTargetDoughValueClick}
+                  valueAffix={userInterface.languageConstants!._gram_abbvr}
                   incrementAmount={100}
                   minValue={2000}
                   maxValue={100000}
-                  isKeyboardActive={dough.userInterface.targetDoughWeightInputMode}
-                  label={dough.userInterface.languageConstants!._target_dough_weight}
+                  isKeyboardActive={userInterface.targetDoughWeightInputMode}
+                  label={userInterface.languageConstants!._target_dough_weight}
                 />
               </View>}
 

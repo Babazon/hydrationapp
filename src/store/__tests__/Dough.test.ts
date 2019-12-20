@@ -10,10 +10,10 @@ describe('Dough store tests', () => {
 
   it('resets values', () => {
     const dough = new Dough(presets);
-    dough.hydration.toggleTargetHydrationLock();
-    expect(dough.hydration.targetHydrationLocked).toBeTruthy();
+    dough.hydration.toggleLocked();
+    expect(dough.hydration.isLocked).toBeTruthy();
     dough.resetValues();
-    expect(dough.hydration.targetHydrationLocked).toBeFalsy();
+    expect(dough.hydration.isLocked).toBeFalsy();
   })
 
   it('computes salt ratio', () => {
@@ -127,7 +127,7 @@ describe('Dough store tests', () => {
   it('reacts to total hydration changing by setting target hydration to it if it is not locked', () => {
     const dough = new Dough(presets);
     dough.hydration.setTargetHydration = jest.fn().mockImplementation((_: number) => { })
-    expect(dough.hydration.targetHydrationLocked).toBeFalsy();
+    expect(dough.hydration.isLocked).toBeFalsy();
     dough.water.setWeight(1000);
     expect(dough.hydration.setTargetHydration).toHaveBeenCalledWith(dough.totalHydration * 100);
   })
@@ -135,8 +135,8 @@ describe('Dough store tests', () => {
   it('reacts to total hydration changing but doesnt set target hydration when it was locked', () => {
     const dough = new Dough(presets);
     dough.hydration.setTargetHydration = jest.fn().mockImplementation((_: number) => { })
-    dough.hydration.toggleTargetHydrationLock();
-    expect(dough.hydration.targetHydrationLocked).toBeTruthy();
+    dough.hydration.toggleLocked();
+    expect(dough.hydration.isLocked).toBeTruthy();
     dough.water.setWeight(666);
     expect(dough.hydration.setTargetHydration).not.toHaveBeenCalled();
   })
@@ -144,7 +144,7 @@ describe('Dough store tests', () => {
   it('can multiply flour, water and leaven weigh to match target dough weight when it is set and the target hydration was locked', () => {
     const dough = new Dough(presets);
     dough.hydration.setTargetHydration(100);
-    dough.hydration.toggleTargetHydrationLock();
+    dough.hydration.toggleLocked();
     dough.flour.setWeight(10);
     dough.water.setWeight(10);
     dough.leaven.setWeight(0);

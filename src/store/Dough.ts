@@ -10,13 +10,13 @@ export class Dough {
 
   constructor(protected readonly appPresets: any) {
     reaction(() => this.totalHydration, (totalHydration: number) => {
-      if (!this.hydration.targetHydrationLocked) {
+      if (!this.hydration.isLocked) {
         this.hydration.setTargetHydration(totalHydration * 100);
       }
     });
 
     reaction(() => this.targetDoughWeight, (targetDoughWeight: number) => {
-      if (this.hydration.targetHydrationLocked) {
+      if (this.hydration.isLocked) {
         const actualTargetFlourWeight: number = targetDoughWeight * (1 / (1 + this.hydration.targetHydration / 100 + this.saltRatio));
         const ratioToMultiply: number = actualTargetFlourWeight / this.totalFlour;
 
@@ -26,8 +26,8 @@ export class Dough {
       }
     });
 
-    reaction(() => this.hydration.targetHydrationLocked, (_: boolean) => {
-      if (this.hydration.targetHydrationLocked && this.targetDoughWeight) {
+    reaction(() => this.hydration.isLocked, (_: boolean) => {
+      if (this.hydration.isLocked && this.targetDoughWeight) {
         const actualTargetFlourWeight: number = this.targetDoughWeight * (1 / (1 + this.hydration.targetHydration / 100 + this.saltRatio));
         const ratioToMultiply: number = actualTargetFlourWeight / this.totalFlour;
 
@@ -49,7 +49,7 @@ export class Dough {
     this.water.weight = this.appPresets.initialWaterWeight;
     this.leaven.weight = this.appPresets.initialLeavenWeight;
     this.leaven.leavenHydration = this.appPresets.initialLeavenHydratioon;
-    this.hydration.targetHydrationLocked = false;
+    this.hydration.isLocked = false;
     this.water.isLocked = false;
     this.flour.isLocked = false;
     this.hydration.targetHydration = this.appPresets.initialTargetHydration;
