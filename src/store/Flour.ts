@@ -21,7 +21,9 @@ export class Flour {
   }
 
   @computed public get flourWeightToMatchTargetHydration(): number {
-    if (this.dough.water.waterWeight != null && this.dough.leaven.leavenWeight != null && this.dough.leaven.leavenHydration != null) {
+    if (this.dough.water.waterWeight != null &&
+      this.dough.leaven.leavenWeight != null &&
+      this.dough.leaven.leavenHydration != null) {
       return ((this.dough.totalWater / this.dough.hydration.targetHydration) * 100) - this.dough.leaven.leavenFlour;
     }
     return 0;

@@ -124,6 +124,38 @@ describe('Dough store tests', () => {
     expect(dough.experimentalBulkVolume).toBe(dough.experimentalDoughVolume * 1.5);
   })
 
+  it('reacts to total hydration changing by setting target hydration to it if it is not locked', () => {
+    const dough = new Dough(presets);
+    dough.hydration.setTargetHydration = jest.fn().mockImplementation((_: number) => { })
+    expect(dough.hydration.targetHydrationLocked).toBeFalsy();
+    dough.water.setWaterWeight(1000);
+    expect(dough.hydration.setTargetHydration).toHaveBeenCalledWith(dough.totalHydration * 100);
+  })
 
+  it('reacts to total hydration changing but doesnt set target hydration when it was locked', () => {
+    const dough = new Dough(presets);
+    dough.hydration.setTargetHydration = jest.fn().mockImplementation((_: number) => { })
+    dough.hydration.toggleTargetHydrationLock();
+    expect(dough.hydration.targetHydrationLocked).toBeTruthy();
+    dough.water.setWaterWeight(666);
+    expect(dough.hydration.setTargetHydration).not.toHaveBeenCalled();
+  })
 
-})
+  it('can multiply flour, water and leaven weigh to match target dough weight when it is set and the target hydration was locked', () => {
+    const dough = new Dough(presets);
+    dough.hydration.setTargetHydration(100);
+    dough.hydration.toggleTargetHydrationLock();
+    dough.flour.setFlourWeight(10);
+    dough.water.setWaterWeight(10);
+    dough.leaven.setLeavenWeight(0);
+
+    dough.flour.setFlourWeight = jest.fn().mockImplementation((_: number) => { })
+    dough.water.setWaterWeight = jest.fn().mockImplementation((_: number) => { })
+    dough.leaven.setLeavenWeight = jest.fn().mockImplementation((_: number) => { })
+
+    dough.setTargetDoughWeight(200);
+    expect(dough.flour.setFlourWeight).toHaveBeenCalled();
+    expect(dough.water.setWaterWeight).toHaveBeenCalled();
+    expect(dough.leaven.setLeavenWeight).toHaveBeenCalledWith(0)
+  })
+});

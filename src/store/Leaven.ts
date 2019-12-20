@@ -34,7 +34,8 @@ export class Leaven {
   }
 
   @computed public get leavenWater(): number {
-    if (this.leavenHydration != null && this.leavenWeight != null) {
+    if (this.leavenHydration != null &&
+      this.leavenWeight != null) {
       return (this.leavenWeight / (1 + this.leavenHydration / 100)) * (this.leavenHydration / 100);
     }
     return 0;
