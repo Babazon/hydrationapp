@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { getDecimalForFixed } from '../utilities/getDecimalForFixed';
 import { TextWithAccessibility } from './TextWithAccessibility';
 
 interface IProps {
@@ -33,7 +34,7 @@ export class NumberBox extends React.Component<IProps>{
         {!this.props.isKeyboardActive &&
           (
             <TextWithAccessibility style={styles.staticValue}>
-              {this.props.value.toFixed(0)}
+              {this.props.value.toFixed(getDecimalForFixed(this.props.value))}
             </TextWithAccessibility>
           )
         }
@@ -44,11 +45,7 @@ export class NumberBox extends React.Component<IProps>{
               keyboardType={'default'}
               autoFocus
               style={styles.textInput}
-              value={
-                this.props.value > 0 ?
-                  this.props.value.toFixed(0) + '' :
-                  ''
-              }
+              value={this.props.value.toFixed(getDecimalForFixed(this.props.value)) + ''}
               onChangeText={this.onChangeText} />
           )
         }

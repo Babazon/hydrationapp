@@ -2,6 +2,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Dough } from '../store/Dough';
+import { getDecimalForFixed } from '../utilities/getDecimalForFixed';
 import { TextWithAccessibility } from './TextWithAccessibility';
 
 interface IProps {
@@ -21,28 +22,30 @@ export class InfoBlock extends React.Component<IProps>{
         <View style={styles.infoRow}>
           <TextWithAccessibility style={styles.infoStyle}>Total Flour</TextWithAccessibility>
           <View style={styles.dottedLine} />
-          <TextWithAccessibility style={styles.infoStyle}>{dough.totalFlour.toFixed(dough.totalFlour % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
+          <TextWithAccessibility style={styles.infoStyle}>
+            {dough.totalFlour.toFixed(getDecimalForFixed(dough.totalFlour))} {dough.userInterface.languageConstants!._gram_abbvr}</TextWithAccessibility>
         </View>
 
         <View style={styles.infoRow}>
           <TextWithAccessibility style={styles.infoStyle}>Total Water</TextWithAccessibility>
           <View style={styles.dottedLine} />
-          <TextWithAccessibility style={styles.infoStyle}>{dough.totalWater.toFixed(dough.totalWater % 1 > 0 ? 2 : 0)} g</TextWithAccessibility>
+          <TextWithAccessibility style={styles.infoStyle}>
+            {dough.totalWater.toFixed(getDecimalForFixed(dough.totalWater))} {dough.userInterface.languageConstants!._gram_abbvr}</TextWithAccessibility>
         </View>
 
         <View style={styles.infoRow}>
           <TextWithAccessibility style={styles.infoStyle}>Leaven</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {dough.leaven.weight.toFixed(dough.leaven.weight % 1 > 0 ? 2 : 0)} g
-            </TextWithAccessibility>
+            {dough.leaven.weight.toFixed(getDecimalForFixed(dough.leaven.weight))} {dough.userInterface.languageConstants!._gram_abbvr}
+          </TextWithAccessibility>
         </View>
 
         <View style={styles.infoRow}>
           <TextWithAccessibility style={styles.infoStyle}>Inoculation</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {(dough.leaven.inoculation).toFixed(dough.leaven.inoculation % 1 > 0 ? 2 : 0)}{dough.userInterface.languageConstants!._percent}
+            {(dough.leaven.inoculation).toFixed(getDecimalForFixed(dough.leaven.inoculation))} {dough.userInterface.languageConstants!._percent}
           </TextWithAccessibility>
         </View>
 
@@ -50,7 +53,7 @@ export class InfoBlock extends React.Component<IProps>{
           <TextWithAccessibility style={styles.infoStyle}>Recommended Salt</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {dough.recommendedSalt.toFixed(dough.recommendedSalt % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._gram_abbvr}
+            {dough.recommendedSalt.toFixed(getDecimalForFixed(dough.recommendedSalt))} {dough.userInterface.languageConstants!._gram_abbvr}
           </TextWithAccessibility>
         </View>
 
@@ -59,7 +62,7 @@ export class InfoBlock extends React.Component<IProps>{
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
             {/* tslint:disable-next-line: max-line-length*/}
-            {(dough.totalFlour + dough.totalWater + dough.recommendedSalt).toFixed((dough.totalFlour + dough.totalWater + dough.recommendedSalt) % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._gram_abbvr}
+            {(dough.totalFlour + dough.totalWater + dough.recommendedSalt).toFixed(getDecimalForFixed(dough.totalFlour + dough.totalWater + dough.recommendedSalt))} {dough.userInterface.languageConstants!._gram_abbvr}
           </TextWithAccessibility>
         </View>
 
@@ -67,7 +70,7 @@ export class InfoBlock extends React.Component<IProps>{
           <TextWithAccessibility style={styles.infoStyle}>Post Bake Weight</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {dough.postBakeWeight.toFixed(dough.postBakeWeight % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._gram_abbvr}
+            {dough.postBakeWeight.toFixed(getDecimalForFixed(dough.postBakeWeight))} {dough.userInterface.languageConstants!._gram_abbvr}
           </TextWithAccessibility>
         </View>
 
@@ -75,7 +78,7 @@ export class InfoBlock extends React.Component<IProps>{
           <TextWithAccessibility style={styles.infoStyle}>Hydration</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {(dough.totalHydration * 100).toFixed((dough.totalHydration * 100) % 1 > 0 ? 2 : 0)}{dough.userInterface.languageConstants!._percent}
+            {(dough.totalHydration * 100).toFixed(getDecimalForFixed(dough.totalHydration * 100))} {dough.userInterface.languageConstants!._percent}
           </TextWithAccessibility>
         </View>
 
@@ -83,7 +86,7 @@ export class InfoBlock extends React.Component<IProps>{
           <TextWithAccessibility style={styles.infoStyle}>Initial Volume (Experimental)</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {(dough.experimentalDoughVolume).toFixed(dough.experimentalDoughVolume % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._liter_abbvr}
+            {(dough.experimentalDoughVolume).toFixed(getDecimalForFixed(dough.experimentalDoughVolume))} {dough.userInterface.languageConstants!._liter_abbvr}
           </TextWithAccessibility>
         </View>
 
@@ -91,7 +94,7 @@ export class InfoBlock extends React.Component<IProps>{
           <TextWithAccessibility style={styles.infoStyle}>Final Volume (Experimental)</TextWithAccessibility>
           <View style={styles.dottedLine} />
           <TextWithAccessibility style={styles.infoStyle}>
-            {(dough.experimentalBulkVolume).toFixed(dough.experimentalBulkVolume % 1 > 0 ? 2 : 0)} {dough.userInterface.languageConstants!._liter_abbvr}
+            {(dough.experimentalBulkVolume).toFixed(getDecimalForFixed(dough.experimentalBulkVolume))} {dough.userInterface.languageConstants!._liter_abbvr}
           </TextWithAccessibility>
         </View>
 

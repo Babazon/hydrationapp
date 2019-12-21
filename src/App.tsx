@@ -10,14 +10,10 @@ import { TextWithAccessibility } from './Components/TextWithAccessibility';
 import { ErrorBoundary } from './ErrorBoundary';
 import dough from './store/Dough';
 
-// tslint:disable: max-line-length
-
-// TODO : Move text to language constants file or locize
-
 @observer
 export default class App extends React.Component {
 
-  constructor(props: any) {
+  constructor(props: {}) {
     super(props);
   }
 
