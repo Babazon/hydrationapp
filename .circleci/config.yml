@@ -13,6 +13,8 @@ jobs:
       - restore_cache:
           key: node-v1-{{ checksum "package.json" }}-{{ arch }}
 
+      - run: gem install cocoapods --version 1.7.5
+
       - run: yarn install
 
       - run: yarn tsc
