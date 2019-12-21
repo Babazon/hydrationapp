@@ -158,4 +158,39 @@ describe('Dough store tests', () => {
     expect(dough.water.setWeight).toHaveBeenCalled();
     expect(dough.leaven.setWeight).toHaveBeenCalled()
   })
+
+  it('can adjust flour, leaven and water weights from scratch using target dough weight, hydration and inoculation', () => {
+
+    const dough = new Dough(presets);
+
+
+    // prepare
+    dough.water.setWeight(0);
+    dough.flour.setWeight(0);
+    dough.leaven.setWeight(0);
+
+    // set required fields
+    dough.setTargetDoughWeight(1000);
+    dough.leaven.setTargetInoculation(20);
+    dough.hydration.setTargetHydration(100);
+    dough.leaven.setLeavenHydration(100);
+
+    dough.leaven.toggleHydrationLocked();
+    dough.hydration.toggleLocked();
+
+    // set spies
+    dough.flour.setWeight = jest.fn().mockImplementation((_: number) => { });
+    dough.leaven.setWeight = jest.fn().mockImplementation((_: number) => { });
+    dough.water.setWeight = jest.fn().mockImplementation((_: number) => { });
+
+
+    // call function
+    (dough as any).adjustWeightValuesForTargetDoughWeight();
+
+    // assertion
+
+    expect(dough.flour.setWeight).toHaveBeenCalledWith(449.59985612804604);
+    expect(dough.water.setWeight).toHaveBeenCalledWith(449.5998561280461);
+    expect(dough.leaven.setWeight).toHaveBeenCalledWith(89.91997122560922)
+  })
 });
