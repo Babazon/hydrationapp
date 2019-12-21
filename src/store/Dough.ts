@@ -18,7 +18,7 @@ export class Dough {
     reaction(() => this.targetDoughWeight, (targetDoughWeight: number) => {
       if (this.hydration.isLocked) {
         const actualTargetFlourWeight: number = targetDoughWeight * (1 / (1 + this.hydration.targetHydration / 100 + this.saltRatio));
-        const ratioToMultiply: number = actualTargetFlourWeight / this.totalFlour;
+        const ratioToMultiply: number = (actualTargetFlourWeight / this.totalFlour) ?? 0; // in case of divide by 0
 
         this.flour.setWeight(this.flour.weight * ratioToMultiply);
         this.water.setWeight(this.water.weight * ratioToMultiply);
@@ -29,7 +29,7 @@ export class Dough {
     reaction(() => this.hydration.isLocked, (_: boolean) => {
       if (this.hydration.isLocked && this.targetDoughWeight) {
         const actualTargetFlourWeight: number = this.targetDoughWeight * (1 / (1 + this.hydration.targetHydration / 100 + this.saltRatio));
-        const ratioToMultiply: number = actualTargetFlourWeight / this.totalFlour;
+        const ratioToMultiply: number = (actualTargetFlourWeight / this.totalFlour) ?? 0; // in case of divide by 0
 
         this.flour.setWeight(this.flour.weight * ratioToMultiply);
         this.water.setWeight(this.water.weight * ratioToMultiply);
@@ -135,7 +135,9 @@ export class Dough {
   @observable public targetDoughWeight: number = 0;
 
   @action public setTargetDoughWeight = (value: number) => {
-    this.targetDoughWeight = value;
+    if (value >= 0) {
+      this.targetDoughWeight = value;
+    }
   }
 
   @computed public get bakedTargetDoughWeight(): number {

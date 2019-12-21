@@ -19,7 +19,8 @@ export class Flour extends Generic {
   @computed public get flourWeightToMatchTargetHydration(): number {
     if (this.dough.water.weight != null &&
       this.dough.leaven.weight != null &&
-      this.dough.leaven.leavenHydration != null) {
+      this.dough.leaven.leavenHydration != null &&
+      this.dough.hydration.targetHydration > 0) {
       return ((this.dough.totalWater / this.dough.hydration.targetHydration) * 100) - this.dough.leaven.leavenFlour;
     }
     return 0;

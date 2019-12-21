@@ -63,7 +63,7 @@ export class Leaven extends Generic {
   }
 
   @computed public get inoculation(): number {
-    if (!isNaN(this.weight / this.dough.flour.weight)) {
+    if (!isNaN(this.weight / this.dough.flour.weight) && this.dough.flour.weight > 0) { // in case of divide by 0
       return (this.weight / this.dough.flour.weight) * 100;
     }
     return 0;
