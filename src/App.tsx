@@ -4,10 +4,10 @@ import React from 'react';
 import { RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { InfoBlock } from './components/InfoBlock';
-import { PresetButtonsRow } from './components/PresetButtonsRow';
-import { SliderRow } from './components/SliderRow';
-import { TextWithAccessibility } from './components/TextWithAccessibility';
+import { InfoBlock } from './Components/InfoBlock';
+import { PresetButtonsRow } from './Components/PresetButtonsRow';
+import { SliderRow } from './Components/SliderRow';
+import { TextWithAccessibility } from './Components/TextWithAccessibility';
 import { ErrorBoundary } from './ErrorBoundary';
 import dough from './store/Dough';
 
