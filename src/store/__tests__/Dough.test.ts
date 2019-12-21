@@ -147,7 +147,7 @@ describe('Dough store tests', () => {
     dough.hydration.toggleLocked();
     dough.flour.setWeight(10);
     dough.water.setWeight(10);
-    dough.leaven.setWeight(0);
+    dough.leaven.setWeight(10);
 
     dough.flour.setWeight = jest.fn().mockImplementation((_: number) => { })
     dough.water.setWeight = jest.fn().mockImplementation((_: number) => { })
@@ -156,6 +156,6 @@ describe('Dough store tests', () => {
     dough.setTargetDoughWeight(200);
     expect(dough.flour.setWeight).toHaveBeenCalled();
     expect(dough.water.setWeight).toHaveBeenCalled();
-    expect(dough.leaven.setWeight).toHaveBeenCalledWith(0)
+    expect(dough.leaven.setWeight).toHaveBeenCalled()
   })
 });

@@ -23,6 +23,20 @@ export class Leaven extends Generic {
   @observable public weight: number = 200;
   @observable public leavenHydration: number = 100;
 
+  @observable public isHydrationLocked: boolean = false;
+
+  @action public toggleHydrationLocked = (): void => {
+    this.isHydrationLocked = !this.isHydrationLocked;
+  }
+
+  @observable public targetInoculation: number = 20;
+
+  @action public setTargetInoculation = (value: number): void => {
+    if (value > 0) {
+      this.targetInoculation = value;
+    }
+  }
+
   @computed public get leavenFlour(): number {
     if (this.leavenHydration != null && this.weight != null) {
       return (this.weight / (1 + this.leavenHydration / 100));
