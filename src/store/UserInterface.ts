@@ -52,6 +52,12 @@ export class UserInterface {
     this.leavenHydrationInputMode = true;
   }
 
+  @observable public leavenInoculationInputMode: boolean = false;
+
+  @action public onLeavenInoculationValueClick = () => {
+    this.leavenInoculationInputMode = true;
+  }
+
   @observable public targetHydrationInputMode: boolean = false;
 
   @action public onTargetHydrationValueClick = () => {

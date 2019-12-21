@@ -21,7 +21,7 @@ export const presets = {
     _percent: '%',
     _recommended_salt: 'Recommended Salt',
     _reset: 'Reset',
-    _target_dough_weight: 'Target Dough Weight (Hydration must be locked)',
+    _target_dough_weight: 'Target Dough Weight',
     _target_hydration: 'Target Hydration',
     _total_baked_weight: 'Total Baked Weight',
     _total_dough_weight: 'Total Dough Weight',

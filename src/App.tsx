@@ -163,29 +163,31 @@ export default class App extends React.Component {
                   />
                 </View>
 
-                <View style={styles.sliderRow}>
-                  <SliderRow
-                    value={leaven.targetInoculation}
-                    onValueChange={leaven.setTargetInoculation}
-                    onValueClick={() => {/* */ }}
-                    onSymbolClick={() => {/* */ }}
-                    valueAffix={userInterface.languageConstants!._percent}
-                    incrementAmount={userInterface.appPresets.leavenWeightIncrementAmount}
-                    minValue={1}
-                    maxValue={100}
-                    isKeyboardActive={false}
-                    label={'Target Inoculation'}
-                  />
-                </View>
-                <View style={styles.presetRow}>
-                  <PresetButtonsRow
-                    presetValues={userInterface.leavenInoculationPresets}
-                    onClickCallback={leaven.setTargetInoculation}
-                    valueSuffix={userInterface.languageConstants!._percent}
-                    selectedValue={leaven.targetInoculation}
-                  />
-                </View>
-
+                {(flour.weight === 0 || water.weight === 0 || leaven.weight === 0) &&
+                  <>
+                    <View style={styles.sliderRow}>
+                      <SliderRow
+                        value={leaven.targetInoculation}
+                        onValueChange={leaven.setTargetInoculation}
+                        onValueClick={userInterface.onLeavenInoculationValueClick}
+                        valueAffix={userInterface.languageConstants!._percent}
+                        incrementAmount={userInterface.appPresets.leavenWeightIncrementAmount}
+                        minValue={1}
+                        maxValue={100}
+                        isKeyboardActive={userInterface.leavenInoculationInputMode}
+                        label={'Target Inoculation'}
+                      />
+                    </View>
+                    <View style={styles.presetRow}>
+                      <PresetButtonsRow
+                        presetValues={userInterface.leavenInoculationPresets}
+                        onClickCallback={leaven.setTargetInoculation}
+                        valueSuffix={userInterface.languageConstants!._percent}
+                        selectedValue={leaven.targetInoculation}
+                      />
+                    </View>
+                  </>
+                }
               </>}
 
             {/* Info Block */}
