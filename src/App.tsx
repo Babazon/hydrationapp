@@ -124,7 +124,7 @@ export default class App extends React.Component {
             <View style={styles.sliderRow}>
               <SliderRow
                 isLocked={hydration.isLocked}
-                onLockValue={hydration.toggleLocked}
+                toggleLocked={hydration.toggleLocked}
                 value={hydration.targetHydration}
                 onValueChange={hydration.setTargetHydration}
                 onValueClick={userInterface.onTargetHydrationValueClick}

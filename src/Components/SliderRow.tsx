@@ -16,7 +16,7 @@ export interface ISliderRowProps {
   minValue: number;
   maxValue: number;
   isLocked?: boolean;
-  onLockValue?(): void;
+  toggleLocked?(): void;
   incrementAmount: number;
   onValueClick(): void;
   onSymbolClick?(): void;
@@ -37,7 +37,7 @@ export class SliderRow extends React.Component<ISliderRowProps>{
       label,
       maxValue,
       minValue,
-      onLockValue,
+      toggleLocked,
       onSymbolClick,
       onValueChange,
       onValueClick,
@@ -49,10 +49,16 @@ export class SliderRow extends React.Component<ISliderRowProps>{
       <View style={styles.container}>
         <View style={styles.upperRowContainer}>
           <TextWithAccessibility style={styles.semiboldText}>{label}</TextWithAccessibility>
-          <View style={{ width: onLockValue && isLocked != null ? 32 : 0, marginLeft: onLockValue && isLocked != null ? 4 : 0 }}>
+          <View style={{
+            alignItems: 'center',
+            alignSelf: 'flex-end',
+            justifyContent: 'center',
+            marginLeft: toggleLocked && isLocked != null ? 4 : 0,
+            width: toggleLocked && isLocked != null ? 32 : 0
+          }}>
 
-            {onLockValue && isLocked != null &&
-              <TouchableOpacity onPress={this.props.onLockValue} style={styles.lockButtonContainer}>
+            {toggleLocked && isLocked != null &&
+              <TouchableOpacity onPress={this.props.toggleLocked} style={styles.lockButtonContainer}>
                 <>
                   {isLocked &&
                     <Image source={Assets.icon_locked} style={styles.lockedIcon} />}
@@ -113,7 +119,6 @@ const styles = StyleSheet.create({
   lockButtonContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10
   },
   lockedIcon: {
     height: 20,
@@ -148,6 +153,6 @@ const styles = StyleSheet.create({
   upperRowContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-start'
+    justifyContent: 'space-between',
   }
 });
