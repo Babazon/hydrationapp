@@ -147,48 +147,43 @@ export default class App extends React.Component {
               />
             </View>
 
-            {__DEV__ &&
-              <>
-                <View style={styles.sliderRow}>
-                  <SliderRow
-                    value={targetDoughWeight}
-                    onValueChange={setTargetDoughWeight}
-                    onValueClick={userInterface.onTargetDoughValueClick}
-                    valueAffix={userInterface.languageConstants!._gram_abbvr}
-                    incrementAmount={100}
-                    minValue={2000}
-                    maxValue={100000}
-                    isKeyboardActive={userInterface.targetDoughWeightInputMode}
-                    label={userInterface.languageConstants!._target_dough_weight}
-                  />
-                </View>
+            <>
+              <View style={styles.sliderRow}>
+                <SliderRow
+                  value={targetDoughWeight}
+                  onValueChange={setTargetDoughWeight}
+                  onValueClick={userInterface.onTargetDoughValueClick}
+                  valueAffix={userInterface.languageConstants!._gram_abbvr}
+                  incrementAmount={100}
+                  minValue={2000}
+                  maxValue={100000}
+                  isKeyboardActive={userInterface.targetDoughWeightInputMode}
+                  label={userInterface.languageConstants!._target_dough_weight}
+                />
+              </View>
 
-                {(flour.weight === 0 || water.weight === 0 || leaven.weight === 0) &&
-                  <>
-                    <View style={styles.sliderRow}>
-                      <SliderRow
-                        value={leaven.targetInoculation}
-                        onValueChange={leaven.setTargetInoculation}
-                        onValueClick={userInterface.onLeavenInoculationValueClick}
-                        valueAffix={userInterface.languageConstants!._percent}
-                        incrementAmount={userInterface.appPresets.leavenWeightIncrementAmount}
-                        minValue={1}
-                        maxValue={100}
-                        isKeyboardActive={userInterface.leavenInoculationInputMode}
-                        label={'Target Inoculation'}
-                      />
-                    </View>
-                    <View style={styles.presetRow}>
-                      <PresetButtonsRow
-                        presetValues={userInterface.leavenInoculationPresets}
-                        onClickCallback={leaven.setTargetInoculation}
-                        valueSuffix={userInterface.languageConstants!._percent}
-                        selectedValue={leaven.targetInoculation}
-                      />
-                    </View>
-                  </>
-                }
-              </>}
+              <View style={styles.sliderRow}>
+                <SliderRow
+                  value={leaven.targetInoculation}
+                  onValueChange={leaven.setTargetInoculation}
+                  onValueClick={userInterface.onLeavenInoculationValueClick}
+                  valueAffix={userInterface.languageConstants!._percent}
+                  incrementAmount={userInterface.appPresets.leavenWeightIncrementAmount}
+                  minValue={1}
+                  maxValue={100}
+                  isKeyboardActive={userInterface.leavenInoculationInputMode}
+                  label={userInterface.languageConstants!._target_inoculation}
+                />
+              </View>
+              <View style={styles.presetRow}>
+                <PresetButtonsRow
+                  presetValues={userInterface.leavenInoculationPresets}
+                  onClickCallback={leaven.setTargetInoculation}
+                  valueSuffix={userInterface.languageConstants!._percent}
+                  selectedValue={leaven.targetInoculation}
+                />
+              </View>
+            </>
 
             {/* Info Block */}
             <InfoBlock dough={dough} />
