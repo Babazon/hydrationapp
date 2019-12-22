@@ -7,17 +7,15 @@ export class Leaven extends Generic {
   constructor(private readonly dough: Dough) {
     super();
 
-    reaction(() => this.weight, (_) => {
-      if (this.dough.hydration.isLocked) {
-        this.dough.water.setWeight(this.dough.water.waterWeightToMatchTargetHydration);
-      }
-    });
+    reaction(() => this.weight, this.updateWeightToMatchTargetHydration);
 
-    reaction(() => this.leavenHydration, (_) => {
-      if (this.dough.hydration.isLocked) {
-        this.dough.water.setWeight(this.dough.water.waterWeightToMatchTargetHydration);
-      }
-    });
+    reaction(() => this.leavenHydration, this.updateWeightToMatchTargetHydration);
+  }
+
+  private updateWeightToMatchTargetHydration = (_: number): void => {
+    if (this.dough.hydration.isLocked) {
+      this.dough.water.setWeight(this.dough.water.waterWeightToMatchTargetHydration);
+    }
   }
 
   @observable public weight: number = 200;

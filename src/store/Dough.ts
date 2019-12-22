@@ -8,6 +8,7 @@ import { Water } from './Water';
 
 export class Dough {
 
+  // tslint:disable-next-line: cognitive-complexity
   constructor(protected readonly appPresets: any) {
     reaction(() => this.totalHydration, (totalHydration: number) => {
       if (!this.hydration.isLocked) {
