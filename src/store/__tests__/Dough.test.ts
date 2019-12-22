@@ -59,7 +59,7 @@ describe('Dough store tests', () => {
     dough.flour.setWeight(1000);
     dough.leaven.setWeight(1000);
     dough.leaven.setLeavenHydration(100);
-    expect(dough.totalHydration).toBe(100 / 100);
+    expect(dough.totalHydration).toBe(1);
   })
 
   it('can yield recommended salt amount', () => {
