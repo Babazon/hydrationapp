@@ -1,12 +1,12 @@
 import 'es6-symbol/implement';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
+import { FlatList, RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+import { computed } from 'mobx';
 import { InfoBlock } from './Components/InfoBlock';
-import { PresetButtonsRow } from './Components/PresetButtonsRow';
-import { SliderRow } from './Components/SliderRow';
+import { ISliderRowProps, SliderRow } from './Components/SliderRow';
 import { TextWithAccessibility } from './Components/TextWithAccessibility';
 import { ErrorBoundary } from './ErrorBoundary';
 import dough from './store/Dough';
@@ -18,8 +18,115 @@ export default class App extends React.Component {
     super(props);
   }
 
+  @computed private get sliderRowData(): ISliderRowProps[] {
+    const { flour, water, hydration, leaven, userInterface, targetDoughWeight, setTargetDoughWeight } = dough;
+
+    return [
+      {
+        incrementAmount: userInterface.appPresets.flourIncrementAmount,
+        isKeyboardActive: userInterface.flourInputMode,
+        label: userInterface.languageConstants!._flour_weight,
+        maxValue: flour.maxFlour,
+        minValue: flour.minFlour,
+        onSymbolClick: () => {
+          /* */
+        },
+        onValueChange: flour.setWeight,
+        onValueClick: userInterface.onFlourValueClick,
+        value: flour.weight,
+        valueAffix: userInterface.languageConstants!._gram_abbvr
+      },
+      {
+        incrementAmount: userInterface.appPresets.leavenWeightIncrementAmount,
+        isKeyboardActive: userInterface.leavenWeightInputMode,
+        label: userInterface.languageConstants!._leaven_weight,
+        maxValue: leaven.maxLeaven,
+        minValue: leaven.minLeaven,
+        onSymbolClick: () => {
+          /* */
+        },
+        onValueChange: leaven.setWeight,
+        onValueClick: userInterface.onLeavenWeightValueClick,
+        value: leaven.weight,
+        valueAffix: userInterface.languageConstants!._gram_abbvr
+      },
+      {
+        incrementAmount: userInterface.appPresets.leavenHydrationIncrementAmount,
+        isKeyboardActive: userInterface.leavenHydrationInputMode,
+        isLocked: leaven.isHydrationLocked,
+        label: userInterface.languageConstants!._leaven_hydration,
+        maxValue: leaven.maxLeavenHydration,
+        minValue: leaven.minLeavenHydration,
+        onValueChange: leaven.setLeavenHydration,
+        onValueClick: userInterface.onLeavenHydrationValueClick,
+        toggleLocked: leaven.toggleHydrationLocked,
+        value: leaven.leavenHydration,
+        valueAffix: userInterface.languageConstants!._percent
+      },
+      {
+        incrementAmount: userInterface.appPresets.waterIncrementAmount,
+        isKeyboardActive: userInterface.waterInputMode,
+        label: userInterface.languageConstants!._water,
+        maxValue: water.maxWater,
+        minValue: water.minWater,
+        onSymbolClick: () => {
+          /* */
+        },
+        onValueChange: water.setWeight,
+        onValueClick: userInterface.onWaterValueClick,
+        value: water.weight,
+        valueAffix: userInterface.languageConstants!._gram_abbvr
+      },
+      {
+        incrementAmount: userInterface.appPresets.targetHydrationIncrementAmount,
+        isKeyboardActive: userInterface.targetHydrationInputMode,
+        isLocked: hydration.isLocked,
+        label: userInterface.languageConstants!._target_hydration,
+        maxValue: hydration.maxTargetHydration,
+        minValue: hydration.minTargetHydration,
+        onValueChange: hydration.setTargetHydration,
+        onValueClick: userInterface.onTargetHydrationValueClick,
+        toggleLocked: hydration.toggleLocked,
+        value: hydration.targetHydration,
+        valueAffix: userInterface.languageConstants!._percent
+      },
+      {
+        incrementAmount: 1000,
+        isKeyboardActive: userInterface.targetDoughWeightInputMode,
+        label: userInterface.languageConstants!._target_dough_weight,
+        maxValue: 50000,
+        minValue: 0,
+        onValueChange: setTargetDoughWeight,
+        onValueClick: userInterface.onTargetDoughValueClick,
+        value: targetDoughWeight,
+        valueAffix: userInterface.languageConstants!._gram_abbvr
+      },
+      {
+        incrementAmount: 5,
+        isKeyboardActive: userInterface.leavenInoculationInputMode,
+        label: userInterface.languageConstants!._target_inoculation,
+        maxValue: 100,
+        minValue: 0,
+        onValueChange: leaven.setTargetInoculation,
+        onValueClick: userInterface.onLeavenInoculationValueClick,
+        value: leaven.targetInoculation,
+        valueAffix: userInterface.languageConstants!._percent
+      }
+    ];
+  }
+
+  private renderSlider = ({ item }: { item: ISliderRowProps }) => {
+    return (
+      <View style={styles.sliderRow}>
+        <SliderRow
+          {...item}
+        />
+      </View>
+    );
+  }
+
   public render() {
-    const { flour, water, hydration, leaven, userInterface, resetValues, targetDoughWeight, setTargetDoughWeight } = dough;
+    const { userInterface, resetValues } = dough;
 
     return (
       <ErrorBoundary>
@@ -30,160 +137,13 @@ export default class App extends React.Component {
             refreshControl={<RefreshControl title={userInterface.languageConstants!._reset} refreshing={false} onRefresh={resetValues} />}
             contentContainerStyle={styles.scrollViewContentStyle}>
 
-            {/* Flour Weight */}
-            <View style={styles.sliderRow}>
-              <SliderRow
-                value={flour.weight}
-                onValueChange={flour.setWeight}
-                onValueClick={userInterface.onFlourValueClick}
-                onSymbolClick={() => {/* */ }}
-                valueAffix={userInterface.languageConstants!._gram_abbvr}
-                incrementAmount={userInterface.appPresets.flourIncrementAmount}
-                minValue={flour.minFlour}
-                maxValue={flour.maxFlour}
-                isKeyboardActive={userInterface.flourInputMode}
-                label={userInterface.languageConstants!._flour_weight}
-              />
-            </View>
-            <View style={styles.presetRow}>
-              <PresetButtonsRow
-                presetValues={userInterface.flourWeightPresets}
-                onClickCallback={flour.setWeight}
-                valueSuffix={userInterface.languageConstants!._gram_abbvr}
-                selectedValue={flour.weight}
-              />
-            </View>
-
-            {/* Leaven Weight */}
-            <View style={styles.sliderRow}>
-              <SliderRow
-                value={leaven.weight}
-                onValueChange={leaven.setWeight}
-                onValueClick={userInterface.onLeavenWeightValueClick}
-                onSymbolClick={() => {/* */ }}
-                valueAffix={userInterface.languageConstants!._gram_abbvr}
-                incrementAmount={userInterface.appPresets.leavenWeightIncrementAmount}
-                minValue={leaven.minLeaven}
-                maxValue={leaven.maxLeaven}
-                isKeyboardActive={userInterface.leavenWeightInputMode}
-                label={userInterface.languageConstants!._leaven_weight}
-              />
-            </View>
-            <View style={styles.presetRow}>
-              <PresetButtonsRow
-                presetValues={userInterface.leavenInoculationPresets}
-                onClickCallback={leaven.setLeavenWeightUsingInoculation}
-                valueSuffix={userInterface.languageConstants!._percent}
-                selectedValue={leaven.inoculation}
-              />
-            </View>
-
-            {/* Leaven Hydration  */}
-            <View style={styles.sliderRow}>
-              <SliderRow
-                isLocked={leaven.isHydrationLocked}
-                toggleLocked={leaven.toggleHydrationLocked}
-                value={leaven.leavenHydration}
-                onValueChange={leaven.setLeavenHydration}
-                onValueClick={userInterface.onLeavenHydrationValueClick}
-                valueAffix={userInterface.languageConstants!._percent}
-                incrementAmount={userInterface.appPresets.leavenHydrationIncrementAmount}
-                minValue={leaven.minLeavenHydration}
-                maxValue={leaven.maxLeavenHydration}
-                isKeyboardActive={userInterface.leavenHydrationInputMode}
-                label={userInterface.languageConstants!._leaven_hydration}
-              />
-            </View>
-            <View style={styles.presetRow}>
-              <PresetButtonsRow
-                isLocked={leaven.isHydrationLocked}
-                presetValues={userInterface.leavenHydrationPresets}
-                onClickCallback={leaven.setLeavenHydration}
-                valueSuffix={userInterface.languageConstants!._percent}
-                selectedValue={leaven.leavenHydration}
-              />
-            </View>
-
-            {/* Water Weight */}
-            <View style={styles.sliderRow}>
-              <SliderRow
-                value={water.weight}
-                onValueChange={water.setWeight}
-                onValueClick={userInterface.onWaterValueClick}
-                onSymbolClick={() => {/* */ }}
-                valueAffix={userInterface.languageConstants!._gram_abbvr}
-                incrementAmount={userInterface.appPresets.waterIncrementAmount}
-                minValue={water.minWater}
-                maxValue={water.maxWater}
-                isKeyboardActive={userInterface.waterInputMode}
-                label={userInterface.languageConstants!._water}
-              />
-            </View>
-
-            {/* Target Hydration */}
-            <View style={styles.sliderRow}>
-              <SliderRow
-                isLocked={hydration.isLocked}
-                toggleLocked={hydration.toggleLocked}
-                value={hydration.targetHydration}
-                onValueChange={hydration.setTargetHydration}
-                onValueClick={userInterface.onTargetHydrationValueClick}
-                valueAffix={'%'}
-                incrementAmount={userInterface.appPresets.targetHydrationIncrementAmount}
-                minValue={hydration.minTargetHydration}
-                maxValue={hydration.maxTargetHydration}
-                isKeyboardActive={userInterface.targetHydrationInputMode}
-                label={userInterface.languageConstants!._target_hydration}
-              />
-            </View>
-
-            <View style={styles.presetRow}>
-              <PresetButtonsRow
-                isLocked={hydration.isLocked}
-                presetValues={userInterface.targetHydrationPresets}
-                onClickCallback={hydration.setTargetHydration}
-                valueSuffix={userInterface.languageConstants!._percent}
-                selectedValue={hydration.targetHydration}
-              />
-            </View>
-
-            <>
-              <View style={styles.sliderRow}>
-                <SliderRow
-                  value={targetDoughWeight}
-                  onValueChange={setTargetDoughWeight}
-                  onValueClick={userInterface.onTargetDoughValueClick}
-                  valueAffix={userInterface.languageConstants!._gram_abbvr}
-                  incrementAmount={100}
-                  minValue={2000}
-                  maxValue={100000}
-                  isKeyboardActive={userInterface.targetDoughWeightInputMode}
-                  label={userInterface.languageConstants!._target_dough_weight}
-                />
-              </View>
-
-              <View style={styles.sliderRow}>
-                <SliderRow
-                  value={leaven.targetInoculation}
-                  onValueChange={leaven.setTargetInoculation}
-                  onValueClick={userInterface.onLeavenInoculationValueClick}
-                  valueAffix={userInterface.languageConstants!._percent}
-                  incrementAmount={userInterface.appPresets.leavenWeightIncrementAmount}
-                  minValue={1}
-                  maxValue={100}
-                  isKeyboardActive={userInterface.leavenInoculationInputMode}
-                  label={userInterface.languageConstants!._target_inoculation}
-                />
-              </View>
-              <View style={styles.presetRow}>
-                <PresetButtonsRow
-                  presetValues={userInterface.leavenInoculationPresets}
-                  onClickCallback={leaven.setTargetInoculation}
-                  valueSuffix={userInterface.languageConstants!._percent}
-                  selectedValue={leaven.targetInoculation}
-                />
-              </View>
-            </>
+            <FlatList<ISliderRowProps>
+              keyExtractor={(item) => item.label}
+              renderItem={this.renderSlider}
+              data={this.sliderRowData}
+              bounces={false}
+              scrollEnabled={false}
+            />
 
             {/* Info Block */}
             <InfoBlock dough={dough} />
@@ -215,10 +175,6 @@ const styles = StyleSheet.create({
   creditText: {
     fontSize: 8,
     textAlign: 'center'
-  },
-  presetRow: {
-    height: 40,
-    marginBottom: 8
   },
   safeAreaView: {
     flex: 1,

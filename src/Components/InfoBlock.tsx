@@ -92,7 +92,7 @@ export class InfoBlock extends React.Component<IProps>{
   public render() {
 
     return (
-      <FlatList
+      <FlatList<InfoRenderData>
         contentContainerStyle={styles.infoBlock}
         keyExtractor={(item) => item.label}
         renderItem={this.renderDataRow}

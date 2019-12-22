@@ -85,14 +85,17 @@ export class Dough {
   @observable public userInterface: UserInterface = new UserInterface(this, this.appPresets);
 
   @action public resetValues = () => {
-    this.flour.weight = this.appPresets.initialFlourWeight;
-    this.water.weight = this.appPresets.initialWaterWeight;
-    this.leaven.weight = this.appPresets.initialLeavenWeight;
-    this.leaven.leavenHydration = this.appPresets.initialLeavenHydratioon;
+    this.flour.setWeight(this.appPresets.initialFlourWeight);
+    this.water.setWeight(this.appPresets.initialWaterWeight);
+    this.leaven.setWeight(this.appPresets.initialLeavenWeight);
+    this.leaven.setLeavenHydration(this.appPresets.initialLeavenHydratioon);
     this.hydration.isLocked = false;
     this.water.isLocked = false;
     this.flour.isLocked = false;
-    this.hydration.targetHydration = this.appPresets.initialTargetHydration;
+    this.leaven.isHydrationLocked = false;
+    this.hydration.setTargetHydration(this.appPresets.initialTargetHydration);
+    this.setTargetDoughWeight(0);
+    this.leaven.setTargetInoculation(0);
   }
 
   @computed public get saltRatio(): number {
