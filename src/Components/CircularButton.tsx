@@ -1,34 +1,34 @@
+import { observer } from 'mobx-react';
 import React from 'react';
-import { Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { Assets } from '../assets';
+import { Image, ImageURISource, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface IProps {
+  icon: ImageURISource;
   onPress(): void;
   disabled?: boolean;
 }
 
-export class IncrementButton extends React.Component<IProps>{
+@observer
+export class CircularButton extends React.Component<IProps>{
   public render() {
+    const { icon, onPress, disabled } = this.props;
     return (
-
-      <TouchableOpacity onPress={this.props.onPress}
-        disabled={this.props.disabled}
+      <TouchableOpacity onPress={onPress}
+        disabled={disabled}
         style={StyleSheet.flatten([
           styles.button,
           {
-            opacity: !this.props.disabled ? 1 : 0.5
+            opacity: !disabled ? 1 : 0.5
           }
         ])}>
-
-        <Image source={Assets.icon_plus}
+        <Image source={icon}
           style={StyleSheet.flatten([
             styles.icon,
             {
-              opacity: !this.props.disabled ? 1 : 0.5,
+              opacity: !disabled ? 1 : 0.5
             }
           ])}
         />
-
       </TouchableOpacity>
     );
   }

@@ -3,8 +3,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { Dimensions, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Assets } from '../assets';
-import { DecrementButton } from './DecrementButton';
-import { IncrementButton } from './IncrementButton';
+import { CircularButton } from './CircularButton';
 import { NumberBox } from './NumberBox';
 import { TextWithAccessibility } from './TextWithAccessibility';
 
@@ -69,7 +68,8 @@ export class SliderRow extends React.Component<ISliderRowProps>{
           </View>
         </View>
         <View style={styles.sliderContainer}>
-          <DecrementButton
+          <CircularButton
+            icon={Assets.icon_minus}
             disabled={isLocked}
             onPress={this.decrementValue}
           />
@@ -87,7 +87,8 @@ export class SliderRow extends React.Component<ISliderRowProps>{
             onSlidingComplete={onValueChange}
           />
           <View style={styles.minorHorizontalGap} />
-          <IncrementButton
+          <CircularButton
+            icon={Assets.icon_plus}
             disabled={isLocked}
             onPress={this.incrementValue}
           />
