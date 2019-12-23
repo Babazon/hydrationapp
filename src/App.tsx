@@ -1,7 +1,7 @@
 import 'es6-symbol/implement';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { FlatList, RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
+import { RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { computed } from 'mobx';
@@ -117,7 +117,7 @@ export default class App extends React.Component {
 
   private renderSlider = ({ item }: { item: ISliderRowProps }) => {
     return (
-      <View style={styles.sliderRow}>
+      <View style={styles.sliderRow} key={item.label}>
         <SliderRow
           {...item}
         />
@@ -137,17 +137,15 @@ export default class App extends React.Component {
             refreshControl={<RefreshControl title={userInterface.languageConstants!._reset} refreshing={false} onRefresh={resetValues} />}
             contentContainerStyle={styles.scrollViewContentStyle}>
 
-            <FlatList<ISliderRowProps>
-              keyExtractor={(item) => item.label}
-              renderItem={this.renderSlider}
-              data={this.sliderRowData.slice()}
-              bounces={false}
-              scrollEnabled={false}
-            />
+            {this.sliderRowData.slice().map((item: ISliderRowProps) => {
+              return this.renderSlider({ item });
+            })
+            }
 
             {/* Info Block */}
             <InfoBlock dough={dough} />
 
+            {/* CREDITS FOR TEST RELEASES */}
             <View style={styles.creditContainer}>
               <TextWithAccessibility style={styles.creditText}>
                 Code: @sourdoughpie

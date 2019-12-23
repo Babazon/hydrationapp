@@ -1,7 +1,7 @@
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Dough } from '../store/Dough';
 import { getDecimalForFixed } from '../utilities/getDecimalForFixed';
 import { TextWithAccessibility } from './TextWithAccessibility';
@@ -19,7 +19,7 @@ interface IProps {
 @observer
 export class InfoBlock extends React.Component<IProps>{
 
-  @computed private get renderData(): InfoRenderData[] {
+  @computed private get infoBlockData(): InfoRenderData[] {
     const { dough } = this.props;
 
     return [
@@ -79,7 +79,7 @@ export class InfoBlock extends React.Component<IProps>{
 
   private renderDataRow = ({ item }: { item: InfoRenderData }) => {
     return (
-      <View style={styles.infoRow}>
+      <View style={styles.infoRow} key={item.label}>
         <TextWithAccessibility style={styles.infoStyle}>{item.label}</TextWithAccessibility>
         <View style={styles.dottedLine} />
         <TextWithAccessibility style={styles.infoStyle}>
@@ -92,14 +92,12 @@ export class InfoBlock extends React.Component<IProps>{
   public render() {
 
     return (
-      <FlatList<InfoRenderData>
-        contentContainerStyle={styles.infoBlock}
-        keyExtractor={(item) => item.label}
-        renderItem={this.renderDataRow}
-        data={this.renderData}
-        bounces={false}
-        scrollEnabled={false}
-      />
+      <View style={styles.infoBlock}>
+        {
+          this.infoBlockData.slice().map((item: InfoRenderData) => {
+            return this.renderDataRow({ item });
+          })}
+      </View>
     );
   }
 }
