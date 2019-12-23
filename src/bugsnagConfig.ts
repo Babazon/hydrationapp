@@ -10,5 +10,3 @@ config.handlePromiseRejections = true;
 config.autoNotify = true;
 
 export const bugsnag = new Client(config);
-
-bugsnag.notify(new Error('test'));
