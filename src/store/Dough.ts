@@ -1,4 +1,5 @@
 import { action, computed, observable, reaction } from 'mobx';
+import { Alert } from 'react-native';
 import { presets } from '../env';
 import { Flour } from './Flour';
 import { Hydration } from './Hydration';
@@ -18,7 +19,7 @@ export class Dough {
 
     reaction(() => this.targetDoughWeight, (_: number) => {
       if (this.hydration.isLocked) {
-        if (this.flour.weight > 0 && this.water.weight > 0 && this.leaven.weight > 0) {
+        if (this.flour.weight > 0 && this.water.weight > 0 && this.leaven.weight > 0 && this.leaven.leavenHydration > 0) {
           this.adjustWeightValuesForTargetDoughWeightWithNonZeroWeights();
         } else if (this.leaven.isHydrationLocked &&
           this.leaven.leavenHydration > 0 &&
@@ -30,7 +31,7 @@ export class Dough {
 
     reaction(() => this.hydration.isLocked, (_: boolean) => {
       if (this.hydration.isLocked && this.targetDoughWeight) {
-        if (this.flour.weight > 0 && this.water.weight > 0 && this.leaven.weight > 0) {
+        if (this.flour.weight > 0 && this.water.weight > 0 && this.leaven.weight > 0 && this.leaven.leavenHydration > 0) {
           this.adjustWeightValuesForTargetDoughWeightWithNonZeroWeights();
         } else if (this.leaven.isHydrationLocked &&
           this.leaven.leavenHydration > 0 &&
@@ -133,7 +134,7 @@ export class Dough {
   }
 
   @computed public get totalHydration(): number {
-    if (this.totalFlour != null && this.totalWater != null && !isNaN(this.totalWater / this.totalFlour)) {
+    if (this.totalFlour > 0 && this.totalWater != null && !isNaN(this.totalWater / this.totalFlour)) {
       return this.totalWater / this.totalFlour;
     }
     return 0;
@@ -178,9 +179,22 @@ export class Dough {
   @observable public targetDoughWeight: number = 0;
 
   @action public setTargetDoughWeight = (value: number) => {
-    if (value >= 0) {
-      this.targetDoughWeight = value;
+    if (this.leaven.leavenHydration <= 0 || this.hydration.targetHydration <= 0) {
+      Alert.alert('One more step..', 'Please set Target Hydration and Leaven Hydration before calculating target dough weight..');
+      this.hydration.isLocked = false;
+      this.leaven.isHydrationLocked = false;
+    } else {
+      if (value > 0) {
+        this.targetDoughWeight = value;
+        this.hydration.isLocked = true;
+        this.leaven.isHydrationLocked = true;
+      } else {
+        this.targetDoughWeight = 0;
+        this.hydration.isLocked = false;
+        this.leaven.isHydrationLocked = false;
+      }
     }
+
   }
 
   @computed public get bakedTargetDoughWeight(): number {

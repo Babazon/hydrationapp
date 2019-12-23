@@ -109,7 +109,7 @@ export default class App extends React.Component {
         minValue: 0,
         onValueChange: leaven.setTargetInoculation,
         onValueClick: userInterface.onLeavenInoculationValueClick,
-        value: leaven.targetInoculation,
+        value: leaven.targetInoculation || leaven.inoculation, // targetIno = 0 should display inoculation instead
         valueAffix: userInterface.languageConstants!._percent
       }
     ];
@@ -140,7 +140,7 @@ export default class App extends React.Component {
             <FlatList<ISliderRowProps>
               keyExtractor={(item) => item.label}
               renderItem={this.renderSlider}
-              data={this.sliderRowData}
+              data={this.sliderRowData.slice()}
               bounces={false}
               scrollEnabled={false}
             />

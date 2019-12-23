@@ -1,4 +1,5 @@
 import { action, computed, observable, reaction } from 'mobx';
+import { Alert } from 'react-native';
 import { Dough } from './Dough';
 import { Generic } from './Generic';
 
@@ -30,9 +31,22 @@ export class Leaven extends Generic {
   @observable public targetInoculation: number = 20;
 
   @action public setTargetInoculation = (value: number): void => {
-    if (value > 0) {
-      this.targetInoculation = value;
+    if (this.leavenHydration <= 0 || this.dough.hydration.targetHydration <= 0) {
+      Alert.alert('One more step..', 'Please set Target Hydration and Leaven Hydration before calculating target dough weight..');
+      this.dough.hydration.isLocked = false;
+      this.isHydrationLocked = false;
+    } else {
+      if (value > 0) {
+        this.targetInoculation = value;
+        this.dough.hydration.isLocked = true;
+        this.isHydrationLocked = true;
+      } else {
+        this.targetInoculation = 0;
+        this.dough.hydration.isLocked = false;
+        this.isHydrationLocked = false;
+      }
     }
+
   }
 
   @computed public get leavenFlour(): number {
@@ -75,7 +89,7 @@ export class Leaven extends Generic {
   }
 
   @computed public get inoculation(): number {
-    if (!isNaN(this.weight / this.dough.flour.weight) && this.dough.flour.weight > 0) { // in case of divide by 0
+    if (!isNaN(this.weight / this.dough.flour.weight)) { // in case of divide by 0
       return (this.weight / this.dough.flour.weight) * 100;
     }
     return 0;

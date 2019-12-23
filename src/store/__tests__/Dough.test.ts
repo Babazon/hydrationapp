@@ -169,14 +169,13 @@ describe('Dough store tests', () => {
     dough.flour.setWeight(0);
     dough.leaven.setWeight(0);
 
-    // set required fields
-    dough.setTargetDoughWeight(1000);
-    dough.leaven.setTargetInoculation(20);
     dough.hydration.setTargetHydration(100);
     dough.leaven.setLeavenHydration(100);
 
-    dough.leaven.toggleHydrationLocked();
-    dough.hydration.toggleLocked();
+    // set required fields
+    dough.setTargetDoughWeight(1000);
+    dough.leaven.setTargetInoculation(20);
+
 
     // set spies
     dough.flour.setWeight = jest.fn().mockImplementation((_: number) => { });
