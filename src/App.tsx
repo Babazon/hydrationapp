@@ -5,6 +5,8 @@ import { RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { computed } from 'mobx';
+
+import './bugsnagConfig';
 import { InfoBlock } from './Components/InfoBlock';
 import { ISliderRowProps, SliderRow } from './Components/SliderRow';
 import { TextWithAccessibility } from './Components/TextWithAccessibility';
