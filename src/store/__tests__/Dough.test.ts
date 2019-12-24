@@ -42,13 +42,23 @@ describe('Dough store tests', () => {
 
   it('sets target dough weight', () => {
     const dough = new Dough(presets);
-    expect(dough.targetDoughWeight).toBe(0);
+    expect(dough.targetDoughWeight).toBe(1000);
+    dough.leaven.leavenHydration = 100;
+    dough.leaven.isHydrationLocked = true;
+    dough.hydration.targetHydration = 100;
+    dough.hydration.isLocked = true;
+    dough.leaven.targetInoculation = 20;
     dough.setTargetDoughWeight(3000);
     expect(dough.targetDoughWeight).toBe(3000);
   })
 
   it('can compute target baked weight', () => {
     const dough = new Dough(presets);
+    dough.leaven.leavenHydration = 100;
+    dough.leaven.isHydrationLocked = true;
+    dough.hydration.targetHydration = 100;
+    dough.hydration.isLocked = true;
+    dough.leaven.targetInoculation = 20;
     dough.setTargetDoughWeight(2000);
     expect(dough.bakedTargetDoughWeight).toBe(2000 * 0.85)
   })
@@ -143,7 +153,8 @@ describe('Dough store tests', () => {
 
   it('can multiply flour, water and leaven weigh to match target dough weight when it is set and the target hydration was locked', () => {
     const dough = new Dough(presets);
-    dough.hydration.setTargetHydration(100);
+    dough.hydration.targetHydration = 100;
+    dough.leaven.targetInoculation = 20;
     dough.hydration.toggleLocked();
     dough.flour.setWeight(10);
     dough.water.setWeight(10);
@@ -171,10 +182,12 @@ describe('Dough store tests', () => {
 
     dough.hydration.setTargetHydration(100);
     dough.leaven.setLeavenHydration(100);
+    dough.leaven.targetInoculation = 20;
+    dough.leaven.isHydrationLocked = true;
+    dough.hydration.isLocked = true;
 
     // set required fields
     dough.setTargetDoughWeight(1000);
-    dough.leaven.setTargetInoculation(20);
 
 
     // set spies

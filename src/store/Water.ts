@@ -1,4 +1,5 @@
 import { computed, observable, reaction } from 'mobx';
+import { presets } from '../env';
 import { Dough } from './Dough';
 import { Generic } from './Generic';
 
@@ -13,7 +14,7 @@ export class Water extends Generic {
     });
   }
 
-  @observable public weight: number = 725;
+  @observable public weight: number = presets.initialWaterWeight;
 
   @computed public get waterWeightToMatchTargetHydration(): number {
     if (

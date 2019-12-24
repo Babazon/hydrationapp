@@ -1,4 +1,5 @@
 import { computed, observable, reaction } from 'mobx';
+import { presets } from '../env';
 import { Dough } from './Dough';
 import { Generic } from './Generic';
 
@@ -14,7 +15,7 @@ export class Flour extends Generic {
     });
   }
 
-  @observable public weight: number = 1000;
+  @observable public weight: number = presets.initialFlourWeight;
 
   @computed public get flourWeightToMatchTargetHydration(): number {
     if (this.dough.water.weight != null &&

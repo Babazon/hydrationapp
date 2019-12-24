@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "sourceMap": true,
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -29,7 +30,8 @@
     "noImplicitAny": true,
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "pretty": true
   },
   "exclude": [
     "node_modules"

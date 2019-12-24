@@ -4,9 +4,11 @@ export const presets = {
   flourIncrementAmount: 50,
   flourWeightPresets: [500, 1000, 1500, 2000, 3000],
   initialFlourWeight: 1000,
-  initialLeavenHydratioon: 100,
+  initialLeavenHydration: 100,
   initialLeavenWeight: 200,
+  initialTargetDoughWeight: 1000,
   initialTargetHydration: 75,
+  initialTargetInoculation: 0,
   initialWaterWeight: 725,
   languageConstants: {
     _appTitle: '@sourdoughpie hydration app',

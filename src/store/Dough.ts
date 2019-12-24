@@ -86,17 +86,17 @@ export class Dough {
   @observable public userInterface: UserInterface = new UserInterface(this, this.appPresets);
 
   @action public resetValues = () => {
-    this.flour.setWeight(this.appPresets.initialFlourWeight);
-    this.water.setWeight(this.appPresets.initialWaterWeight);
-    this.leaven.setWeight(this.appPresets.initialLeavenWeight);
-    this.leaven.setLeavenHydration(this.appPresets.initialLeavenHydratioon);
+    this.flour.weight = this.appPresets.initialFlourWeight;
+    this.water.weight = this.appPresets.initialWaterWeight;
+    this.leaven.weight = this.appPresets.initialLeavenWeight;
+    this.leaven.leavenHydration = this.appPresets.initialLeavenHydration;
     this.hydration.isLocked = false;
     this.water.isLocked = false;
     this.flour.isLocked = false;
     this.leaven.isHydrationLocked = false;
-    this.hydration.setTargetHydration(this.appPresets.initialTargetHydration);
-    this.setTargetDoughWeight(0);
-    this.leaven.setTargetInoculation(0);
+    this.hydration.targetHydration = this.appPresets.initialTargetHydration;
+    this.targetDoughWeight = this.appPresets.initialTargetDoughWeight;
+    this.leaven.targetInoculation = this.appPresets.initialTargetInoculation;
   }
 
   @computed public get saltRatio(): number {
@@ -176,23 +176,26 @@ export class Dough {
 
   }
 
-  @observable public targetDoughWeight: number = 0;
+  @observable public targetDoughWeight: number = presets.initialTargetDoughWeight;
 
   @action public setTargetDoughWeight = (value: number) => {
-    if (this.leaven.leavenHydration <= 0 || this.hydration.targetHydration <= 0) {
-      Alert.alert('One more step..', 'Please set Target Hydration and Leaven Hydration before calculating target dough weight..');
-      this.hydration.isLocked = false;
-      this.leaven.isHydrationLocked = false;
-    } else {
-      if (value > 0) {
+    if (value > 0) {
+      if (this.leaven.leavenHydration <= 0 || this.hydration.targetHydration <= 0 || this.leaven.targetInoculation <= 0) {
+        Alert.alert('One more step..', 'Please set Target Hydration, Leaven Hydration and Target Inoculation before calculating target dough weight..');
+        this.hydration.isLocked = false;
+        this.leaven.isHydrationLocked = false;
+        this.leaven.setTargetInoculation(this.userInterface.appPresets.initialTargetInoculation);
+        this.leaven.setLeavenHydration(this.userInterface.appPresets.initialLeavenHydration);
+        this.hydration.setTargetHydration(this.userInterface.appPresets.initialTargetHydration);
+      } else {
         this.targetDoughWeight = value;
         this.hydration.isLocked = true;
         this.leaven.isHydrationLocked = true;
-      } else {
-        this.targetDoughWeight = 0;
-        this.hydration.isLocked = false;
-        this.leaven.isHydrationLocked = false;
       }
+    } else {
+      this.targetDoughWeight = 0;
+      this.hydration.isLocked = false;
+      this.leaven.isHydrationLocked = false;
     }
 
   }

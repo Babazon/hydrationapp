@@ -1,5 +1,6 @@
 import { action, computed, observable, reaction } from 'mobx';
 import { Alert } from 'react-native';
+import { presets } from '../env';
 import { Dough } from './Dough';
 import { Generic } from './Generic';
 
@@ -19,8 +20,8 @@ export class Leaven extends Generic {
     }
   }
 
-  @observable public weight: number = 200;
-  @observable public leavenHydration: number = 100;
+  @observable public weight: number = presets.initialLeavenWeight;
+  @observable public leavenHydration: number = presets.initialLeavenHydration;
 
   @observable public isHydrationLocked: boolean = false;
 
@@ -28,25 +29,27 @@ export class Leaven extends Generic {
     this.isHydrationLocked = !this.isHydrationLocked;
   }
 
-  @observable public targetInoculation: number = 20;
+  @observable public targetInoculation: number = presets.initialTargetInoculation;
 
   @action public setTargetInoculation = (value: number): void => {
-    if (this.leavenHydration <= 0 || this.dough.hydration.targetHydration <= 0) {
-      Alert.alert('One more step..', 'Please set Target Hydration and Leaven Hydration before calculating target dough weight..');
-      this.dough.hydration.isLocked = false;
-      this.isHydrationLocked = false;
-    } else {
-      if (value > 0) {
+    if (value > 0) {
+      if (this.leavenHydration <= 0 || this.dough.hydration.targetHydration <= 0) {
+        Alert.alert('One more step..', 'Please set Target Hydration, Leaven Hydration before calculating target dough weight..');
+        this.dough.hydration.isLocked = false;
+        this.isHydrationLocked = false;
+        this.dough.leaven.setLeavenHydration(this.dough.userInterface.appPresets.initialLeavenHydration);
+        this.dough.hydration.setTargetHydration(this.dough.userInterface.appPresets.targetHydration);
+        this.dough.setTargetDoughWeight(this.dough.userInterface.appPresets.initialTargetDoughWeight);
+      } else {
         this.targetInoculation = value;
         this.dough.hydration.isLocked = true;
         this.isHydrationLocked = true;
-      } else {
-        this.targetInoculation = 0;
-        this.dough.hydration.isLocked = false;
-        this.isHydrationLocked = false;
       }
+    } else {
+      this.targetInoculation = 0;
+      this.dough.hydration.isLocked = false;
+      this.isHydrationLocked = false;
     }
-
   }
 
   @computed public get leavenFlour(): number {
@@ -89,7 +92,7 @@ export class Leaven extends Generic {
   }
 
   @computed public get inoculation(): number {
-    if (!isNaN(this.weight / this.dough.flour.weight)) { // in case of divide by 0
+    if (!isNaN(this.weight / this.dough.flour.weight) && this.dough.flour.weight > 0) { // in case of divide by 0
       return (this.weight / this.dough.flour.weight) * 100;
     }
     return 0;
