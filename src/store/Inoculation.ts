@@ -5,7 +5,7 @@ import { Dough } from './Dough';
 import { Generic } from './Generic';
 
 export class Inoculation extends Generic {
-  constructor(private dough: Dough) {
+  constructor(private readonly dough: Dough) {
     super();
   }
 

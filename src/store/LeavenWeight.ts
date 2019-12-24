@@ -12,7 +12,7 @@ export class LeavenWeight extends Generic {
 
   }
 
-  private updateWaterValueToMatchTargetHydration = (_: number): void => {
+  private readonly updateWaterValueToMatchTargetHydration = (_: number): void => {
     if (this.dough.hydration.isLocked) {
       this.dough.water.setValue(this.dough.water.waterValueToMatchTargetHydration);
     }

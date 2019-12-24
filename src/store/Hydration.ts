@@ -10,13 +10,13 @@ export class Hydration extends Generic {
     reaction(() => this.isLocked, this.setWaterValueToMatchHydration);
   }
 
-  @action private setWaterValueToMatchHydration = (locked: boolean) => {
+  @action private readonly setWaterValueToMatchHydration = (locked: boolean) => {
     if (locked) {
       this.dough.water.setValue(this.dough.water.waterValueToMatchTargetHydration);
     }
   }
 
-  @observable public value: number = 75;
+  @observable public value = 75;
 
   @computed public get minTargetHydration(): number {
     return this.dough.userInterface.appPresets.minTargetHydration;

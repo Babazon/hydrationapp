@@ -4,9 +4,9 @@ import { Units } from './UserInterface';
 export class Generic {
 
   @observable public value: number;
-  @observable public isLocked: boolean = false;
+  @observable public isLocked = false;
   @observable public units: Units = Units.metric;
-  @observable public inputMode: boolean = false;
+  @observable public inputMode = false;
 
   @action public toggleLocked = () => {
     this.isLocked = !this.isLocked;

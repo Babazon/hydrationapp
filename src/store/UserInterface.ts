@@ -28,37 +28,37 @@ export class UserInterface {
     }
   }
 
-  @observable public flourInputMode: boolean = false;
+  @observable public flourInputMode = false;
 
   @action public onFlourValueClick = () => {
     this.flourInputMode = true;
   }
 
-  @observable public waterInputMode: boolean = false;
+  @observable public waterInputMode = false;
 
   @action public onWaterValueClick = () => {
     this.waterInputMode = true;
   }
 
-  @observable public leavenWeightInputMode: boolean = false;
+  @observable public leavenWeightInputMode = false;
 
   @action public onLeavenWeightValueClick = () => {
     this.leavenWeightInputMode = true;
   }
 
-  @observable public leavenHydrationInputMode: boolean = false;
+  @observable public leavenHydrationInputMode = false;
 
   @action public onLeavenHydrationValueClick = () => {
     this.leavenHydrationInputMode = true;
   }
 
-  @observable public leavenInoculationInputMode: boolean = false;
+  @observable public leavenInoculationInputMode = false;
 
   @action public onLeavenInoculationValueClick = () => {
     this.leavenInoculationInputMode = true;
   }
 
-  @observable public targetHydrationInputMode: boolean = false;
+  @observable public targetHydrationInputMode = false;
 
   @action public onTargetHydrationValueClick = () => {
     this.targetHydrationInputMode = true;
@@ -68,7 +68,7 @@ export class UserInterface {
     return this.appPresets.saltRatio;
   }
 
-  @observable public targetDoughWeightInputMode: boolean = false;
+  @observable public targetDoughWeightInputMode = false;
 
   @action public onTargetDoughValueClick = () => {
     this.targetDoughWeightInputMode = true;
