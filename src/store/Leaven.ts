@@ -37,8 +37,8 @@ export class Leaven extends Generic {
         Alert.alert('One more step..', 'Please set Target Hydration, Leaven Hydration before calculating target dough weight..');
         this.dough.hydration.isLocked = false;
         this.isHydrationLocked = false;
-        this.dough.leaven.setLeavenHydration(this.dough.userInterface.appPresets.initialLeavenHydration);
-        this.dough.hydration.setTargetHydration(this.dough.userInterface.appPresets.targetHydration);
+        this.dough.leaven.setLeavenHydration(100);
+        this.dough.hydration.setTargetHydration(75);
         this.dough.setTargetDoughWeight(this.dough.userInterface.appPresets.initialTargetDoughWeight);
       } else {
         this.targetInoculation = value;

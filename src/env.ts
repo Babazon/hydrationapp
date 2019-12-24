@@ -8,7 +8,7 @@ export const presets = {
   initialLeavenWeight: 200,
   initialTargetDoughWeight: 1000,
   initialTargetHydration: 75,
-  initialTargetInoculation: 0,
+  initialTargetInoculation: 20,
   initialWaterWeight: 725,
   languageConstants: {
     _appTitle: '@sourdoughpie hydration app',

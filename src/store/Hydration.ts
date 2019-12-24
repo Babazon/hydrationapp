@@ -1,5 +1,4 @@
 import { action, computed, observable, reaction } from 'mobx';
-import { presets } from '../env';
 import { Dough } from './Dough';
 import { Generic } from './Generic';
 
@@ -17,7 +16,7 @@ export class Hydration extends Generic {
     }
   }
 
-  @observable public targetHydration: number = presets.initialTargetHydration;
+  @observable public targetHydration: number = 75;
 
   @action public setTargetHydration = (value: number) => {
     if (!this.isLocked) {

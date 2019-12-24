@@ -12,7 +12,7 @@ export class Dough {
   // tslint:disable-next-line: cognitive-complexity
   constructor(protected readonly appPresets: any) {
     reaction(() => this.totalHydration, (totalHydration: number) => {
-      if (!this.hydration.isLocked) {
+      if (!this.hydration.isLocked && totalHydration != null) {
         this.hydration.setTargetHydration(totalHydration * 100);
       }
     });
@@ -51,6 +51,7 @@ export class Dough {
     });
 
   }
+
   @action private adjustWeightValuesForTargetDoughWeightWithNonZeroWeights = () => {
     const actualTargetFlourWeight: number = this.targetDoughWeight * (1 / (1 + this.hydration.targetHydration / 100 + this.saltRatio));
     const ratioToMultiply: number = (actualTargetFlourWeight / this.totalFlour) ?? 0; // in case of divide by 0
@@ -184,9 +185,9 @@ export class Dough {
         Alert.alert('One more step..', 'Please set Target Hydration, Leaven Hydration and Target Inoculation before calculating target dough weight..');
         this.hydration.isLocked = false;
         this.leaven.isHydrationLocked = false;
-        this.leaven.setTargetInoculation(this.userInterface.appPresets.initialTargetInoculation);
-        this.leaven.setLeavenHydration(this.userInterface.appPresets.initialLeavenHydration);
-        this.hydration.setTargetHydration(this.userInterface.appPresets.initialTargetHydration);
+        this.leaven.setTargetInoculation(presets.initialTargetInoculation);
+        this.leaven.setLeavenHydration(presets.initialLeavenHydration);
+        this.hydration.setTargetHydration(75);
       } else {
         this.targetDoughWeight = value;
         this.hydration.isLocked = true;
