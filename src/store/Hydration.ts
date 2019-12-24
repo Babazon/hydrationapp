@@ -7,10 +7,10 @@ export class Hydration extends Generic {
   constructor(private readonly dough: Dough) {
     super();
 
-    reaction(() => this.isLocked, this.waterReactionCallback);
+    reaction(() => this.isLocked, this.setWaterValueToMatchHydration);
   }
 
-  @action private waterReactionCallback = (locked: boolean) => {
+  @action private setWaterValueToMatchHydration = (locked: boolean) => {
     if (locked) {
       this.dough.water.setValue(this.dough.water.waterValueToMatchTargetHydration);
     }

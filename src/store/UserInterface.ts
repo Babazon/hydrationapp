@@ -20,11 +20,11 @@ export class UserInterface {
     }
   }
 
-  @computed public get languageConstants(): { [key: string]: string } | undefined {
+  @computed public get languageConstants(): { [key: string]: string } {
     try {
       return this.appPresets.languageConstants;
     } catch (error) {
-      //
+      return {};
     }
   }
 

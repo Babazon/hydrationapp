@@ -8,10 +8,11 @@ export class LeavenHydration extends Generic {
   constructor(private readonly dough: Dough) {
     super();
 
-    reaction(() => this.value, this.updateValueToMatchTargetHydration);
+    reaction(() => this.value, this.updateWaterValueToMatchTargetHydration);
+
   }
 
-  private updateValueToMatchTargetHydration = (_: number): void => {
+  private updateWaterValueToMatchTargetHydration = (_: number): void => {
     if (this.dough.hydration.isLocked) {
       this.dough.water.setValue(this.dough.water.waterValueToMatchTargetHydration);
     }

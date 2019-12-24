@@ -25,9 +25,9 @@ export interface ISliderRowProps {
 @observer
 export class SliderRow extends React.Component<ISliderRowProps>{
 
-  private decrementValue = () => this.props.onValueChange(this.props.value - this.props.incrementAmount);
+  private readonly decrementValue = () => this.props.onValueChange(this.props.value - this.props.incrementAmount);
 
-  private incrementValue = () => this.props.onValueChange(this.props.value + this.props.incrementAmount);
+  private readonly incrementValue = () => this.props.onValueChange(this.props.value + this.props.incrementAmount);
 
   public render() {
     const {

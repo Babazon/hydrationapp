@@ -16,7 +16,7 @@ interface IProps {
 @observer
 export class NumberBox extends React.Component<IProps>{
 
-  private onChangeText = (value: string) => {
+  private readonly onChangeText = (value: string) => {
     if (!isNaN(+value) && this.props.onValueChange) {
       this.props.onValueChange(+value);
     }
@@ -45,7 +45,7 @@ export class NumberBox extends React.Component<IProps>{
               keyboardType={'default'}
               autoFocus
               style={styles.textInput}
-              value={this.props.value.toFixed(getDecimalForFixed(this.props.value)) + ''}
+              value={`${this.props.value.toFixed(getDecimalForFixed(this.props.value))}`}
               onChangeText={this.onChangeText} />
           )
         }
