@@ -10,62 +10,62 @@ describe('Leaven store tests', () => {
   })
 
   it('sets leaven weight', () => {
-    expect(dough.leaven.weight).toBe(200);
-    dough.leaven.setWeight(666);
-    expect(dough.leaven.weight).toBe(666);
+    expect(dough.leavenWeight.value).toBe(200);
+    dough.leavenWeight.setValue(666);
+    expect(dough.leavenWeight.value).toBe(666);
   })
 
   it('sets leaven hydration', () => {
-    expect(dough.leaven.leavenHydration).toBe(100);
-    dough.leaven.setLeavenHydration(50);
-    expect(dough.leaven.leavenHydration).toBe(50);
+    expect(dough.leavenHydration.value).toBe(100);
+    dough.leavenHydration.setValue(50);
+    expect(dough.leavenHydration.value).toBe(50);
   })
 
   it('sets leaven value lock', () => {
-    expect(dough.leaven.isLocked).toBeFalsy();
-    dough.leaven.toggleLocked()
-    expect(dough.leaven.isLocked).toBeTruthy();
+    expect(dough.leavenWeight.isLocked).toBeFalsy();
+    dough.leavenWeight.toggleLocked()
+    expect(dough.leavenWeight.isLocked).toBeTruthy();
   })
 
   it('yieds flour weight of leaven based on hydration', () => {
-    dough.leaven.setWeight(1000);
-    dough.leaven.setLeavenHydration(100);
-    expect(dough.leaven.leavenFlour).toBe(500);
+    dough.leavenWeight.setValue(1000);
+    dough.leavenHydration.setValue(100);
+    expect(dough.leavenWeight.leavenFlour).toBe(500);
   })
 
   it('yieds water weight of leaven based on hydration', () => {
-    dough.leaven.setWeight(1000);
-    dough.leaven.setLeavenHydration(100);
-    expect(dough.leaven.leavenWater).toBe(500);
+    dough.leavenWeight.setValue(1000);
+    dough.leavenHydration.setValue(100);
+    expect(dough.leavenWeight.leavenWater).toBe(500);
   })
 
   it('yields min leaven from app presets', () => {
-    expect(dough.leaven.minLeaven).toEqual(presets.minLeaven);
+    expect(dough.leavenWeight.minLeaven).toEqual(presets.minLeaven);
   })
 
   it('yields min leaven hydration from app presets', () => {
-    expect(dough.leaven.minLeavenHydration).toEqual(presets.minLeavenHydration);
+    expect(dough.leavenHydration.minLeavenHydration).toEqual(presets.minLeavenHydration);
   })
 
   it('yields max leaven from app presets', () => {
-    expect(dough.leaven.maxLeaven).toEqual(presets.maxLeaven);
+    expect(dough.leavenWeight.maxLeaven).toEqual(presets.maxLeaven);
   })
 
   it('yields max leaven hydration from app presets', () => {
-    expect(dough.leaven.maxLeavenHydration).toEqual(presets.maxLeavenHydration);
+    expect(dough.leavenHydration.maxLeavenHydration).toEqual(presets.maxLeavenHydration);
   })
 
   it('can set leaven weight via inoculation percentage based on flour in dough', () => {
-    dough.flour.setWeight(1000);
-    dough.leaven.setLeavenWeightUsingInoculation(20);
-    expect(dough.leaven.weight).toBe(200);
+    dough.flour.setValue(1000);
+    dough.leavenWeight.setLeavenValueUsingInoculation(20);
+    expect(dough.leavenWeight.value).toBe(200);
   })
 
 
   it('yields inoculation of leaven based on its weight and the weight of flour', () => {
-    dough.flour.setWeight(1000);
-    dough.leaven.setWeight(490);
-    expect(dough.leaven.inoculation).toBe(49)
+    dough.flour.setValue(1000);
+    dough.leavenWeight.setValue(490);
+    expect(dough.leavenWeight.inoculation).toBe(49)
   })
 
 

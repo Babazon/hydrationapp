@@ -9,9 +9,9 @@ describe('Water store tests', () => {
   })
 
   it('can set water weight', () => {
-    expect(dough.water.weight).toBe(725);
-    dough.water.setWeight(1000);
-    expect(dough.water.weight).toBe(1000);
+    expect(dough.water.value).toBe(725);
+    dough.water.setValue(1000);
+    expect(dough.water.value).toBe(1000);
   })
 
   it('can lock and unlock water weight input', () => {
@@ -29,11 +29,11 @@ describe('Water store tests', () => {
   })
 
   it('can yield the required water to match target hydration based on flour and leaven values', () => {
-    dough.flour.setWeight(1000);
-    dough.leaven.setWeight(1000);
-    dough.leaven.setLeavenHydration(100);
-    dough.hydration.setTargetHydration(100);
-    expect(dough.water.waterWeightToMatchTargetHydration).toBe(1000);
+    dough.flour.setValue(1000);
+    dough.leavenWeight.setValue(1000);
+    dough.leavenHydration.setValue(100);
+    dough.hydration.setValue(100);
+    expect(dough.water.waterValueToMatchTargetHydration).toBe(1000);
   })
 
 

@@ -12,17 +12,11 @@ export class Hydration extends Generic {
 
   @action private waterReactionCallback = (locked: boolean) => {
     if (locked) {
-      this.dough.water.setWeight(this.dough.water.waterWeightToMatchTargetHydration);
+      this.dough.water.setValue(this.dough.water.waterValueToMatchTargetHydration);
     }
   }
 
-  @observable public targetHydration: number = 75;
-
-  @action public setTargetHydration = (value: number) => {
-    if (!this.isLocked) {
-      this.targetHydration = value;
-    }
-  }
+  @observable public value: number = 75;
 
   @computed public get minTargetHydration(): number {
     return this.dough.userInterface.appPresets.minTargetHydration;

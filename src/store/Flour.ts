@@ -8,21 +8,21 @@ export class Flour extends Generic {
   constructor(private readonly dough: Dough) {
     super();
 
-    reaction(() => this.weight, (_) => {
-      if (dough.hydration.targetHydration && dough.hydration.isLocked) {
-        dough.water.setWeight(dough.water.waterWeightToMatchTargetHydration);
+    reaction(() => this.value, (_) => {
+      if (dough.hydration.value && dough.hydration.isLocked) {
+        dough.water.setValue(dough.water.waterValueToMatchTargetHydration);
       }
     });
   }
 
-  @observable public weight: number = presets.initialFlourWeight;
+  @observable public value: number = presets.initialFlourValue;
 
-  @computed public get flourWeightToMatchTargetHydration(): number {
-    if (this.dough.water.weight != null &&
-      this.dough.leaven.weight != null &&
-      this.dough.leaven.leavenHydration != null &&
-      this.dough.hydration.targetHydration > 0) {
-      return ((this.dough.totalWater / this.dough.hydration.targetHydration) * 100) - this.dough.leaven.leavenFlour;
+  @computed public get flourValueToMatchTargetHydration(): number {
+    if (this.dough.water.value != null &&
+      this.dough.leavenWeight.value != null &&
+      this.dough.leavenHydration.value != null &&
+      this.dough.hydration.value > 0) {
+      return ((this.dough.totalWater / this.dough.hydration.value) * 100) - this.dough.leavenWeight.leavenFlour;
     }
     return 0;
   }

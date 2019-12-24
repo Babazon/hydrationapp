@@ -1,9 +1,11 @@
 import { action, computed, observable, reaction } from 'mobx';
-import { Alert } from 'react-native';
 import { presets } from '../env';
+import { DoughWeight } from './DoughWeight';
 import { Flour } from './Flour';
 import { Hydration } from './Hydration';
-import { Leaven } from './Leaven';
+import { Inoculation } from './Inoculation';
+import { LeavenHydration } from './LeavenHydration';
+import { LeavenWeight } from './LeavenWeight';
 import { UserInterface } from './UserInterface';
 import { Water } from './Water';
 
@@ -13,37 +15,37 @@ export class Dough {
   constructor(protected readonly appPresets: any) {
     reaction(() => this.totalHydration, (totalHydration: number) => {
       if (!this.hydration.isLocked && totalHydration != null) {
-        this.hydration.setTargetHydration(totalHydration * 100);
+        this.hydration.setValue(totalHydration * 100);
       }
     });
 
-    reaction(() => this.targetDoughWeight, (_: number) => {
+    reaction(() => this.doughWeight.value, (_: number) => {
       if (this.hydration.isLocked) {
-        if (this.flour.weight > 0 && this.water.weight > 0 && this.leaven.weight > 0 && this.leaven.leavenHydration > 0) {
+        if (this.flour.value > 0 && this.water.value > 0 && this.leavenWeight.value > 0 && this.leavenHydration.value > 0) {
           this.adjustWeightValuesForTargetDoughWeightWithNonZeroWeights();
-        } else if (this.leaven.isHydrationLocked &&
-          this.leaven.leavenHydration > 0 &&
-          this.leaven.targetInoculation > 0) {
+        } else if (this.leavenHydration.isLocked &&
+          this.leavenHydration.value > 0 &&
+          this.inoculation.value > 0) {
           this.adjustWeightValuesForTargetDoughWeight();
         }
       }
     });
 
     reaction(() => this.hydration.isLocked, (_: boolean) => {
-      if (this.hydration.isLocked && this.targetDoughWeight) {
-        if (this.flour.weight > 0 && this.water.weight > 0 && this.leaven.weight > 0 && this.leaven.leavenHydration > 0) {
+      if (this.hydration.isLocked && this.doughWeight.value) {
+        if (this.flour.value > 0 && this.water.value > 0 && this.leavenWeight.value > 0 && this.leavenHydration.value > 0) {
           this.adjustWeightValuesForTargetDoughWeightWithNonZeroWeights();
-        } else if (this.leaven.isHydrationLocked &&
-          this.leaven.leavenHydration > 0 &&
-          this.leaven.targetInoculation > 0) {
+        } else if (this.leavenHydration.isLocked &&
+          this.leavenHydration.value > 0 &&
+          this.inoculation.value > 0) {
           this.adjustWeightValuesForTargetDoughWeight();
         }
       }
     });
 
-    reaction(() => this.leaven.targetInoculation, (targetInoculation: number) => {
-      if (this.leaven.isHydrationLocked &&
-        this.leaven.leavenHydration > 0 &&
+    reaction(() => this.inoculation.value, (targetInoculation: number) => {
+      if (this.leavenHydration.isLocked &&
+        this.leavenHydration.value > 0 &&
         this.hydration.isLocked &&
         targetInoculation > 0) {
         this.adjustWeightValuesForTargetDoughWeight();
@@ -53,51 +55,54 @@ export class Dough {
   }
 
   @action private adjustWeightValuesForTargetDoughWeightWithNonZeroWeights = () => {
-    const actualTargetFlourWeight: number = this.targetDoughWeight * (1 / (1 + this.hydration.targetHydration / 100 + this.saltRatio));
+    const actualTargetFlourWeight: number = this.doughWeight.value * (1 / (1 + this.hydration.value / 100 + this.saltRatio));
     const ratioToMultiply: number = (actualTargetFlourWeight / this.totalFlour) ?? 0; // in case of divide by 0
     // This is bad, doesn't work if any of these observables are 0
     // New formula must be developed that looks at leaven hydration and inoculation
-    // Finds new total flour, water, leaven weights
+    // Finds new total flour, water, leaven values
     // Directly sets them
     // Leaven inoculation and hydration must be set!!
-    this.flour.setWeight(this.flour.weight * ratioToMultiply);
-    this.water.setWeight(this.water.weight * ratioToMultiply);
-    this.leaven.setWeight(this.leaven.weight * ratioToMultiply);
+    this.flour.setValue(this.flour.value * ratioToMultiply);
+    this.water.setValue(this.water.value * ratioToMultiply);
+    this.leavenWeight.setValue(this.leavenWeight.value * ratioToMultiply);
   }
 
   @action private adjustWeightValuesForTargetDoughWeight = () => {
 
-    const finalTotalFlourWeight: number = this.targetDoughWeight / ((1 + (this.hydration.targetHydration / 100)) + this.saltRatio);
-    const finalTotalWaterWeight: number = finalTotalFlourWeight * (this.hydration.targetHydration / 100);
-    const finalFlourWeight: number = finalTotalFlourWeight / (1 + ((this.leaven.targetInoculation / 100) * (1 / (1 + (this.leaven.leavenHydration / 100)))));
-    const finalLeavenWeight: number = finalFlourWeight * (this.leaven.targetInoculation / 100);
-    const finalLeavenFlourWeight: number = finalLeavenWeight * (1 / (1 + (this.leaven.leavenHydration / 100)));
+    const finalTotalFlourWeight: number = this.doughWeight.value / ((1 + (this.hydration.value / 100)) + this.saltRatio);
+    const finalTotalWaterWeight: number = finalTotalFlourWeight * (this.hydration.value / 100);
+    const finalFlourWeight: number = finalTotalFlourWeight / (1 + ((this.inoculation.value / 100) * (1 / (1 + (this.leavenHydration.value / 100)))));
+    const finalLeavenWeight: number = finalFlourWeight * (this.inoculation.value / 100);
+    const finalLeavenFlourWeight: number = finalLeavenWeight * (1 / (1 + (this.leavenHydration.value / 100)));
     const finalLeavenWaterWeight: number = finalLeavenWeight - finalLeavenFlourWeight;
     const finalWaterWeight: number = finalTotalWaterWeight - finalLeavenWaterWeight;
 
-    this.flour.setWeight(finalFlourWeight);
-    this.water.setWeight(finalWaterWeight);
-    this.leaven.setWeight(finalLeavenWeight);
+    this.flour.setValue(finalFlourWeight);
+    this.water.setValue(finalWaterWeight);
+    this.leavenWeight.setValue(finalLeavenWeight);
   }
 
   @observable public flour: Flour = new Flour(this);
   @observable public water: Water = new Water(this);
-  @observable public leaven: Leaven = new Leaven(this);
+  @observable public leavenWeight: LeavenWeight = new LeavenWeight(this);
+  @observable public leavenHydration: LeavenHydration = new LeavenHydration(this);
   @observable public hydration: Hydration = new Hydration(this);
   @observable public userInterface: UserInterface = new UserInterface(this, this.appPresets);
+  @observable public inoculation: Inoculation = new Inoculation(this);
+  @observable public doughWeight: DoughWeight = new DoughWeight(this);
 
   @action public resetValues = () => {
-    this.flour.weight = this.appPresets.initialFlourWeight;
-    this.water.weight = this.appPresets.initialWaterWeight;
-    this.leaven.weight = this.appPresets.initialLeavenWeight;
-    this.leaven.leavenHydration = this.appPresets.initialLeavenHydration;
+    this.flour.value = this.appPresets.initialFlourValue;
+    this.water.value = this.appPresets.initialWaterValue;
+    this.leavenWeight.value = this.appPresets.initialLeavenValue;
+    this.leavenHydration.value = this.appPresets.initialLeavenHydration;
     this.hydration.isLocked = false;
     this.water.isLocked = false;
     this.flour.isLocked = false;
-    this.leaven.isHydrationLocked = false;
-    this.hydration.targetHydration = this.appPresets.initialTargetHydration;
-    this.targetDoughWeight = this.appPresets.initialTargetDoughWeight;
-    this.leaven.targetInoculation = this.appPresets.initialTargetInoculation;
+    this.leavenHydration.isLocked = false;
+    this.hydration.value = this.appPresets.initialTargetHydration;
+    this.doughWeight.value = this.appPresets.initialTargetDoughWeight;
+    this.inoculation.value = this.appPresets.initialTargetInoculation;
   }
 
   @computed public get saltRatio(): number {
@@ -121,15 +126,15 @@ export class Dough {
   }
 
   @computed public get totalFlour(): number {
-    if (this.flour.weight != null && this.leaven.leavenFlour != null) {
-      return this.flour.weight + this.leaven.leavenFlour;
+    if (this.flour.value != null && this.leavenWeight.leavenFlour != null) {
+      return this.flour.value + this.leavenWeight.leavenFlour;
     }
     return 0;
   }
 
   @computed public get totalWater(): number {
-    if (this.water.weight != null && this.leaven.leavenWater != null) {
-      return this.water.weight + this.leaven.leavenWater;
+    if (this.water.value != null && this.leavenWeight.leavenWater != null) {
+      return this.water.value + this.leavenWeight.leavenWater;
     }
     return 0;
   }
@@ -175,37 +180,6 @@ export class Dough {
     }
     return this.experimentalDoughVolume * 1.5;
 
-  }
-
-  @observable public targetDoughWeight: number = presets.initialTargetDoughWeight;
-
-  @action public setTargetDoughWeight = (value: number) => {
-    if (value > 0) {
-      if (this.leaven.leavenHydration <= 0 || this.hydration.targetHydration <= 0 || this.leaven.targetInoculation <= 0) {
-        Alert.alert('One more step..', 'Please set Target Hydration, Leaven Hydration and Target Inoculation before calculating target dough weight..');
-        this.hydration.isLocked = false;
-        this.leaven.isHydrationLocked = false;
-        this.leaven.setTargetInoculation(presets.initialTargetInoculation);
-        this.leaven.setLeavenHydration(presets.initialLeavenHydration);
-        this.hydration.setTargetHydration(75);
-      } else {
-        this.targetDoughWeight = value;
-        this.hydration.isLocked = true;
-        this.leaven.isHydrationLocked = true;
-      }
-    } else {
-      this.targetDoughWeight = 0;
-      this.hydration.isLocked = false;
-      this.leaven.isHydrationLocked = false;
-    }
-
-  }
-
-  @computed public get bakedTargetDoughWeight(): number {
-    if (this.targetDoughWeight) {
-      return this.targetDoughWeight * 0.85;
-    }
-    return 0;
   }
 
 }

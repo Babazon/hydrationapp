@@ -1,11 +1,9 @@
 import 'es6-symbol/implement';
+import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
-import { computed } from 'mobx';
-
 import './bugsnagConfig';
 import { InfoBlock } from './Components/InfoBlock';
 import { ISliderRowProps, SliderRow } from './Components/SliderRow';
@@ -21,7 +19,7 @@ export default class App extends React.Component {
   }
 
   @computed private get sliderRowData(): ISliderRowProps[] {
-    const { flour, water, hydration, leaven, userInterface, targetDoughWeight, setTargetDoughWeight } = dough;
+    const { flour, water, hydration, leavenWeight, leavenHydration, userInterface, doughWeight, inoculation } = dough;
 
     return [
       {
@@ -33,36 +31,36 @@ export default class App extends React.Component {
         onSymbolClick: () => {
           /* */
         },
-        onValueChange: flour.setWeight,
+        onValueChange: flour.setValue,
         onValueClick: userInterface.onFlourValueClick,
-        value: flour.weight,
+        value: flour.value,
         valueAffix: userInterface.languageConstants!._gram_abbvr
       },
       {
         incrementAmount: userInterface.appPresets.leavenWeightIncrementAmount,
         isKeyboardActive: userInterface.leavenWeightInputMode,
         label: userInterface.languageConstants!._leaven_weight,
-        maxValue: leaven.maxLeaven,
-        minValue: leaven.minLeaven,
+        maxValue: leavenWeight.maxLeaven,
+        minValue: leavenWeight.minLeaven,
         onSymbolClick: () => {
           /* */
         },
-        onValueChange: leaven.setWeight,
+        onValueChange: leavenWeight.setValue,
         onValueClick: userInterface.onLeavenWeightValueClick,
-        value: leaven.weight,
+        value: leavenWeight.value,
         valueAffix: userInterface.languageConstants!._gram_abbvr
       },
       {
         incrementAmount: userInterface.appPresets.leavenHydrationIncrementAmount,
         isKeyboardActive: userInterface.leavenHydrationInputMode,
-        isLocked: leaven.isHydrationLocked,
+        isLocked: leavenHydration.isLocked,
         label: userInterface.languageConstants!._leaven_hydration,
-        maxValue: leaven.maxLeavenHydration,
-        minValue: leaven.minLeavenHydration,
-        onValueChange: leaven.setLeavenHydration,
+        maxValue: leavenHydration.maxLeavenHydration,
+        minValue: leavenHydration.minLeavenHydration,
+        onValueChange: leavenHydration.setValue,
         onValueClick: userInterface.onLeavenHydrationValueClick,
-        toggleLocked: leaven.toggleHydrationLocked,
-        value: leaven.leavenHydration,
+        toggleLocked: leavenHydration.toggleLocked,
+        value: leavenHydration.value,
         valueAffix: userInterface.languageConstants!._percent
       },
       {
@@ -74,9 +72,9 @@ export default class App extends React.Component {
         onSymbolClick: () => {
           /* */
         },
-        onValueChange: water.setWeight,
+        onValueChange: water.setValue,
         onValueClick: userInterface.onWaterValueClick,
-        value: water.weight,
+        value: water.value,
         valueAffix: userInterface.languageConstants!._gram_abbvr
       },
       {
@@ -86,10 +84,10 @@ export default class App extends React.Component {
         label: userInterface.languageConstants!._target_hydration,
         maxValue: hydration.maxTargetHydration,
         minValue: hydration.minTargetHydration,
-        onValueChange: hydration.setTargetHydration,
+        onValueChange: hydration.setValue,
         onValueClick: userInterface.onTargetHydrationValueClick,
         toggleLocked: hydration.toggleLocked,
-        value: hydration.targetHydration,
+        value: hydration.value,
         valueAffix: userInterface.languageConstants!._percent
       },
       {
@@ -98,9 +96,9 @@ export default class App extends React.Component {
         label: userInterface.languageConstants!._target_dough_weight,
         maxValue: 50000,
         minValue: 0,
-        onValueChange: setTargetDoughWeight,
+        onValueChange: doughWeight.setValue,
         onValueClick: userInterface.onTargetDoughValueClick,
-        value: targetDoughWeight,
+        value: doughWeight.value,
         valueAffix: userInterface.languageConstants!._gram_abbvr
       },
       {
@@ -109,9 +107,9 @@ export default class App extends React.Component {
         label: userInterface.languageConstants!._target_inoculation,
         maxValue: 100,
         minValue: 0,
-        onValueChange: leaven.setTargetInoculation,
+        onValueChange: inoculation.setValue,
         onValueClick: userInterface.onLeavenInoculationValueClick,
-        value: leaven.targetInoculation, // targetIno = 0 should display inoculation instead
+        value: inoculation.value, // targetIno = 0 should display inoculation instead
         valueAffix: userInterface.languageConstants!._percent
       }
     ];

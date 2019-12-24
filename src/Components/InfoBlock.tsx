@@ -36,12 +36,12 @@ export class InfoBlock extends React.Component<IProps>{
       {
         label: dough.userInterface.languageConstants!._total_leaven,
         unit: dough.userInterface.languageConstants!._gram_abbvr,
-        value: dough.leaven.weight.toFixed(getDecimalForFixed(dough.leaven.weight))
+        value: dough.leavenWeight.value.toFixed(getDecimalForFixed(dough.leavenWeight.value))
       },
       {
         label: dough.userInterface.languageConstants!._inoculation,
         unit: dough.userInterface.languageConstants!._percent,
-        value: dough.leaven.inoculation.toFixed(getDecimalForFixed(dough.leaven.inoculation))
+        value: dough.inoculation.value.toFixed(getDecimalForFixed(dough.inoculation.value))
       },
       {
         label: dough.userInterface.languageConstants!._recommended_salt,
