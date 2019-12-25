@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 
 export interface IPersistence {
   flour: number;
@@ -19,7 +19,7 @@ export class PersistenceModel implements IPersistence {
   @observable public doughWeight: number;
   @observable public inoculation: number;
 
-  public static deserialize(data: IPersistence) {
+  @action public static deserialize(data: IPersistence) {
     const model = new PersistenceModel();
 
     model.flour = data.flour;

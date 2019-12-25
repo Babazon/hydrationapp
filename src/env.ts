@@ -22,7 +22,7 @@ export const presets = {
     _liter_abbvr: 'lt',
     _percent: '%',
     _recommended_salt: 'Recommended Salt',
-    _reset: 'Reset',
+    _reset: 'Pull to load recipe...',
     _target_dough_weight: 'Target Dough Weight (Premium Feature)',
     _target_hydration: 'Target Hydration',
     _target_inoculation: 'Target Inoculation (Premium Feature)',
@@ -51,6 +51,7 @@ export const presets = {
   minWater: 0,
   postBakeWeightRatio: 0.85,
   saltRatio: 0.022,
+  storageKey: 'persistenceModel',
   targetHydrationIncrementAmount: 1,
   targetHydrationPresets: [50, 75, 80, 85, 90, 95],
   waterIncrementAmount: 25

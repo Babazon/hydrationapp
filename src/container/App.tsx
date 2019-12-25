@@ -31,13 +31,13 @@ export default class App extends React.Component {
             refreshControl={
               <RefreshControl
                 title={this.vm.dough.userInterface.languageConstants._reset}
-                refreshing={false}
-                onRefresh={this.vm.dough.resetValues}
+                refreshing={this.vm.isLoading}
+                onRefresh={this.vm.loadRecipe}
               />
             }
             contentContainerStyle={styles.scrollViewContentStyle}>
 
-            <Header isPremium={this.vm.isPremium} setPremium={this.vm.setPremium} saveRecipe={this.vm.saveRecipe} />
+            <Header isPremium={this.vm.isPremium} setPremium={this.vm.setPremium} saveRecipe={this.vm.persistRecipe} />
             <Main sliderData={this.vm.sliderData} />
             <InfoBlock dough={this.vm.dough} />
             <Credits />

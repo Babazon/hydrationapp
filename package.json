@@ -15,6 +15,7 @@
     "postinstall": "cd ios && pod install"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.7.1",
     "@react-native-community/slider": "^2.0.7",
     "appcenter": "^2.6.0",
     "appcenter-analytics": "^2.6.0",
