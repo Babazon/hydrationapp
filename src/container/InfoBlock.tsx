@@ -3,8 +3,8 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Dough } from '../store/Dough';
+import { TextWithAccessibility } from '../toolkit/TextWithAccessibility';
 import { getDecimalForFixed } from '../utilities/getDecimalForFixed';
-import { TextWithAccessibility } from './TextWithAccessibility';
 
 // tslint:disable-next-line: interface-name
 interface InfoRenderData {
