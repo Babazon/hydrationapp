@@ -100,7 +100,7 @@ export class AppViewModel {
         minValue: 0,
         onValueChange: inoculation.setValue,
         onValueClick: userInterface.onLeavenInoculationValueClick,
-        value: inoculation.value, // targetIno = 0 should display inoculation instead
+        value: inoculation.value,
         valueAffix: userInterface.languageConstants._percent
       }
       ];

@@ -33,8 +33,10 @@ export default class App extends React.Component {
                 title={this.vm.dough.userInterface.languageConstants._reset}
                 refreshing={false}
                 onRefresh={this.vm.dough.resetValues}
-              />}
+              />
+            }
             contentContainerStyle={styles.scrollViewContentStyle}>
+
             <Header isPremium={this.vm.isPremium} setPremium={this.vm.setPremium} saveRecipe={this.vm.saveRecipe} />
             <Main sliderData={this.vm.sliderData} />
             <InfoBlock dough={this.vm.dough} />
@@ -48,7 +50,6 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-
   safeAreaView: {
     flex: 1,
     marginTop: 16
