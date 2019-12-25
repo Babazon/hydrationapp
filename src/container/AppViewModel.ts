@@ -1,6 +1,6 @@
 import { action, computed, observable } from 'mobx';
-import { Dough } from './store/Dough';
-import { ISliderRowProps } from './toolkit/SliderRow';
+import { Dough } from '../store/Dough';
+import { ISliderRowProps } from '../toolkit/SliderRow';
 
 export class AppViewModel {
   constructor(public readonly dough: Dough) { }
