@@ -10,9 +10,9 @@ interface IMainProps {
 @observer
 export class Main extends React.Component<IMainProps>{
 
-  private readonly renderSlider = ({ item }: { item: ISliderRowProps }) => {
+  private readonly renderSlider = ({ item, index }: { item: ISliderRowProps, index: number }) => {
     return (
-      <View style={styles.sliderRow} key={item.label}>
+      <View style={StyleSheet.flatten([styles.sliderRow, { backgroundColor: index % 2 < 1 ? 'whitesmoke' : 'white' }])} key={item.label}>
         <SliderRow
           {...item}
         />
@@ -23,8 +23,8 @@ export class Main extends React.Component<IMainProps>{
   public render() {
     return (
       <>
-        {this.props.sliderData.slice().map((item: ISliderRowProps) => {
-          return this.renderSlider({ item });
+        {this.props.sliderData.slice().map((item: ISliderRowProps, index: number) => {
+          return this.renderSlider({ item, index });
         })
         }
       </>

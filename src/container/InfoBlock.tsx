@@ -25,17 +25,17 @@ export class InfoBlock extends React.Component<IProps>{
     return [
       {
         label: dough.userInterface.languageConstants._total_flour,
-        unit: dough.userInterface.languageConstants._gram_abbvr,
+        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
         value: dough.totalFlour.toFixed(getDecimalForFixed(dough.totalFlour))
       },
       {
         label: dough.userInterface.languageConstants._total_water,
-        unit: dough.userInterface.languageConstants._gram_abbvr,
+        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
         value: dough.totalWater.toFixed(getDecimalForFixed(dough.totalWater))
       },
       {
         label: dough.userInterface.languageConstants._total_leaven,
-        unit: dough.userInterface.languageConstants._gram_abbvr,
+        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
         value: dough.leavenWeight.value.toFixed(getDecimalForFixed(dough.leavenWeight.value))
       },
       {
@@ -45,18 +45,18 @@ export class InfoBlock extends React.Component<IProps>{
       },
       {
         label: dough.userInterface.languageConstants._recommended_salt,
-        unit: dough.userInterface.languageConstants._gram_abbvr,
+        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
         value: dough.recommendedSalt.toFixed(getDecimalForFixed(dough.recommendedSalt))
       },
       {
         label: dough.userInterface.languageConstants._total_dough_weight,
-        unit: dough.userInterface.languageConstants._gram_abbvr,
+        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
         value: (dough.totalFlour + dough.totalWater + dough.recommendedSalt)
           .toFixed(getDecimalForFixed(dough.totalFlour + dough.totalWater + dough.recommendedSalt))
       },
       {
         label: dough.userInterface.languageConstants._total_baked_weight,
-        unit: dough.userInterface.languageConstants._gram_abbvr,
+        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
         value: dough.postBakeWeight.toFixed(getDecimalForFixed(dough.postBakeWeight))
       },
       {
@@ -66,12 +66,12 @@ export class InfoBlock extends React.Component<IProps>{
       },
       {
         label: dough.userInterface.languageConstants._initial_volume,
-        unit: dough.userInterface.languageConstants._liter_abbvr,
+        unit: ` ${dough.userInterface.languageConstants._liter_abbvr}`,
         value: dough.experimentalDoughVolume.toFixed(getDecimalForFixed(dough.experimentalDoughVolume))
       },
       {
         label: dough.userInterface.languageConstants._final_volume,
-        unit: dough.userInterface.languageConstants._liter_abbvr,
+        unit: ` ${dough.userInterface.languageConstants._liter_abbvr}`,
         value: dough.experimentalBulkVolume.toFixed(getDecimalForFixed(dough.experimentalBulkVolume))
       },
     ];

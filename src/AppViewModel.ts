@@ -24,9 +24,6 @@ export class AppViewModel {
         label: userInterface.languageConstants._flour_weight,
         maxValue: flour.maxFlour,
         minValue: flour.minFlour,
-        onSymbolClick: () => {
-          /* */
-        },
         onValueChange: flour.setValue,
         onValueClick: userInterface.onFlourValueClick,
         value: flour.value,
@@ -38,9 +35,6 @@ export class AppViewModel {
         label: userInterface.languageConstants._leaven_weight,
         maxValue: leavenWeight.maxLeaven,
         minValue: leavenWeight.minLeaven,
-        onSymbolClick: () => {
-          /* */
-        },
         onValueChange: leavenWeight.setValue,
         onValueClick: userInterface.onLeavenWeightValueClick,
         value: leavenWeight.value,
@@ -65,9 +59,6 @@ export class AppViewModel {
         label: userInterface.languageConstants._water,
         maxValue: water.maxWater,
         minValue: water.minWater,
-        onSymbolClick: () => {
-          /* */
-        },
         onValueChange: water.setValue,
         onValueClick: userInterface.onWaterValueClick,
         value: water.value,
