@@ -9,6 +9,7 @@ import { LeavenWeight } from './LeavenWeight';
 import { UserInterface } from './UserInterface';
 import { Water } from './Water';
 
+// tslint:disable-next-line: max-classes-per-file
 export class Dough {
 
   // tslint:disable-next-line: cognitive-complexity
@@ -179,7 +180,6 @@ export class Dough {
       return this.experimentalDoughVolume * 1.45;
     }
     return this.experimentalDoughVolume * 1.5;
-
   }
 
 }

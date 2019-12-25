@@ -95,7 +95,7 @@ export class AppViewModel {
         valueAffix: userInterface.languageConstants._gram_abbvr
       },
       {
-        incrementAmount: 5,
+        incrementAmount: 1,
         isKeyboardActive: userInterface.leavenInoculationInputMode,
         isLocked: inoculation.isLocked,
         label: userInterface.languageConstants._target_inoculation,
