@@ -3,14 +3,14 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { RefreshControl, SafeAreaView, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Credits } from '../container/Credits';
-import { InfoBlock } from '../container/InfoBlock';
-import { Main } from '../container/Main';
+import '../bugsnagConfig';
 import { ErrorBoundary } from '../ErrorBoundary';
 import dough from '../store/Dough';
 import { Header } from '../toolkit/Header';
 import { AppViewModel } from './AppViewModel';
-import './bugsnagConfig';
+import { Credits } from './Credits';
+import { InfoBlock } from './InfoBlock';
+import { Main } from './Main';
 
 @observer
 export default class App extends React.Component {

@@ -84,22 +84,26 @@ export class AppViewModel {
       {
         incrementAmount: 1000,
         isKeyboardActive: userInterface.targetDoughWeightInputMode,
+        isLocked: doughWeight.isLocked,
         label: userInterface.languageConstants._target_dough_weight,
         maxValue: 50000,
         minValue: 0,
         onValueChange: doughWeight.setValue,
         onValueClick: userInterface.onTargetDoughValueClick,
+        toggleLocked: doughWeight.toggleLocked,
         value: doughWeight.value,
         valueAffix: userInterface.languageConstants._gram_abbvr
       },
       {
         incrementAmount: 5,
         isKeyboardActive: userInterface.leavenInoculationInputMode,
+        isLocked: inoculation.isLocked,
         label: userInterface.languageConstants._target_inoculation,
         maxValue: 100,
         minValue: 0,
         onValueChange: inoculation.setValue,
         onValueClick: userInterface.onLeavenInoculationValueClick,
+        toggleLocked: inoculation.toggleLocked,
         value: inoculation.value,
         valueAffix: userInterface.languageConstants._percent
       }
