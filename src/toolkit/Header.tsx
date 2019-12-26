@@ -7,18 +7,31 @@ export interface IHeaderProps {
   isPremium: boolean;
   setPremium(): void;
   saveRecipe(): void;
+  isRecipeSaved: boolean;
 }
 
 @observer
 export class Header extends React.Component<IHeaderProps> {
   public render() {
-    const { isPremium, setPremium, saveRecipe } = this.props;
+    const { isPremium, setPremium, saveRecipe, isRecipeSaved } = this.props;
     return (
       <View style={styles.container}>
         <TouchableOpacity style={StyleSheet.flatten([styles.button])} onPress={saveRecipe}>
-          <TextWithAccessibility>
-            Save Recipe
-          </TextWithAccessibility>
+          <>
+            {
+              !isRecipeSaved &&
+              <TextWithAccessibility>
+                Save Recipe
+               </TextWithAccessibility>
+            }
+
+            {
+              isRecipeSaved &&
+              <TextWithAccessibility>
+                Recipe Saved
+               </TextWithAccessibility>
+            }
+          </>
         </TouchableOpacity>
         <TextWithAccessibility style={StyleSheet.flatten([styles.title])}>
           Hydration
@@ -32,7 +45,7 @@ export class Header extends React.Component<IHeaderProps> {
             }
             {isPremium &&
               <TextWithAccessibility>
-                Trying Premium
+                Premium
               </TextWithAccessibility>
             }
           </>
@@ -49,7 +62,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     justifyContent: 'center',
-    padding: 4
+    padding: 4,
+    width: 100
   },
   container: {
     alignItems: 'center',

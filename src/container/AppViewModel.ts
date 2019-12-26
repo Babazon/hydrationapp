@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { action, computed, observable } from 'mobx';
-import { bugsnag } from '../bugsnagConfig';
 import { presets } from '../env';
 import { Dough } from '../store/Dough';
 import { ISliderRowProps } from '../toolkit/SliderRow';
@@ -10,12 +9,16 @@ export class AppViewModel {
   constructor(public readonly dough: Dough) { }
 
   @observable public isLoading = false;
+  @observable public isRecipeSaved = false;
+  @observable public isPremium = false;
 
   @action private toggleLoading = ({ isLoading }: { isLoading: boolean }) => {
     this.isLoading = isLoading;
   }
 
-  @observable public isPremium = false;
+  @action private setRecipeSaved = ({ isRecipeSaved }: { isRecipeSaved: boolean }): void => {
+    this.isRecipeSaved = isRecipeSaved;
+  }
 
   @action public setPremium = () => {
     this.isPremium = true;
@@ -25,8 +28,9 @@ export class AppViewModel {
     this.toggleLoading({ isLoading: true });
     try {
       await AsyncStorage.setItem(presets.storageKey, this.dough.persistenceModel.serialize());
+      this.setRecipeSaved({ isRecipeSaved: true });
     } catch (error) {
-      bugsnag.notify(error);
+      this.setRecipeSaved({ isRecipeSaved: false });
     } finally {
       this.toggleLoading({ isLoading: false });
     }
@@ -40,7 +44,7 @@ export class AppViewModel {
         return PersistenceModel.deserialize(JSON.parse(value));
       }
     } catch (error) {
-      bugsnag.notify(error);
+      //
     } finally {
       this.toggleLoading({ isLoading: false });
     }
@@ -54,7 +58,7 @@ export class AppViewModel {
         this.dough.loadPersistedRecipe(persistenceModel);
       }
     } catch (error) {
-      bugsnag.notify(error);
+      //
     }
   }
 

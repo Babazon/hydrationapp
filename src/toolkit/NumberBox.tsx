@@ -22,6 +22,13 @@ export class NumberBox extends React.Component<IProps>{
     }
   }
 
+  private readonly normalizeStringDisplay = (value: number) => {
+    const valueToString = `${value.toFixed(getDecimalForFixed(value))}`;
+    return valueToString.startsWith('0')
+      ? valueToString.substring(1)
+      : valueToString;
+  }
+
   public render() {
 
     return (<View
@@ -45,7 +52,7 @@ export class NumberBox extends React.Component<IProps>{
               keyboardType={'default'}
               autoFocus
               style={styles.textInput}
-              value={`${this.props.value.toFixed(getDecimalForFixed(this.props.value))}`}
+              value={this.normalizeStringDisplay(this.props.value)}
               onChangeText={this.onChangeText} />
           )
         }
