@@ -303,7 +303,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.basyuksel.hydration;
 				PRODUCT_NAME = BasHydro;
-				PROVISIONING_PROFILE_SPECIFIER = "Sourdough Hydration App Ad Hoc Provisioning Profil";
+				PROVISIONING_PROFILE_SPECIFIER = SourdoughHydrationDistributionProvisioningProfile;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
