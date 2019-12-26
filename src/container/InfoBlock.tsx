@@ -22,7 +22,8 @@ export class InfoBlock extends React.Component<IProps>{
   @computed private get infoBlockData(): InfoRenderData[] {
     const { dough } = this.props;
 
-    return [
+    // tslint:disable-next-line: prefer-immediate-return
+    const data: InfoRenderData[] = [
       {
         label: dough.userInterface.languageConstants._total_flour,
         unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
@@ -40,8 +41,8 @@ export class InfoBlock extends React.Component<IProps>{
       },
       {
         label: dough.userInterface.languageConstants._inoculation,
-        unit: dough.userInterface.languageConstants._percent,
-        value: dough.inoculation.value.toFixed(getDecimalForFixed(dough.inoculation.value))
+        unit: ` ${dough.userInterface.languageConstants._percent}`,
+        value: dough.leavenWeight.inoculation.toFixed(getDecimalForFixed(dough.leavenWeight.value))
       },
       {
         label: dough.userInterface.languageConstants._recommended_salt,
@@ -75,6 +76,8 @@ export class InfoBlock extends React.Component<IProps>{
         value: dough.experimentalBulkVolume.toFixed(getDecimalForFixed(dough.experimentalBulkVolume))
       },
     ];
+
+    return data;
   }
 
   private readonly renderDataRow = ({ item }: { item: InfoRenderData }) => {
