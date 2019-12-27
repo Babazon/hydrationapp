@@ -2,8 +2,8 @@ import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { TextWithAccessibility } from '../components/TextWithAccessibility';
 import { Dough } from '../store/Dough';
-import { TextWithAccessibility } from '../toolkit/TextWithAccessibility';
 import { getDecimalForFixed } from '../utilities/getDecimalForFixed';
 
 // tslint:disable-next-line: interface-name

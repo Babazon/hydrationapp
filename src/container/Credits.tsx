@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { TextWithAccessibility } from '../toolkit/TextWithAccessibility';
+import { TextWithAccessibility } from '../components/TextWithAccessibility';
 
 export const Credits: React.FC = () => {
   return (

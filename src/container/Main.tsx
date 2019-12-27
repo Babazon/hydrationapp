@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { ISliderRowProps, SliderRow } from '../toolkit/SliderRow';
+import { ISliderRowProps, SliderRow } from '../components/SliderRow';
 
 interface IMainProps {
   sliderData: ISliderRowProps[];

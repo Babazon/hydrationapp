@@ -2,9 +2,9 @@
 
 import AsyncStorage from '@react-native-community/async-storage';
 import { action, computed, observable } from 'mobx';
+import { ISliderRowProps } from '../components/SliderRow';
 import { presets } from '../env';
 import { Dough } from '../store/Dough';
-import { ISliderRowProps } from '../toolkit/SliderRow';
 import { PersistenceModel } from '../utilities/Persistence';
 
 export class AppViewModel {
