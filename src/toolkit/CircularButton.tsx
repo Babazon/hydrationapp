@@ -38,16 +38,16 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: '#D8D8D8',
-    borderRadius: 15,
-    height: 30,
+    borderRadius: 20,
+    height: 40,
     justifyContent: 'center',
-    width: 30,
+    width: 40,
   },
   icon: {
-    borderRadius: 7.5,
-    height: 15,
+    borderRadius: 10,
+    height: 20,
     resizeMode: 'contain',
     tintColor: 'black',
-    width: 15,
+    width: 20,
   }
 });

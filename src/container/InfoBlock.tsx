@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   infoStyle: {
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'left'
   }
 });

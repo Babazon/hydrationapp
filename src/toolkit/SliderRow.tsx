@@ -122,14 +122,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   lockedIcon: {
-    height: 20,
+    height: 24,
     resizeMode: 'contain',
-    width: 20
+    width: 24
   },
   minorHorizontalGap: {
     width: 4
   },
   semiboldText: {
+    fontSize: 16,
     fontWeight: '500'
   },
   sliderContainer: {
@@ -146,10 +147,10 @@ const styles = StyleSheet.create({
     marginVertical: 4
   },
   unlockedIcon: {
-    height: 20,
+    height: 24,
     resizeMode: 'contain',
     tintColor: 'gray',
-    width: 20
+    width: 24
   },
   upperRowContainer: {
     alignItems: 'center',

@@ -35,6 +35,6 @@ export class Main extends React.Component<IMainProps>{
 const styles = StyleSheet.create({
   sliderRow: {
     height: 80,
-    paddingBottom: 8
+    marginBottom: 8
   }
 });

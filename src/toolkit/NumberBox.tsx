@@ -51,6 +51,7 @@ export class NumberBox extends React.Component<IProps>{
             <TextInput
               keyboardType={'default'}
               autoFocus
+              underlineColorAndroid="transparent"
               style={styles.textInput}
               value={this.normalizeStringDisplay(this.props.value)}
               onChangeText={this.onChangeText} />
@@ -82,14 +83,14 @@ const styles = StyleSheet.create({
   },
   staticValue: {
     color: 'black',
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '500',
     marginHorizontal: 4,
     textAlign: 'right'
   },
   symbolText: {
     color: 'black',
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '500',
     textAlign: 'center'
   },
@@ -99,12 +100,12 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 4,
     borderTopRightRadius: 4,
     flex: 1,
-    height: 32,
+    height: 40,
     justifyContent: 'center'
   },
   textInput: {
     color: 'black',
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '500',
     marginHorizontal: 4,
     textAlign: 'right'
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 4,
     borderTopLeftRadius: 4,
     flex: 2,
-    height: 32,
+    height: 40,
     justifyContent: 'center'
   }
 });
