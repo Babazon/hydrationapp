@@ -22,8 +22,7 @@ export class InfoBlock extends React.Component<IProps>{
   @computed private get infoBlockData(): InfoRenderData[] {
     const { dough } = this.props;
 
-    // tslint:disable-next-line: prefer-immediate-return
-    const data: InfoRenderData[] = [
+    return [
       {
         label: dough.userInterface.languageConstants._total_flour,
         unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
@@ -77,7 +76,6 @@ export class InfoBlock extends React.Component<IProps>{
       },
     ];
 
-    return data;
   }
 
   private readonly renderDataRow = ({ item }: { item: InfoRenderData }) => {

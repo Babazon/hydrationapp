@@ -59,11 +59,6 @@ export class Dough {
   @action private adjustWeightValuesForTargetDoughWeightWithNonZeroWeights = () => {
     const actualTargetFlourWeight: number = this.doughWeight.value * (1 / (1 + this.hydration.value / 100 + this.saltRatio));
     const ratioToMultiply: number = (actualTargetFlourWeight / this.totalFlour) ?? 0; // in case of divide by 0
-    // This is bad, doesn't work if any of these observables are 0
-    // New formula must be developed that looks at leaven hydration and inoculation
-    // Finds new total flour, water, leaven values
-    // Directly sets them
-    // Leaven inoculation and hydration must be set!!
     this.flour.setValue(this.flour.value * ratioToMultiply);
     this.water.setValue(this.water.value * ratioToMultiply);
     this.leavenWeight.setValue(this.leavenWeight.value * ratioToMultiply);

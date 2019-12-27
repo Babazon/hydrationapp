@@ -34,7 +34,7 @@ export default class App extends React.Component {
               contentContainerStyle={styles.scrollViewContentStyle}>
 
               <Main sliderData={this.vm.sliderData} />
-              <View style={{ height: 16 }} />
+              <View style={styles.padding} />
               <InfoBlock dough={this.vm.dough} />
 
             </KeyboardAwareScrollView>
@@ -47,8 +47,11 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  padding: {
+    height: 16
+  },
   safeAreaView: {
-    flex: 1,
+    flex: 1
   },
   scrollViewContentStyle: {
     alignItems: 'stretch',

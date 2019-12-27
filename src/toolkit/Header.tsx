@@ -1,3 +1,5 @@
+// TODO: PREPARE FOR IN-APP-PURCHASE
+
 import { observer } from 'mobx-react';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';

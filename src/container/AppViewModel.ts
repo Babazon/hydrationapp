@@ -1,3 +1,5 @@
+// TODO: PREPARE FOR IN-APP-PURCHASE
+
 import AsyncStorage from '@react-native-community/async-storage';
 import { action, computed, observable } from 'mobx';
 import { presets } from '../env';
@@ -12,11 +14,11 @@ export class AppViewModel {
   @observable public isRecipeSaved = false;
   @observable public isPremium = false;
 
-  @action private toggleLoading = ({ isLoading }: { isLoading: boolean }) => {
+  @action private readonly toggleLoading = ({ isLoading }: { isLoading: boolean }) => {
     this.isLoading = isLoading;
   }
 
-  @action private setRecipeSaved = ({ isRecipeSaved }: { isRecipeSaved: boolean }): void => {
+  @action private readonly setRecipeSaved = ({ isRecipeSaved }: { isRecipeSaved: boolean }): void => {
     this.isRecipeSaved = isRecipeSaved;
   }
 
@@ -36,7 +38,7 @@ export class AppViewModel {
     }
   }
 
-  @action private recoverRecipe = async (): Promise<PersistenceModel | null> => {
+  @action private readonly recoverRecipe = async (): Promise<PersistenceModel | null> => {
     this.toggleLoading({ isLoading: true });
     try {
       const value = await AsyncStorage.getItem(presets.storageKey);

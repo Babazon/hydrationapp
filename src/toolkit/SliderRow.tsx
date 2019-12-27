@@ -48,13 +48,11 @@ export class SliderRow extends React.Component<ISliderRowProps>{
       <View style={styles.container}>
         <View style={styles.upperRowContainer}>
           <TextWithAccessibility style={styles.semiboldText}>{label}</TextWithAccessibility>
-          <View style={{
-            alignItems: 'center',
-            alignSelf: 'flex-end',
-            justifyContent: 'center',
+          <View style={StyleSheet.flatten([styles.lockButtonView,
+          {
             marginLeft: toggleLocked && isLocked != null ? 4 : 0,
             width: toggleLocked && isLocked != null ? 32 : 0
-          }}>
+          }])}>
 
             {toggleLocked && isLocked != null &&
               <TouchableOpacity onPress={this.props.toggleLocked} style={styles.lockButtonContainer}>
@@ -119,7 +117,12 @@ const styles = StyleSheet.create({
   },
   lockButtonContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
+  },
+  lockButtonView: {
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    justifyContent: 'center'
   },
   lockedIcon: {
     height: 24,
@@ -155,6 +158,6 @@ const styles = StyleSheet.create({
   upperRowContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   }
 });
