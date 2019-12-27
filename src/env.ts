@@ -1,3 +1,4 @@
+// extract strings to locize/i18n setup
 export const presets = {
   butterWaterRatio: 0.15,
   eggWaterPercentage: 0.76,

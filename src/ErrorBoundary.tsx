@@ -23,3 +23,5 @@ export class ErrorBoundary extends React.Component<{}, IState> {
     return this.props.children;
   }
 }
+
+// taken from https://reactjs.org/docs/error-boundaries.html
