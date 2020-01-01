@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 16,
     fontWeight: '500',
-    marginHorizontal: 4,
+    marginHorizontal: 2,
     textAlign: 'right'
   },
   symbolText: {

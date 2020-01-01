@@ -66,7 +66,7 @@ export class AppViewModel {
 
   @computed public get sliderData(): ISliderRowProps[] {
     const { flour, water, hydration, leavenWeight, leavenHydration, userInterface, doughWeight, inoculation } = this.dough;
-    const data = [
+    return [
       {
         incrementAmount: userInterface.appPresets.flourIncrementAmount,
         isKeyboardActive: userInterface.flourInputMode,
@@ -126,10 +126,6 @@ export class AppViewModel {
         value: hydration.value,
         valueAffix: userInterface.languageConstants._percent
       },
-    ];
-
-    if (this.isPremium) {
-      return [...data,
       {
         incrementAmount: 1000,
         isKeyboardActive: userInterface.targetDoughWeightInputMode,
@@ -156,10 +152,7 @@ export class AppViewModel {
         value: inoculation.value,
         valueAffix: userInterface.languageConstants._percent
       }
-      ];
-    }
-
-    return data;
+    ];
   }
 
 }

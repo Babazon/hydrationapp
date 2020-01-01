@@ -40,7 +40,7 @@ export class InfoBlock extends React.Component<IProps>{
       },
       {
         label: dough.userInterface.languageConstants._inoculation,
-        unit: ` ${dough.userInterface.languageConstants._percent}`,
+        unit: `${dough.userInterface.languageConstants._percent}`,
         value: dough.leavenWeight.inoculation.toFixed(getDecimalForFixed(dough.leavenWeight.value))
       },
       {
@@ -75,7 +75,6 @@ export class InfoBlock extends React.Component<IProps>{
         value: dough.experimentalBulkVolume.toFixed(getDecimalForFixed(dough.experimentalBulkVolume))
       },
     ];
-
   }
 
   private readonly renderDataRow = ({ item }: { item: InfoRenderData }) => {

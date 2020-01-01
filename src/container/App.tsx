@@ -1,7 +1,7 @@
 import 'es6-symbol/implement';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import '../bugsnagConfig';
@@ -30,6 +30,10 @@ export default class App extends React.Component {
           <SafeAreaView style={styles.safeAreaView}>
 
             <KeyboardAwareScrollView
+              refreshControl={<RefreshControl
+                refreshing={false}
+                onRefresh={this.vm.dough.resetValues}
+              />}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.scrollViewContentStyle}>
 
