@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.hydrationapp"
+        applicationId "com.breadcalc"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
