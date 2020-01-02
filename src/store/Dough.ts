@@ -123,6 +123,8 @@ export class Dough {
     this.water.isLocked = false;
     this.flour.isLocked = false;
     this.leavenHydration.isLocked = false;
+    this.doughWeight.isLocked = false;
+    this.inoculation.isLocked = false;
     this.hydration.value = this.appPresets.initialTargetHydration;
     this.doughWeight.value = this.appPresets.initialTargetDoughWeight;
     this.inoculation.value = this.appPresets.initialTargetInoculation;

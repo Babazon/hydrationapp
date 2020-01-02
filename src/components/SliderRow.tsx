@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
   lockedIcon: {
     height: 24,
     resizeMode: 'contain',
+    tintColor: '#7AADF3',
     width: 24
   },
   minorHorizontalGap: {
