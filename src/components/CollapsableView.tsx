@@ -6,18 +6,21 @@ import { TextWithAccessibility } from './TextWithAccessibility';
 export class CollapsableView extends React.Component<{}, { collapsed: boolean }> {
 
   public state = {
-    collapsed: false
+    collapsed: true
   };
   private collapse = () => this.setState((prev) => ({ collapsed: !prev.collapsed }));
 
   public render() {
     return <View>
+      <TouchableHighlight>
+        <TextWithAccessibility onPress={this.collapse}>
+          {this.state.collapsed ? 'Expand' : 'Collapse'}
+        </TextWithAccessibility>
+      </TouchableHighlight>
       <Collapsible collapsed={this.state.collapsed}>
-        <TouchableHighlight>
-          <TextWithAccessibility onPress={this.collapse}>
-            hi
+        <TextWithAccessibility onPress={this.collapse}>
+          Collapsed content
       </TextWithAccessibility>
-        </TouchableHighlight>
       </Collapsible>
     </View>;
   }
