@@ -24,6 +24,36 @@ export class InfoBlock extends React.Component<IProps>{
 
     return [
       {
+        label: dough.userInterface.languageConstants._recipe_flour,
+        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
+        value: dough.flour.value.toFixed(getDecimalForFixed(dough.flour.value))
+      },
+      {
+        label: dough.userInterface.languageConstants._recipe_water,
+        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
+        value: dough.water.value.toFixed(getDecimalForFixed(dough.water.value))
+      },
+      {
+        label: dough.userInterface.languageConstants._total_leaven,
+        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
+        value: dough.leavenWeight.value.toFixed(getDecimalForFixed(dough.leavenWeight.value))
+      },
+      {
+        label: dough.userInterface.languageConstants._current_inoculation,
+        unit: `${dough.userInterface.languageConstants._percent}`,
+        value: dough.leavenWeight.inoculation.toFixed(getDecimalForFixed(dough.leavenWeight.value))
+      },
+      {
+        label: dough.userInterface.languageConstants._inoculation,
+        unit: `${dough.userInterface.languageConstants._percent}`,
+        value: dough.inoculation.value.toFixed(getDecimalForFixed(dough.leavenWeight.value))
+      },
+      {
+        label: dough.userInterface.languageConstants._recommended_salt,
+        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
+        value: dough.recommendedSalt.toFixed(getDecimalForFixed(dough.recommendedSalt))
+      },
+      {
         label: dough.userInterface.languageConstants._total_flour,
         unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
         value: dough.totalFlour.toFixed(getDecimalForFixed(dough.totalFlour))
@@ -32,21 +62,6 @@ export class InfoBlock extends React.Component<IProps>{
         label: dough.userInterface.languageConstants._total_water,
         unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
         value: dough.totalWater.toFixed(getDecimalForFixed(dough.totalWater))
-      },
-      {
-        label: dough.userInterface.languageConstants._total_leaven,
-        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
-        value: dough.leavenWeight.value.toFixed(getDecimalForFixed(dough.leavenWeight.value))
-      },
-      {
-        label: dough.userInterface.languageConstants._inoculation,
-        unit: `${dough.userInterface.languageConstants._percent}`,
-        value: dough.leavenWeight.inoculation.toFixed(getDecimalForFixed(dough.leavenWeight.value))
-      },
-      {
-        label: dough.userInterface.languageConstants._recommended_salt,
-        unit: ` ${dough.userInterface.languageConstants._gram_abbvr}`,
-        value: dough.recommendedSalt.toFixed(getDecimalForFixed(dough.recommendedSalt))
       },
       {
         label: dough.userInterface.languageConstants._total_dough_weight,
