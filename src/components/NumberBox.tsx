@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
-import { getDecimalForFixed } from '../utilities/getDecimalForFixed';
 import { TextWithAccessibility } from './TextWithAccessibility';
 
 interface IProps {
@@ -23,7 +22,7 @@ export class NumberBox extends React.Component<IProps>{
   }
 
   private readonly normalizeStringDisplay = (value: number) => {
-    const valueToString = `${value.toFixed(getDecimalForFixed(value))}`;
+    const valueToString = `${value.toFixed(0)}`;
     return valueToString.startsWith('0')
       ? valueToString.substring(1)
       : valueToString;
@@ -41,7 +40,7 @@ export class NumberBox extends React.Component<IProps>{
         {!this.props.isKeyboardActive &&
           (
             <TextWithAccessibility style={styles.staticValue}>
-              {this.props.value.toFixed(getDecimalForFixed(this.props.value))}
+              {this.props.value.toFixed(0)}
             </TextWithAccessibility>
           )
         }
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 16,
     fontWeight: '500',
-    marginHorizontal: 2,
+    marginHorizontal: 4,
     textAlign: 'right'
   },
   symbolText: {
