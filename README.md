@@ -8,8 +8,10 @@
 
 ## Progress
 
-[BASIC] : Ready to deploy on App Stores
+[MVP] : Deployed on App Stores
 
-[BASIC] : Guides and Onboarding Videos in version 1.1
+### AppStore: https://apps.apple.com/us/app/breadcalc/id1492947816
+### PlayStore: https://play.google.com/store/apps/details?id=com.breadcalc&hl=en
+### Instagram Support Page: https://www.instagram.com/breadcalc
 
-[PREMIUM] : Persistence, Dough Weight features ready. In-app payments not configured yet. Egg/Milk/Butter extras tba with first premium version
+[UPCOMING] : Guides and Onboarding Videos in version 1.1, Persistence, Dough Weight features ready. Egg/Milk/Butter extras tba with first premium version. Flour partitioning.

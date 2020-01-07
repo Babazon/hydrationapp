@@ -51,6 +51,7 @@ export class Flour extends Generic {
     // Option 1: User numeric input, and warn to keep it at 100
     // Option 2: Sliders, but moving Slider2 makes the Slider1 react (multiple sliders??)
     // Question: In case of reaction, which value gets adjusted if slider3 is moved? slider1 or slider2?
+    // Could we lock all but one, and set the sliders that aren't locked only?
   }
 
   @computed public get flourParts(): Array<[string, number, number]> {
