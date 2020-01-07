@@ -43,7 +43,7 @@
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-typescript": "^7.7.0",
     "@babel/runtime": "^7.7.1",
-    "@react-native-community/cli": "^2.9.0",
+    "@react-native-community/cli": "^3.0.4",
     "@types/enzyme": "^3.10.3",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/jest": "^24.0.22",
