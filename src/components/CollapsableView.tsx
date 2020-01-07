@@ -1,27 +1,44 @@
 import React from 'react';
-import { TouchableHighlight, View } from 'react-native';
+import { Image, StyleSheet, TouchableHighlight, View } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import Collapsible from 'react-native-collapsible';
-import { TextWithAccessibility } from './TextWithAccessibility';
+import { Assets } from '../assets';
 
-export class CollapsableView extends React.Component<{}, { collapsed: boolean }> {
+export interface ICollapsableViewProps {
+  content: JSX.Element | JSX.Element[];
+}
+
+export class CollapsableView extends React.Component<ICollapsableViewProps, { collapsed: boolean }> {
 
   public state = {
     collapsed: true
   };
-  private collapse = () => this.setState((prev) => ({ collapsed: !prev.collapsed }));
+
+  private toggle = () => this.setState((prev) => ({ collapsed: !prev.collapsed }));
 
   public render() {
     return <View>
-      <TouchableHighlight>
-        <TextWithAccessibility onPress={this.collapse}>
-          {this.state.collapsed ? 'Expand' : 'Collapse'}
-        </TextWithAccessibility>
+      <TouchableHighlight onPress={this.toggle} underlayColor="transparent">
+        < >
+          {this.state.collapsed && <Image source={Assets.icon_right_chevron} style={styles.icon} />}
+          {this.state.collapsed && <Image source={Assets.icon_down_chevron} style={styles.icon} />}
+        </>
       </TouchableHighlight>
       <Collapsible collapsed={this.state.collapsed}>
-        <TextWithAccessibility onPress={this.collapse}>
-          Collapsed content
-      </TextWithAccessibility>
+        <Animatable.View
+          duration={300}
+          easing="ease-out">
+          {!!this.props.content && this.props.content}
+        </Animatable.View>
       </Collapsible>
     </View>;
   }
 }
+
+const styles = StyleSheet.create({
+  icon: {
+    height: 30,
+    resizeMode: 'contain',
+    width: 30
+  }
+});

@@ -4,6 +4,7 @@ import React from 'react';
 import { Dimensions, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Assets } from '../assets';
 import { CircularButton } from './CircularButton';
+import { CollapsableView } from './CollapsableView';
 import { NumberBox } from './NumberBox';
 import { TextWithAccessibility } from './TextWithAccessibility';
 
@@ -47,7 +48,12 @@ export class SliderRow extends React.Component<ISliderRowProps>{
     return (
       <View style={styles.container}>
         <View style={styles.upperRowContainer}>
-          <TextWithAccessibility style={styles.semiboldText}>{label}</TextWithAccessibility>
+          <TextWithAccessibility style={styles.semiboldText}>
+            {label}
+          </TextWithAccessibility>
+
+          <CollapsableView content={<TextWithAccessibility>Flour</TextWithAccessibility>} />
+
           <View style={StyleSheet.flatten([styles.lockButtonView,
           {
             marginLeft: toggleLocked && isLocked != null ? 4 : 0,

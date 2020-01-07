@@ -12,8 +12,6 @@ import { AppViewModel } from './AppViewModel';
 import { InfoBlock } from './InfoBlock';
 import { Main } from './Main';
 
-import { CollapsableView } from '../components/CollapsableView';
-
 @observer
 export default class App extends React.Component {
 
@@ -38,7 +36,6 @@ export default class App extends React.Component {
               />}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.scrollViewContentStyle}>
-              <CollapsableView />
               <Main sliderData={this.vm.sliderData} />
               <View style={styles.padding} />
               <InfoBlock dough={this.vm.dough} />
