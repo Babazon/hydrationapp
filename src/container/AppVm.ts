@@ -4,7 +4,7 @@ import { computed } from 'mobx';
 import { ISliderRowProps } from '../components/SliderRow';
 import { Dough } from '../store/Dough';
 
-export class AppViewModel {
+export class AppVm {
   constructor(public readonly dough: Dough) { }
 
   @computed public get sliderData(): ISliderRowProps[] {

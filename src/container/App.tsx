@@ -8,7 +8,7 @@ import '../bugsnagConfig';
 
 import { ErrorBoundary } from '../ErrorBoundary';
 import dough from '../store/Dough';
-import { AppViewModel } from './AppViewModel';
+import { AppVm } from './AppVm';
 import { InfoBlock } from './InfoBlock';
 import { Main } from './Main';
 
@@ -19,7 +19,7 @@ export default class App extends React.Component {
     super(props);
   }
 
-  private readonly vm: AppViewModel = new AppViewModel(dough);
+  private readonly vm: AppVm = new AppVm(dough);
 
   public render() {
 
@@ -38,7 +38,7 @@ export default class App extends React.Component {
               contentContainerStyle={styles.scrollViewContentStyle}>
               <Main sliderData={this.vm.sliderData} />
               <View style={styles.padding} />
-              <InfoBlock dough={this.vm.dough} />
+              <InfoBlock />
 
             </KeyboardAwareScrollView>
           </SafeAreaView>
