@@ -1,6 +1,5 @@
 import { action, computed, observable, reaction } from 'mobx';
 import { presets } from '../env';
-import { PersistenceModel } from '../utilities/Persistence';
 import { DoughWeight } from './DoughWeight';
 import { Flour } from './Flour';
 import { Hydration } from './Hydration';
@@ -87,32 +86,6 @@ export class Dough {
   @observable public userInterface: UserInterface = new UserInterface(this, this.appPresets);
   @observable public inoculation: Inoculation = new Inoculation(this);
   @observable public doughWeight: DoughWeight = new DoughWeight(this);
-
-  @computed public get persistenceModel(): PersistenceModel {
-    return PersistenceModel.deserialize({
-      doughWeight: this.doughWeight.value,
-      flour: this.flour.value,
-      hydration: this.hydration.value,
-      inoculation: this.inoculation.value,
-      leavenHydration: this.leavenHydration.value,
-      leavenWeight: this.leavenWeight.value,
-      water: this.water.value
-    });
-  }
-
-  @action public loadPersistedRecipe = (persistence: PersistenceModel) => {
-    try {
-      this.flour.value = persistence.flour;
-      this.water.value = persistence.water;
-      this.hydration.value = persistence.hydration;
-      this.leavenHydration.value = persistence.leavenHydration;
-      this.leavenWeight.value = persistence.leavenWeight;
-      this.doughWeight.value = persistence.doughWeight;
-      this.inoculation.value = persistence.inoculation;
-    } catch (error) {
-      //
-    }
-  }
 
   @action public resetValues = () => {
     this.flour.value = this.appPresets.initialFlourValue;

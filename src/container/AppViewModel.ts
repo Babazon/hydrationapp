@@ -1,68 +1,11 @@
 // TODO: PREPARE FOR IN-APP-PURCHASE
 
-import AsyncStorage from '@react-native-community/async-storage';
-import { action, computed, observable } from 'mobx';
+import { computed } from 'mobx';
 import { ISliderRowProps } from '../components/SliderRow';
-import { presets } from '../env';
 import { Dough } from '../store/Dough';
-import { PersistenceModel } from '../utilities/Persistence';
 
 export class AppViewModel {
   constructor(public readonly dough: Dough) { }
-
-  @observable public isLoading = false;
-  @observable public isRecipeSaved = false;
-  @observable public isPremium = false;
-
-  @action private readonly toggleLoading = ({ isLoading }: { isLoading: boolean }) => {
-    this.isLoading = isLoading;
-  }
-
-  @action private readonly setRecipeSaved = ({ isRecipeSaved }: { isRecipeSaved: boolean }): void => {
-    this.isRecipeSaved = isRecipeSaved;
-  }
-
-  @action public setPremium = () => {
-    this.isPremium = true;
-  }
-
-  @action public persistRecipe = async (): Promise<void> => {
-    this.toggleLoading({ isLoading: true });
-    try {
-      await AsyncStorage.setItem(presets.storageKey, this.dough.persistenceModel.serialize());
-      this.setRecipeSaved({ isRecipeSaved: true });
-    } catch (error) {
-      this.setRecipeSaved({ isRecipeSaved: false });
-    } finally {
-      this.toggleLoading({ isLoading: false });
-    }
-  }
-
-  @action private readonly recoverRecipe = async (): Promise<PersistenceModel | null> => {
-    this.toggleLoading({ isLoading: true });
-    try {
-      const value = await AsyncStorage.getItem(presets.storageKey);
-      if (value != null) {
-        return PersistenceModel.deserialize(JSON.parse(value));
-      }
-    } catch (error) {
-      //
-    } finally {
-      this.toggleLoading({ isLoading: false });
-    }
-    return null;
-  }
-
-  @action public loadRecipe = async (): Promise<void> => {
-    try {
-      const persistenceModel = await this.recoverRecipe();
-      if (persistenceModel != null) {
-        this.dough.loadPersistedRecipe(persistenceModel);
-      }
-    } catch (error) {
-      //
-    }
-  }
 
   @computed public get sliderData(): ISliderRowProps[] {
     const { flour, water, hydration, leavenWeight, leavenHydration, userInterface, doughWeight, inoculation } = this.dough;
