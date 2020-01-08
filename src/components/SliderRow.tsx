@@ -116,19 +116,19 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    marginVertical: 8
+    marginVertical: 8,
   },
   horizontalGap: {
     width: 8
   },
   lockButtonContainer: {
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   lockButtonView: {
     alignItems: 'center',
     alignSelf: 'flex-end',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   lockedIcon: {
     height: 24,
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   semiboldText: {
     fontSize: 16,
-    fontWeight: '500'
+    fontWeight: '500',
   },
   sliderContainer: {
     alignItems: 'center',
@@ -149,12 +149,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginTop: 24,
-    maxWidth: Dimensions.get('window').width
+    maxWidth: Dimensions.get('window').width,
   },
   sliderStyle: {
     flex: 4,
     height: 40,
-    marginVertical: 4
+    marginVertical: 4,
   },
   unlockedIcon: {
     height: 24,
@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
   upperRowContainer: {
     alignItems: 'center',
     flexDirection: 'row',
+    height: 40,
     justifyContent: 'space-between'
   }
 });
