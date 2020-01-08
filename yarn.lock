@@ -2426,10 +2426,10 @@ buffer-from@1.x, buffer-from@^1.0.0:
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
   integrity sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==
 
-bugsnag-react-native@^2.23.3:
-  version "2.23.3"
-  resolved "https://registry.yarnpkg.com/bugsnag-react-native/-/bugsnag-react-native-2.23.3.tgz#c4116d85b7ed921f59ea395521577f0d60280805"
-  integrity sha512-SPchJq+V0Pwl1PhLlEltyP+5mNzwPomTOJPAaMINiDyg9RsuCPK8onzetJj0PlP5gfULHrjEU7ZRhARh1eMKvw==
+bugsnag-react-native@^2.23.4:
+  version "2.23.4"
+  resolved "https://registry.yarnpkg.com/bugsnag-react-native/-/bugsnag-react-native-2.23.4.tgz#4ea9e877a86488b0c6212b2ee756c597b7194878"
+  integrity sha512-If8gkcQdLCtOppWViF8rN+Ylr3cloLf5kk+hG0cF7uTxYp7O63dd6J5jGIGnMCW/7IKfqcwn4t6sb/WJl6uM7A==
   dependencies:
     iserror "^0.0.2"
     promise "^7"
