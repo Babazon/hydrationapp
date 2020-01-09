@@ -17,7 +17,7 @@
   "dependencies": {
     "@react-native-community/slider": "^2.0.8",
     "appcenter": "^2.6.0",
-    "appcenter-analytics": "^2.6.0",
+    "appcenter-analytics": "^2.6.1",
     "appcenter-crashes": "^2.6.0",
     "bugsnag-react-native": "^2.23.4",
     "es6-symbol": "^3.1.3",
