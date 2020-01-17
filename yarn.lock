@@ -1276,10 +1276,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@welldone-software/why-did-you-render@^3.3.8":
-  version "3.3.9"
-  resolved "https://registry.yarnpkg.com/@welldone-software/why-did-you-render/-/why-did-you-render-3.3.9.tgz#473bc8209d08476b5cffcd19dce3484fdc159b48"
-  integrity sha512-uH8gQvggyAvrRdib2+n+/ZwbVtUhap2Tvere+Bb3KWAE6K4rdgZMUtjtovjbLaAqR4zN4XWGLjp7Dc/MAhBKoQ==
+"@welldone-software/why-did-you-render@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@welldone-software/why-did-you-render/-/why-did-you-render-3.5.0.tgz#41a414e90b372af73e8693e44bfdb960c4921193"
+  integrity sha512-9+WVSV8ZBb12SYu5uS4rOB5xVbW3ZpXGuAoeKlZ71oI9NrNG5X+v9WTFmoV+jKPKtlOU8dbwwDjF9GOzp7XvPQ==
   dependencies:
     lodash "^4"
 
