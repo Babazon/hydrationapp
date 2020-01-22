@@ -47,7 +47,7 @@
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/jest": "^24.9.0",
     "@types/node": "^13.1.8",
-    "@types/react": "^16.9.17",
+    "@types/react": "^16.9.18",
     "@types/react-native": "^0.60.30",
     "@types/requirejs": "^2.1.31",
     "@welldone-software/why-did-you-render": "^3.5.0",
