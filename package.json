@@ -48,7 +48,7 @@
     "@types/jest": "^24.9.0",
     "@types/node": "^13.1.8",
     "@types/react": "^16.9.18",
-    "@types/react-native": "^0.60.30",
+    "@types/react-native": "^0.61.2",
     "@types/requirejs": "^2.1.31",
     "@welldone-software/why-did-you-render": "^3.5.0",
     "babel-core": "^6.26.3",
