@@ -2,13 +2,17 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextWithAccessibility } from '../components/TextWithAccessibility';
-import dough from '../store/Dough';
+import { Dough } from '../store/Dough';
 import { InfoBlockVm, InfoRenderData } from './InfoBlockVm';
 
-@observer
-export class InfoBlock extends React.Component {
+interface IProps {
+  dough: Dough;
+}
 
-  private readonly vm: InfoBlockVm = new InfoBlockVm(dough);
+@observer
+export class InfoBlock extends React.Component<IProps> {
+
+  private readonly vm: InfoBlockVm = new InfoBlockVm(this.props.dough);
 
   private readonly renderDataRow = ({ item }: { item: InfoRenderData }) => {
     return (

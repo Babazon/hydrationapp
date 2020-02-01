@@ -7,7 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import '../bugsnagConfig';
 
 import { ErrorBoundary } from '../ErrorBoundary';
-import dough from '../store/Dough';
+import root from '../store/RootStore';
 import { AppVm } from './AppVm';
 import { InfoBlock } from './InfoBlock';
 import { Main } from './Main';
@@ -19,7 +19,7 @@ export default class App extends React.Component {
     super(props);
   }
 
-  private readonly vm: AppVm = new AppVm(dough);
+  private readonly vm: AppVm = new AppVm(root?.dough);
 
   public render() {
 
@@ -38,7 +38,7 @@ export default class App extends React.Component {
               contentContainerStyle={styles.scrollViewContentStyle}>
               <Main sliderData={this.vm.sliderData} />
               <View style={styles.padding} />
-              <InfoBlock />
+              <InfoBlock dough={root?.dough} />
 
             </KeyboardAwareScrollView>
           </SafeAreaView>

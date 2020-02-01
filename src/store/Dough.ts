@@ -1,5 +1,4 @@
 import { action, computed, observable, reaction } from 'mobx';
-import { presets } from '../env';
 import { DoughWeight } from './DoughWeight';
 import { Flour } from './Flour';
 import { Hydration } from './Hydration';
@@ -52,7 +51,6 @@ export class Dough {
         this.adjustWeightValuesForTargetDoughWeight();
       }
     });
-
   }
 
   @action private adjustWeightValuesForTargetDoughWeightWithNonZeroWeights = () => {
@@ -180,5 +178,3 @@ export class Dough {
   }
 
 }
-
-export default new Dough(presets);
