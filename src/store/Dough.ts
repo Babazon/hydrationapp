@@ -1,5 +1,5 @@
-import { action, computed, observable, reaction } from 'mobx';
-import { serialize } from 'serializr';
+import AsyncStorage from '@react-native-community/async-storage';
+import { action, computed, observable, reaction, runInAction } from 'mobx';
 import { DoughWeight } from './DoughWeight';
 import { Flour } from './Flour';
 import { Hydration } from './Hydration';
@@ -15,6 +15,9 @@ export class Dough {
 
   // tslint:disable-next-line: cognitive-complexity
   constructor(protected readonly appPresets: any) {
+
+    this.hydrateAllRecipes();
+
     reaction(() => this.totalHydration, (totalHydration: number) => {
       if (!this.hydration.isLocked && totalHydration != null) {
         this.hydration.setValue(totalHydration * 100);
@@ -78,16 +81,52 @@ export class Dough {
     this.leavenWeight.setValue(finalLeavenWeight);
   }
 
-  @observable public recipe: RecipeModel;
+  @observable public localRecipes: { [index: string]: RecipeModel } = {};
 
-  @action public persistRecipe = () => {
-    this.recipe = RecipeModel.fromJSON({
+  @action public persistRecipe = async () => {
+    const recipe = RecipeModel.fromJSON({
       leavenHydration: this.leavenHydration.value,
       leavenWeight: this.leavenWeight.value,
       recipeFlour: this.flour.value,
       recipeWater: this.water.value
     });
-    serialize(RecipeModel, this.recipe);
+    try {
+      await AsyncStorage.setItem(new Date().toTimeString(), JSON.stringify(recipe));
+    } catch (e) {
+      //
+    }
+  }
+
+  @action private hydrateAllRecipes = async () => {
+    try {
+      const keys = await AsyncStorage.getAllKeys();
+      this.hydrateValues(keys);
+    } catch (error) {
+      //
+    }
+  }
+
+  @action private hydrateValues = async (keys: string[]) => {
+    try {
+      const recipes: Array<[string, string | null]> = await AsyncStorage.multiGet(keys);
+      const recipesTable = recipes.reduce((accumulator, [key, recipe]: [string, string]) => {
+        accumulator[key] = RecipeModel.fromJSON(JSON.parse(recipe));
+        return accumulator;
+      }, {} as { [index: string]: RecipeModel });
+      runInAction(() => {
+        this.localRecipes = recipesTable;
+        this.setToSelectedRecipe(Object.values(this.localRecipes)[0]);
+      });
+    } catch (error) {
+      //
+    }
+  }
+
+  @action public setToSelectedRecipe = (recipe: RecipeModel) => {
+    this.flour.value = recipe.recipeFlour;
+    this.water.value = recipe.recipeWater;
+    this.leavenWeight.value = recipe.leavenWeight;
+    this.leavenHydration.value = recipe.leavenHydration;
   }
 
   @observable public flour: Flour = new Flour(this);

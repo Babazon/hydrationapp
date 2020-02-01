@@ -1,4 +1,5 @@
 import { observable } from 'mobx';
+import { persist } from 'mobx-persist';
 
 export interface IRecipeJSON {
   recipeFlour: number;
@@ -9,10 +10,10 @@ export interface IRecipeJSON {
 
 export class RecipeModel {
 
-  @observable public recipeFlour: number = 1000;
-  @observable public recipeWater: number = 750;
-  @observable public leavenWeight: number = 200;
-  @observable public leavenHydration: number = 100;
+  @persist @observable public recipeFlour: number = 1000;
+  @persist @observable public recipeWater: number = 750;
+  @persist @observable public leavenWeight: number = 200;
+  @persist @observable public leavenHydration: number = 100;
 
   public static fromJSON(data: IRecipeJSON) {
     const model = new RecipeModel();
