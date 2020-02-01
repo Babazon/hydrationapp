@@ -1,10 +1,12 @@
 import { action, computed, observable, reaction } from 'mobx';
+import { serialize } from 'serializr';
 import { DoughWeight } from './DoughWeight';
 import { Flour } from './Flour';
 import { Hydration } from './Hydration';
 import { Inoculation } from './Inoculation';
 import { LeavenHydration } from './LeavenHydration';
 import { LeavenWeight } from './LeavenWeight';
+import { RecipeModel } from './RecipeModel';
 import { UserInterface } from './UserInterface';
 import { Water } from './Water';
 
@@ -74,6 +76,18 @@ export class Dough {
     this.flour.setValue(finalFlourWeight);
     this.water.setValue(finalWaterWeight);
     this.leavenWeight.setValue(finalLeavenWeight);
+  }
+
+  @observable public recipe: RecipeModel;
+
+  @action public persistRecipe = () => {
+    this.recipe = RecipeModel.fromJSON({
+      leavenHydration: this.leavenHydration.value,
+      leavenWeight: this.leavenWeight.value,
+      recipeFlour: this.flour.value,
+      recipeWater: this.water.value
+    });
+    serialize(RecipeModel, this.recipe);
   }
 
   @observable public flour: Flour = new Flour(this);
