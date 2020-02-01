@@ -1,11 +1,12 @@
 import 'es6-symbol/implement';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
+import { RefreshControl, SafeAreaView, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import '../bugsnagConfig';
 
+import { TextWithAccessibility } from '../components/TextWithAccessibility';
 import { ErrorBoundary } from '../ErrorBoundary';
 import root from '../store/RootStore';
 import { AppVm } from './AppVm';
@@ -36,9 +37,12 @@ export default class App extends React.Component {
               />}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.scrollViewContentStyle}>
+              <TouchableHighlight onPress={this.vm.dough.persistRecipe}>
+                <TextWithAccessibility>Persist this recipe</TextWithAccessibility>
+              </TouchableHighlight>
               <Main sliderData={this.vm.sliderData} />
               <View style={styles.padding} />
-              <InfoBlock dough={root?.dough} />
+              <InfoBlock dough={this.vm.dough} />
 
             </KeyboardAwareScrollView>
           </SafeAreaView>
