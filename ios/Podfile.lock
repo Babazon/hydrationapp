@@ -1,12 +1,12 @@
 PODS:
-  - appcenter (2.6.0):
+  - appcenter (2.6.1):
     - AppCenterReactNativeShared
     - React
-  - appcenter-analytics (2.6.0):
+  - appcenter-analytics (2.6.1):
     - AppCenter/Analytics
     - AppCenterReactNativeShared
     - React
-  - appcenter-crashes (2.6.0):
+  - appcenter-crashes (2.6.1):
     - AppCenter/Crashes
     - AppCenterReactNativeShared
     - React
@@ -18,10 +18,10 @@ PODS:
   - AppCenterReactNativeShared (2.6.0):
     - AppCenter/Core (= 2.5.1)
   - boost-for-react-native (1.63.0)
-  - BugsnagReactNative (2.23.4):
-    - BugsnagReactNative/Core (= 2.23.4)
+  - BugsnagReactNative (2.23.5):
+    - BugsnagReactNative/Core (= 2.23.5)
     - React
-  - BugsnagReactNative/Core (2.23.4):
+  - BugsnagReactNative/Core (2.23.5):
     - React
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.61.5)
@@ -205,7 +205,7 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
-  - react-native-safe-area-context (0.6.1):
+  - react-native-safe-area-context (0.6.4):
     - React
   - react-native-slider (2.0.8):
     - React
@@ -354,12 +354,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppCenter: fddcbac6e4baae3d93a196ceb0bfe0e4ce407dec
-  appcenter: dc687dcf81280ccab1dc938b0b974d265144a802
-  appcenter-analytics: fa8dba207d07733dcbda749d262fde3e7161258d
-  appcenter-crashes: fa97ffec69882486d7183193cc9394473757d1ad
+  appcenter: f2e241f931e0865a74b3af3928066a1190814be0
+  appcenter-analytics: 42e368870a904af67fd93f043f3efa75ffa772a2
+  appcenter-crashes: bfc5c03a6ddcfa158fcf4217d1724fd52f45d12c
   AppCenterReactNativeShared: d5e360f8a4cb5126d29e31ab98051d2f070ba631
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  BugsnagReactNative: bfa11ce45f7ee311962ecda93f190b6ea74329fe
+  BugsnagReactNative: 249cb5d0620321c93f5f4cf1ca9fdd0a2f10415b
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: aaeaf388755e4f29cd74acbc9e3b8da6d807c37f
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
@@ -374,7 +374,7 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
-  react-native-safe-area-context: 1f8a52fb0ab1321eef9a7099bd2c360d4e38264b
+  react-native-safe-area-context: 52342d2d80ea8faadd0ffa76d83b6051f20c5329
   react-native-slider: 3a1cfd00c9c31068251b536822f7192e8d1d6b6f
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
