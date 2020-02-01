@@ -4,10 +4,9 @@ import { Dough } from './Dough';
 
 export class RootStore {
   constructor(protected readonly appPresets: any) {
-    this.dough = new Dough(appPresets);
   }
 
-  @observable public dough: Dough;
+  @observable public dough: Dough = new Dough(this.appPresets);
 
 }
 
