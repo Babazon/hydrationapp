@@ -1,13 +1,14 @@
 import 'es6-symbol/implement';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { RefreshControl, SafeAreaView, StyleSheet, TouchableHighlight, View } from 'react-native';
+import { FlatList, RefreshControl, SafeAreaView, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import '../bugsnagConfig';
 
 import { TextWithAccessibility } from '../components/TextWithAccessibility';
 import { ErrorBoundary } from '../ErrorBoundary';
+import { RecipeModel } from '../store/RecipeModel';
 import root from '../store/RootStore';
 import { AppVm } from './AppVm';
 import { InfoBlock } from './InfoBlock';
@@ -21,6 +22,20 @@ export default class App extends React.Component {
   }
 
   private readonly vm: AppVm = new AppVm(root?.dough);
+
+  private renderItem = ({ item }: { item: [string, RecipeModel] }) => {
+    return (
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 4 }}>
+        <TextWithAccessibility>{item[0].substr(0, 9)}</TextWithAccessibility>
+        <TextWithAccessibility>
+          F: {item[1].recipeFlour + ' '}
+          W: {item[1].recipeWater + ' '}
+          LW: {item[1].leavenWeight + ' '}
+          LH: {item[1].leavenHydration + ' '}
+        </TextWithAccessibility>
+      </View>
+    );
+  }
 
   public render() {
 
@@ -40,6 +55,12 @@ export default class App extends React.Component {
               <TouchableHighlight onPress={this.vm.dough.persistRecipe}>
                 <TextWithAccessibility>Persist this recipe</TextWithAccessibility>
               </TouchableHighlight>
+
+              <FlatList<[string, RecipeModel]>
+                renderItem={this.renderItem}
+                data={this.vm.dough.localRecipesArray}
+                keyExtractor={(item) => item[0]}
+              />
               <Main sliderData={this.vm.sliderData} />
               <View style={styles.padding} />
               <InfoBlock dough={this.vm.dough} />
