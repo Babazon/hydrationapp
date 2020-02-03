@@ -81,7 +81,16 @@ export class Dough {
     this.leavenWeight.setValue(finalLeavenWeight);
   }
 
+  //////////// PERSISTENCE
+
   @observable public localRecipes: { [index: string]: RecipeModel } = {};
+  @computed public get localRecipesArray(): Array<[string, RecipeModel]> {
+    return Object.entries(this.localRecipes).sort((recipe1, recipe2) => {
+      if (recipe1[0] > recipe2[0]) { return 1; }
+      if (recipe1[0] < recipe2[0]) { return -1; }
+      return 0;
+    });
+  }
 
   @action public persistRecipe = async () => {
     const recipe = RecipeModel.fromJSON({
@@ -92,6 +101,7 @@ export class Dough {
     });
     try {
       await AsyncStorage.setItem(new Date().toTimeString(), JSON.stringify(recipe));
+      await this.hydrateAllRecipes();
     } catch (e) {
       //
     }
@@ -128,6 +138,8 @@ export class Dough {
     this.leavenWeight.value = recipe.leavenWeight;
     this.leavenHydration.value = recipe.leavenHydration;
   }
+
+  ///////////////////////////////
 
   @observable public flour: Flour = new Flour(this);
   @observable public water: Water = new Water(this);
