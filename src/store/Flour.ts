@@ -35,6 +35,8 @@ export class Flour extends Generic {
     return this.dough.userInterface.appPresets.maxFlour;
   }
 
+  // DOUGH BREAK DOWN FEATURE
+
   @observable private parts: Array<[string, number]> = [['Total', 100]];
 
   @action public createFlourPart = (partName: string) => {
