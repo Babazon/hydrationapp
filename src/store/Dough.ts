@@ -99,6 +99,7 @@ export class Dough {
       recipeFlour: this.flour.value,
       recipeWater: this.water.value
     });
+
     try {
       await AsyncStorage.setItem(new Date().toTimeString(), JSON.stringify(recipe));
       await this.hydrateAllRecipes();
