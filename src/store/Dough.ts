@@ -1,5 +1,5 @@
-import AsyncStorage from '@react-native-community/async-storage';
-import { action, computed, observable, reaction, runInAction } from 'mobx';
+import { action, computed, observable, reaction } from 'mobx';
+import { Persistence } from '../utilities/persistence';
 import { DoughWeight } from './DoughWeight';
 import { Flour } from './Flour';
 import { Hydration } from './Hydration';
@@ -16,7 +16,10 @@ export class Dough {
   // tslint:disable-next-line: cognitive-complexity
   constructor(protected readonly appPresets: any) {
 
-    this.hydrateAllRecipes();
+    // persistence
+    this.hydrate();
+
+    // SIDE EFFECTS
 
     reaction(() => this.totalHydration, (totalHydration: number) => {
       if (!this.hydration.isLocked && totalHydration != null) {
@@ -56,6 +59,8 @@ export class Dough {
         this.adjustWeightValuesForTargetDoughWeight();
       }
     });
+
+    // --- SIDE EFFECTS
   }
 
   @action private adjustWeightValuesForTargetDoughWeightWithNonZeroWeights = () => {
@@ -83,8 +88,12 @@ export class Dough {
 
   //////////// PERSISTENCE
 
+  @observable private readonly persistence: Persistence<RecipeModel> = new Persistence();
+
   @observable public localRecipes: { [index: string]: RecipeModel } = {};
+
   @computed public get localRecipesArray(): Array<[string, RecipeModel]> {
+    // SORT BY DATE, also the key, first value of the tuple
     return Object.entries(this.localRecipes).sort((recipe1, recipe2) => {
       if (recipe1[0] > recipe2[0]) { return 1; }
       if (recipe1[0] < recipe2[0]) { return -1; }
@@ -99,38 +108,33 @@ export class Dough {
       recipeFlour: this.flour.value,
       recipeWater: this.water.value
     });
-
     try {
-      await AsyncStorage.setItem(new Date().toTimeString(), JSON.stringify(recipe));
-      await this.hydrateAllRecipes();
-    } catch (e) {
-      //
-    }
-  }
-
-  @action private hydrateAllRecipes = async () => {
-    try {
-      const keys = await AsyncStorage.getAllKeys();
-      this.hydrateValues(keys);
+      await this.persistence.persist(recipe);
+      await this.hydrate();
     } catch (error) {
-      //
+      // could not persist
+    }
+
+  }
+
+  @action private hydrate = async () => {
+    try {
+      const flattenedRecipes = await this.persistence.hydrate();
+      if (flattenedRecipes) {
+        this.createRecipeTable(flattenedRecipes);
+      }
+    } catch (error) {
+      // could not hydrate
     }
   }
 
-  @action private hydrateValues = async (keys: string[]) => {
-    try {
-      const recipes: Array<[string, string | null]> = await AsyncStorage.multiGet(keys);
-      const recipesTable = recipes.reduce((accumulator, [key, recipe]: [string, string]) => {
+  @action private createRecipeTable = (flattenedRecipes: Array<[string, string | null]>) => {
+    this.localRecipes = flattenedRecipes
+      .reduce((accumulator, [key, recipe]: [string, string]) => {
         accumulator[key] = RecipeModel.fromJSON(JSON.parse(recipe));
         return accumulator;
-      }, {} as { [index: string]: RecipeModel });
-      runInAction(() => {
-        this.localRecipes = recipesTable;
-        this.setToSelectedRecipe(Object.values(this.localRecipes)[0]);
-      });
-    } catch (error) {
-      //
-    }
+      }
+        , {} as { [index: string]: RecipeModel });
   }
 
   @action public setToSelectedRecipe = (recipe: RecipeModel) => {
@@ -166,6 +170,8 @@ export class Dough {
     this.doughWeight.value = this.appPresets.initialTargetDoughWeight;
     this.inoculation.value = this.appPresets.initialTargetInoculation;
   }
+
+  ////////////////////
 
   @computed public get saltRatio(): number {
     return this.appPresets.saltRatio;
