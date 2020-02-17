@@ -1,4 +1,5 @@
 import { action, computed, observable, reaction } from 'mobx';
+import { yieldRecipeFactorFromTargetDough, yieldRecipeFromTargetDough } from '../utilities/formulae';
 import { Persistence } from '../utilities/persistence';
 import { DoughWeight } from './DoughWeight';
 import { Flour } from './Flour';
@@ -64,26 +65,35 @@ export class Dough {
   }
 
   @action private adjustWeightValuesForTargetDoughWeightWithNonZeroWeights = () => {
-    const actualTargetFlourWeight: number = this.doughWeight.value * (1 / (1 + this.hydration.value / 100 + this.saltRatio));
-    const ratioToMultiply: number = (actualTargetFlourWeight / this.totalFlour) ?? 0; // in case of divide by 0
-    this.flour.setValue(this.flour.value * ratioToMultiply);
-    this.water.setValue(this.water.value * ratioToMultiply);
-    this.leavenWeight.setValue(this.leavenWeight.value * ratioToMultiply);
+
+    const model = yieldRecipeFactorFromTargetDough({
+      doughWeight: this.doughWeight.value,
+      flourWeight: this.flour.value,
+      hydration: this.hydration.value,
+      leavenWeight: this.leavenWeight.value,
+      saltRatio: this.saltRatio,
+      totalFlour: this.totalFlour,
+      waterWeight: this.water.value
+    });
+
+    this.flour.setValue(model.recipeFlour);
+    this.water.setValue(model.recipeWater);
+    this.leavenWeight.setValue(model.leavenWeight);
   }
 
   @action private adjustWeightValuesForTargetDoughWeight = () => {
 
-    const finalTotalFlourWeight: number = this.doughWeight.value / ((1 + (this.hydration.value / 100)) + this.saltRatio);
-    const finalTotalWaterWeight: number = finalTotalFlourWeight * (this.hydration.value / 100);
-    const finalFlourWeight: number = finalTotalFlourWeight / (1 + ((this.inoculation.value / 100) * (1 / (1 + (this.leavenHydration.value / 100)))));
-    const finalLeavenWeight: number = finalFlourWeight * (this.inoculation.value / 100);
-    const finalLeavenFlourWeight: number = finalLeavenWeight * (1 / (1 + (this.leavenHydration.value / 100)));
-    const finalLeavenWaterWeight: number = finalLeavenWeight - finalLeavenFlourWeight;
-    const finalWaterWeight: number = finalTotalWaterWeight - finalLeavenWaterWeight;
+    const model = yieldRecipeFromTargetDough({
+      doughWeight: this.doughWeight.value,
+      hydration: this.hydration.value,
+      inoculation: this.inoculation.value,
+      leavenHydration: this.leavenHydration.value,
+      saltRatio: this.saltRatio
+    });
 
-    this.flour.setValue(finalFlourWeight);
-    this.water.setValue(finalWaterWeight);
-    this.leavenWeight.setValue(finalLeavenWeight);
+    this.flour.setValue(model.recipeFlour);
+    this.water.setValue(model.recipeWater);
+    this.leavenWeight.setValue(model.leavenWeight);
   }
 
   //////////// PERSISTENCE
@@ -114,7 +124,6 @@ export class Dough {
     } catch (error) {
       // could not persist
     }
-
   }
 
   @action private hydrate = async () => {

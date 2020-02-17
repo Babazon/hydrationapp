@@ -1,5 +1,6 @@
 import { action, computed, observable, reaction } from 'mobx';
 import { presets } from '../env';
+import { yieldFlourToMatchHydration } from '../utilities/formulae';
 import { Dough } from './Dough';
 import { Generic } from './Generic';
 
@@ -18,13 +19,16 @@ export class Flour extends Generic {
   @observable public value: number = presets.initialFlourValue;
 
   @computed public get flourValueToMatchTargetHydration(): number {
-    if (this.dough.water.value != null &&
-      this.dough.leavenWeight.value != null &&
-      this.dough.leavenHydration.value != null &&
-      this.dough.hydration.value > 0) {
-      return ((this.dough.totalWater / this.dough.hydration.value) * 100) - this.dough.leavenWeight.leavenFlour;
-    }
-    return 0;
+
+    return yieldFlourToMatchHydration({
+      hydration: this.dough.hydration.value,
+      leavenFlour: this.dough.leavenWeight.leavenFlour,
+      leavenHydration: this.dough.leavenHydration.value,
+      leavenWeight: this.dough.leavenWeight.value,
+      totalWater: this.dough.totalWater,
+      waterWeight: this.dough.water.value
+    });
+
   }
 
   @computed public get minFlour(): number {
