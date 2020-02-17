@@ -1139,10 +1139,10 @@
     wcwidth "^1.0.1"
     ws "^1.1.0"
 
-"@react-native-community/cli@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-4.0.0.tgz#db3f665128285b7d51068d1b35102af96225c9f2"
-  integrity sha512-kTfnArEQjfKYgMVokee1GNrXGxesmnb2DyZi1BLUoVEHIheCuTXUgUH3vOlCiO/kI4mMd3bXhZVO4YhZnIfwag==
+"@react-native-community/cli@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-4.0.1.tgz#21133541d70d496cc9eca8974b6f2d4a4d18e1d2"
+  integrity sha512-Hdy3v1OWhK8HYCHeVP7XzllM3D3l1eIof/a7Vlz3QZJ1jc4CvobVy5eq/MauCIJJZW5MvZ7UFXy03KcfJxG7yQ==
   dependencies:
     "@hapi/joi" "^15.0.3"
     "@react-native-community/cli-debugger-ui" "^3.0.0"
