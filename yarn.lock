@@ -1139,10 +1139,10 @@
     wcwidth "^1.0.1"
     ws "^1.1.0"
 
-"@react-native-community/cli@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-4.0.1.tgz#21133541d70d496cc9eca8974b6f2d4a4d18e1d2"
-  integrity sha512-Hdy3v1OWhK8HYCHeVP7XzllM3D3l1eIof/a7Vlz3QZJ1jc4CvobVy5eq/MauCIJJZW5MvZ7UFXy03KcfJxG7yQ==
+"@react-native-community/cli@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-4.1.0.tgz#cca7d16fa76a4e6d5e06bb1e0964e301fa92f410"
+  integrity sha512-dZjlELM++jkm/dUPSG1kCC58EEdvmjrFeTPAtLxWmVDZ1cGsqcNjmb2qXhH0/9Ty5Pb3t3+l4oCXdyTyyjBGAQ==
   dependencies:
     "@hapi/joi" "^15.0.3"
     "@react-native-community/cli-debugger-ui" "^3.0.0"
@@ -1176,6 +1176,7 @@
     open "^6.2.0"
     ora "^3.4.0"
     plist "^3.0.0"
+    pretty-format "^25.1.0"
     semver "^6.3.0"
     serve-static "^1.13.1"
     shell-quote "1.6.1"
