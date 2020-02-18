@@ -65,7 +65,6 @@ export class Dough {
   }
 
   @action private adjustWeightValuesForTargetDoughWeightWithNonZeroWeights = () => {
-
     const model = yieldRecipeFactorFromTargetDough({
       doughWeight: this.doughWeight.value,
       flourWeight: this.flour.value,
@@ -96,7 +95,7 @@ export class Dough {
     this.leavenWeight.setValue(model.leavenWeight);
   }
 
-  //////////// PERSISTENCE
+  /* PERSISTENCE */
 
   @observable private readonly persistence: Persistence<RecipeModel> = new Persistence();
 
