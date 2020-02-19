@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx';
 import { Alert } from 'react-native';
-import { presets } from '../env';
+import { presets } from '../../env';
 import { Dough } from './Dough';
 import { Generic } from './Generic';
 

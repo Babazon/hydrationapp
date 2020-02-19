@@ -1,8 +1,8 @@
 // TODO: PREPARE FOR IN-APP-PURCHASE
 
 import { computed } from 'mobx';
-import { ISliderRowProps } from '../components/SliderRow';
-import { Dough } from '../store/Dough';
+import { ISliderRowProps } from './components/SliderRow';
+import { Dough } from './store/Dough/Dough';
 
 export class AppVm {
   constructor(public readonly dough: Dough) { }

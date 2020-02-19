@@ -1,5 +1,5 @@
 import { runInAction } from 'mobx';
-import { RecipeModel } from '../store/RecipeModel';
+import { RecipeModel } from '../store/Dough/RecipeModel';
 
 export const yieldRecipeFromTargetDough = ({ doughWeight, hydration, leavenHydration, inoculation, saltRatio }: { doughWeight: number, hydration: number, leavenHydration: number, inoculation: number, saltRatio: number }): RecipeModel => {
   const model = new RecipeModel();

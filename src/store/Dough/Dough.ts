@@ -1,6 +1,6 @@
 import { action, computed, observable, reaction } from 'mobx';
-import { yieldRecipeFactorFromTargetDough, yieldRecipeFromTargetDough } from '../utilities/formulae';
-import { Persistence } from '../utilities/persistence';
+import { yieldRecipeFactorFromTargetDough, yieldRecipeFromTargetDough } from '../../utilities/formulae';
+import { Persistence } from '../../utilities/persistence';
 import { DoughWeight } from './DoughWeight';
 import { Flour } from './Flour';
 import { Hydration } from './Hydration';

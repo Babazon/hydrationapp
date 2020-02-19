@@ -4,12 +4,15 @@ import React from 'react';
 import { RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import '../bugsnagConfig';
-import { ErrorBoundary } from '../ErrorBoundary';
-import root from '../store/RootStore';
 import { AppVm } from './AppVm';
-import { InfoBlock } from './InfoBlock';
-import { Main } from './Main';
+import './bugsnagConfig';
+import { InfoBlock } from './container/InfoBlock';
+import { Main } from './container/Main';
+import { presets } from './env';
+import { ErrorBoundary } from './ErrorBoundary';
+import { createRootStore } from './store/RootStore';
+
+const rootStore = createRootStore(presets);
 
 @observer
 export default class App extends React.Component {
@@ -18,7 +21,7 @@ export default class App extends React.Component {
     super(props);
   }
 
-  private readonly vm: AppVm = new AppVm(root?.dough);
+  private readonly vm: AppVm = new AppVm(rootStore?.dough);
 
   // private renderItem = ({ item }: { item: [string, RecipeModel] }) => {
   //   return (

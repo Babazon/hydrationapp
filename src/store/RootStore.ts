@@ -1,13 +1,16 @@
 import { observable } from 'mobx';
-import { presets } from '../env';
-import { Dough } from './Dough';
+import { Dough } from './Dough/Dough';
 
 export class RootStore {
-  constructor(protected readonly appPresets: any) {
+  constructor(public readonly appPresets: any) {
   }
 
   @observable public dough: Dough = new Dough(this.appPresets);
 
 }
 
-export default new RootStore(presets);
+export const createRootStore = (envPresets: any): RootStore => {
+  const root = new RootStore(envPresets);
+  root.dough = new Dough(root.appPresets);
+  return root;
+};

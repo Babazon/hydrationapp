@@ -1,6 +1,6 @@
 import { computed, observable, reaction } from 'mobx';
-import { presets } from '../env';
-import { yieldFlourToMatchHydration } from '../utilities/formulae';
+import { presets } from '../../env';
+import { yieldFlourToMatchHydration } from '../../utilities/formulae';
 import { Dough } from './Dough';
 import { Generic } from './Generic';
 

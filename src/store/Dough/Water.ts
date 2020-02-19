@@ -1,5 +1,5 @@
 import { computed, observable, reaction } from 'mobx';
-import { presets } from '../env';
+import { presets } from '../../env';
 import { Dough } from './Dough';
 import { Generic } from './Generic';
 

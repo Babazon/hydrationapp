@@ -1,4 +1,4 @@
-import { Dough } from "../Dough"
+import { Dough } from "../Dough/Dough"
 import { presets } from "../../env";
 
 describe('Flour store tests', () => {

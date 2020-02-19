@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextWithAccessibility } from '../components/TextWithAccessibility';
-import { Dough } from '../store/Dough';
+import { Dough } from '../store/Dough/Dough';
 import { InfoBlockVm, InfoRenderData } from './InfoBlockVm';
 
 interface IProps {

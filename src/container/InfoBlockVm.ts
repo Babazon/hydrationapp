@@ -1,6 +1,6 @@
 import { computed } from 'mobx';
 
-import { Dough } from '../store/Dough';
+import { Dough } from '../store/Dough/Dough';
 import { getDecimalForFixed } from '../utilities/getDecimalForFixed';
 
 // tslint:disable-next-line: interface-name
