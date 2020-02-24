@@ -1577,17 +1577,29 @@ appcenter-analytics@^2.6.1:
   dependencies:
     appcenter "2.6.1"
 
-appcenter-crashes@^2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-2.6.1.tgz#b73a5491c9af4ea817a4f9d810a4131ce1232d41"
-  integrity sha512-iPce1e/lAWGUDv/2hMbGBxUC40wIcTLBO4KcIBIHNd62JfLKsQ3SSnqXF3YDGzjgBLc0jWFmqasTgZJMr4PPaA==
+appcenter-crashes@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-3.0.0.tgz#14c6de7f2037cdcb942649c77c45c914e6eb3f4c"
+  integrity sha512-8bAI4ic2nGICHWiX5rdsGATcg+kkP0bQKOdGrqztMeb2we0BvirxwLMF88ndP0HgPYBpOy0MU9L8FkevFz8oog==
   dependencies:
-    appcenter "2.6.1"
+    appcenter "3.0.0"
 
 appcenter-link-scripts@2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/appcenter-link-scripts/-/appcenter-link-scripts-2.6.1.tgz#0b7b2db6f946e22baaaf48c61ac317f4cec80522"
   integrity sha512-k+ToY1YxPEblQxA2iZU/8RRfKitdVwCU234TV+Pwi5uzoWo3uyy/tAEXXaHIoir+EHAhtrmcHosA+QM0lL/O/g==
+  dependencies:
+    debug "4.1.1"
+    glob "5.0.15"
+    mkdirp "0.5.1"
+    plist "3.0.1"
+    which "1.2.11"
+    xcode "2.0.0"
+
+appcenter-link-scripts@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/appcenter-link-scripts/-/appcenter-link-scripts-3.0.0.tgz#f358768ccb28857f2d8b284cbe8a494d93c4ebf3"
+  integrity sha512-4rKD9k4cNJctndw6TdQUUBJ5fy0/Gc+rw2HZ2vLMT3r6v0fa42ZhN0ZkDOZzWeYL44ctCZt7nCKI6DpXqSDKVA==
   dependencies:
     debug "4.1.1"
     glob "5.0.15"
@@ -1602,6 +1614,13 @@ appcenter@2.6.1, appcenter@^2.6.0:
   integrity sha512-2o6wZCk1v80Tq4AaXM7i4i9SibFFGesezRtb8fTqQjqSYqrP+umxoLxvu37UwGD7njRc599CALmNvEgbmAwi0g==
   dependencies:
     appcenter-link-scripts "2.6.1"
+
+appcenter@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-3.0.0.tgz#9b6a451426f9c8fa2c1c02c6ebeeb1a2fda598a2"
+  integrity sha512-6kUbIM0z92uyOUlWqU0EnntdP7d2OhSWpg/Ajx2JGbOZ6R9Qet50ez4FnT4j0+lJH9nLh37P9tQvcOoHTJColw==
+  dependencies:
+    appcenter-link-scripts "3.0.0"
 
 aproba@^1.0.3:
   version "1.2.0"
