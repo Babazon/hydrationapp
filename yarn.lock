@@ -8426,10 +8426,15 @@ serialize-error@^2.1.0:
   resolved "https://registry.yarnpkg.com/serialize-error/-/serialize-error-2.1.0.tgz#50b679d5635cdf84667bdc8e59af4e5b81d5f60a"
   integrity sha1-ULZ51WNc34Rme9yOWa9OW4HV9go=
 
-serializr@^1.1.11, serializr@^1.5.4:
+serializr@^1.1.11:
   version "1.5.4"
   resolved "https://registry.yarnpkg.com/serializr/-/serializr-1.5.4.tgz#3ddf1cb7b4465c9c3f72bab0cbc41e09dbe50c33"
   integrity sha512-ImLlkNfNSSv9d7Ah1j/yrPk1FHbRC1zkD7URcgx/8M1eYHGUxGf/Ig/d8ML04ifqN7QesyYKsfLYA4xjAVAR/g==
+
+serializr@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/serializr/-/serializr-2.0.2.tgz#b13ae9d9be795c65a7123363c9e11b8f52078e61"
+  integrity sha512-xIqLv4VytKOH/jTCNavoOsJTPKkE/fZCZeAD+Db/U5o+MviQs+8k+G8L6smFVXbUCFSaeNW0xJcVvAXR/GSBgg==
 
 serve-static@^1.13.1:
   version "1.14.1"
