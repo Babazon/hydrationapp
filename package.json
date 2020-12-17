@@ -33,7 +33,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.9.1",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-safe-area-view": "^1.0.0",
-    "serializr": "^1.5.4"
+    "serializr": "^2.0.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
